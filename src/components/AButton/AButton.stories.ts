@@ -16,3 +16,11 @@ export const Default = (args: any) => ({
   },
   template: '<AButton v-bind="args">Click Me</AButton>',
 })
+
+export const Disabled = (args: any) => ({
+  components: {AButton},
+  setup() {
+    return {args}
+  },
+  template: '<AButton v-bind="args" :disabled="true">Click Me</AButton>',
+})
