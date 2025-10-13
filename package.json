@@ -27,7 +27,8 @@
     "build-storybook": "storybook build",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "playground:dev": "npm run build:clean && npm run build && concurrently -k \"npm run build -- --watch\" \"npm --prefix playground run dev\"",
+    "playground": "npm run build:clean && npm run build && npm --prefix playground run dev",
+    "playground:watch": "npm run build:clean && npm run build && concurrently -k \"npm run build -- --watch\" \"npm --prefix playground run dev\"",
     "clean": "npm run build:clean && rimraf node_modules .turbo .vite .cache"
   },
   "peerDependencies": {
