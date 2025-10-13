@@ -62,7 +62,7 @@ This library supports multiple import patterns depending on your needs.
 - Individual import (tree-shakable, recommended for apps):
 
 ```ts
-import UButton from '@ultimate/core-ui/src/components/UButton';
+import UButton from '@ultimate/core-ui/components/UButton';
 
 export default {
   components: { UButton },
@@ -72,7 +72,7 @@ export default {
 - Barrel import from package entry (convenient for grouped imports):
 
 ```ts
-import { UButton } from '@ultimate/core-ui/src';
+import { UButton } from '@ultimate/core-ui';
 
 export default {
   components: { UButton },
@@ -82,7 +82,7 @@ export default {
 - Plugin install (registers all components globally):
 
 ```ts
-import AnchorUI from '@ultimate/core-ui/src';
+import AnchorUI from '@ultimate/core-ui';
 import { createApp } from 'vue';
 import App from './App.vue';
 
