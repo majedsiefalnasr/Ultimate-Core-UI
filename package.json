@@ -1,5 +1,5 @@
 {
-  "name": "@anchor/ui",
+  "name": "@ultimate/core-ui",
   "version": "0.1.0",
   "description": "Anchor UI Library is a Vue 3-based component library built on top of Vuetify for modern and responsive UIs.",
   "main": "dist/anchor-ui.umd.js",

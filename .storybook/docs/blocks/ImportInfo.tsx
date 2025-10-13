@@ -1,4 +1,4 @@
-import {Source, useOf} from '@storybook/addon-docs/blocks'
+import { Source, useOf } from '@storybook/addon-docs/blocks'
 import React from 'react'
 
 /**
@@ -45,7 +45,7 @@ export const ImportInfo: React.FC = () => {
 
   if (!componentName) return null
 
-  const importStatement = `import { ${componentName} } from '@anchor/ui';`
+  const importStatement = `import { ${componentName} } from '@ultimate/core-ui';`
 
   return (
     <div style={{margin: '1.5rem 0'}}>
