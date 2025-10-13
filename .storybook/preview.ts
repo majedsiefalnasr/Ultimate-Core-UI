@@ -11,16 +11,7 @@ const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
     docs: {
-      // 👇 Sets a custom template for the docs page
-      page: Template,
-      // 👇 Enables the table of contents
-      toc: {
-        title: 'Table of Contents',
-        disable: false,
-        unsafeTocbotOptions: {
-          orderedList: false,
-        },
-      },
+      page: Template, // use custom template for docs homepage
     },
   },
 }

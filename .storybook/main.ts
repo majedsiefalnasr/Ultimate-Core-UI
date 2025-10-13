@@ -2,7 +2,8 @@ import type {StorybookConfig} from '@storybook/vue3-vite'
 import postcss from 'postcss'
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|ts)'],
+  // include component stories (js/ts), MDX stories, and docs-only MDX pages
+  stories: ['./docs/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-docs',
@@ -23,10 +24,9 @@ const config: StorybookConfig = {
     options: {},
   },
   docs: {
-    //👇 See the table below for the list of supported options
-    defaultName: 'Documentation',
-    docsMode: false,
-    autodocs: true,
+    defaultName: 'Docs', // default name for the docs tab
+    docsMode: false, // whether to render stories in docs tab by default
+    autodocs: true, // automatically generate docs from component metadata
   } as any,
 }
 
