@@ -24,6 +24,19 @@ npm run test
 npm run build
 ```
 
+## 🧹 Linting & Formatting
+
+This project includes ESLint and Prettier configurations for Vue 3 + TypeScript.
+
+Install dev dependencies and run the linters:
+
+```bash
+npm install
+npm run lint       # check for lint errors
+npm run lint:fix   # auto-fix fixable lint issues
+npm run format     # format files with Prettier
+```
+
 ## 📦 Generating Type Declarations
 
 This project uses `vite-plugin-dts` to emit TypeScript declaration files alongside the build output. To generate `.d.ts` files:
