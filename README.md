@@ -54,3 +54,44 @@ npm run build
 ```
 
 If you're in a monorepo, ensure the package's `tsconfig.json` is configured to include the correct paths, or pass a custom `tsconfig` path in `vite.config.ts` (the plugin supports that option).
+
+## 📥 Importing components
+
+This library supports multiple import patterns depending on your needs.
+
+- Individual import (tree-shakable, recommended for apps):
+
+```ts
+import UButton from '@anchor/ui/src/components/UButton';
+
+export default {
+  components: { UButton },
+};
+```
+
+- Barrel import from package entry (convenient for grouped imports):
+
+```ts
+import { UButton } from '@anchor/ui/src';
+
+export default {
+  components: { UButton },
+};
+```
+
+- Plugin install (registers all components globally):
+
+```ts
+import AnchorUI from '@anchor/ui/src';
+import { createApp } from 'vue';
+import App from './App.vue';
+
+const app = createApp(App);
+app.use(AnchorUI);
+app.mount('#app');
+```
+
+Notes:
+
+- The examples above reference the `src` entry in this repository for local development. When consuming the published package, import from the package name (for example, `import { UButton } from '@anchor/ui'`) — the build output will preserve the same public API.
+- Prefer individual imports in production apps to reduce bundle size.
