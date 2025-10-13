@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:clean && vite build",
+    "build:clean": "rimraf dist",
     "prepare": "husky install",
     "lint": "eslint --ext .js,.ts,.vue src --report-unused-disable-directives --max-warnings=0",
     "lint:fix": "eslint --ext .js,.ts,.vue src --fix",
@@ -19,8 +20,8 @@
     "build-storybook": "storybook build",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "playground:clean": "rm -rf dist",
-    "playground:dev": "npm run build && concurrently -k \"npm run build -- --watch\" \"npm --prefix playground run dev\""
+    "playground:dev": "npm run build:clean && npm run build && concurrently -k \"npm run build -- --watch\" \"npm --prefix playground run dev\"",
+    "clean": "npm run build:clean && rimraf node_modules .turbo .vite .cache"
   },
   "peerDependencies": {
     "vue": "^3.5.0",
