@@ -72,7 +72,11 @@
     "storybook",
     "ultimate-core-ui"
   ],
-  "author": "Majed @Ultimate-Solutions",
+  "author": "Majed Sief Alnasr @Ultimate-Solutions",
   "license": "MIT",
-  "packageManager": "npm@9.8.1"
+  "packageManager": "npm@9.8.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majedsiefalnasr/Ultimate-Core-UI.git"
+  }
 }
