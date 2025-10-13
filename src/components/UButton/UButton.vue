@@ -5,12 +5,12 @@
 </template>
 
 <script setup lang="ts">
-  import {VBtn} from 'vuetify/components'
+  import { VBtn } from 'vuetify/components';
 
   defineProps<{
-    color?: string
-    variant?: 'flat' | 'outlined' | 'text'
-  }>()
+    color?: string;
+    variant?: 'flat' | 'outlined' | 'text';
+  }>();
 </script>
 
 <style scoped lang="scss">

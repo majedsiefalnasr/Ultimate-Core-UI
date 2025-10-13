@@ -1,5 +1,5 @@
-import {createVuetify} from 'vuetify'
-import 'vuetify/styles'
+import { createVuetify } from 'vuetify';
+import 'vuetify/styles';
 
 export const anchorVuetify = createVuetify({
   theme: {
@@ -21,4 +21,4 @@ export const anchorVuetify = createVuetify({
       },
     },
   },
-})
+});
