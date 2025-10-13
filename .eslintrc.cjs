@@ -19,6 +19,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   plugins: ['vue', '@typescript-eslint', 'import'],
+  // No custom import/resolver configured to avoid resolver peer-dependency conflicts
   rules: {
     // Project conventions: tightened for consistent code quality
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -52,6 +53,19 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
         '@typescript-eslint/explicit-function-return-type': 'off',
+      },
+    },
+    {
+      files: ['**/*.d.ts'],
+      rules: {
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+      },
+    },
+    {
+      files: ['**/*.test.ts', '**/*.spec.ts', 'tests/**'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
   ],

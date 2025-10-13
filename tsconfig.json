@@ -3,10 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "declaration": true,
     "declarationDir": "./dist",
     "jsx": "preserve",
@@ -15,17 +12,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": [
-      "vitest/globals"
-    ]
+    "types": ["vitest/globals"]
   },
-  "include": [
-    "src/**/*.{ts,tsx,vue}",
-    "tests/**/*.{ts,tsx}"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "storybook-static"
-  ]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist", "storybook-static"]
 }

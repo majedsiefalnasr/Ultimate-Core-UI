@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
+
 import UButton from './UButton.vue';
 
 describe('UButton', () => {
@@ -10,6 +11,7 @@ describe('UButton', () => {
 
   it('applies color prop', () => {
     const wrapper = mount(UButton, { props: { color: 'red' } });
-    expect((wrapper.props() as any).color).toBe('red');
+    // use typed access to props
+    expect(String(wrapper.props().color)).toBe('red');
   });
 });
