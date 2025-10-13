@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "prepare": "husky install",
     "lint": "eslint --ext .js,.ts,.vue src --report-unused-disable-directives --max-warnings=0",
     "lint:fix": "eslint --ext .js,.ts,.vue src --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue,scss,css,json,md}\"",
@@ -40,10 +41,22 @@
     "prettier": "^3.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0",
     "typescript": "^5.3.3",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^4.0.0",
     "vitest": "^1.6.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{scss,css,json,md}": [
+      "prettier --write"
+    ]
   },
   "keywords": [
     "vue3",
