@@ -1,6 +1,6 @@
-# ⚓ Anchor UI
+# ⚓ Ultimate Core UI
 
-Anchor UI is a **Vue 3 component library** built on top of **Vuetify**, offering a modern, accessible, and consistent design system for building beautiful applications faster.
+Ultimate Core UI is a **Vue 3 component library** built on top of **Vuetify**, offering a modern, accessible, and consistent design system for building beautiful applications faster.
 
 ## 🚀 Features
 
@@ -82,12 +82,12 @@ export default {
 - Plugin install (registers all components globally):
 
 ```ts
-import AnchorUI from '@ultimate/core-ui';
+import UltimateCoreUI from '@ultimate/core-ui';
 import { createApp } from 'vue';
 import App from './App.vue';
 
 const app = createApp(App);
-app.use(AnchorUI);
+app.use(UltimateCoreUI);
 app.mount('#app');
 ```
 

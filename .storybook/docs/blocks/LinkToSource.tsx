@@ -1,4 +1,4 @@
-import {useOf} from '@storybook/addon-docs/blocks'
+import { useOf } from '@storybook/addon-docs/blocks'
 import path from 'path-browserify'
 import React from 'react'
 
@@ -37,7 +37,7 @@ export const LinkToSource: React.FC = () => {
 
   return (
     <a
-      href={`https://github.com/your-org/anchor-ui/blob/main/${srcPath}`}
+      href={`https://github.com/your-org/ultimate-core-ui/blob/main/${srcPath}`}
       target='_blank'
       rel='noopener noreferrer'
       style={{

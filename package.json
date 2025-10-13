@@ -1,9 +1,9 @@
 {
   "name": "@ultimate/core-ui",
   "version": "0.1.0",
-  "description": "Anchor UI Library is a Vue 3-based component library built on top of Vuetify for modern and responsive UIs.",
-  "main": "dist/anchor-ui.umd.js",
-  "module": "dist/anchor-ui.es.js",
+  "description": "Ultimate core UI Library is a Vue 3-based component library built on top of Vuetify for modern and responsive UIs.",
+  "main": "dist/ultimate-core-ui.umd.js",
+  "module": "dist/ultimate-core-ui.es.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -65,7 +65,7 @@
     "ui-library",
     "vite",
     "storybook",
-    "anchor-ui"
+    "ultimate-core-ui"
   ],
   "author": "Majed @Ultimate-Solutions",
   "license": "MIT",

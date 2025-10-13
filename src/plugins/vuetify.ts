@@ -1,18 +1,18 @@
 import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
 
-export const anchorVuetify = createVuetify({
+export const ultimateVuetify = createVuetify({
   theme: {
-    defaultTheme: 'anchorLight',
+    defaultTheme: 'ultimateLight',
     themes: {
-      anchorLight: {
+      ultimateLight: {
         dark: false,
         colors: {
           primary: '#0057b8',
           secondary: '#6c757d',
         },
       },
-      anchorDark: {
+      ultimateDark: {
         dark: true,
         colors: {
           primary: '#0077ff',

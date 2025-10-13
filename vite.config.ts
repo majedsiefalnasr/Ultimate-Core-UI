@@ -1,7 +1,8 @@
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
-import {defineConfig} from 'vite'
-import dts from 'vite-plugin-dts'
+import path from 'path';
+
+import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   plugins: [
@@ -17,8 +18,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'AnchorUI',
-      fileName: (format: string) => `anchor-ui.${format}.js`,
+      name: 'UltimateCoreUI',
+      fileName: (format: string) => `ultimate-core-ui.${format}.js`,
     },
     rollupOptions: {
       external: ['vue', 'vuetify'],
@@ -30,4 +31,4 @@ export default defineConfig({
       },
     },
   },
-})
+});

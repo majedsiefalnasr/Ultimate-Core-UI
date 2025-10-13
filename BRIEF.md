@@ -97,7 +97,7 @@ src/components/UButton/
 Every component should be exported via `src/index.ts`:
 
 ```ts
-export {default as AnchorButton} from './components/AnchorButton/AnchorButton.vue'
+export { default as UButton } from './components/UButton/UButton.vue';
 ```
 
 ---

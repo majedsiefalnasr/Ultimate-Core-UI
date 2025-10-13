@@ -10,14 +10,14 @@ import {
 import React from 'react'
 
 // 🧩 Import your custom blocks
-import {BootstrapComponent} from './docs/blocks/BootstrapComponent'
-import {ImportInfo} from './docs/blocks/ImportInfo'
-import {LinkToSource} from './docs/blocks/LinkToSource'
-import {VuetifyComponent} from './docs/blocks/VuetifyComponent'
+import { BootstrapComponent } from './docs/blocks/BootstrapComponent'
+import { ImportInfo } from './docs/blocks/ImportInfo'
+import { LinkToSource } from './docs/blocks/LinkToSource'
+import { VuetifyComponent } from './docs/blocks/VuetifyComponent'
 
 /**
- * Custom Docs Page for Anchor UI
- * Combines Storybook default docs blocks with custom Anchor UI ones.
+ * Custom Docs Page for Ultimate Core UI
+ * Combines Storybook default docs blocks with custom Ultimate Core UI ones.
  */
 export const Template: React.FC = () => {
   return (
