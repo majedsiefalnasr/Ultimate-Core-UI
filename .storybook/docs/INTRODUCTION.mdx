@@ -1,0 +1,123 @@
+import {Meta} from '@storybook/addon-docs/blocks'
+
+<Meta title='Getting Started/Anchor UI/Majed/Introduction' />
+
+# Anchor UI — Storybook Introduction
+
+This document explains how to use and contribute to the Storybook documentation for the Anchor UI component library. The project uses Vue 3 (Composition API), Vuetify, Vite, and Storybook. Follow the conventions below to keep stories consistent, discoverable, and well-documented.
+
+## Purpose
+
+- Provide interactive, visual documentation for all UI components in `src/components/`.
+- Serve as the canonical place for component usage examples, prop docs, accessibility notes, and design tokens (styles).
+- Help designers, developers, and QA test and interact with components in isolation.
+
+## Project conventions (must-follow)
+
+- Components live under `src/components/ComponentName/` and export a folder index (e.g., `src/components/AButton/index.ts`).
+- Each component folder should contain:
+  - `ComponentName.vue` — the Vue Single File Component using Composition API.
+  - `ComponentName.stories.ts` — Storybook stories and docs for the component.
+  - `ComponentName.test.ts` — Vitest unit tests (happy path, edge case, failure case).
+  - `index.ts` — Re-export for the component.
+- Story file naming: `ComponentName.stories.ts` (PascalCase matches component name).
+- Use `<script setup lang="ts">` and define props and emits with types.
+- Style files should use SCSS modules or `<style scoped lang="scss">`.
+
+## Story structure and recommended patterns
+
+Each story file should follow this pattern:
+
+- Default export: component title + meta args
+- ArgTypes: document controls with types and descriptions
+- Primary (default) story: simple usage showing `props` children
+- Variants: one-arg changes that demonstrate a property or slot
+- Accessibility story: show aria attributes, keyboard interactions
+- Docs: use Storybook Docs blocks to explain purpose, props, and examples
+
+Example skeleton (TypeScript + Vue 3):
+
+- Default export (title: `Components/ComponentName`)
+- args: default props
+- Story functions: return component template and args
+
+## Doc sections to include in each story
+
+- Purpose: Short sentence explaining the component's intent.
+- API / Props table: include types, default values, descriptions.
+- Events: list emitted events and payload shapes.
+- Slots: describe named/default slots and usage.
+- Accessibility: ARIA roles, keyboard guidance, focus management.
+- Design tokens: reference theme variables or SCSS variables when relevant.
+
+## Writing docs (best practices)
+
+- Keep examples small and focused. Prefer multiple small stories over one large mega-story.
+- Use realistic data in examples, but avoid business secrets or private strings.
+- Add small code snippets to show common patterns.
+- When showing layout or spacing, prefer story decorators or wrapper components.
+- For interactive examples, use Storybook controls via `args` instead of inline knobs.
+
+## Testing & QA
+
+- Each component must include a `*.test.ts` file using Vitest + Vue Testing Library.
+- Tests should include at least:
+  - one happy-path rendering/interaction test
+  - one edge-case test (missing props, empty slot)
+  - one failure/validation case (invalid props, emit errors)
+- Run tests locally with the project test runner (see `package.json` scripts).
+
+## Running Storybook locally
+
+If Storybook is already configured in the project, start it with the repository scripts in `package.json` (typically `npm run storybook` or `yarn storybook`). If that script is missing, consult `README.md` and the Storybook configuration under `.storybook/`.
+
+## Adding a new component + stories (step-by-step)
+
+1. Create component folder: `src/components/YourComponent/`.
+2. Implement `YourComponent.vue` using Composition API and typed props.
+3. Add `index.ts` re-export and update `src/components/index.ts` to re-export your component.
+4. Add `YourComponent.stories.ts` with the required sections (see "Story structure").
+5. Add `YourComponent.test.ts` with Vitest tests.
+6. Run linters, tests, and Storybook to verify the component renders and docs appear.
+
+## Accessibility checklist (quick)
+
+- Ensure focusable elements have visible focus styles.
+- Provide ARIA roles/labels where semantic elements are insufficient.
+- Ensure keyboard navigation works for interactive components.
+- Test with screen readers when possible.
+
+## Troubleshooting
+
+- If stories don't show up, verify file name matches `*.stories.ts` and the title doesn't collide with another story.
+- If Prop controls don't appear, check `argTypes` and that props are exposed in the default export args.
+- Check console for errors — sometimes missing peer-dependencies (Vue/Vuetify) cause silent failures.
+
+## Contributing guidelines
+
+- Add or update Storybook docs when you add or change components.
+- Keep stories focused, and follow the naming conventions.
+- Update `README.md` and `BRIEF.md` if you add major patterns or structural changes.
+
+## Where to edit Storybook configuration
+
+Storybook configs live under `.storybook/`.
+
+- `main.ts` — addons, stories glob, webpack/vite config
+- `preview.ts` — global decorators, parameters, styles
+- `INTRODUCTION.md` — this file
+
+## FAQ
+
+Q: Where should I add global CSS for stories?
+A: Add it in `.storybook/preview.ts` or import the main stylesheet from `src/styles/index.scss` in `preview.ts`.
+
+Q: How do I document a composable or utility that's not a component?
+A: Create a docs-only story (MDX or `*.stories.ts`) under `Docs/` with code examples and exports.
+
+---
+
+If you'd like, I can also:
+
+- Add a pointer in `README.md` that links to this introduction.
+- Generate a story skeleton template file to speed up adding new components.
