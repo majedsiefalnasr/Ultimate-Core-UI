@@ -23,3 +23,21 @@ npm run test
 # Build library
 npm run build
 ```
+
+## 📦 Generating Type Declarations
+
+This project uses `vite-plugin-dts` to emit TypeScript declaration files alongside the build output. To generate `.d.ts` files:
+
+1. Install dependencies using npm:
+
+```bash
+npm install
+```
+
+2. Run the build (this will produce `dist/*.js` and `dist/index.d.ts`):
+
+```bash
+npm run build
+```
+
+If you're in a monorepo, ensure the package's `tsconfig.json` is configured to include the correct paths, or pass a custom `tsconfig` path in `vite.config.ts` (the plugin supports that option).

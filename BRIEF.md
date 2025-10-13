@@ -1,9 +1,9 @@
-# 🧭 BRIEF.md — Anchor UI Project Overview
+# 🧭 BRIEF.md — Ultimate Core UI Project Overview
 
 ## 📘 Project Summary
 
-**Name:** Anchor UI (`@anchor/ui`)  
-**Description:** Anchor UI Library is a Vue 3-based component library designed to help build modern, responsive UIs efficiently.  
+**Name:** Ultimate Core UI (`@ultimate/core-ui`)  
+**Description:** Ultimate Core UI Library is a Vue 3-based component library designed to help build modern, responsive UIs efficiently.  
 It leverages **Vite**, **TypeScript**, **Vuetify**, **Bootstrap**, and **Storybook** to streamline development, ensure scalability, and enable visual documentation.
 
 ---
@@ -17,7 +17,7 @@ It leverages **Vite**, **TypeScript**, **Vuetify**, **Bootstrap**, and **Storybo
 | Language           | TypeScript                    |
 | UI Base            | Vuetify                       |
 | Styling            | Bootstrap 5 + Custom SCSS     |
-| Documentation      | Storybook                     |
+| Documentation      | Storybook 9+                  |
 | Testing            | Vitest / Vue Test Utils       |
 | Linting            | ESLint + Prettier             |
 | Package Management | npm / pnpm                    |
@@ -37,13 +37,17 @@ It leverages **Vite**, **TypeScript**, **Vuetify**, **Bootstrap**, and **Storybo
 
 ## 🗂️ Folder Structure
 
-```
-anchor-ui/
+```Blain
+ultimate-core-ui/
 ├── packages/
-│   └── anchor-ui/
+│   └── ultimate-core-ui/
 │       ├── src/
 │       │   ├── components/
-│       │   │   └── AnchorButton.vue
+│       │   │   └── UButton/
+│       │   │       └── UButton.vue
+│       │   │       └── UButton.stories.ts
+│       │   │       └── UButton.test.ts
+│       │   │       └── index.ts
 │       │   ├── composables/
 │       │   ├── styles/
 │       │   └── index.ts
@@ -78,14 +82,14 @@ anchor-ui/
 
 ## 🧩 Component Architecture
 
-Each component in Anchor UI wraps or extends a Vuetify base component with consistent design tokens and props.  
+Each component in Ultimate Core UI wraps or extends a Vuetify base component with consistent design tokens and props.  
 Example structure for a single component:
 
 ```Blank
-src/components/AnchorButton/
-├── AnchorButton.vue
-├── AnchorButton.stories.ts
-├── AnchorButton.test.ts
+src/components/UButton/
+├── UButton.vue
+├── UButton.stories.ts
+├── UButton.test.ts
 └── index.ts
 ```
 
@@ -129,13 +133,13 @@ export {default as AnchorButton} from './components/AnchorButton/AnchorButton.vu
 
 ## 🧭 Naming Conventions
 
-| Type            | Example                   |
-| --------------- | ------------------------- |
-| Component       | `AnchorButton.vue`        |
-| SCSS file       | `_anchor-button.scss`     |
-| Storybook Story | `AnchorButton.stories.ts` |
-| Test file       | `AnchorButton.test.ts`    |
-| Export Name     | `AnchorButton`            |
+| Type            | Example              |
+| --------------- | -------------------- |
+| Component       | `UButton.vue`        |
+| SCSS file       | `_u-button.scss`     |
+| Storybook Story | `UButton.stories.ts` |
+| Test file       | `UButton.test.ts`    |
+| Export Name     | `UButton`            |
 
 ---
 
@@ -151,11 +155,11 @@ export {default as AnchorButton} from './components/AnchorButton/AnchorButton.vu
 
 ## ⚡ Deployment
 
-Anchor UI can be distributed via npm or used locally through linking:
+Ultimate Core UI can be distributed via npm or used locally through linking:
 
 ```bash
 npm link
-npm link @anchor/ui
+npm link @ultimate/core-ui
 ```
 
 ---
@@ -170,7 +174,7 @@ npm link @anchor/ui
 
 ## ✅ Summary
 
-Anchor UI is a Vue 3 + Vuetify component library focused on:
+Ultimate Core UI is a Vue 3 + Vuetify component library focused on:
 
 - Simplicity, speed, and scalability.
 - Modern tooling (Vite, Storybook, TypeScript).

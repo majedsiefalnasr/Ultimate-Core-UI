@@ -11,7 +11,7 @@
 ### 🧱 Code Structure & Modularity
 
 - **Never create a file longer than 500 lines of code.** If approaching that limit, refactor into smaller modules.
-- **Each component lives in its own folder** (e.g., `AButton/`), containing its `.vue`, `.stories.ts`, `.test.ts`, and optional `index.ts` files.
+- **Each component lives in its own folder** (e.g., `UButton/`), containing its `.vue`, `.stories.ts`, `.test.ts`, and optional `index.ts` files.
 - **Organize code into clearly separated modules**, grouped by feature or responsibility (e.g., `components/`, `composables/`, `utils/`, `styles/`).
 - **Avoid circular imports** by keeping dependencies one-directional.
 - **Always create a re-export entry point** in `src/index.ts` for tree-shakable imports.
@@ -105,7 +105,7 @@
 
 ---
 
-### ♿ Accessibility & Inclusivity
+### ♿ Accessibility & Inclusively
 
 - Ensure all components are **keyboard accessible**.
 - Add **ARIA labels** when appropriate.

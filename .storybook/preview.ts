@@ -4,7 +4,8 @@ import 'vuetify/styles'
 import '../src/styles/index.scss'
 
 import type {Preview} from '@storybook/vue3-vite'
-import Template from './docs/Template.mdx'
+// import Template from './docs/Template.mdx'
+import {Template} from './DocsTemplate'
 
 const preview: Preview = {
   //👇 Enables auto-generated documentation for all stories
