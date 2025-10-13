@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ultimate/core-ui": ["../src"]
+    }
+  },
+  "include": ["src/**/*", "../src/**/*"]
+}

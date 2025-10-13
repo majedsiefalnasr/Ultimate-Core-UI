@@ -28,6 +28,9 @@ export default defineConfig({
           vue: 'Vue',
           vuetify: 'Vuetify',
         },
+        // Ensure library consumers can use named imports and avoid the default+named
+        // export warning produced by Rollup when mixing default and named exports.
+        exports: 'named',
       },
     },
   },
