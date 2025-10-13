@@ -18,7 +18,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest run",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "playground:dev": "sh -c \"npm run build -- --watch & BUILD_PID=$!; npm --prefix playground run dev; kill $BUILD_PID\""
   },
   "peerDependencies": {
     "vue": "^3.5.0",
