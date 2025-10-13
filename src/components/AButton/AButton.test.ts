@@ -10,6 +10,6 @@ describe('AButton', () => {
 
   it('applies color prop', () => {
     const wrapper = mount(AButton, {props: {color: 'red'}})
-    expect(wrapper.props().color).toBe('red')
+    expect((wrapper.props() as any).color).toBe('red')
   })
 })
