@@ -1,4 +1,7 @@
 import type { App, Component } from 'vue';
+// Ensure Material Design Icons font CSS is included when the library is used
+// This allows consumers of the library to have the MDI font available by default.
+import '@mdi/font/css/materialdesignicons.css';
 
 import * as components from './components';
 

@@ -7,8 +7,10 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
-import App from './App.vue';
 import 'vuetify/styles';
+import App from './App.vue';
+// Include Material Design Icons font for the playground preview
+import '@mdi/font/css/materialdesignicons.css';
 
 const vuetify = createVuetify({
   components,
