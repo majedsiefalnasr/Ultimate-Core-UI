@@ -1,1 +1,1 @@
-export { default as UButton } from './UButton';
+export { default as UButton } from './core/button/UButton.vue';
