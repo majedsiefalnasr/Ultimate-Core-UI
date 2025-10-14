@@ -1,6 +1,5 @@
 <template>
   <VBtn v-bind="forwarded" @click="$emit('click', $event)">
-    <slot name="icon" />
     <slot />
   </VBtn>
 </template>

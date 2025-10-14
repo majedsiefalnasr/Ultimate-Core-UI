@@ -81,36 +81,60 @@ export const Variants = () => ({
   `,
 });
 
-export const SizesAndIcon = () => ({
+export const Sizes = () => ({
   components: { UButton },
   template: `
     <div style="display:flex;gap:12px;align-items:center">
-      <UButton variant="contained" size="x-small">x-small</UButton>
-      <UButton variant="contained" size="small">small</UButton>
-      <UButton variant="contained" size="default">default</UButton>
-      <UButton variant="contained" size="large">large</UButton>
-      <UButton variant="contained" size="x-large">x-large</UButton>
-      <UButton variant="contained"><template #icon>⭐</template>Icon</UButton>
+      <UButton size="x-small">x-small</UButton>
+      <UButton size="small">small</UButton>
+      <UButton size="default">default</UButton>
+      <UButton size="large">large</UButton>
+      <UButton size="x-large">x-large</UButton>
     </div>
   `,
 });
 
-export const LoadingAndDisabled = () => ({
+export const Icon = () => ({
   components: { UButton },
   template: `
     <div style="display:flex;gap:12px;align-items:center">
-      <UButton color="primary" variant="contained" :loading="true">Loading</UButton>
-      <UButton color="primary" variant="contained" :disabled="true">Disabled</UButton>
+      <UButton icon="mdi-plus"></UButton>
     </div>
   `,
 });
 
-export const BlockAndRounded = () => ({
+export const Loading = () => ({
   components: { UButton },
   template: `
-    <div style="width:320px;display:flex;flex-direction:column;gap:12px">
-      <UButton color="primary" variant="contained" :block="true">Block</UButton>
-      <UButton color="primary" variant="contained" :rounded="true">Rounded</UButton>
+    <div style="display:flex;gap:12px;align-items:center">
+      <UButton :loading="true">Loading</UButton>
+    </div>
+  `,
+});
+
+export const Disabled = () => ({
+  components: { UButton },
+  template: `
+    <div style="display:flex;gap:12px;align-items:center">
+      <UButton :disabled="true">Disabled</UButton>
+    </div>
+  `,
+});
+
+export const Block = () => ({
+  components: { UButton },
+  template: `
+    <div style="display:flex;gap:12px;align-items:center">
+      <UButton :block="true">Block</UButton>
+    </div>
+  `,
+});
+
+export const Rounded = () => ({
+  components: { UButton },
+  template: `
+    <div style="display:flex;gap:12px;align-items:center">
+      <UButton :rounded="true">Rounded</UButton>
     </div>
   `,
 });
