@@ -44,6 +44,7 @@ ultimate-core-ui/
 │       ├── src/
 │       │   ├── components/
 │       │   │   └── UButton/
+│       │   │       └── _u-button.scss
 │       │   │       └── UButton.vue
 │       │   │       └── UButton.stories.ts
 │       │   │       └── UButton.test.ts

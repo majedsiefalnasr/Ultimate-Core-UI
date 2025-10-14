@@ -2,7 +2,7 @@ import type {StorybookConfig} from '@storybook/vue3-vite'
 
 const config: StorybookConfig = {
   // include component stories (js/ts), MDX stories, and docs-only MDX pages
-  stories: ['./docs/**/*.@(mdx)', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['./docs/**/*.@(mdx)', '../src/**/*.docs.@(mdx)', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-docs', '@storybook/addon-a11y'],
 
   framework: {

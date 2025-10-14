@@ -32,10 +32,12 @@
     "clean": "npm run build:clean && rimraf node_modules .turbo .vite .cache"
   },
   "peerDependencies": {
+    "@mdi/font": "^7.0.96",
     "vue": "^3.5.0",
     "vuetify": "^3.7.0"
   },
   "devDependencies": {
+    "@mdi/font": "^7.4.47",
     "@storybook/addon-a11y": "^9.1.10",
     "@storybook/addon-docs": "9.1.10",
     "@storybook/addon-links": "^9.1.10",

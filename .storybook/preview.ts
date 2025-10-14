@@ -1,6 +1,8 @@
 import {setup} from '@storybook/vue3'
 import {createVuetify} from 'vuetify'
 import 'vuetify/styles'
+// Material Design Icons font (used by Vuetify icon props like 'mdi-information')
+import '@mdi/font/css/materialdesignicons.css'
 import '../src/styles/index.scss'
 
 import type {Preview} from '@storybook/vue3-vite'
