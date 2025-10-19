@@ -1,138 +1,191 @@
-# GitHub Copilot Instructions
+# 🤖 Copilot Instructions for Ultimate Core UI
 
-### 🔄 Project Awareness & Context
+## 🧭 Project Context
 
-- **Always read `BRIEF.md` and `README.md`** at the start of a new conversation to understand the project's architecture, goals, style, and constraints.
-- **Maintain consistency** with the component structure, naming conventions, and design philosophy described in `BRIEF.md`.
-- **Understand that this is a Vue 3-based UI component library** built on top of Vuetify. All code should align with that ecosystem.
+**Ultimate Core UI (`@ultimate/core-ui`)** is a **Vue 3 + TypeScript component library** built on top of **Vuetify** and **Bootstrap 5**.  
+It provides a consistent design system and reusable UI components that extend Vuetify's base components (e.g., `UBtn` extends `VBtn`).  
+Each component must **inherit Vuetify props, events, and slots**, while allowing additional customization through new props, slots, and SCSS layers.
 
----
+### Goals
 
-### 🧱 Code Structure & Modularity
-
-- **Never create a file longer than 500 lines of code.** If approaching that limit, refactor into smaller modules.
-- **Each component lives in its own folder** (e.g., `UButton/`), containing its `.vue`, `.stories.ts`, `.test.ts`, and optional `index.ts` files.
-- **Organize code into clearly separated modules**, grouped by feature or responsibility (e.g., `components/`, `composables/`, `utils/`, `styles/`).
-- **Avoid circular imports** by keeping dependencies one-directional.
-- **Always create a re-export entry point** in `src/index.ts` for tree-shakable imports.
+- Extend Vuetify components while preserving full compatibility with their props, slots, and events.
+- Provide consistent design, accessibility, and responsiveness.
+- Offer Storybook documentation for each component.
+- Maintain strong typing, modular architecture, and tree-shakable builds.
 
 ---
 
-### 🧪 Testing & Reliability
+## ⚙️ Component Architecture
 
-- **Follow the testing conventions** defined in `BRIEF.md`.
-- **Each component must have at least one test file** that includes:
-  - 1 test for expected behavior
-  - 1 test for edge case
-  - 1 test for failure case
-- **Tests should live in a `/tests` folder** mirroring the `src` structure.
-- Use **Vitest + Vue Testing Library** for component testing.
+Each component should follow these rules:
 
----
+1. **Naming**
+   - Component names are prefixed with `U` (e.g., `UBtn`, `UCard`, `UDialog`).
+   - Folder and file names mirror the component name exactly.
 
-### 📎 Style & Conventions
+2. **Structure Example**
 
-- **Follow Vue 3 Composition API syntax** (`<script setup lang="ts">` preferred).
-- **Use SCSS modules or scoped SCSS** for styling.
-- Write **docstrings for every function and composable** using Google style.
-- Follow **TypeScript best practices** — define prop types, emits, and return types.
-- **Use PascalCase for components**, `camelCase` for composables, and `SCREAMING_SNAKE_CASE` for constants.
+   ```plaintext
+   src/components/UBtn/
+   ├── UBtn.vue
+   ├── UBtn.scss
+   ├── UBtn.stories.ts
+   ├── UBtn.test.ts
+   └── index.ts
+   ```
 
----
+3. **Extending Vuetify Components**  
+   Use Vuetify’s base component (e.g., `VBtn`) as the foundation.
 
-### 📚 Documentation & Explainability
+   ```ts
+   <script setup lang="ts">
+   import { VBtn } from 'vuetify/components'
+   import { useAttrs } from 'vue'
 
-- **Document each component in Storybook** with:
-  - Default state
-  - Props
-  - Events
-  - Slots
-- **Update `README.md` and Storybook Docs** when new components or props are added.
-- Comment **non-obvious logic** and add inline `# Reason:` comments for design decisions.
-- Keep all code understandable by a mid-level Vue developer.
+   const props = defineProps({
+     ...VBtn.props,
+     variant: {
+       type: String,
+       default: 'primary',
+     },
+     loadingText: String,
+   })
 
----
+   const attrs = useAttrs()
+   </script>
 
-### 🧠 AI Behavior Rules
+   <template>
+     <VBtn v-bind="attrs" v-bind="props">
+       <slot />
+       <template v-if="props.loadingText" #loader>
+         <span class="u-btn__loader">{{ props.loadingText }}</span>
+       </template>
+     </VBtn>
+   </template>
 
-- **Never assume missing context. Ask questions if uncertain.**
-- **Never hallucinate libraries or functions** – only use known packages (`vue`, `vuetify`, `vite`, etc.).
-- **Confirm all file paths and module names** exist before referencing them.
+   <style scoped lang="scss">
+   @import './UBtn.scss';
+   </style>
+   ```
 
----
+4. **Prop/Slot Inheritance**
+   - Ensure all Vuetify props and slots still work.
+   - Pass through all unknown props/attrs via `v-bind="attrs"`.
 
-### 🛠️ Code Quality & Maintenance
-
-- Refactor for clarity without changing functionality.
-- Avoid unnecessary complexity – prefer simple, declarative Vue patterns.
-- Maintain **consistent naming conventions** across all components.
-- Use **type hints** and avoid any-typed logic.
-- Avoid commented-out code and redundant comments.
-- **Never use `eval` or `exec`.**
-
----
-
-### 🗂️ File Organization & Management
-
-- **Follow the `src/` structure** defined in `BRIEF.md`.  
-  Don’t create new directories unless they fit the library architecture.
-- **Don’t delete files** without explicit reason — if deprecated, mark them as such and add a note.
-
----
-
-### 📦 Dependencies & Packages
-
-- Check if a dependency exists in `package.json` before suggesting new ones.
-- Keep **Vuetify and Vue as peer dependencies** — don’t bundle them.
-- If a new package is required, document it in `README.md` with a short purpose note.
+5. **Export Pattern**
+   ```ts
+   import UBtn from './UBtn.vue';
+   export default UBtn;
+   export * from './UBtn.vue';
+   ```
 
 ---
 
-### 📝 Commit Messages & Version Control
+## 💅 Styling Guidelines
 
-- Use clear, descriptive messages, e.g.,  
-  `feat(button): add loading state prop`  
-  `fix(card): adjust responsive padding`
-- Follow semantic versioning guidelines for releases.
-
----
-
-### ⚠️ Security & Privacy
-
-- Never commit secrets or API keys.
-- Add `.env` and related files to `.gitignore`.
-- Review code for any potential vulnerabilities (especially file imports or DOM injection).
+- Base styles are built with **Bootstrap 5** utility classes and **custom SCSS**.
+- Use BEM naming conventions (`.u-btn--variant`, `.u-card__header`).
+- Each component has its own SCSS file.
+- Theme variables are defined in `/src/styles/_variables.scss`.
 
 ---
 
-### ♿ Accessibility & Inclusively
+## 📚 Storybook Conventions
 
-- Ensure all components are **keyboard accessible**.
-- Add **ARIA labels** when appropriate.
-- Follow Vuetify’s accessibility best practices.
-- Use inclusive, neutral language in comments and docs.
+- Each component must include a Storybook file (`ComponentName.stories.ts`).
+- Stories use the **CSF3 format** with clear args and controls.
+
+Example (`UBtn.stories.ts`):
+
+```ts
+import UBtn from './UBtn.vue';
+import type { Meta, StoryObj } from '@storybook/vue3';
+
+const meta: Meta<typeof UBtn> = {
+  title: 'Components/UBtn',
+  component: UBtn,
+  args: {
+    color: 'primary',
+    text: 'Click me',
+  },
+  argTypes: {
+    color: { control: 'select', options: ['primary', 'secondary', 'error'] },
+  },
+};
+export default meta;
+export const Default: StoryObj<typeof UBtn> = {};
+```
+
+---
+
+## 🧪 Testing Standards
+
+- Use **Vitest** with **Vue Test Utils**.
+- Each component has a matching `ComponentName.test.ts`.
+- Test coverage must include:
+  - Rendering with default props.
+  - Prop reactivity (especially inherited Vuetify props).
+  - Events and slot rendering.
+
+Example (`UBtn.test.ts`):
+
+```ts
+import { mount } from '@vue/test-utils';
+import UBtn from './UBtn.vue';
+
+describe('UBtn', () => {
+  it('renders default slot', () => {
+    const wrapper = mount(UBtn, { slots: { default: 'Hello' } });
+    expect(wrapper.text()).toContain('Hello');
+  });
+
+  it('passes Vuetify props correctly', () => {
+    const wrapper = mount(UBtn, { props: { color: 'secondary' } });
+    expect(wrapper.props().color).toBe('secondary');
+  });
+});
+```
 
 ---
 
-### 📝 Issue & PR Templates
+## 🧠 Copilot Prompt Library
 
-- Use templates from `.github/ISSUE_TEMPLATE/` and `.github/pull_request_template/`.
-- Always fill required fields and link to relevant components or issues.
+To make Copilot more effective, ready-to-use prompt templates are provided separately.
+
+📄 **See:** [`docs/copilot-prompts.md`](../docs/copilot-prompts.md)
+
+That file includes practical Copilot instructions to:
+
+- Create new components extending Vuetify ones.
+- Generate Storybook stories, tests, and SCSS files.
+- Build utilities and composables.
+- Produce documentation snippets automatically.
+
+---
+
+## 🧾 Linting & Formatting
+
+- **ESLint + Prettier** are enforced.
+- Use semicolons, single quotes, and trailing commas.
+- Follow Vue 3 `<script setup>` conventions.
 
 ---
 
-### ⬆️ Dependency Updates
+## 📦 Publishing Notes
 
-- Test all dependency updates before merging.
-- Update `README.md` if setup steps or versions change.
-- Check for security advisories.
-
----
-
-### 📁 Handling Large Files
-
-- Don’t commit files >100MB.
-- Use Git LFS or external storage for assets.
-- Add `.gitignore` patterns for large or temporary files.
+- Each package should be tree-shakable and export named components.
+- Use `vite build` for library builds.
+- Include only `dist/` in published package.
 
 ---
+
+## ✅ Summary
+
+Copilot should always:
+
+1. Use **TypeScript** and **<script setup>** syntax.
+2. Extend **Vuetify** components while preserving compatibility.
+3. Follow **BEM + SCSS modular structure**.
+4. Create **Storybook** and **test** files for every new component.
+5. Maintain **consistent naming** (`UComponentName`).
+6. Enforce **linting and formatting** automatically.
