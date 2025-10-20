@@ -10,7 +10,6 @@
    * @extends VBtn
    * @example
    * <UBtn color="primary" @click="onClick">Click Me</UBtn>
-   * <UBtn icon="mdi-heart" rounded="circle" />
    */
   import { VBtn } from 'vuetify/components';
 
