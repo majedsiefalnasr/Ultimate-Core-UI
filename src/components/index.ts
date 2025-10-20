@@ -1,1 +1,2 @@
-export * from './core';
+export * from './UBtn';
+export { default as UBtn } from './UBtn';
