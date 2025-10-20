@@ -5,7 +5,9 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@ultimate/core-ui": ["../src"]
+      "@ultimate/core-ui": ["../src"],
+      "@ultimate/core-ui/components": ["../src/components/index.ts"],
+      "@ultimate/core-ui/components/*": ["../src/components/*"]
     }
   },
   "include": ["src/**/*", "../src/**/*"]

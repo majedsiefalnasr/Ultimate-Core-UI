@@ -7,6 +7,14 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
+      // specific subpath alias first so it doesn't get swallowed by the broader package alias
+      '@ultimate/core-ui/components': path.resolve(
+        __dirname,
+        '..',
+        'src',
+        'components',
+        'index.ts'
+      ),
       // Use built ESM bundle from the library's dist so the playground is isolated
       '@ultimate/core-ui': path.resolve(__dirname, '..', 'dist', 'ultimate-core-ui.es.js'),
     },
