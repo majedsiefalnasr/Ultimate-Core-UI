@@ -1,191 +1,215 @@
-# 🤖 Copilot Instructions for Ultimate Core UI
+# 🧠 Copilot Instructions (v2.1)
 
-## 🧭 Project Context
-
-**Ultimate Core UI (`@ultimate/core-ui`)** is a **Vue 3 + TypeScript component library** built on top of **Vuetify** and **Bootstrap 5**.  
-It provides a consistent design system and reusable UI components that extend Vuetify's base components (e.g., `UBtn` extends `VBtn`).  
-Each component must **inherit Vuetify props, events, and slots**, while allowing additional customization through new props, slots, and SCSS layers.
-
-### Goals
-
-- Extend Vuetify components while preserving full compatibility with their props, slots, and events.
-- Provide consistent design, accessibility, and responsiveness.
-- Offer Storybook documentation for each component.
-- Maintain strong typing, modular architecture, and tree-shakable builds.
+**Project:** Ultimate Core UI — Vuetify-based UI Library  
+**Purpose:** Developer-oriented Copilot configuration guide for building, maintaining, and extending the UI component system.
 
 ---
 
-## ⚙️ Component Architecture
+## ⚙️ 1. Overview
 
-Each component should follow these rules:
+This guide defines how GitHub Copilot and developers should generate, extend, and document Ultimate Core UI components.  
+Ultimate Core UI builds upon **Vuetify**, extending its components (`VBtn`, `VCard`, etc.) into your library’s namespace (`UBtn`, `UCard`, …).
 
-1. **Naming**
-   - Component names are prefixed with `U` (e.g., `UBtn`, `UCard`, `UDialog`).
-   - Folder and file names mirror the component name exactly.
+**Goals:**
 
-2. **Structure Example**
-
-   ```plaintext
-   src/components/UBtn/
-   ├── UBtn.vue
-   ├── UBtn.scss
-   ├── UBtn.stories.ts
-   ├── UBtn.test.ts
-   └── index.ts
-   ```
-
-3. **Extending Vuetify Components**  
-   Use Vuetify’s base component (e.g., `VBtn`) as the foundation.
-
-   ```ts
-   <script setup lang="ts">
-   import { VBtn } from 'vuetify/components'
-   import { useAttrs } from 'vue'
-
-   const props = defineProps({
-     ...VBtn.props,
-     variant: {
-       type: String,
-       default: 'primary',
-     },
-     loadingText: String,
-   })
-
-   const attrs = useAttrs()
-   </script>
-
-   <template>
-     <VBtn v-bind="attrs" v-bind="props">
-       <slot />
-       <template v-if="props.loadingText" #loader>
-         <span class="u-btn__loader">{{ props.loadingText }}</span>
-       </template>
-     </VBtn>
-   </template>
-
-   <style scoped lang="scss">
-   @import './UBtn.scss';
-   </style>
-   ```
-
-4. **Prop/Slot Inheritance**
-   - Ensure all Vuetify props and slots still work.
-   - Pass through all unknown props/attrs via `v-bind="attrs"`.
-
-5. **Export Pattern**
-   ```ts
-   import UBtn from './UBtn.vue';
-   export default UBtn;
-   export * from './UBtn.vue';
-   ```
+- Ensure component consistency across the design system.
+- Keep compatibility with Vuetify’s props, emits, and slots.
+- Maintain top-level code clarity through JSDoc and snippet metadata.
+- Prepare code for automated snippet generation and developer onboarding.
 
 ---
 
-## 💅 Styling Guidelines
+## 🧱 2. Architecture Rules
 
-- Base styles are built with **Bootstrap 5** utility classes and **custom SCSS**.
-- Use BEM naming conventions (`.u-btn--variant`, `.u-card__header`).
-- Each component has its own SCSS file.
-- Theme variables are defined in `/src/styles/_variables.scss`.
+### 🔸 Component Inheritance
+
+- Every Ultimate Core UI component should **extend its Vuetify equivalent**.
+- Props, emits, and slots from Vuetify must pass through transparently.
+- Example: `UBtn` → inherits all from `VBtn`.
+
+### 🔸 Local Props Policy
+
+- Local props are **optional** and **must not** be generated unless explicitly requested.
+- Copilot should **not create or duplicate** Vuetify props.
+- When a new prop is requested, it must be well documented with JSDoc.
+
+### 🔸 Component Naming
+
+- Prefix all extended components with `U` (for Ultimate).  
+  Example: `UBtn`, `UCard`, `UDialog`, `UInput`.
+- Maintain PascalCase naming for Vue components.
 
 ---
 
-## 📚 Storybook Conventions
+## 💬 3. Documentation Standards
 
-- Each component must include a Storybook file (`ComponentName.stories.ts`).
-- Stories use the **CSF3 format** with clear args and controls.
+### 🧾 JSDoc Enforcement
 
-Example (`UBtn.stories.ts`):
+Every component must include:
 
-```ts
-import UBtn from './UBtn.vue';
-import type { Meta, StoryObj } from '@storybook/vue3';
+- A descriptive JSDoc block at the top.
+- Inline documentation for props, emits, and slots.
 
-const meta: Meta<typeof UBtn> = {
-  title: 'Components/UBtn',
-  component: UBtn,
-  args: {
-    color: 'primary',
-    text: 'Click me',
-  },
-  argTypes: {
-    color: { control: 'select', options: ['primary', 'secondary', 'error'] },
-  },
-};
-export default meta;
-export const Default: StoryObj<typeof UBtn> = {};
+#### Example JSDoc
+
+```js
+/**
+ * Extended UBtn component built on Vuetify's VBtn.
+ * Inherits all VBtn props, slots, and emits.
+ *
+ * @component
+ * @extends VBtn
+ * @example
+ * <UBtn color="primary" @click="onClick">Click Me</UBtn>
+ */
 ```
 
 ---
 
-## 🧪 Testing Standards
+## ⚡ 4. Snippet Metadata in Components
 
-- Use **Vitest** with **Vue Test Utils**.
-- Each component has a matching `ComponentName.test.ts`.
-- Test coverage must include:
-  - Rendering with default props.
-  - Prop reactivity (especially inherited Vuetify props).
-  - Events and slot rendering.
+Each component file must begin with a **snippet metadata header** for IDE recognition.
 
-Example (`UBtn.test.ts`):
+Example:
 
-```ts
-import { mount } from '@vue/test-utils';
-import UBtn from './UBtn.vue';
+```js
+// snippet:UBtn
+// <UBtn color="primary" @click="onClick">Click Me</UBtn>
+```
 
-describe('UBtn', () => {
-  it('renders default slot', () => {
-    const wrapper = mount(UBtn, { slots: { default: 'Hello' } });
-    expect(wrapper.text()).toContain('Hello');
-  });
+This allows snippet generators and IDEs to auto-register snippets dynamically.
 
-  it('passes Vuetify props correctly', () => {
-    const wrapper = mount(UBtn, { props: { color: 'secondary' } });
-    expect(wrapper.props().color).toBe('secondary');
-  });
-});
+---
+
+## 🧩 5. Snippet Convention Guide
+
+| Type            | Convention                                   | Example                              |
+| --------------- | -------------------------------------------- | ------------------------------------ |
+| **Trigger**     | lowercase, same as component name            | `ubtn`                               |
+| **Prefix**      | Always `u` for Ultimate Core UI              | `UBtn`, `UCard`, `UDialog`           |
+| **Body**        | Minimal functional example                   | `<UBtn color="primary">Label</UBtn>` |
+| **Description** | “Ultimate Core UI – [ComponentName] snippet” | “Ultimate Core UI – Button snippet”  |
+
+---
+
+## 💡 6. VS Code Snippet JSON Template
+
+Place the following JSON file in `.vscode/snippets/ultimate-core-ui.code-snippets`:
+
+```json
+{
+  "UBtn": {
+    "prefix": "ubtn",
+    "body": ["<UBtn color=\"${1:primary}\">${2:Label}</UBtn>"],
+    "description": "Ultimate Core UI – Button snippet"
+  },
+  "UCard": {
+    "prefix": "ucard",
+    "body": ["<UCard title=\"${1:Card Title}\">", "  ${2:Card content}", "</UCard>"],
+    "description": "Ultimate Core UI – Card snippet"
+  },
+  "UDialog": {
+    "prefix": "udialog",
+    "body": ["<UDialog v-model=\"${1:isOpen}\">", "  ${2:Dialog content}", "</UDialog>"],
+    "description": "Ultimate Core UI – Dialog snippet"
+  }
+}
+```
+
+This ensures developers can type `ubtn` + `Tab` in VS Code and instantly generate a working component usage snippet.
+
+---
+
+## 🤖 7. Copilot Behavior Rules
+
+Copilot must:
+
+1. **Inherit Vuetify logic** (props, emits, slots) automatically.
+2. **Not create local props** unless explicitly requested.
+3. **Include JSDoc** for every component, prop, and slot.
+4. **Insert snippet headers** at the top of each file.
+5. **Provide examples** within `@example` tags for documentation clarity.
+6. Prefer **composition API** syntax and script setup for cleaner code.
+7. Follow **Vuetify + Ultimate Core UI** naming conventions.
+
+---
+
+## 🧩 8. Example: `UBtn.vue`
+
+```vue
+<!-- snippet:UBtn -->
+<!-- <UBtn color="primary" @click="onClick">Click Me</UBtn> -->
+
+<script setup>
+  /**
+   * Extended UBtn component built on Vuetify's VBtn.
+   * Inherits all VBtn props, slots, and emits.
+   *
+   * @component
+   * @extends VBtn
+   * @example
+   * <UBtn color="primary" @click="onClick">Click Me</UBtn>
+   */
+
+  import { VBtn } from 'vuetify/components';
+
+  defineProps(VBtn.props);
+  defineEmits(VBtn.emits);
+</script>
+
+<template>
+  <VBtn v-bind="$props" v-on="$attrs">
+    <slot />
+  </VBtn>
+</template>
 ```
 
 ---
 
-## 🧠 Copilot Prompt Library
+## 📦 9. Best Practices Summary
 
-To make Copilot more effective, ready-to-use prompt templates are provided separately.
-
-📄 **See:** [`docs/copilot-prompts.md`](../docs/copilot-prompts.md)
-
-That file includes practical Copilot instructions to:
-
-- Create new components extending Vuetify ones.
-- Generate Storybook stories, tests, and SCSS files.
-- Build utilities and composables.
-- Produce documentation snippets automatically.
+✅ Always inherit from Vuetify components.  
+✅ Don’t duplicate props or emits.  
+✅ Add local props only on explicit request.  
+✅ Use JSDoc for all code.  
+✅ Include snippet headers for automation.  
+✅ Follow consistent naming and folder structure.  
+✅ Keep examples simple, minimal, and working.
 
 ---
 
-## 🧾 Linting & Formatting
+## 🏁 10. Quick Reference
 
-- **ESLint + Prettier** are enforced.
-- Use semicolons, single quotes, and trailing commas.
-- Follow Vue 3 `<script setup>` conventions.
+**Component folder structure:**
+
+```
+src/
+└── components/
+    ├── UBtn/
+    │   ├── UBtn.vue
+    │   └── index.ts
+    ├── UCard/
+    │   ├── UCard.vue
+    │   └── index.ts
+    └── UDialog/
+        ├── UDialog.vue
+        └── index.ts
+```
+
+**File header snippet pattern:**
+
+```js
+// snippet:<ComponentName>
+// <ComponentName ...>...</ComponentName>
+```
+
+**JSDoc must always include:**
+
+- @component
+- @extends (Vuetify component)
+- @example
+- Optional: @prop, @slot, @emit (if local additions exist)
 
 ---
 
-## 📦 Publishing Notes
-
-- Each package should be tree-shakable and export named components.
-- Use `vite build` for library builds.
-- Include only `dist/` in published package.
-
----
-
-## ✅ Summary
-
-Copilot should always:
-
-1. Use **TypeScript** and **<script setup>** syntax.
-2. Extend **Vuetify** components while preserving compatibility.
-3. Follow **BEM + SCSS modular structure**.
-4. Create **Storybook** and **test** files for every new component.
-5. Maintain **consistent naming** (`UComponentName`).
-6. Enforce **linting and formatting** automatically.
+🧩 **End of Copilot Instructions v2.1**
