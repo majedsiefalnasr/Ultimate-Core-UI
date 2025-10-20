@@ -115,7 +115,7 @@ export const Icon: Story = {
 ## 5. VS Code Snippet Generation
 
 For each component, Copilot must generate snippets under:  
-`@UltimateCoreUI/snippets/.vscode/<component>.code-snippets`
+`src/snippets/.vscode/<component>.code-snippets`
 
 Each snippet must support **PascalCase** and **kebab-case** triggers.
 
@@ -153,47 +153,35 @@ If user specifies **“add Optional Enhancement”**, Copilot may:
 Each component folder follows this pattern:
 
 ```
-@UltimateCoreUI (Project directory)/
-│
-├── src
-│   ├── components/UComponent/
-│   │   ├── UComponent.vue
-│   │   ├── UComponent.stories.ts
-│   │   ├── index.ts
-│   │   └── UComponent.scss (optional)
-│   ├── snippets/
-│   │   ├── .vscode/
-│   │   │   ├── UComponent.code-snippets
-│   │   │   └── ...
-│   │   └── README.md
-│   └── ...
-│
-├── ...
-│
-└── package.json
+src
+├── components/UComponent/
+│   ├── UComponent.vue
+│   ├── UComponent.stories.ts
+│   ├── index.ts
+│   └── UComponent.scss (optional)
+├── snippets/
+│   ├── .vscode/
+│   │   ├── UComponent.code-snippets
+│   │   └── ...
+│   └── README.md
+└── ...
 ```
 
 Example for `UBtn`:
 
 ```
-@UltimateCoreUI (Project directory)/
-│
-├── src
-│   ├── components/UBtn/
-│   │   ├── UBtn.vue
-│   │   ├── UBtn.stories.ts
-│   │   ├── index.ts
-│   │   └── UBtn.scss (optional)
-│   ├── snippets/
-│   │   ├── .vscode/
-│   │   │   ├── UBtn.code-snippets
-│   │   │   └── ...
-│   │   └── README.md
-│   └── ...
-│
-├── ...
-│
-└── package.json
+src
+├── components/UBtn/
+│   ├── UBtn.vue
+│   ├── UBtn.stories.ts
+│   ├── index.ts
+│   └── UBtn.scss (optional)
+├── snippets/
+│   ├── .vscode/
+│   │   ├── UBtn.code-snippets
+│   │   └── ...
+│   └── README.md
+└── ...
 ```
 
 ---
