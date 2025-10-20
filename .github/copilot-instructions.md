@@ -1,146 +1,41 @@
-# 🧠 Copilot Instructions (v2.1)
+# 🧠 Copilot Instructions for @UltimateCoreUI
 
-**Project:** Ultimate Core UI — Vuetify-based UI Library  
-**Purpose:** Developer-oriented Copilot configuration guide for building, maintaining, and extending the UI component system.
+## 1. Purpose & Overview
 
----
+These instructions guide GitHub Copilot to generate **Vue 3 components** for the `@UltimateCoreUI` library, built on top of **Vuetify**.  
+Each component must behave as an **extended Vuetify component** (like `VBtn`), inheriting all props, emits, attrs, and slots.
 
-## ⚙️ 1. Overview
+Copilot should ensure:
 
-This guide defines how GitHub Copilot and developers should generate, extend, and document Ultimate Core UI components.  
-Ultimate Core UI builds upon **Vuetify**, extending its components (`VBtn`, `VCard`, etc.) into your library’s namespace (`UBtn`, `UCard`, …).
-
-**Goals:**
-
-- Ensure component consistency across the design system.
-- Keep compatibility with Vuetify’s props, emits, and slots.
-- Maintain top-level code clarity through JSDoc and snippet metadata.
-- Prepare code for automated snippet generation and developer onboarding.
+- The component works as `<UComponent>` and `<u-component>`.
+- Follows the structure and coding style shown in the canonical `UBtn` example below.
+- Automatically generates Storybook files and snippet entries.
 
 ---
 
-## 🧱 2. Architecture Rules
+## 2. Component Generation Template
 
-### 🔸 Component Inheritance
+When generating a new component (e.g., `UInput`), Copilot must:
 
-- Every Ultimate Core UI component should **extend its Vuetify equivalent**.
-- Props, emits, and slots from Vuetify must pass through transparently.
-- Example: `UBtn` → inherits all from `VBtn`.
-
-### 🔸 Local Props Policy
-
-- Local props are **optional** and **must not** be generated unless explicitly requested.
-- Copilot should **not create or duplicate** Vuetify props.
-- When a new prop is requested, it must be well documented with JSDoc.
-
-### 🔸 Component Naming
-
-- Prefix all extended components with `U` (for Ultimate).  
-  Example: `UBtn`, `UCard`, `UDialog`, `UInput`.
-- Maintain PascalCase naming for Vue components.
+1. Create a Vue component that **extends a Vuetify base component** (e.g., `VInput`).
+2. Inherit **all props, slots, emits, and attrs** using `v-bind="$attrs"` and slot forwarding.
+3. Set `inheritAttrs: false`.
+4. Define a component name like `UInput`.
+5. Support both **PascalCase** and **kebab-case** usages.
+6. Include **JSDoc** with examples.
+7. Add **optional local props** or style sections if the user requests enhancement.
 
 ---
 
-## 💬 3. Documentation Standards
+## 3. Canonical Example — `UBtn.vue`
 
-### 🧾 JSDoc Enforcement
-
-Every component must include:
-
-- A descriptive JSDoc block at the top.
-- Inline documentation for props, emits, and slots.
-
-#### Example JSDoc
-
-```js
-/**
- * Extended UBtn component built on Vuetify's VBtn.
- * Inherits all VBtn props, slots, and emits.
- *
- * @component
- * @extends VBtn
- * @example
- * <UBtn color="primary" @click="onClick">Click Me</UBtn>
- */
-```
-
----
-
-## ⚡ 4. Snippet Metadata in Components
-
-Each component file must begin with a **snippet metadata header** for IDE recognition.
-
-Example:
-
-```js
-// snippet:UBtn
-// <UBtn color="primary" @click="onClick">Click Me</UBtn>
-```
-
-This allows snippet generators and IDEs to auto-register snippets dynamically.
-
----
-
-## 🧩 5. Snippet Convention Guide
-
-| Type            | Convention                                   | Example                              |
-| --------------- | -------------------------------------------- | ------------------------------------ |
-| **Trigger**     | lowercase, same as component name            | `ubtn`                               |
-| **Prefix**      | Always `u` for Ultimate Core UI              | `UBtn`, `UCard`, `UDialog`           |
-| **Body**        | Minimal functional example                   | `<UBtn color="primary">Label</UBtn>` |
-| **Description** | “Ultimate Core UI – [ComponentName] snippet” | “Ultimate Core UI – Button snippet”  |
-
----
-
-## 💡 6. VS Code Snippet JSON Template
-
-Place the following JSON file in `.vscode/snippets/ultimate-core-ui.code-snippets`:
-
-```json
-{
-  "UBtn": {
-    "prefix": "ubtn",
-    "body": ["<UBtn color=\"${1:primary}\">${2:Label}</UBtn>"],
-    "description": "Ultimate Core UI – Button snippet"
-  },
-  "UCard": {
-    "prefix": "ucard",
-    "body": ["<UCard title=\"${1:Card Title}\">", "  ${2:Card content}", "</UCard>"],
-    "description": "Ultimate Core UI – Card snippet"
-  },
-  "UDialog": {
-    "prefix": "udialog",
-    "body": ["<UDialog v-model=\"${1:isOpen}\">", "  ${2:Dialog content}", "</UDialog>"],
-    "description": "Ultimate Core UI – Dialog snippet"
-  }
-}
-```
-
-This ensures developers can type `ubtn` + `Tab` in VS Code and instantly generate a working component usage snippet.
-
----
-
-## 🤖 7. Copilot Behavior Rules
-
-Copilot must:
-
-1. **Inherit Vuetify logic** (props, emits, slots) automatically.
-2. **Not create local props** unless explicitly requested.
-3. **Include JSDoc** for every component, prop, and slot.
-4. **Insert snippet headers** at the top of each file.
-5. **Provide examples** within `@example` tags for documentation clarity.
-6. Prefer **composition API** syntax and script setup for cleaner code.
-7. Follow **Vuetify + Ultimate Core UI** naming conventions.
-
----
-
-## 🧩 8. Example: `UBtn.vue`
+This file is the reference pattern for all components.
 
 ```vue
 <!-- snippet:UBtn -->
 <!-- <UBtn color="primary" @click="onClick">Click Me</UBtn> -->
 
-<script setup>
+<script setup lang="ts">
   /**
    * Extended UBtn component built on Vuetify's VBtn.
    * Inherits all VBtn props, slots, and emits.
@@ -150,66 +45,164 @@ Copilot must:
    * @example
    * <UBtn color="primary" @click="onClick">Click Me</UBtn>
    */
-
   import { VBtn } from 'vuetify/components';
 
-  defineProps(VBtn.props);
-  defineEmits(VBtn.emits);
+  defineOptions({
+    name: 'UBtn',
+    inheritAttrs: false,
+  });
 </script>
 
 <template>
-  <VBtn v-bind="$props" v-on="$attrs">
-    <slot />
-  </VBtn>
+  <v-btn v-bind="$attrs">
+    <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
+      <slot :name="name as string" v-bind="slotData || {}" />
+    </template>
+  </v-btn>
 </template>
+
+<style scoped lang="scss">
+  // keep local styles in UBtn.scss; uncomment if needed
+  // @import './UBtn.scss';
+</style>
 ```
 
 ---
 
-## 📦 9. Best Practices Summary
+## 4. Storybook Example — `UBtn.stories.ts`
 
-✅ Always inherit from Vuetify components.  
-✅ Don’t duplicate props or emits.  
-✅ Add local props only on explicit request.  
-✅ Use JSDoc for all code.  
-✅ Include snippet headers for automation.  
-✅ Follow consistent naming and folder structure.  
-✅ Keep examples simple, minimal, and working.
+```ts
+import type { Meta, StoryObj } from '@storybook/vue3';
+import UBtn from './UBtn.vue';
+
+const meta: Meta<typeof UBtn> = {
+  title: 'Components/UBtn',
+  component: UBtn,
+  tags: ['autodocs'],
+  args: {
+    color: 'primary',
+    children: 'Click Me',
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof UBtn>;
+
+export const Default: Story = {
+  args: { color: 'primary' },
+  render: (args) => ({
+    components: { UBtn },
+    setup() {
+      return { args };
+    },
+    template: '<UBtn v-bind="args">Click Me</UBtn>',
+  }),
+};
+
+export const Icon: Story = {
+  render: (args) => ({
+    components: { UBtn },
+    setup() {
+      return { args };
+    },
+    template: '<UBtn icon="mdi-heart" />',
+  }),
+};
+```
 
 ---
 
-## 🏁 10. Quick Reference
+## 5. VS Code Snippet Generation
 
-**Component folder structure:**
+For each component, Copilot must generate snippets under:  
+`@UltimateCoreUI/snippets/.vscode/<component>.code-snippets`
 
+Each snippet must support **PascalCase** and **kebab-case** triggers.
+
+Example — `UBtn.code-snippets`:
+
+```json
+{
+  "UBtn Component": {
+    "prefix": "UBtn",
+    "body": ["<UBtn color="primary" @click="onClick">Click Me</UBtn>"],
+    "description": "Insert a UBtn component"
+  },
+  "u-btn Component": {
+    "prefix": "u-btn",
+    "body": ["<u-btn color="primary" @click="onClick">Click Me</u-btn>"],
+    "description": "Insert a u-btn component"
+  }
+}
 ```
-src/
-└── components/
-    ├── UBtn/
-    │   ├── UBtn.vue
-    │   └── index.ts
-    ├── UCard/
-    │   ├── UCard.vue
-    │   └── index.ts
-    └── UDialog/
-        ├── UDialog.vue
-        └── index.ts
-```
-
-**File header snippet pattern:**
-
-```js
-// snippet:<ComponentName>
-// <ComponentName ...>...</ComponentName>
-```
-
-**JSDoc must always include:**
-
-- @component
-- @extends (Vuetify component)
-- @example
-- Optional: @prop, @slot, @emit (if local additions exist)
 
 ---
 
-🧩 **End of Copilot Instructions v2.1**
+## 6. Optional Enhancements
+
+If user specifies **“add Optional Enhancement”**, Copilot may:
+
+- Add new local props (e.g., `loading`, `variant`, `size`).
+- Import and use component-specific SCSS.
+- Add slots or computed helpers for extended functionality.
+
+---
+
+## 7. File Naming & Folder Rules
+
+Each component folder follows this pattern:
+
+```
+@UltimateCoreUI (Project directory)/
+│
+├── src
+│   ├── components/UComponent/
+│   │   ├── UComponent.vue
+│   │   ├── UComponent.stories.ts
+│   │   ├── index.ts
+│   │   └── UComponent.scss (optional)
+│   ├── snippets/
+│   │   ├── .vscode/
+│   │   │   ├── UComponent.code-snippets
+│   │   │   └── ...
+│   │   └── README.md
+│   └── ...
+│
+├── ...
+│
+└── package.json
+```
+
+Example for `UBtn`:
+
+```
+@UltimateCoreUI (Project directory)/
+│
+├── src
+│   ├── components/UBtn/
+│   │   ├── UBtn.vue
+│   │   ├── UBtn.stories.ts
+│   │   ├── index.ts
+│   │   └── UBtn.scss (optional)
+│   ├── snippets/
+│   │   ├── .vscode/
+│   │   │   ├── UBtn.code-snippets
+│   │   │   └── ...
+│   │   └── README.md
+│   └── ...
+│
+├── ...
+│
+└── package.json
+```
+
+---
+
+✅ **Copilot Rule Summary**
+
+1. Follow the canonical `UBtn.vue` structure.
+2. Generate `.stories.ts` beside the component.
+3. Create `.code-snippets` entries for both `<UComponent>` and `<u-component>`.
+4. Support both naming styles.
+5. Add enhancements only when requested.
+6. Always use Vuetify base components.
