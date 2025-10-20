@@ -1,8 +1,9 @@
+// import UBtn from './UBtn.vue'
 import type { Meta, StoryFn } from '@storybook/vue3';
 import { ref, watch } from 'vue';
-import { VBtn } from 'vuetify/components';
 
-// Strongly-typed args for the VBtn stories to avoid `any` eslint errors.
+import UBtn from './index';
+
 interface ButtonArgs {
   density?: 'default' | 'comfortable' | 'compact';
   size?: 'x-small' | 'small' | 'default' | 'large' | 'x-large';
@@ -19,16 +20,14 @@ interface ButtonArgs {
   label?: string;
 }
 
-// Clean CSF stories for VBtn. Keep minimal and easy to parse to avoid
-// Storybook indexing issues.
 const meta: Meta<ButtonArgs> = {
   title: 'Core/Button',
-  component: VBtn,
+  component: UBtn,
   parameters: {
     docs: {
       description: {
         component:
-          'The v-btn component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.',
+          'The UBtn component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.',
       },
     },
   },
@@ -101,11 +100,11 @@ const meta: Meta<ButtonArgs> = {
 export default meta;
 
 export const Default: StoryFn<ButtonArgs> = (args) => ({
-  components: { VBtn },
+  components: { UBtn },
   setup() {
     return { args };
   },
-  template: '<v-btn v-bind="args">{{ args.label || "Button" }}</v-btn>',
+  template: '<UBtn v-bind="args">{{ args.label || "Button" }}</UBtn>',
 });
 
 Default.args = {
@@ -114,32 +113,32 @@ Default.args = {
 } as ButtonArgs;
 
 export const Variants = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="auto">
-          <v-btn color="primary" variant="elevated">Elevated Button (Default)</v-btn>
+          <UBtn color="primary" variant="elevated">Elevated Button (Default)</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn color="primary" variant="flat">Flat Button</v-btn>
+          <UBtn color="primary" variant="flat">Flat Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn color="primary" variant="tonal">Tonal Button</v-btn>
+          <UBtn color="primary" variant="tonal">Tonal Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn color="primary" variant="outlined">Outlined Button</v-btn>
+          <UBtn color="primary" variant="outlined">Outlined Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn color="primary" variant="text">Text Button</v-btn>
+          <UBtn color="primary" variant="text">Text Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn color="primary" variant="plain">Plain Button</v-btn>
+          <UBtn color="primary" variant="plain">Plain Button</UBtn>
         </v-col>
       </v-row>
     </v-container>
@@ -147,20 +146,20 @@ export const Variants = () => ({
 });
 
 export const Density = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="auto">
-          <v-btn density="compact">Compact Button</v-btn>
+          <UBtn density="compact">Compact Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn density="comfortable">Comfortable Button</v-btn>
+          <UBtn density="comfortable">Comfortable Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn density="default">Default Button</v-btn>
+          <UBtn density="default">Default Button</UBtn>
         </v-col>
       </v-row>
     </v-container>
@@ -168,28 +167,28 @@ export const Density = () => ({
 });
 
 export const Sizes = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="auto">
-          <v-btn size="x-small">Extra small Button</v-btn>
+          <UBtn size="x-small">Extra small Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn size="small">Small Button</v-btn>
+          <UBtn size="small">Small Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn>Regular Button</v-btn>
+          <UBtn>Regular Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn size="large">Large Button</v-btn>
+          <UBtn size="large">Large Button</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn size="x-large">X-Large Button</v-btn>
+          <UBtn size="x-large">X-Large Button</UBtn>
         </v-col>
       </v-row>
     </v-container>
@@ -197,57 +196,57 @@ export const Sizes = () => ({
 });
 
 export const Block = () => ({
-  components: { VBtn },
-  template: `<v-btn block>Block Button</v-btn>`,
+  components: { UBtn },
+  template: `<UBtn block>Block Button</UBtn>`,
 });
 
 export const Rounded = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:center">
-      <v-btn rounded="0">0</v-btn>
-      <v-btn rounded="xs">xs</v-btn>
-      <v-btn rounded="sm">sm</v-btn>
-      <v-btn>default</v-btn>
-      <v-btn rounded="lg">lg</v-btn>
-      <v-btn rounded="xl">xl</v-btn>
-      <v-btn rounded="pill">pill</v-btn>
-      <v-btn rounded="circle" icon="mdi-heart"></v-btn>
+      <UBtn rounded="0">0</UBtn>
+      <UBtn rounded="xs">xs</UBtn>
+      <UBtn rounded="sm">sm</UBtn>
+      <UBtn>default</UBtn>
+      <UBtn rounded="lg">lg</UBtn>
+      <UBtn rounded="xl">xl</UBtn>
+      <UBtn rounded="pill">pill</UBtn>
+      <UBtn rounded="circle" icon="mdi-heart"></UBtn>
     </div>
   `,
 });
 
 export const Elevation = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <v-container>
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
-          <v-btn size="x-large">Default Elevation (2)</v-btn>
+          <UBtn size="x-large">Default Elevation (2)</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn elevation="4" size="x-large">Elevation 4</v-btn>
+          <UBtn elevation="4" size="x-large">Elevation 4</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn elevation="8" size="x-large">Elevation 8</v-btn>
+          <UBtn elevation="8" size="x-large">Elevation 8</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn elevation="12" size="x-large">Elevation 12</v-btn>
+          <UBtn elevation="12" size="x-large">Elevation 12</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn elevation="16" size="x-large">Elevation 16</v-btn>
+          <UBtn elevation="16" size="x-large">Elevation 16</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn elevation="20" size="x-large">Elevation 20</v-btn>
+          <UBtn elevation="20" size="x-large">Elevation 20</UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn elevation="24" size="x-large">Elevation 24</v-btn>
+          <UBtn elevation="24" size="x-large">Elevation 24</UBtn>
         </v-col>
       </v-row>
     </v-container>
@@ -255,27 +254,27 @@ export const Elevation = () => ({
 });
 
 export const Ripple = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <v-container>
       <v-row justify="center">
         <v-col cols="auto">
-          <v-btn
+          <UBtn
             height="72"
             min-width="164"
           >
             With Ripple
-          </v-btn>
+          </UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn
+          <UBtn
             :ripple="false"
             height="72"
             min-width="164"
           >
             Without Ripple
-          </v-btn>
+          </UBtn>
         </v-col>
       </v-row>
     </v-container>
@@ -283,42 +282,42 @@ export const Ripple = () => ({
 });
 
 export const Icon = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="auto">
-          <v-btn density="compact" icon="mdi-plus"></v-btn>
+          <UBtn density="compact" icon="mdi-plus"></UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn density="comfortable" icon="mdi-tag"></v-btn>
+          <UBtn density="comfortable" icon="mdi-tag"></UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn density="default" icon="mdi-open-in-new"></v-btn>
+          <UBtn density="default" icon="mdi-open-in-new"></UBtn>
         </v-col>
       </v-row>
 
       <v-row align="center" justify="center">
         <v-col cols="auto">
-          <v-btn icon="mdi-account" size="x-small"></v-btn>
+          <UBtn icon="mdi-account" size="x-small"></UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn icon="mdi-plus" size="small"></v-btn>
+          <UBtn icon="mdi-plus" size="small"></UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn icon="mdi-tag"></v-btn>
+          <UBtn icon="mdi-tag"></UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn icon="mdi-open-in-new" size="large"></v-btn>
+          <UBtn icon="mdi-open-in-new" size="large"></UBtn>
         </v-col>
 
         <v-col cols="auto">
-          <v-btn icon="mdi-calendar" size="x-large"></v-btn>
+          <UBtn icon="mdi-calendar" size="x-large"></UBtn>
         </v-col>
       </v-row>
     </v-container>
@@ -326,7 +325,7 @@ export const Icon = () => ({
 });
 
 export const Loaders = () => ({
-  components: { VBtn },
+  components: { UBtn },
   setup() {
     const loading = ref(false);
     const load = () => {
@@ -343,11 +342,11 @@ export const Loaders = () => ({
       title="Strengthen your passwords"
     >
       <template v-slot:actions>
-        <v-btn height="48">
+        <UBtn height="48">
           No Thanks
-        </v-btn>
+        </UBtn>
 
-        <v-btn
+        <UBtn
           :loading="loading"
           class="flex-grow-1"
           height="48"
@@ -355,17 +354,17 @@ export const Loaders = () => ({
           @click="load"
         >
           Take Checkup
-        </v-btn>
+        </UBtn>
       </template>
     </v-card>
   `,
 });
 
 export const IconColor = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <div class="text-center">
-      <v-btn
+      <UBtn
         append-icon="mdi-account-circle"
         prepend-icon="mdi-check-circle"
       >
@@ -378,41 +377,41 @@ export const IconColor = () => ({
         <template v-slot:append>
           <v-icon color="warning"></v-icon>
         </template>
-      </v-btn>
+      </UBtn>
     </div>
   `,
 });
 
 export const Spaced = () => ({
-  components: { VBtn },
+  components: { UBtn },
   template: `
     <v-container class="d-flex flex-wrap align-center justify-center ga-3">
-      <v-btn height="70" prepend-icon="$prev" spaced="start" width="220">
+      <UBtn height="70" prepend-icon="$prev" spaced="start" width="220">
         <span class="text-right">
           <div class="mb-1">Previous</div>
           <small class="text-medium-emphasis">spaced: start</small>
         </span>
-      </v-btn>
+      </UBtn>
 
-      <v-btn append-icon="$next" height="70" prepend-icon="$prev" spaced="both" width="220">
+      <UBtn append-icon="$next" height="70" prepend-icon="$prev" spaced="both" width="220">
         <span>
           <div class="mb-1">Navigate</div>
           <small class="text-medium-emphasis">spaced: both</small>
         </span>
-      </v-btn>
+      </UBtn>
 
-      <v-btn append-icon="$next" height="70" spaced="end" width="220">
+      <UBtn append-icon="$next" height="70" spaced="end" width="220">
         <span class="text-left">
           <div class="mb-1">Next</div>
           <small class="text-medium-emphasis">spaced: end</small>
         </span>
-      </v-btn>
+      </UBtn>
     </v-container>
   `,
 });
 
 export const CustomLoader = () => ({
-  components: { VBtn },
+  components: { UBtn },
   setup() {
     const loading = ref(false);
 
@@ -425,7 +424,7 @@ export const CustomLoader = () => ({
   },
   template: `
     <div class="text-center">
-      <v-btn
+      <UBtn
         :loading="loading"
         @click="loading = !loading"
       >
@@ -434,7 +433,7 @@ export const CustomLoader = () => ({
         <template v-slot:loader>
           <v-progress-linear indeterminate></v-progress-linear>
         </template>
-      </v-btn>
+      </UBtn>
     </div>
   `,
 });
