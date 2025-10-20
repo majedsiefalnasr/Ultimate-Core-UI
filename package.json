@@ -9,7 +9,12 @@
       "import": "./dist/ultimate-core-ui.es.js",
       "require": "./dist/ultimate-core-ui.umd.cjs"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/style.css",
+    "./components": {
+      "import": "./src/components/index.ts",
+      "types": "./src/components/index.ts"
+    },
+    "./components/*": "./src/components/*"
   },
   "types": "dist/index.d.ts",
   "files": [
@@ -17,7 +22,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:clean && vite build && vue-tsc --emitDeclarationOnly",
+    "build": "npm run build:clean && vite build && vue-tsc --declaration --emitDeclarationOnly",
     "build:clean": "rimraf dist",
     "prepare": "husky install",
     "lint": "eslint --ext .js,.ts,.vue src --report-unused-disable-directives --max-warnings=0",

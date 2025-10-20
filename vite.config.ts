@@ -5,6 +5,11 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@ultimate/core-ui/components': path.resolve(__dirname, 'src/components'),
+    },
+  },
   plugins: [
     vue(),
     // Generate .d.ts files during build. Configured for monorepo usage.

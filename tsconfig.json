@@ -5,14 +5,20 @@
     "moduleResolution": "Node",
     "lib": ["ESNext", "DOM"],
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./dist/types",
+    "emitDeclarationOnly": true,
     "jsx": "preserve",
     "strict": true,
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "baseUrl": ".",
+    "paths": {
+      "@ultimate/core-ui/components": ["./src/components/index.ts"],
+      "@ultimate/core-ui/components/*": ["./src/components/*"]
+    }
   },
   "include": ["src/**/*", "tests/**/*"],
   "exclude": ["node_modules", "dist", "storybook-static", "src/App.vue", "src/main.ts"]

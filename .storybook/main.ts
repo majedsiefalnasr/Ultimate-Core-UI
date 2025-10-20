@@ -1,4 +1,4 @@
-import type {StorybookConfig} from '@storybook/vue3-vite'
+import type { StorybookConfig } from '@storybook/vue3-vite'
 
 const config: StorybookConfig = {
   // include component stories (js/ts), MDX stories, and docs-only MDX pages
