@@ -14,7 +14,9 @@
       "import": "./src/components/index.ts",
       "types": "./src/components/index.ts"
     },
-    "./components/*": "./src/components/*"
+    "./components/*": "./src/components/*",
+    "./snippets": "./src/snippets/",
+    "./snippets/*": "./src/snippets/*.code-snippets"
   },
   "types": "dist/index.d.ts",
   "files": [
