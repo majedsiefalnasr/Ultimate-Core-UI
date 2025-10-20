@@ -4,7 +4,7 @@ import { ref, watch } from 'vue';
 
 import UBtn from './index';
 
-interface ButtonArgs {
+interface ComponentArgs {
   density?: 'default' | 'comfortable' | 'compact';
   size?: 'x-small' | 'small' | 'default' | 'large' | 'x-large';
   block?: boolean;
@@ -20,7 +20,7 @@ interface ButtonArgs {
   label?: string;
 }
 
-const meta: Meta<ButtonArgs> = {
+const meta: Meta<ComponentArgs> = {
   title: 'Core/Button',
   component: UBtn,
   parameters: {
@@ -99,7 +99,7 @@ const meta: Meta<ButtonArgs> = {
 
 export default meta;
 
-export const Default: StoryFn<ButtonArgs> = (args) => ({
+export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBtn },
   setup() {
     return { args };
@@ -110,7 +110,7 @@ export const Default: StoryFn<ButtonArgs> = (args) => ({
 Default.args = {
   color: 'primary',
   label: 'Primary',
-} as ButtonArgs;
+} as ComponentArgs;
 
 export const Variants = () => ({
   components: { UBtn },
