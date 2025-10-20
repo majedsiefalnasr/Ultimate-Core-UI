@@ -33,7 +33,7 @@ This file is the reference pattern for all components.
 
 ```vue
 <!-- snippet:UBtn -->
-<!-- <UBtn color="primary" @click="onClick">Click Me</UBtn> -->
+<!-- <UBtn>Click Me</UBtn> -->
 
 <script setup lang="ts">
   /**
@@ -115,7 +115,7 @@ export const Icon: Story = {
 ## 5. VS Code Snippet Generation
 
 For each component, Copilot must generate snippets under:  
-`src/snippets/.vscode/<component>.code-snippets`
+`src/snippets/<component>.code-snippets`
 
 Each snippet must support **PascalCase** and **kebab-case** triggers.
 
