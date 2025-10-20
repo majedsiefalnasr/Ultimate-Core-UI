@@ -11,7 +11,10 @@
    * @example
    * <UBottomSheet v-model:open="show">Content</UBottomSheet>
    */
+  // Import Vuetify's VBottomSheet component (Base component)
   import { VBottomSheet } from 'vuetify/components';
+  // Import local styles
+  import './UBottomSheet.scss';
 
   defineOptions({
     name: 'UBottomSheet',
@@ -27,7 +30,4 @@
   </v-bottom-sheet>
 </template>
 
-<style scoped lang="scss">
-  // Add local styles in UBottomSheet.scss if needed
-  // @import './UBottomSheet.scss';
-</style>
+<style scoped lang="scss"></style>

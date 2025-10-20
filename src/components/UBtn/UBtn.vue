@@ -1,5 +1,5 @@
 <!-- snippet:UBtn -->
-<!-- <UBtn color="primary" @click="onClick">Click Me</UBtn> -->
+<!-- <UBtn>Click Me</UBtn> -->
 
 <script setup lang="ts">
   /**
@@ -11,7 +11,10 @@
    * @example
    * <UBtn color="primary" @click="onClick">Click Me</UBtn>
    */
+  // Import Vuetify's VBtn component (Base component)
   import { VBtn } from 'vuetify/components';
+  // Import local styles
+  import './UBtn.scss';
 
   defineOptions({
     name: 'UBtn',
@@ -27,7 +30,4 @@
   </v-btn>
 </template>
 
-<style scoped lang="scss">
-  // keep local styles in UBtn.scss; uncomment if needed
-  // @import './UBtn.scss';
-</style>
+<style scoped lang="scss"></style>
