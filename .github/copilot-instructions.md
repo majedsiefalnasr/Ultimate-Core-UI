@@ -45,26 +45,31 @@ This file is the reference pattern for all components.
    * @example
    * <UBtn color="primary" @click="onClick">Click Me</UBtn>
    */
+  // Import Vuetify's VBtn component (Base component)
   import { VBtn } from 'vuetify/components';
+  // Import local styles
+  import './UBtn.scss';
 
   defineOptions({
     name: 'UBtn',
     inheritAttrs: false,
   });
+
+  // Define slots with proper typing
+  defineSlots<{
+    [key: string]: any;
+  }>();
 </script>
 
 <template>
   <v-btn v-bind="$attrs">
     <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
-      <slot :name="name as string" v-bind="slotData || {}" />
+      <slot :name="name" v-bind="slotData || {}" />
     </template>
   </v-btn>
 </template>
 
-<style scoped lang="scss">
-  // keep local styles in UBtn.scss; uncomment if needed
-  // @import './UBtn.scss';
-</style>
+<style scoped lang="scss"></style>
 ```
 
 ---
