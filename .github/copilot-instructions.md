@@ -57,7 +57,7 @@ This file is the reference pattern for all components.
 
   // Define slots with proper typing
   defineSlots<{
-    [key: string]: any;
+    [key: string]: (props: Record<string, unknown>) => unknown;
   }>();
 </script>
 
@@ -301,3 +301,51 @@ src
 4. Support both naming styles.
 5. Add enhancements only when requested.
 6. Always use Vuetify base components.
+
+---
+
+## 8. TypeScript typing rules (important)
+
+When Copilot generates TypeScript code for this repository, avoid using the `any` type. This project enforces `@typescript-eslint/no-explicit-any` and `strict`-like typing rules. Use the following guidance when producing TypeScript:
+
+- Never emit `: any` or cast values to `any` (for example `(x as any)`).
+- Prefer narrow, explicit types. When the exact type is unknown, use safe alternatives:
+  - Use `unknown` when you truly don't know the type, then narrow it with type guards before use.
+  - Use union types or indexed types when appropriate (for example `Record<string, unknown>`).
+  - Define small, local interfaces or types for structural typing rather than falling back to `any`.
+
+Examples:
+
+- Bad (forbidden):
+
+```ts
+const c = comp as any;
+if (c.name) {
+  app.component((c as any).name, c as any);
+}
+```
+
+- Good (preferred):
+
+```ts
+type InstallableComponent = Component & { install?: (app: App) => void; name?: string };
+const c = comp as unknown as InstallableComponent;
+if (!c) return;
+if (typeof c.install === 'function') {
+  c.install(app);
+} else if (typeof c.name === 'string') {
+  app.component(c.name, c as Component);
+}
+```
+
+If narrowing requires runtime checks, generate explicit type guards rather than using `any` or suppressing lint rules. If you must use a temporary broader type, prefer `unknown` and document why with a short comment.
+
+If Copilot cannot produce a well-typed result, produce a brief TODO comment and leave the specific typing to a human. Example:
+
+```ts
+// TODO: determine exact component export type here — using `unknown` until clarified
+const comp = exports[name] as unknown;
+// human: replace `unknown` with specific interface if needed
+```
+
+This rule is enforced by CI and local linting; follow it to avoid pre-commit failures.
