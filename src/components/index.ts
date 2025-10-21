@@ -12,3 +12,7 @@ export { default as UBtn } from './UBtn';
 // UCard
 export * from './UCard';
 export { default as UCard } from './UCard';
+
+// UChip
+export * from './UChip';
+export { default as UChip } from './UChip';

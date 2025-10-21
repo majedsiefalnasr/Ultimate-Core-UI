@@ -1,0 +1,12 @@
+{
+  "UChip Component": {
+    "prefix": "UChip",
+    "body": ["<UChip ${1:color=\"$2\"}>$3</UChip>"],
+    "description": "Insert a UChip component",
+  },
+  "u-chip Component": {
+    "prefix": "u-chip",
+    "body": ["<u-chip ${1:color=\"$2\"}>$3</u-chip>"],
+    "description": "Insert a u-chip component",
+  },
+}
