@@ -24,8 +24,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:clean && vite build && vue-tsc --declaration --emitDeclarationOnly",
+    "build": "npm run build:clean && vite build && vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly",
     "build:clean": "rimraf dist",
+    "build:types": "vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly",
     "prepare": "husky install",
     "lint": "eslint --ext .js,.ts,.vue src --report-unused-disable-directives --max-warnings=0",
     "lint:fix": "eslint --ext .js,.ts,.vue src --fix",
