@@ -16,3 +16,7 @@ export { default as UCard } from './UCard';
 // UChip
 export * from './UChip';
 export { default as UChip } from './UChip';
+
+// UDialog
+export * from './UDialog';
+export { default as UDialog } from './UDialog';
