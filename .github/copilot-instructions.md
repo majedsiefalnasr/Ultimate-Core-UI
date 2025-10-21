@@ -75,39 +75,141 @@ This file is the reference pattern for all components.
 import type { Meta, StoryObj } from '@storybook/vue3';
 import UBtn from './UBtn.vue';
 
-const meta: Meta<typeof UBtn> = {
-  title: 'Components/UBtn',
+interface ComponentArgs {
+  density?: 'default' | 'comfortable' | 'compact';
+  size?: 'x-small' | 'small' | 'default' | 'large' | 'x-large';
+  block?: boolean;
+  rounded?: string | number | boolean;
+  elevation?: number;
+  ripple?: boolean;
+  variant?: 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plain';
+  icon?: string;
+  loading?: boolean;
+  spaced?: 'start' | 'end' | 'both';
+  color?: string;
+  disabled?: boolean;
+  label?: string;
+}
+
+const meta: Meta<ComponentArgs> = {
+  title: 'Component/Containment/Button',
   component: UBtn,
-  tags: ['autodocs'],
-  args: {
-    color: 'primary',
-    children: 'Click Me',
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The UBtn component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.',
+      },
+      import: `import { UBtn } from '@ultimate/core-ui/components'`,
+    },
+    Vuetify: {
+      component: 'VBtn',
+      content:
+        "This component is built on top of Vuetify's VBtn component. For detailed usage and props, refer to the Vuetify documentation linked below.",
+      link: 'https://vuetifyjs.com/en/components/buttons/',
+    },
+    anatomy: {
+      title: 'Anatomy',
+      description:
+        'The recommended placement of elements inside of <UBtn> is: Place text in the center. Place visual content around container text',
+      Image: '/images/stories/ubtn.anatomy.png',
+      data: [
+        {
+          element: '1. Container',
+          description:
+            'In addition to text, the Button container typically holds a v-icon component',
+        },
+        {
+          element: '2. Icon (optional)',
+          description: 'Leading media content intended to improve visual context',
+        },
+        {
+          element: '3. Text',
+          description: 'A content area for displaying text and other inline elements',
+        },
+      ],
+    },
+  },
+  argTypes: {
+    density: {
+      control: { type: 'select' },
+      options: ['default', 'comfortable', 'compact'],
+      description: 'Density (default | comfortable | compact)',
+      table: { defaultValue: { summary: 'default' } },
+    },
+    size: {
+      control: { type: 'select' },
+      options: ['x-small', 'small', 'default', 'large', 'x-large'],
+      description: 'Size: x-small | small | default | large | x-large',
+      table: { defaultValue: { summary: 'default' } },
+    },
+    block: {
+      control: 'boolean',
+      description: 'Full width',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    rounded: {
+      control: 'text',
+      description: 'This can be 0, xs, sm, true, lg, xl, pill, circle, and shaped.',
+      table: { defaultValue: { summary: 'rounded' } },
+    },
+    elevation: {
+      control: 'number',
+      description: 'Elevation (box-shadow). Number from 0 to 24.',
+      table: { defaultValue: { summary: '2' } },
+    },
+    ripple: {
+      control: 'boolean',
+      description: 'Ripple effect',
+      table: { defaultValue: { summary: 'true' } },
+    },
+    variant: {
+      control: { type: 'select' },
+      options: ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'],
+      description: 'Visual variant (elevated | flat | tonal | outlined | text | plain)',
+      table: { defaultValue: { summary: 'elevated' } },
+    },
+    icon: {
+      control: 'text',
+      description: 'Icon name (Material Design Icons)',
+    },
+    loading: {
+      control: 'boolean',
+      description: 'Loading state',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    spaced: {
+      control: { type: 'select' },
+      options: ['start', 'end', 'both'],
+      description: 'Adds space when using icon with label',
+    },
+    color: {
+      control: 'color',
+      description: 'Theme color or CSS color',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disabled state',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    label: { control: 'text', description: 'Default slot text (used by the Default story)' },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof UBtn>;
 
-export const Default: Story = {
-  args: { color: 'primary' },
-  render: (args) => ({
-    components: { UBtn },
-    setup() {
-      return { args };
-    },
-    template: '<UBtn v-bind="args">Click Me</UBtn>',
-  }),
-};
+export const Default: StoryFn<ComponentArgs> = (args) => ({
+  components: { UBtn },
+  setup() {
+    return { args };
+  },
+  template: '<UBtn v-bind="args">{{ args.label || "Button" }}</UBtn>',
+});
 
-export const Icon: Story = {
-  render: (args) => ({
-    components: { UBtn },
-    setup() {
-      return { args };
-    },
-    template: '<UBtn icon="mdi-heart" />',
-  }),
-};
+Default.args = {
+  color: 'primary',
+  label: 'Primary',
+} as ComponentArgs;
 ```
 
 ---
@@ -125,12 +227,12 @@ Example — `UBtn.code-snippets`:
 {
   "UBtn Component": {
     "prefix": "UBtn",
-    "body": ["<UBtn color="primary" @click="onClick">Click Me</UBtn>"],
+    "body": ["<UBtn>$1</UBtn>"],
     "description": "Insert a UBtn component"
   },
   "u-btn Component": {
     "prefix": "u-btn",
-    "body": ["<u-btn color="primary" @click="onClick">Click Me</u-btn>"],
+    "body": ["<u-btn>$1</u-btn>"],
     "description": "Insert a u-btn component"
   }
 }
