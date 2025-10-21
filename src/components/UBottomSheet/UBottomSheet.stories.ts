@@ -16,6 +16,24 @@ const meta: Meta<ComponentArgs> = {
         component:
           'The UBottomSheet component provides a material design bottom sheet with a multitude of options.',
       },
+      import: `import { UBottomSheet } from '@ultimate/core-ui/components'`,
+    },
+    Vuetify: {
+      component: 'VBottomSheet',
+      content:
+        "This component is built on top of Vuetify's VBottomSheet component. For detailed usage and props, refer to the Vuetify documentation linked below.",
+      link: 'https://vuetifyjs.com/en/components/bottom-sheets/',
+    },
+    anatomy: {
+      description:
+        'The recommended components to use inside of a v-bottom-sheet are: v-card, v-list, v-sheet',
+      Image: '/images/stories/ubottomsheet.anatomy.png',
+      data: [
+        {
+          element: '1. Container',
+          description: 'The bottom sheet is a dialog that animates from the bottom of the screen',
+        },
+      ],
     },
   },
   argTypes: {
