@@ -21,7 +21,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Core/Button',
+  title: 'Component/Containment/Button',
   component: UBtn,
   parameters: {
     docs: {
@@ -29,6 +29,34 @@ const meta: Meta<ComponentArgs> = {
         component:
           'The UBtn component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.',
       },
+      import: `import { UBtn } from '@ultimate/core-ui/components'`,
+    },
+    Vuetify: {
+      component: 'VBtn',
+      content:
+        "This component is built on top of Vuetify's VBtn component. For detailed usage and props, refer to the Vuetify documentation linked below.",
+      link: 'https://vuetifyjs.com/en/components/buttons/',
+    },
+    anatomy: {
+      title: 'Anatomy',
+      description:
+        'The recommended placement of elements inside of <UBtn> is: Place text in the center. Place visual content around container text',
+      Image: '/images/stories/ubtn.anatomy.png',
+      data: [
+        {
+          element: '1. Container',
+          description:
+            'In addition to text, the Button container typically holds a v-icon component',
+        },
+        {
+          element: '2. Icon (optional)',
+          description: 'Leading media content intended to improve visual context',
+        },
+        {
+          element: '3. Text',
+          description: 'A content area for displaying text and other inline elements',
+        },
+      ],
     },
   },
   argTypes: {
