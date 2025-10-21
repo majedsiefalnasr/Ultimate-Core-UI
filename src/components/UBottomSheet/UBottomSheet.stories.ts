@@ -43,18 +43,19 @@ const meta: Meta<ComponentArgs> = {
       control: 'boolean',
       description:
         'With the inset prop, reduce the maximum width of the content area on desktop to 70%. This can be further reduced manually using the width prop.',
-      table: { defaultValue: { summary: 'false' } },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     modelValue: {
       control: 'boolean',
       description:
         'The v-model (or model-value) controls the visibility of the bottom sheet. Use this to open/close programmatically.',
-      table: { defaultValue: { summary: 'false' } },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     width: {
       control: 'text',
       description:
         'Optional width for the bottom sheet content area. Can be a CSS value (e.g., "600px", "70%") or a number for pixel width.',
+      table: { type: { summary: 'string | number' } },
     },
   },
 };

@@ -74,45 +74,51 @@ const meta: Meta<ComponentArgs> = {
       options: ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'],
       description:
         'The variant prop gives you easy access to several different card styles. Available variants are: elevated (default), flat, tonal, outlined, text, and plain.',
-      table: { defaultValue: { summary: 'elevated' } },
+      table: {
+        type: { summary: 'elevated | flat | tonal | outlined | text | plain' },
+        defaultValue: { summary: 'elevated' },
+      },
     },
     color: {
       control: 'color',
       description:
         'Cards can be colored by using any of the builtin colors and contextual names using the color prop.',
+      table: { type: { summary: 'string' } },
     },
     elevation: {
       control: 'number',
       description:
         'The elevation property provides up to 24 levels of shadow depth. By default, cards rest at 2dp.',
-      table: { defaultValue: { summary: '2' } },
+      table: { type: { summary: 'number' }, defaultValue: { summary: '2' } },
     },
     hover: {
       control: 'boolean',
       description:
         'When using the hover prop, the cards will increase its elevation when the mouse is hovered over them.',
-      table: { defaultValue: { summary: 'false' } },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     href: {
       control: 'text',
       description:
         'The card becomes an anchor with the href prop. Provide a URL to make the card an <a> element.',
+      table: { type: { summary: 'string' } },
     },
     link: {
       control: 'boolean',
       description:
         'Add the link prop for the same style without adding an anchor (useful for router-link or programmatic navigation).',
-      table: { defaultValue: { summary: 'false' } },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     disabled: {
       control: 'boolean',
       description:
         'The disabled prop can be added in order to prevent a user from interacting with the card.',
-      table: { defaultValue: { summary: 'false' } },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     image: {
       control: 'text',
       description: 'Apply a specific background image to the Card (provide a URL).',
+      table: { type: { summary: 'string' } },
     },
   },
 };
