@@ -3,13 +3,21 @@ import type { Meta, StoryFn } from '@storybook/vue3';
 import UCard from './UCard.vue';
 
 interface ComponentArgs {
-  elevation?: number;
-  color?: string;
+  title?: string;
+  subtitle?: string;
   text?: string;
+  variant?: 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plain';
+  color?: string;
+  elevation?: number;
+  hover?: boolean;
+  href?: string;
+  link?: boolean;
+  disabled?: boolean;
+  image?: string;
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Component/Surfaces/Card',
+  title: 'Component/Containment/Card',
   component: UCard,
   parameters: {
     docs: {
@@ -58,9 +66,54 @@ const meta: Meta<ComponentArgs> = {
     },
   },
   argTypes: {
-    elevation: { control: 'number', description: 'Elevation (0-24)' },
-    color: { control: 'color', description: 'Theme or CSS color' },
+    title: { control: 'text', description: 'Card title text' },
+    subtitle: { control: 'text', description: 'Card subtitle text' },
     text: { control: 'text', description: 'Default slot text' },
+    variant: {
+      control: { type: 'select' },
+      options: ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'],
+      description:
+        'The variant prop gives you easy access to several different card styles. Available variants are: elevated (default), flat, tonal, outlined, text, and plain.',
+      table: { defaultValue: { summary: 'elevated' } },
+    },
+    color: {
+      control: 'color',
+      description:
+        'Cards can be colored by using any of the builtin colors and contextual names using the color prop.',
+    },
+    elevation: {
+      control: 'number',
+      description:
+        'The elevation property provides up to 24 levels of shadow depth. By default, cards rest at 2dp.',
+      table: { defaultValue: { summary: '2' } },
+    },
+    hover: {
+      control: 'boolean',
+      description:
+        'When using the hover prop, the cards will increase its elevation when the mouse is hovered over them.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    href: {
+      control: 'text',
+      description:
+        'The card becomes an anchor with the href prop. Provide a URL to make the card an <a> element.',
+    },
+    link: {
+      control: 'boolean',
+      description:
+        'Add the link prop for the same style without adding an anchor (useful for router-link or programmatic navigation).',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    disabled: {
+      control: 'boolean',
+      description:
+        'The disabled prop can be added in order to prevent a user from interacting with the card.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    image: {
+      control: 'text',
+      description: 'Apply a specific background image to the Card (provide a URL).',
+    },
   },
 };
 
@@ -75,6 +128,7 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 });
 
 Default.args = {
-  elevation: 2,
-  text: 'Card content',
+  title: 'Card Title',
+  subtitle: 'Card subtitle secondary text',
+  text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!',
 };
