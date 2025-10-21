@@ -14,6 +14,7 @@ import { BootstrapComponent } from './docs/blocks/BootstrapComponent'
 import { ImportInfo } from './docs/blocks/ImportInfo'
 import { LinkToSource } from './docs/blocks/LinkToSource'
 import { VuetifyComponent } from './docs/blocks/VuetifyComponent'
+import { Anatomy } from './docs/blocks/Anatomy'
 
 /**
  * Custom Docs Page for Ultimate Core UI
@@ -37,6 +38,9 @@ export const Template: React.FC = () => {
       {/* Bootstrap / Vuetify info blocks (conditionally shown) */}
       <BootstrapComponent />
       <VuetifyComponent />
+
+      {/* Anatomy / component structure */}
+      <Anatomy />
 
       {/* Primary story preview */}
       <Primary />
