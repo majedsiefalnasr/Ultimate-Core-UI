@@ -10,15 +10,16 @@ export const VuetifyComponent: React.FC = () => {
   const storyOf: any = useOf('story')
 
   // Respect explicit override if provided in story parameters
-  const VuetifyComponentName: string | null =
-    storyOf?.parameters?.VuetifyComponent || storyOf?.story?.parameters?.VuetifyComponent || null
+  const Vuetify: string | null =
+    storyOf?.parameters?.Vuetify || storyOf?.story?.parameters?.Vuetify || null
 
-  if (!VuetifyComponentName) {
+  if (!Vuetify) {
     return null
   }
 
-  // Build a docs slug — many Vuetify docs use lowercase component names without the V prefix
-  const slug = VuetifyComponentName.toLowerCase()
+  const component = Vuetify?.component || ''
+  const content = Vuetify?.content || ''
+  const link = Vuetify?.link || ''
 
   return (
     <div
@@ -29,18 +30,12 @@ export const VuetifyComponent: React.FC = () => {
         marginTop: '1.5rem',
         fontSize: '0.95rem',
       }}>
-      <p>
-        This component uses <code>{VuetifyComponentName}</code> under the hood.
-      </p>
-      <p>
-        You can find the Vuetify docs below. Please note that the docs may reference
-        components/directives with the <code>v-</code> prefix.
-      </p>
+      <p>{content}</p>
       <a
-        href={`https://vuetifyjs.com/en/components/${slug}`}
+        href={`${link}`}
         target='_blank'
         rel='noopener noreferrer'>
-        Open Vuetify Docs →
+        Open Vuetify {component} Docs →
       </a>
     </div>
   )

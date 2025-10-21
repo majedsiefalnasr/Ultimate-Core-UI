@@ -1,0 +1,47 @@
+.docblock-argstable {
+  border-spacing: 0px;
+  color: rgb(46, 52, 56);
+  font-size: 13px;
+  line-height: 20px;
+  text-align: left;
+  width: 100%;
+  margin: 25px 1px 40px;
+}
+.docblock-argstable td, 
+.docblock-argstable th {
+  padding: 0px;
+  border: none;
+  vertical-align: top;
+  text-overflow: ellipsis;
+}
+.docblock-argstable th {
+  color: rgba(46, 52, 56, 0.75);
+  padding: 10px 15px;
+}
+.docblock-argstable th:first-of-type, 
+.docblock-argstable td:first-of-type {
+  padding-left: 20px;
+}
+.docblock-argstable tbody {
+  filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 1px 3px);
+}
+.docblock-argstable td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.docblock-argstable tbody > tr > * {
+  background: rgb(255, 255, 255);
+  border-top: 1px solid rgba(38, 85, 115, 0.15);
+}
+.docblock-argstable tbody > tr:first-of-type > * {
+  border-block-start: 1px solid rgba(38, 85, 115, 0.15);
+}
+.docblock-argstable tbody > tr > :first-of-type {
+  border-inline-start: 1px solid rgba(38, 85, 115, 0.15);
+}
+.docblock-argstable tbody > tr:first-of-type > td:first-of-type {
+  border-top-left-radius: 4px;
+}
+.docblock-argstable tbody > tr > :first-of-type > * {
+  font-weight: bold;
+}

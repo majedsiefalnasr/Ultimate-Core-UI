@@ -1,6 +1,8 @@
 import {useOf} from '@storybook/addon-docs/blocks'
 import React from 'react'
 
+import './Anatomy.scss';
+
 /**
  * Anatomy docs block
  * Expects story parameter `anatomy` with shape:
@@ -22,15 +24,7 @@ export const Anatomy: React.FC = () => {
   const {title = 'Anatomy', description = '', Image = '', data = []} = anatomy
 
   return (
-    <div
-      style={{
-        background: '#ffffff',
-        padding: '1rem',
-        borderRadius: '0.5rem',
-        marginTop: '1.5rem',
-        fontSize: '0.95rem',
-        boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
-      }}>
+    <div>
       <h3 style={{marginTop: 0}}>{title}</h3>
       {description ? <p>{description}</p> : null}
 
@@ -41,20 +35,20 @@ export const Anatomy: React.FC = () => {
       ) : null}
 
       {Array.isArray(data) && data.length > 0 ? (
-        <table style={{width: '100%', borderCollapse: 'collapse'}}>
-          <thead>
-            <tr style={{textAlign: 'left', borderBottom: '1px solid #e6e6e6'}}>
-              <th style={{padding: '0.5rem'}}>Element / Area</th>
-              <th style={{padding: '0.5rem'}}>Description</th>
+        <table style={{width: '100%'}} className='docblock-argstable sb-unstyled'>
+          <thead className='docblock-argstable-head'>
+            <tr>
+              <th>Element / Area</th>
+              <th>Description</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='docblock-argstable-body'>
             {data.map((row: any, idx: number) => (
-              <tr key={idx} style={{borderBottom: '1px solid #f2f2f2'}}>
-                <td style={{padding: '0.5rem', verticalAlign: 'top', width: '35%'}}>
+              <tr key={idx}>
+                <td>
                   <code>{row.element}</code>
                 </td>
-                <td style={{padding: '0.5rem'}}>{row.description}</td>
+                <td>{row.description}</td>
               </tr>
             ))}
           </tbody>

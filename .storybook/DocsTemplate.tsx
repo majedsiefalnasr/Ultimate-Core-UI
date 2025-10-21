@@ -39,9 +39,6 @@ export const Template: React.FC = () => {
       <BootstrapComponent />
       <VuetifyComponent />
 
-      {/* Anatomy / component structure */}
-      <Anatomy />
-
       {/* Primary story preview */}
       <Primary />
 
@@ -50,6 +47,9 @@ export const Template: React.FC = () => {
 
       {/* Source Code */}
       <Source />
+
+      {/* Anatomy / component structure */}
+      <Anatomy />
 
       {/* Other Stories */}
       <Stories includePrimary={false} title='More Examples' />

@@ -7,7 +7,7 @@ import React from 'react'
 export const ImportInfo: React.FC = () => {
   const storyOf: any = useOf('story')
   const componentDocs = storyOf?.story?.parameters?.docs || ''
-  const importStatement = componentDocs?.component?.import
+  const importStatement = componentDocs?.import
 
   return (
     <div style={{margin: '1.5rem 0'}}>
