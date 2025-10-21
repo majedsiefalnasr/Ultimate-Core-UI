@@ -267,9 +267,8 @@ src
 │   ├── index.ts
 │   └── UComponent.scss (optional)
 ├── snippets/
-│   ├── .vscode/
-│   │   ├── UComponent.code-snippets
-│   │   └── ...
+│   ├── UComponent.code-snippets
+│   ├── ...
 │   └── README.md
 └── ...
 ```
@@ -284,9 +283,8 @@ src
 │   ├── index.ts
 │   └── UBtn.scss (optional)
 ├── snippets/
-│   ├── .vscode/
-│   │   ├── UBtn.code-snippets
-│   │   └── ...
+│   ├── UBtn.code-snippets
+│   ├── ...
 │   └── README.md
 └── ...
 ```
