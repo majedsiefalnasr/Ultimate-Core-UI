@@ -63,48 +63,56 @@ const meta: Meta<ComponentArgs> = {
     density: {
       control: { type: 'select' },
       options: ['default', 'comfortable', 'compact'],
-      description: 'Density (default | comfortable | compact)',
+      description:
+        'The density prop is used to control the vertical space that the button takes up.',
       table: { defaultValue: { summary: 'default' } },
     },
     size: {
       control: { type: 'select' },
       options: ['x-small', 'small', 'default', 'large', 'x-large'],
-      description: 'Size: x-small | small | default | large | x-large',
+      description:
+        'The size property is used to control the size of the button and scales with density. The default size is undefined which essentially translates to medium.',
       table: { defaultValue: { summary: 'default' } },
     },
     block: {
       control: 'boolean',
-      description: 'Full width',
+      description:
+        'Block buttons extend the full available width of their container. This is useful for creating buttons that span the full width of a card or dialog.',
       table: { defaultValue: { summary: 'false' } },
     },
     rounded: {
       control: 'text',
-      description: 'This can be 0, xs, sm, true, lg, xl, pill, circle, and shaped.',
+      description:
+        'Use the rounded prop to control the border radius of a button. This can be 0, xs, sm, true, lg, xl, pill, circle, and shaped.',
       table: { defaultValue: { summary: 'rounded' } },
     },
     elevation: {
       control: 'number',
-      description: 'Elevation (box-shadow). Number from 0 to 24.',
+      description:
+        'The elevation property provides up to 24 levels of shadow depth. By default, buttons rest at 2dp.',
       table: { defaultValue: { summary: '2' } },
     },
     ripple: {
       control: 'boolean',
-      description: 'Ripple effect',
+      description: 'The ripple property determines whether the v-ripple\n directive is used.',
       table: { defaultValue: { summary: 'true' } },
     },
     variant: {
       control: { type: 'select' },
       options: ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'],
-      description: 'Visual variant (elevated | flat | tonal | outlined | text | plain)',
+      description:
+        'The variant prop gives you easy access to several different button styles. Available variants are: elevated(default), flat, tonal, outlined, text, and plain.',
       table: { defaultValue: { summary: 'elevated' } },
     },
     icon: {
       control: 'text',
-      description: 'Icon name (Material Design Icons)',
+      description:
+        'Icons can be used for the primary content of a button. They are commonly used in the v-toolbar and v-app-bar components.',
     },
     loading: {
       control: 'boolean',
-      description: 'Loading state',
+      description:
+        'Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a v-progress-circular component but this can be customized with the loader slot.',
       table: { defaultValue: { summary: 'false' } },
     },
     spaced: {
