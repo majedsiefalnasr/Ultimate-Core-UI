@@ -9,8 +9,11 @@ import * as directives from 'vuetify/directives';
 
 import 'vuetify/styles';
 import App from './App.vue';
+
 // Include Material Design Icons font for the playground preview
 import '@mdi/font/css/materialdesignicons.css';
+// Import the Ultimate Core UI library
+import UltimateCoreUI from '@ultimate/core-ui';
 
 const vuetify = createVuetify({
   components,
@@ -19,5 +22,5 @@ const vuetify = createVuetify({
 
 const app = createApp(App);
 app.use(vuetify);
-
+app.use(UltimateCoreUI);
 app.mount('#app');
