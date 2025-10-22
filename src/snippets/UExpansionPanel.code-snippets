@@ -1,0 +1,12 @@
+{
+  "UExpansionPanel Component": {
+    "prefix": "UExpansionPanel",
+    "body": ["<UExpansionPanel${1: title=\"$2\"} ${3: text=\"$4\"} />"],
+    "description": "Insert a UExpansionPanel component",
+  },
+  "u-expansion-panel Component": {
+    "prefix": "u-expansion-panel",
+    "body": ["<u-expansion-panel${1: title=\"$2\"} ${3: text=\"$4\"} />"],
+    "description": "Insert a u-expansion-panel component",
+  },
+}

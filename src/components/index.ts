@@ -24,3 +24,11 @@ export { default as UDialog } from './UDialog';
 // UDivider
 export * from './UDivider';
 export { default as UDivider } from './UDivider';
+
+// UExpansionPanels
+export * from './UExpansionPanels';
+export { default as UExpansionPanels } from './UExpansionPanels';
+
+// UExpansionPanel
+export * from './UExpansionPanel';
+export { default as UExpansionPanel } from './UExpansionPanel';
