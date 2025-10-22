@@ -20,3 +20,7 @@ export { default as UChip } from './UChip';
 // UDialog
 export * from './UDialog';
 export { default as UDialog } from './UDialog';
+
+// UDivider
+export * from './UDivider';
+export { default as UDivider } from './UDivider';
