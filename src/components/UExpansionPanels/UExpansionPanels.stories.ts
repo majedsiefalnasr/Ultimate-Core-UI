@@ -63,6 +63,41 @@ const meta: Meta<ComponentArgs> = {
         "This component is built on top of Vuetify's VExpansionPanels component. For detailed usage and props, refer to the Vuetify documentation linked below.",
       link: 'https://vuetifyjs.com/en/components/expansion-panels/',
     },
+    APIs: {
+      data: [
+        {
+          element: {
+            title: 'v-expansion-panels',
+            link: 'https://vuetifyjs.com/en/api/v-expansion-panels/',
+          },
+          description: 'Primary component',
+        },
+        {
+          element: {
+            title: 'v-expansion-panel',
+            link: 'https://vuetifyjs.com/en/api/v-expansion-panel/',
+          },
+          description:
+            'Sub-component that wraps v-expansion-panel-text and v-expansion-panel-title',
+        },
+        {
+          element: {
+            title: 'v-expansion-panel-text',
+            link: 'https://vuetifyjs.com/en/api/v-expansion-panel-text/',
+          },
+          description:
+            'Sub-component used to display the Expanion Panel’s text. Wraps the #text slot',
+        },
+        {
+          element: {
+            title: 'v-expansion-panel-title',
+            link: 'https://vuetifyjs.com/en/api/v-expansion-panel-title/',
+          },
+          description:
+            '	Sub-component used to display the Expansion Panel’s title. Wraps the #title slot',
+        },
+      ],
+    },
   },
   argTypes: {
     variant: {
