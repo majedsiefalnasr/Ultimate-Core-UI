@@ -32,3 +32,11 @@ export { default as UExpansionPanels } from './UExpansionPanels';
 // UExpansionPanel
 export * from './UExpansionPanel';
 export { default as UExpansionPanel } from './UExpansionPanel';
+
+// UList
+export * from './UList';
+export { default as UList } from './UList';
+
+// UListItem
+export * from './UListItem';
+export { default as UListItem } from './UListItem';

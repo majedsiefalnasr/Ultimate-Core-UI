@@ -1,0 +1,12 @@
+{
+  "UListItem Component": {
+    "prefix": "UListItem",
+    "body": ["<UListItem${1: title}${2: subtitle}}></UListItem>"],
+    "description": "Insert a UListItem component",
+  },
+  "u-list-item Component": {
+    "prefix": "u-list-item",
+    "body": ["<u-list-item>${1: title}${2: subtitle}></u-list-item>"],
+    "description": "Insert a u-list-item component",
+  },
+}

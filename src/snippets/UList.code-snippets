@@ -1,0 +1,12 @@
+{
+  "UList Component": {
+    "prefix": "UList",
+    "body": ["<UList>$1</UList>"],
+    "description": "Insert a UList component",
+  },
+  "u-list Component": {
+    "prefix": "u-list",
+    "body": ["<u-list>$1</u-list>"],
+    "description": "Insert a u-list component",
+  },
+}
