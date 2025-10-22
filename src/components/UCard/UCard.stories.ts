@@ -45,6 +45,10 @@ const meta: Meta<ComponentArgs> = {
         },
       },
     },
+    Primary: {
+      description:
+        'The UCard component is a stylish way to wrap different types of content; such as tables, images, or user actions.',
+    },
     Vuetify: {
       component: 'VCard',
       content:

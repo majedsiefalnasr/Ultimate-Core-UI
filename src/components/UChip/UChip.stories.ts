@@ -60,6 +60,10 @@ const meta: Meta<ComponentArgs> = {
         },
       },
     },
+    Primary: {
+      description:
+        'Chips come in the following variations: closeable, filter, outlined, pill. The default slot of UChip will also accept avatars and icons alongside text.',
+    },
     Vuetify: {
       component: 'VChip',
       content:

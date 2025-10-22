@@ -48,6 +48,10 @@ const meta: Meta<ComponentArgs> = {
         },
       },
     },
+    Primary: {
+      description:
+        'Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet is meant to contain anything.',
+    },
     Vuetify: {
       component: 'VBottomSheet',
       content:

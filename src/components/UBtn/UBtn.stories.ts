@@ -50,6 +50,10 @@ const meta: Meta<ComponentArgs> = {
         },
       },
     },
+    Primary: {
+      description:
+        'Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.',
+    },
     Vuetify: {
       component: 'VBtn',
       content:
