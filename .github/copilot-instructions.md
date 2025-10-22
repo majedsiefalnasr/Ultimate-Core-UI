@@ -106,6 +106,25 @@ const meta: Meta<ComponentArgs> = {
           'The UBtn component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.',
       },
       import: `import { UBtn } from '@ultimate/core-ui/components'`,
+      source: {
+        transform: (src: string, storyContext: { args: ComponentArgs }) => {
+          const { args } = storyContext;
+
+          // Build attributes string from args
+          const attrsArray = Object.entries(args as Record<string, unknown>)
+            .filter(([_, value]) => value !== undefined && value !== false)
+            .map(([key, value]) => {
+              if (value === true) return key;
+              if (typeof value === 'string') return `${key}="${value}"`;
+              if (typeof value === 'number') return `:${key}="${value}"`;
+              return `:${key}="${JSON.stringify(value)}"`;
+            });
+
+          const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
+
+          return `<UBtn${attrsString}>${args.label || 'Button'}</UBtn>`;
+        },
+      },
     },
     Vuetify: {
       component: 'VBtn',
@@ -139,54 +158,75 @@ const meta: Meta<ComponentArgs> = {
     density: {
       control: { type: 'select' },
       options: ['default', 'comfortable', 'compact'],
-      description: 'Density (default | comfortable | compact)',
-      table: { defaultValue: { summary: 'default' } },
+      description:
+        'The density prop is used to control the vertical space that the button takes up.',
+      table: {
+        type: { summary: 'default | comfortable | compact' },
+        defaultValue: { summary: 'default' },
+      },
     },
     size: {
       control: { type: 'select' },
       options: ['x-small', 'small', 'default', 'large', 'x-large'],
-      description: 'Size: x-small | small | default | large | x-large',
-      table: { defaultValue: { summary: 'default' } },
+      description:
+        'The size property is used to control the size of the button and scales with density. The default size is undefined which essentially translates to medium.',
+      table: {
+        type: { summary: 'x-small | small | default | large | x-large' },
+        defaultValue: { summary: 'default' },
+      },
     },
     block: {
       control: 'boolean',
-      description: 'Full width',
-      table: { defaultValue: { summary: 'false' } },
+      description:
+        'Block buttons extend the full available width of their container. This is useful for creating buttons that span the full width of a card or dialog.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     rounded: {
       control: 'text',
-      description: 'This can be 0, xs, sm, true, lg, xl, pill, circle, and shaped.',
-      table: { defaultValue: { summary: 'rounded' } },
+      description:
+        'Use the rounded prop to control the border radius of a button. This can be 0, xs, sm, true, lg, xl, pill, circle, and shaped.',
+      table: { type: { summary: 'string' }, defaultValue: { summary: 'rounded' } },
     },
     elevation: {
       control: 'number',
-      description: 'Elevation (box-shadow). Number from 0 to 24.',
-      table: { defaultValue: { summary: '2' } },
+      description:
+        'The elevation property provides up to 24 levels of shadow depth. By default, buttons rest at 2dp.',
+      table: { type: { summary: 'number' }, defaultValue: { summary: '2' } },
     },
     ripple: {
       control: 'boolean',
-      description: 'Ripple effect',
-      table: { defaultValue: { summary: 'true' } },
+      description: 'The ripple property determines whether the v-ripple\n directive is used.',
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'true' } },
     },
     variant: {
       control: { type: 'select' },
       options: ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'],
-      description: 'Visual variant (elevated | flat | tonal | outlined | text | plain)',
-      table: { defaultValue: { summary: 'elevated' } },
+      description: 'The variant prop gives you easy access to several different button styles.',
+      table: {
+        type: { summary: 'elevated | flat | tonal | outlined | text | plain' },
+        defaultValue: { summary: 'elevated' },
+      },
     },
     icon: {
       control: 'text',
-      description: 'Icon name (Material Design Icons)',
+      description:
+        'Icons can be used for the primary content of a button. They are commonly used in the v-toolbar and v-app-bar components.',
+      table: { type: { summary: 'string' } },
     },
     loading: {
       control: 'boolean',
-      description: 'Loading state',
-      table: { defaultValue: { summary: 'false' } },
+      description:
+        'Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a v-progress-circular component but this can be customized with the loader slot.',
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     spaced: {
       control: { type: 'select' },
       options: ['start', 'end', 'both'],
       description: 'Adds space when using icon with label',
+      table: { type: { summary: 'start | end | both' } },
     },
     color: {
       control: 'color',
@@ -195,7 +235,7 @@ const meta: Meta<ComponentArgs> = {
     disabled: {
       control: 'boolean',
       description: 'Disabled state',
-      table: { defaultValue: { summary: 'false' } },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     label: { control: 'text', description: 'Default slot text (used by the Default story)' },
   },
