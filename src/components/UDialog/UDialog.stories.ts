@@ -19,7 +19,7 @@ const meta: Meta<ComponentArgs> = {
     docs: {
       description: {
         component:
-          "The UDialog component is built on top of Vuetify's VDialog component and provides a standard dialog container.",
+          'The UDialog component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.',
       },
       import: `import { UDialog } from '@ultimate/core-ui/components'`,
       source: {

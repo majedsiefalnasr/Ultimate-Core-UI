@@ -37,7 +37,7 @@ const meta: Meta<ComponentArgs> = {
     docs: {
       description: {
         component:
-          "UChip is a thin wrapper around Vuetify's VChip component and forwards all props, slots and emits.",
+          'The UChip component is used to convey small pieces of information. Using the close property, the chip becomes interactive, allowing user interaction. This component is used by the UChipGroup for advanced selection options.',
       },
       import: `import { UChip } from '@ultimate/core-ui/components'`,
       source: {

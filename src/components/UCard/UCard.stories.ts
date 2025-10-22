@@ -22,7 +22,8 @@ const meta: Meta<ComponentArgs> = {
   parameters: {
     docs: {
       description: {
-        component: "UCard is a thin wrapper around Vuetify's VCard component.",
+        component:
+          'The UCard component is a versatile and enhanced version of USheet that provides a simple interface for headings, text, images, icons, and more.',
       },
       import: `import { UCard } from '@ultimate/core-ui/components'`,
       source: {

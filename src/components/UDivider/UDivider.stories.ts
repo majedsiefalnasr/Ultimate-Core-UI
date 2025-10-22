@@ -16,8 +16,7 @@ const meta: Meta<ComponentArgs> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "The UDivider component is a thin line used to separate content. It extends Vuetify's VDivider and forwards all props and slots.",
+        component: 'The UDivider component is used to separate sections of lists or layouts.',
       },
       import: `import { UDivider } from '@ultimate/core-ui/components'`,
       source: {
