@@ -4,7 +4,7 @@ import React from 'react'
 /**
  * Tries to generate a relative path to the component source file from its story file.
  */
-export const LinkToSource: React.FC = () => {
+const LinkToSource: React.FC = () => {
     const storyOf: any = useOf('story')
     const componentDocs = storyOf?.story?.parameters?.docs || ''
     const sourceURL = componentDocs?.component?.source || ''
@@ -24,3 +24,6 @@ export const LinkToSource: React.FC = () => {
     </a>
   )
 }
+
+export default LinkToSource;
+export { LinkToSource };

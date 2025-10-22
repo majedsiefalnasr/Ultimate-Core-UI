@@ -10,12 +10,7 @@ import {
 import React from 'react'
 
 // 🧩 Import your custom blocks
-import { BootstrapComponent } from './docs/blocks/BootstrapComponent'
-import { ImportInfo } from './docs/blocks/ImportInfo'
-import { LinkToSource } from './docs/blocks/LinkToSource'
-import { VuetifyComponent } from './docs/blocks/VuetifyComponent'
-import { Anatomy } from './docs/blocks/Anatomy'
-import { StoryHeader } from './docs/blocks/StoryHeader'
+import { BootstrapComponent, ImportInfo, LinkToSource, VuetifyComponent, API , Anatomy, StoryHeader } from './docs/blocks'
 
 /**
  * Custom Docs Page for Ultimate Core UI
@@ -42,6 +37,9 @@ export const Template: React.FC = () => {
 
       {/* Story header (title + description) plus Primary preview, Controls and Source */}
       <StoryHeader />
+
+      {/* API / component structure */}
+      <API />
 
       {/* Anatomy / component structure */}
       <Anatomy />

@@ -11,7 +11,7 @@ import {
  * Renders story title and description (from story parameters) and includes
  * the Primary preview, Controls and Source blocks.
  */
-export const StoryHeader: React.FC = () => {
+const StoryHeader: React.FC = () => {
   const storyOf: any = useOf('story')
 
   const storyHeader: any =
@@ -50,3 +50,6 @@ export const StoryHeader: React.FC = () => {
     </div>
   )
 }
+
+export default StoryHeader;
+export { StoryHeader };

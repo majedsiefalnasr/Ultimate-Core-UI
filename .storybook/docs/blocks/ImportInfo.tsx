@@ -4,7 +4,7 @@ import React from 'react'
 /**
  * Displays an import statement for the current component.
  */
-export const ImportInfo: React.FC = () => {
+const ImportInfo: React.FC = () => {
   const storyOf: any = useOf('story')
   const componentDocs = storyOf?.story?.parameters?.docs || ''
   const importStatement = componentDocs?.import
@@ -15,3 +15,6 @@ export const ImportInfo: React.FC = () => {
     </div>
   )
 }
+
+export default ImportInfo;
+export { ImportInfo };

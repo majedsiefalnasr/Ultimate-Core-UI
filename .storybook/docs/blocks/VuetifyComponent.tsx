@@ -6,7 +6,7 @@ import React from 'react'
  * Tries to infer the Vuetify component name from story metadata. You may
  * override detection by setting `parameters.VuetifyComponent` in the story.
  */
-export const VuetifyComponent: React.FC = () => {
+const VuetifyComponent: React.FC = () => {
   const storyOf: any = useOf('story')
 
   // Respect explicit override if provided in story parameters
@@ -40,3 +40,6 @@ export const VuetifyComponent: React.FC = () => {
     </div>
   )
 }
+
+export default VuetifyComponent;
+export { VuetifyComponent };

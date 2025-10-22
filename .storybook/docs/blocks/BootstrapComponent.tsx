@@ -6,7 +6,7 @@ import React from 'react'
  * Tries to infer the Bootstrap component name from story metadata. You may
  * override detection by setting `parameters.bootstrapComponent` in the story.
  */
-export const BootstrapComponent: React.FC = () => {
+const BootstrapComponent: React.FC = () => {
   const storyOf: any = useOf('story')
 
   // Respect explicit override if provided in story parameters
@@ -47,3 +47,6 @@ export const BootstrapComponent: React.FC = () => {
     </div>
   )
 }
+
+export default BootstrapComponent;
+export { BootstrapComponent };
