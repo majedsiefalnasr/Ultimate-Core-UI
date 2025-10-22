@@ -19,6 +19,34 @@ const meta: Meta<ComponentArgs> = {
           'The UBottomSheet component provides a material design bottom sheet with a multitude of options.',
       },
       import: `import { UBottomSheet } from '@ultimate/core-ui/components'`,
+      source: {
+        transform: (src: string, storyContext: { args: ComponentArgs }) => {
+          const { args } = storyContext;
+
+          // Build attributes string from args
+          const attrsArray = Object.entries(args as Record<string, unknown>)
+            .filter(([_, value]) => value !== undefined && value !== false)
+            .map(([key, value]) => {
+              if (value === true) return key;
+              if (typeof value === 'string') return `${key}="${value}"`;
+              if (typeof value === 'number') return `:${key}="${value}"`;
+              return `:${key}="${JSON.stringify(value)}"`;
+            });
+
+          const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
+
+          return `<UBottomSheet${attrsString}>
+  <template v-slot:activator="{ props: activatorProps }">
+    <v-btn v-bind="activatorProps" text="Click Me"></v-btn>
+  </template>
+
+  <v-card
+    title="Bottom Sheet"
+    text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, eos? Nulla aspernatur odio rem, culpa voluptatibus eius debitis dolorem perspiciatis asperiores sed consectetur praesentium! Delectus et iure maxime eaque exercitationem!"
+  ></v-card>
+</UBottomSheet>`;
+        },
+      },
     },
     Vuetify: {
       component: 'VBottomSheet',

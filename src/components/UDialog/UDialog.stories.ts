@@ -22,6 +22,45 @@ const meta: Meta<ComponentArgs> = {
           "The UDialog component is built on top of Vuetify's VDialog component and provides a standard dialog container.",
       },
       import: `import { UDialog } from '@ultimate/core-ui/components'`,
+      source: {
+        transform: (src: string, storyContext: { args: ComponentArgs }) => {
+          const { args } = storyContext;
+
+          // Build attributes string from args
+          const attrsArray = Object.entries(args as Record<string, unknown>)
+            .filter(([_, value]) => value !== undefined && value !== false)
+            .map(([key, value]) => {
+              if (value === true) return key;
+              if (typeof value === 'string') return `${key}="${value}"`;
+              if (typeof value === 'number') return `:${key}="${value}"`;
+              return `:${key}="${JSON.stringify(value)}"`;
+            });
+
+          const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
+
+          return `<UDialog${attrsString}>
+  <template v-slot:activator="{ props: activatorProps }">
+    <UBtn
+      v-bind="activatorProps"
+      text="Open Dialog"
+    />
+  </template>
+  <template v-slot:default="{ isActive }">
+    <UCard>
+      <v-card-text class="text-h2 pa-12">
+        Hello world!
+      </v-card-text>
+      <v-card-actions class="justify-end">
+        <UBtn
+          text="Close"
+          @click="isActive.value = false"
+        />
+      </v-card-actions>
+    </UCard>
+  </template>
+</UDialog>`;
+        },
+      },
     },
     Vuetify: {
       component: 'VDialog',
