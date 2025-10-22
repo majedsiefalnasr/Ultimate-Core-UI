@@ -17,7 +17,20 @@ export const StoryHeader: React.FC = () => {
   const storyHeader: any =
     storyOf?.parameters?.Primary || storyOf?.story?.parameters?.Primary || null
 
-  if (!storyHeader) return null
+  if (!storyHeader) return (
+    <div style={{margin: '1.5rem 0'}}>
+      <h3 style={{margin: '0 0 0.5rem 0'}}>Usage</h3>
+
+      {/* Primary story preview */}
+      <Primary />
+
+      {/* Controls / Args */}
+      <Controls />
+
+      {/* Source Code */}
+      <Source />
+    </div>
+  )
 
   const {title = 'Usage', description = '',} = storyHeader
 
