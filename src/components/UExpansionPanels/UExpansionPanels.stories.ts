@@ -33,22 +33,14 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<UExpansionPanels${attrsString}>
+          return `
+<UExpansionPanels${attrsString}>
   <UExpansionPanel
-    title="Title"
-    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-  >
-  </UExpansionPanel>
-  <UExpansionPanel
-    title="Title"
-    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-  >
-  </UExpansionPanel>
-  <UExpansionPanel
-    title="Title"
-    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-  >
-  </UExpansionPanel>
+    v-for="i in 3"
+    :key="i"
+    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    :title="'Item ' + i"
+  ></UExpansionPanel>
 </UExpansionPanels>`;
         },
       },
@@ -138,20 +130,11 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
   template: `
     <UExpansionPanels v-bind="args">
       <UExpansionPanel
-        title="Title"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-      >
-      </UExpansionPanel>
-      <UExpansionPanel
-        title="Title"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-      >
-      </UExpansionPanel>
-      <UExpansionPanel
-        title="Title"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-      >
-      </UExpansionPanel>
+        v-for="i in 3"
+        :key="i"
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        :title="'Item ' + i"
+      ></UExpansionPanel>
     </UExpansionPanels>
   `,
 });
