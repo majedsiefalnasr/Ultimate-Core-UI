@@ -40,3 +40,7 @@ export { default as UList } from './UList';
 // UListItem
 export * from './UListItem';
 export { default as UListItem } from './UListItem';
+
+// UMenu
+export * from './UMenu';
+export { default as UMenu } from './UMenu';
