@@ -1,6 +1,3 @@
-<!-- snippet:UChip -->
-<!-- <UChip>Label</UChip> -->
-
 <script setup lang="ts">
   /**
    * Extended UChip component built on Vuetify's VChip.
@@ -8,23 +5,16 @@
    *
    * @component
    * @extends VChip
-   * @example
-   * <UChip color="primary">Chip</UChip>
    */
   // Import Vuetify's VChip component (Base component)
   import { VChip } from 'vuetify/components';
   // Import local styles
   import './UChip.scss';
 
-  defineOptions({
-    name: 'UChip',
-    inheritAttrs: false,
-  });
+  defineOptions({ name: 'UChip', inheritAttrs: false });
 
   // Define slots with proper typing
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>

@@ -1,6 +1,3 @@
-<!-- snippet:UBottomSheet -->
-<!-- <UBottomSheet model-value v-model:open="isOpen">Content</UBottomSheet> -->
-
 <script setup lang="ts">
   /**
    * Extended UBottomSheet component built on Vuetify's VBottomSheet.
@@ -8,23 +5,17 @@
    *
    * @component
    * @extends VBottomSheet
-   * @example
-   * <UBottomSheet v-model:open="show">Content</UBottomSheet>
    */
   // Import Vuetify's VBottomSheet component (Base component)
   import { VBottomSheet } from 'vuetify/components';
   // Import local styles
   import './UBottomSheet.scss';
 
-  defineOptions({
-    name: 'UBottomSheet',
-    inheritAttrs: false,
-  });
+  // Component options
+  defineOptions({ name: 'UBottomSheet', inheritAttrs: false });
 
   // Define slots with proper typing
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>

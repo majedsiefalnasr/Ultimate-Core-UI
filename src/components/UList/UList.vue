@@ -1,6 +1,3 @@
-<!-- snippet:UList -->
-<!-- <UList><UListItem>Item</UListItem></UList> -->
-
 <script setup lang="ts">
   /**
    * Extended UList component built on Vuetify's VList.
@@ -8,22 +5,16 @@
    *
    * @component
    * @extends VList
-   * @example
-   * <UList>
-   *   <UListItem>First</UListItem>
    * </UList>
    */
   import { VList } from 'vuetify/components';
   import './UList.scss';
 
-  defineOptions({
-    name: 'UList',
-    inheritAttrs: false,
-  });
+  // Component options
+  defineOptions({ name: 'UList', inheritAttrs: false });
 
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  // Define slots with generic props
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>

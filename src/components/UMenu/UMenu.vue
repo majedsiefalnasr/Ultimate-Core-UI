@@ -1,6 +1,3 @@
-<!-- snippet:UMenu -->
-<!-- <UMenu>Menu</UMenu> -->
-
 <script setup lang="ts">
   /**
    * Extended UMenu component built on Vuetify's VMenu.
@@ -8,20 +5,15 @@
    *
    * @component
    * @extends VMenu
-   * @example
-   * <UMenu activator="(props) => <UBtn v-bind=\"props\">Open</UBtn>">...</UMenu>
    */
   import { VMenu } from 'vuetify/components';
   import './UMenu.scss';
 
-  defineOptions({
-    name: 'UMenu',
-    inheritAttrs: false,
-  });
+  // Component options
+  defineOptions({ name: 'UMenu', inheritAttrs: false });
 
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  // Define slots with generic props
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>

@@ -1,6 +1,3 @@
-<!-- snippet:UCard -->
-<!-- <UCard text="Card content" /> -->
-
 <script setup lang="ts">
   /**
    * Extended UCard component built on Vuetify's VCard.
@@ -8,26 +5,15 @@
    *
    * @component
    * @extends VCard
-   * @example
-   * <UCard
-   *  title="Card Title"
-   *  subtitle="Card Subtitle"
-   *  text="This is some card content."
-   * />
    */
   import { VCard } from 'vuetify/components';
   // Import local styles
   import './UCard.scss';
 
-  defineOptions({
-    name: 'UCard',
-    inheritAttrs: false,
-  });
+  defineOptions({ name: 'UCard', inheritAttrs: false });
 
   // Define slots with proper typing
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>

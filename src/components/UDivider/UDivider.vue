@@ -1,6 +1,3 @@
-<!-- snippet:UDivider -->
-<!-- <UDivider /> -->
-
 <script setup lang="ts">
   /**
    * Extended UDivider component built on Vuetify's VDivider.
@@ -8,24 +5,23 @@
    *
    * @component
    * @extends VDivider
-   * @example
-   * <UDivider />
    */
   import { VDivider } from 'vuetify/components';
   import './UDivider.scss';
 
-  defineOptions({
-    name: 'UDivider',
-    inheritAttrs: false,
-  });
+  // Component options
+  defineOptions({ name: 'UDivider', inheritAttrs: false });
 
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  // Define slots with generic props
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>
-  <v-divider v-bind="$attrs" />
+  <v-divider v-bind="$attrs">
+    <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
+      <slot :name="name" v-bind="slotData || {}" />
+    </template>
+  </v-divider>
 </template>
 
 <style scoped lang="scss"></style>

@@ -1,6 +1,3 @@
-<!-- snippet:UBtn -->
-<!-- <UBtn>Click Me</UBtn> -->
-
 <script setup lang="ts">
   /**
    * Extended UBtn component built on Vuetify's VBtn.
@@ -8,23 +5,16 @@
    *
    * @component
    * @extends VBtn
-   * @example
-   * <UBtn color="primary" @click="onClick">Click Me</UBtn>
    */
   // Import Vuetify's VBtn component (Base component)
   import { VBtn } from 'vuetify/components';
   // Import local styles
   import './UBtn.scss';
 
-  defineOptions({
-    name: 'UBtn',
-    inheritAttrs: false,
-  });
+  defineOptions({ name: 'UBtn', inheritAttrs: false });
 
   // Define slots with proper typing
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>

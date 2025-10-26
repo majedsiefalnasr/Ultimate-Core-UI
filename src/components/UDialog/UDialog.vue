@@ -1,6 +1,3 @@
-<!-- snippet:UDialog -->
-<!-- <UDialog v-model:open="show">Content</UDialog> -->
-
 <script setup lang="ts">
   /**
    * Extended UDialog component built on Vuetify's VDialog.
@@ -8,20 +5,15 @@
    *
    * @component
    * @extends VDialog
-   * @example
-   * <UDialog v-model:open="show">Content</UDialog>
    */
   import { VDialog } from 'vuetify/components';
   import './UDialog.scss';
 
-  defineOptions({
-    name: 'UDialog',
-    inheritAttrs: false,
-  });
+  // Component options
+  defineOptions({ name: 'UDialog', inheritAttrs: false });
 
-  defineSlots<{
-    [key: string]: (props: Record<string, unknown>) => unknown;
-  }>();
+  // Define slots with generic props
+  defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
 </script>
 
 <template>
