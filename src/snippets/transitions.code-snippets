@@ -1,0 +1,199 @@
+{
+  "UExpandTransition Component": {
+    "prefix": ["UExpandTransition", "u-expand-transition"],
+    "body": [
+      "<UExpandTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UExpandTransition>"
+    ],
+    "description": "Expand/collapse transition"
+  },
+  "UFadeTransition Component": {
+    "prefix": ["UFadeTransition", "u-fade-transition"],
+    "body": [
+      "<UFadeTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UFadeTransition>"
+    ],
+    "description": "Fade in/out transition"
+  },
+  "UScaleTransition Component": {
+    "prefix": ["UScaleTransition", "u-scale-transition"],
+    "body": [
+      "<UScaleTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UScaleTransition>"
+    ],
+    "description": "Scale up/down transition"
+  },
+  "USlideXTransition Component": {
+    "prefix": ["USlideXTransition", "u-slide-x-transition"],
+    "body": [
+      "<USlideXTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</USlideXTransition>"
+    ],
+    "description": "Horizontal slide transition"
+  },
+  "USlideXReverseTransition Component": {
+    "prefix": ["USlideXReverseTransition", "u-slide-x-reverse-transition"],
+    "body": [
+      "<USlideXReverseTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</USlideXReverseTransition>"
+    ],
+    "description": "Horizontal slide reverse transition"
+  },
+  "USlideYTransition Component": {
+    "prefix": ["USlideYTransition", "u-slide-y-transition"],
+    "body": [
+      "<USlideYTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</USlideYTransition>"
+    ],
+    "description": "Vertical slide transition"
+  },
+  "USlideYReverseTransition Component": {
+    "prefix": ["USlideYReverseTransition", "u-slide-y-reverse-transition"],
+    "body": [
+      "<USlideYReverseTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</USlideYReverseTransition>"
+    ],
+    "description": "Vertical slide reverse transition"
+  },
+  "UScrollXTransition Component": {
+    "prefix": ["UScrollXTransition", "u-scroll-x-transition"],
+    "body": [
+      "<UScrollXTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UScrollXTransition>"
+    ],
+    "description": "Horizontal scroll transition"
+  },
+  "UScrollXReverseTransition Component": {
+    "prefix": ["UScrollXReverseTransition", "u-scroll-x-reverse-transition"],
+    "body": [
+      "<UScrollXReverseTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UScrollXReverseTransition>"
+    ],
+    "description": "Horizontal scroll reverse transition"
+  },
+  "UScrollYTransition Component": {
+    "prefix": ["UScrollYTransition", "u-scroll-y-transition"],
+    "body": [
+      "<UScrollYTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UScrollYTransition>"
+    ],
+    "description": "Vertical scroll transition"
+  },
+  "UScrollYReverseTransition Component": {
+    "prefix": ["UScrollYReverseTransition", "u-scroll-y-reverse-transition"],
+    "body": [
+      "<UScrollYReverseTransition>",
+      "\t<div v-show=\"${1:show}\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UScrollYReverseTransition>"
+    ],
+    "description": "Vertical scroll reverse transition"
+  },
+  "Transition Group": {
+    "prefix": ["uTransitionGroup", "u-transition-group"],
+    "body": [
+      "<TransitionGroup name=\"${1|fade,scale,slide-x,slide-y|}}\">",
+      "\t<div v-for=\"item in ${2:items}\" :key=\"item.id\">",
+      "\t\t$0",
+      "\t</div>",
+      "</TransitionGroup>"
+    ],
+    "description": "Transition group for lists"
+  },
+  "Conditional Transition": {
+    "prefix": ["uConditionalTransition", "u-conditional-transition"],
+    "body": [
+      "<UFadeTransition mode=\"out-in\">",
+      "\t<div v-if=\"${1:condition}\" key=\"a\">",
+      "\t\t$2",
+      "\t</div>",
+      "\t<div v-else key=\"b\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UFadeTransition>"
+    ],
+    "description": "Conditional content with transition"
+  },
+  "List Transition": {
+    "prefix": ["uListTransition", "u-list-transition"],
+    "body": [
+      "<TransitionGroup name=\"list\" tag=\"div\">",
+      "\t<UCard",
+      "\t\tv-for=\"item in ${1:items}\"",
+      "\t\t:key=\"item.id\"",
+      "\t\tclass=\"mb-2\"",
+      "\t>",
+      "\t\t$0",
+      "\t</UCard>",
+      "</TransitionGroup>"
+    ],
+    "description": "Animated list with transitions"
+  },
+  "Staggered List Transition": {
+    "prefix": ["uStaggeredTransition", "u-staggered-transition"],
+    "body": [
+      "<TransitionGroup",
+      "\tname=\"staggered-fade\"",
+      "\ttag=\"div\"",
+      "\t:css=\"false\"",
+      "\t@before-enter=\"${1:onBeforeEnter}\"",
+      "\t@enter=\"${2:onEnter}\"",
+      "\t@leave=\"${3:onLeave}\"",
+      ">",
+      "\t<div",
+      "\t\tv-for=\"(item, index) in ${4:items}\"",
+      "\t\t:key=\"item.id\"",
+      "\t\t:data-index=\"index\"",
+      "\t>",
+      "\t\t$0",
+      "\t</div>",
+      "</TransitionGroup>"
+    ],
+    "description": "Staggered list animation"
+  },
+  "Route Transition": {
+    "prefix": ["uRouteTransition", "u-route-transition"],
+    "body": ["<UFadeTransition mode=\"out-in\">", "\t<RouterView />", "</UFadeTransition>$0"],
+    "description": "Route view with transition"
+  },
+  "Dialog Transition": {
+    "prefix": ["uDialogTransition", "u-dialog-transition"],
+    "body": [
+      "<UDialog v-model=\"${1:dialog}\" transition=\"${2|dialog-transition,dialog-bottom-transition,dialog-top-transition|}}\">",
+      "\t$0",
+      "</UDialog>"
+    ],
+    "description": "Dialog with custom transition"
+  }
+}

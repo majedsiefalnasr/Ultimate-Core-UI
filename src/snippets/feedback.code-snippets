@@ -1,0 +1,310 @@
+{
+  "UAlert Component": {
+    "prefix": ["UAlert", "u-alert"],
+    "body": ["<UAlert>", "\t$0", "</UAlert>"],
+    "description": "Alert component"
+  },
+  "UAlert with type": {
+    "prefix": ["UAlertType", "u-alert-type"],
+    "body": [
+      "<UAlert type=\"${1|success,info,warning,error|}\" title=\"${2:Title}\">",
+      "\t$0",
+      "</UAlert>"
+    ],
+    "description": "Alert with type"
+  },
+  "UAlert closable": {
+    "prefix": ["UAlertClosable", "u-alert-closable"],
+    "body": [
+      "<UAlert",
+      "\ttype=\"${1:info}\"",
+      "\ttitle=\"${2:Title}\"",
+      "\tclosable",
+      "\t@click:close=\"${3:handleClose}\"",
+      ">",
+      "\t$0",
+      "</UAlert>"
+    ],
+    "description": "Closable alert"
+  },
+  "UAlert with props": {
+    "prefix": ["UAlertProps", "u-alert-props"],
+    "body": [
+      "<UAlert",
+      "\ttype=\"${1:success}\"",
+      "\ttitle=\"${2:Success}\"",
+      "\ttext=\"${3:Operation completed successfully}\"",
+      "\tvariant=\"${4|flat,tonal,outlined,elevated|}\"",
+      "\tprominent",
+      "/>$0"
+    ],
+    "description": "Alert with full props"
+  },
+  "UDialog Component": {
+    "prefix": ["UDialog", "u-dialog"],
+    "body": ["<UDialog v-model=\"${1:dialog}\">", "\t$0", "</UDialog>"],
+    "description": "Dialog component"
+  },
+  "UDialog with card": {
+    "prefix": ["UDialogCard", "u-dialog-card"],
+    "body": [
+      "<UDialog v-model=\"${1:dialog}\" max-width=\"${2:500}\">",
+      "\t<UCard>",
+      "\t\t<UCardTitle>${3:Dialog Title}</UCardTitle>",
+      "\t\t<UCardText>",
+      "\t\t\t$4",
+      "\t\t</UCardText>",
+      "\t\t<UCardActions>",
+      "\t\t\t<v-spacer />",
+      "\t\t\t<UBtn @click=\"${1:dialog} = false\">Cancel</UBtn>",
+      "\t\t\t<UBtn color=\"primary\" @click=\"${5:handleConfirm}\">Confirm</UBtn>",
+      "\t\t</UCardActions>",
+      "\t</UCard>",
+      "</UDialog>$0"
+    ],
+    "description": "Dialog with card content"
+  },
+  "UDialog confirmation": {
+    "prefix": ["UDialogConfirm", "u-dialog-confirm"],
+    "body": [
+      "<UDialog v-model=\"${1:confirmDialog}\" max-width=\"400\">",
+      "\t<UCard>",
+      "\t\t<UCardTitle>${2:Confirm Action}</UCardTitle>",
+      "\t\t<UCardText>",
+      "\t\t\t${3:Are you sure you want to proceed?}",
+      "\t\t</UCardText>",
+      "\t\t<UCardActions>",
+      "\t\t\t<v-spacer />",
+      "\t\t\t<UBtn variant=\"text\" @click=\"${1:confirmDialog} = false\">",
+      "\t\t\t\tCancel",
+      "\t\t\t</UBtn>",
+      "\t\t\t<UBtn color=\"error\" @click=\"${4:handleConfirm}\">",
+      "\t\t\t\tConfirm",
+      "\t\t\t</UBtn>",
+      "\t\t</UCardActions>",
+      "\t</UCard>",
+      "</UDialog>$0"
+    ],
+    "description": "Confirmation dialog"
+  },
+  "UDialog fullscreen": {
+    "prefix": ["UDialogFullscreen", "u-dialog-fullscreen"],
+    "body": [
+      "<UDialog v-model=\"${1:dialog}\" fullscreen>",
+      "\t<UCard>",
+      "\t\t<UToolbar color=\"primary\">",
+      "\t\t\t<UBtn icon=\"mdi-close\" @click=\"${1:dialog} = false\" />",
+      "\t\t\t<UToolbarTitle>${2:Title}</UToolbarTitle>",
+      "\t\t\t<v-spacer />",
+      "\t\t\t<UBtn variant=\"text\" @click=\"${3:handleSave}\">Save</UBtn>",
+      "\t\t</UToolbar>",
+      "\t\t<UCardText>",
+      "\t\t\t$0",
+      "\t\t</UCardText>",
+      "\t</UCard>",
+      "</UDialog>"
+    ],
+    "description": "Fullscreen dialog"
+  },
+  "USnackbar Component": {
+    "prefix": ["USnackbar", "u-snackbar"],
+    "body": ["<USnackbar v-model=\"${1:snackbar}\">", "\t${2:Message}", "</USnackbar>$0"],
+    "description": "Snackbar notification"
+  },
+  "USnackbar with action": {
+    "prefix": ["USnackbarAction", "u-snackbar-action"],
+    "body": [
+      "<USnackbar v-model=\"${1:snackbar}\">",
+      "\t${2:Message}",
+      "",
+      "\t<template #actions>",
+      "\t\t<UBtn color=\"${3:primary}\" variant=\"text\" @click=\"${4:handleAction}\">",
+      "\t\t\t${5:Action}",
+      "\t\t</UBtn>",
+      "\t\t<UBtn icon=\"mdi-close\" @click=\"${1:snackbar} = false\" />",
+      "\t</template>",
+      "</USnackbar>$0"
+    ],
+    "description": "Snackbar with action button"
+  },
+  "USnackbar with props": {
+    "prefix": ["USnackbarProps", "u-snackbar-props"],
+    "body": [
+      "<USnackbar",
+      "\tv-model=\"${1:snackbar}\"",
+      "\t:timeout=\"${2:3000}\"",
+      "\tcolor=\"${3:success}\"",
+      "\tlocation=\"${4|top,bottom,left,right,top left,top right,bottom left,bottom right|}\"",
+      ">",
+      "\t${5:Message}",
+      "</USnackbar>$0"
+    ],
+    "description": "Snackbar with positioning and color"
+  },
+  "USnackbarQueue Component": {
+    "prefix": ["USnackbarQueue", "u-snackbar-queue"],
+    "body": ["<USnackbarQueue />$0"],
+    "description": "Snackbar queue for multiple notifications"
+  },
+  "UProgressLinear Component": {
+    "prefix": ["UProgressLinear", "u-progress-linear"],
+    "body": [
+      "<UProgressLinear",
+      "\t:model-value=\"${1:progress}\"",
+      "\tcolor=\"${2:primary}\"",
+      "/>$0"
+    ],
+    "description": "Linear progress bar"
+  },
+  "UProgressLinear indeterminate": {
+    "prefix": ["UProgressLinearIndeterminate", "u-progress-linear-indeterminate"],
+    "body": ["<UProgressLinear indeterminate color=\"${1:primary}\" />$0"],
+    "description": "Indeterminate linear progress"
+  },
+  "UProgressLinear with buffer": {
+    "prefix": ["UProgressLinearBuffer", "u-progress-linear-buffer"],
+    "body": [
+      "<UProgressLinear",
+      "\t:model-value=\"${1:progress}\"",
+      "\t:buffer-value=\"${2:buffer}\"",
+      "\tcolor=\"${3:primary}\"",
+      "/>$0"
+    ],
+    "description": "Linear progress with buffer"
+  },
+  "UProgressCircular Component": {
+    "prefix": ["UProgressCircular", "u-progress-circular"],
+    "body": [
+      "<UProgressCircular",
+      "\t:model-value=\"${1:progress}\"",
+      "\tcolor=\"${2:primary}\"",
+      "/>$0"
+    ],
+    "description": "Circular progress indicator"
+  },
+  "UProgressCircular indeterminate": {
+    "prefix": ["UProgressCircularIndeterminate", "u-progress-circular-indeterminate"],
+    "body": ["<UProgressCircular indeterminate color=\"${1:primary}\" />$0"],
+    "description": "Indeterminate circular progress"
+  },
+  "UProgressCircular with size": {
+    "prefix": ["UProgressCircularSize", "u-progress-circular-size"],
+    "body": [
+      "<UProgressCircular",
+      "\t:model-value=\"${1:progress}\"",
+      "\t:size=\"${2:64}\"",
+      "\t:width=\"${3:6}\"",
+      "\tcolor=\"${4:primary}\"",
+      ">",
+      "\t{{ ${1:progress} }}%",
+      "</UProgressCircular>$0"
+    ],
+    "description": "Circular progress with custom size and text"
+  },
+  "USkeletonLoader Component": {
+    "prefix": ["USkeletonLoader", "u-skeleton-loader"],
+    "body": ["<USkeletonLoader type=\"${1|article,card,list-item,table,image|}\"/>$0"],
+    "description": "Skeleton loader component"
+  },
+  "USkeletonLoader custom": {
+    "prefix": ["USkeletonLoaderCustom", "u-skeleton-loader-custom"],
+    "body": [
+      "<USkeletonLoader",
+      "\t:loading=\"${1:loading}\"",
+      "\ttype=\"${2:card}\"",
+      ">",
+      "\t$0",
+      "</USkeletonLoader>"
+    ],
+    "description": "Skeleton loader with content"
+  },
+  "USkeletonLoader types": {
+    "prefix": ["USkeletonLoaderTypes", "u-skeleton-loader-types"],
+    "body": ["<USkeletonLoader type=\"avatar, list-item-two-line\" />$0"],
+    "description": "Skeleton loader with multiple types"
+  },
+  "UOverlay Component": {
+    "prefix": ["UOverlay", "u-overlay"],
+    "body": ["<UOverlay v-model=\"${1:overlay}\">", "\t$0", "</UOverlay>"],
+    "description": "Overlay component"
+  },
+  "UOverlay with loader": {
+    "prefix": ["UOverlayLoader", "u-overlay-loader"],
+    "body": [
+      "<UOverlay v-model=\"${1:loading}\" class=\"align-center justify-center\">",
+      "\t<UProgressCircular indeterminate size=\"64\" />",
+      "</UOverlay>$0"
+    ],
+    "description": "Overlay with loading indicator"
+  },
+  "UTooltip Component": {
+    "prefix": ["UTooltip", "u-tooltip"],
+    "body": [
+      "<UTooltip text=\"${1:Tooltip text}\">",
+      "\t<template #activator=\"{ props }\">",
+      "\t\t<UBtn v-bind=\"props\">$2</UBtn>",
+      "\t</template>",
+      "</UTooltip>$0"
+    ],
+    "description": "Tooltip component"
+  },
+  "UTooltip with location": {
+    "prefix": ["UTooltipLocation", "u-tooltip-location"],
+    "body": [
+      "<UTooltip",
+      "\ttext=\"${1:Tooltip text}\"",
+      "\tlocation=\"${2|top,bottom,left,right|}\"",
+      ">",
+      "\t<template #activator=\"{ props }\">",
+      "\t\t$0",
+      "\t</template>",
+      "</UTooltip>"
+    ],
+    "description": "Tooltip with custom location"
+  },
+  "UBanner Component": {
+    "prefix": ["UBanner", "u-banner"],
+    "body": [
+      "<UBanner>",
+      "\t${1:Banner message}",
+      "\t<template #actions>",
+      "\t\t<UBtn>${2:Action}</UBtn>",
+      "\t</template>",
+      "</UBanner>$0"
+    ],
+    "description": "Banner component"
+  },
+  "UBanner with icon": {
+    "prefix": ["UBannerIcon", "u-banner-icon"],
+    "body": [
+      "<UBanner icon=\"${1:mdi-information}\">",
+      "\t${2:Banner message}",
+      "\t<template #actions>",
+      "\t\t<UBtn>${3:Dismiss}</UBtn>",
+      "\t</template>",
+      "</UBanner>$0"
+    ],
+    "description": "Banner with icon"
+  },
+  "Loading State": {
+    "prefix": ["uLoadingState", "u-loading-state"],
+    "body": [
+      "<div v-if=\"${1:loading}\" class=\"d-flex justify-center align-center pa-4\">",
+      "\t<UProgressCircular indeterminate color=\"primary\" />",
+      "</div>",
+      "<div v-else>",
+      "\t$0",
+      "</div>"
+    ],
+    "description": "Conditional loading state"
+  },
+  "Error State": {
+    "prefix": ["uErrorState", "u-error-state"],
+    "body": [
+      "<UAlert v-if=\"${1:error}\" type=\"error\" closable @click:close=\"${1:error} = null\">",
+      "\t{{ ${1:error} }}",
+      "</UAlert>$0"
+    ],
+    "description": "Error alert state"
+  }
+}

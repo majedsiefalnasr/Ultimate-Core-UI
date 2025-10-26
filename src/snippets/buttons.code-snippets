@@ -1,0 +1,231 @@
+{
+  "UBtn Component": {
+    "prefix": ["UBtn", "u-btn"],
+    "body": ["<UBtn>$1</UBtn>$0"],
+    "description": "Ultimate Core UI Button component"
+  },
+  "UBtn with color": {
+    "prefix": ["UBtnColor", "u-btn-color"],
+    "body": ["<UBtn color=\"${1|primary,secondary,success,error,warning,info|}\">$2</UBtn>$0"],
+    "description": "Button with color prop"
+  },
+  "UBtn with variant": {
+    "prefix": ["UBtnVariant", "u-btn-variant"],
+    "body": ["<UBtn variant=\"${1|elevated,flat,tonal,outlined,text,plain|}\">$2</UBtn>$0"],
+    "description": "Button with variant prop"
+  },
+  "UBtn with size": {
+    "prefix": ["UBtnSize", "u-btn-size"],
+    "body": ["<UBtn size=\"${1|x-small,small,default,large,x-large|}\">$2</UBtn>$0"],
+    "description": "Button with size prop"
+  },
+  "UBtn with icon": {
+    "prefix": ["UBtnIcon", "u-btn-icon"],
+    "body": ["<UBtn prepend-icon=\"${1:mdi-plus}\">", "\t$2", "</UBtn>$0"],
+    "description": "Button with prepend icon"
+  },
+  "UBtn icon only": {
+    "prefix": ["UBtnIconOnly", "u-btn-icon-only"],
+    "body": ["<UBtn icon=\"${1:mdi-heart}\" />$0"],
+    "description": "Icon-only button"
+  },
+  "UBtn loading": {
+    "prefix": ["UBtnLoading", "u-btn-loading"],
+    "body": ["<UBtn :loading=\"${1:loading}\">$2</UBtn>$0"],
+    "description": "Button with loading state"
+  },
+  "UBtn disabled": {
+    "prefix": ["UBtnDisabled", "u-btn-disabled"],
+    "body": ["<UBtn :disabled=\"${1:true}\">$2</UBtn>$0"],
+    "description": "Disabled button"
+  },
+  "UBtn block": {
+    "prefix": ["UBtnBlock", "u-btn-block"],
+    "body": ["<UBtn block>$1</UBtn>$0"],
+    "description": "Full-width block button"
+  },
+  "UBtn rounded": {
+    "prefix": ["UBtnRounded", "u-btn-rounded"],
+    "body": ["<UBtn rounded=\"${1|0,xs,sm,md,lg,xl,pill,circle|}\">$2</UBtn>$0"],
+    "description": "Button with border radius"
+  },
+  "UBtn with props": {
+    "prefix": ["UBtnProps", "u-btn-props"],
+    "body": [
+      "<UBtn",
+      "\tcolor=\"${1:primary}\"",
+      "\tvariant=\"${2:elevated}\"",
+      "\tsize=\"${3:default}\"",
+      "\t:disabled=\"${4:false}\"",
+      "\t:loading=\"${5:false}\"",
+      "\t@click=\"${6:handleClick}\"",
+      ">",
+      "\t$7",
+      "</UBtn>$0"
+    ],
+    "description": "Button with common props"
+  },
+  "UBtn with slots": {
+    "prefix": ["UBtnSlots", "u-btn-slots"],
+    "body": [
+      "<UBtn>",
+      "\t<template #prepend>",
+      "\t\t<UIcon>$1</UIcon>",
+      "\t</template>",
+      "\t$2",
+      "\t<template #append>",
+      "\t\t<UIcon>$3</UIcon>",
+      "\t</template>",
+      "</UBtn>$0"
+    ],
+    "description": "Button with prepend and append slots"
+  },
+  "UBtnGroup Component": {
+    "prefix": ["UBtnGroup", "u-btn-group"],
+    "body": [
+      "<UBtnGroup>",
+      "\t<UBtn>$1</UBtn>",
+      "\t<UBtn>$2</UBtn>",
+      "\t<UBtn>$3</UBtn>",
+      "</UBtnGroup>$0"
+    ],
+    "description": "Button group component"
+  },
+  "UBtnGroup divided": {
+    "prefix": ["UBtnGroupDivided", "u-btn-group-divided"],
+    "body": [
+      "<UBtnGroup divided>",
+      "\t<UBtn>$1</UBtn>",
+      "\t<UBtn>$2</UBtn>",
+      "\t<UBtn>$3</UBtn>",
+      "</UBtnGroup>$0"
+    ],
+    "description": "Divided button group"
+  },
+  "UBtnToggle Component": {
+    "prefix": ["UBtnToggle", "u-btn-toggle"],
+    "body": [
+      "<UBtnToggle v-model=\"${1:toggle}\">",
+      "\t<UBtn value=\"${2:option1}\">$3</UBtn>",
+      "\t<UBtn value=\"${4:option2}\">$5</UBtn>",
+      "\t<UBtn value=\"${6:option3}\">$7</UBtn>",
+      "</UBtnToggle>$0"
+    ],
+    "description": "Toggle button group"
+  },
+  "UBtnToggle multiple": {
+    "prefix": ["UBtnToggleMultiple", "u-btn-toggle-multiple"],
+    "body": [
+      "<UBtnToggle v-model=\"${1:selected}\" multiple>",
+      "\t<UBtn value=\"${2:option1}\">$3</UBtn>",
+      "\t<UBtn value=\"${4:option2}\">$5</UBtn>",
+      "\t<UBtn value=\"${6:option3}\">$7</UBtn>",
+      "</UBtnToggle>$0"
+    ],
+    "description": "Multiple selection toggle buttons"
+  },
+  "UFab Component": {
+    "prefix": ["UFab", "u-fab"],
+    "body": [
+      "<UFab",
+      "\ticon=\"${1:mdi-plus}\"",
+      "\tcolor=\"${2:primary}\"",
+      "\t@click=\"${3:handleClick}\"",
+      "/>$0"
+    ],
+    "description": "Floating Action Button"
+  },
+  "UFab with location": {
+    "prefix": ["UFabLocation", "u-fab-location"],
+    "body": [
+      "<UFab",
+      "\tapp",
+      "\tlocation=\"${1|bottom end,bottom start,top end,top start|}\"",
+      "\ticon=\"${2:mdi-plus}\"",
+      "\tcolor=\"${3:primary}\"",
+      "/>$0"
+    ],
+    "description": "FAB with app positioning"
+  },
+  "UFab extended": {
+    "prefix": ["UFabExtended", "u-fab-extended"],
+    "body": [
+      "<UFab",
+      "\textended",
+      "\ticon=\"${1:mdi-plus}\"",
+      "\tcolor=\"${2:primary}\"",
+      ">",
+      "\t$3",
+      "</UFab>$0"
+    ],
+    "description": "Extended FAB with text"
+  },
+  "USpeedDial Component": {
+    "prefix": ["USpeedDial", "u-speed-dial"],
+    "body": [
+      "<USpeedDial>",
+      "\t<template #activator=\"{ props }\">",
+      "\t\t<UBtn v-bind=\"props\" icon=\"${1:mdi-plus}\" />",
+      "\t</template>",
+      "",
+      "\t<UBtn icon=\"${2:mdi-pencil}\" />",
+      "\t<UBtn icon=\"${3:mdi-delete}\" />",
+      "\t<UBtn icon=\"${4:mdi-share}\" />",
+      "</USpeedDial>$0"
+    ],
+    "description": "Speed dial with action buttons"
+  },
+  "USpeedDial with direction": {
+    "prefix": ["USpeedDialDirection", "u-speed-dial-direction"],
+    "body": [
+      "<USpeedDial direction=\"${1|top,bottom,left,right|}\">",
+      "\t<template #activator=\"{ props }\">",
+      "\t\t<UBtn v-bind=\"props\" icon=\"${2:mdi-plus}\" />",
+      "\t</template>",
+      "",
+      "\t<UBtn icon=\"${3:mdi-pencil}\" />",
+      "\t<UBtn icon=\"${4:mdi-delete}\" />",
+      "</USpeedDial>$0"
+    ],
+    "description": "Speed dial with custom direction"
+  },
+  "Button Group Actions": {
+    "prefix": ["uBtnActions", "u-btn-actions"],
+    "body": [
+      "<div class=\"d-flex gap-2\">",
+      "\t<UBtn color=\"primary\" @click=\"${1:handleSave}\">",
+      "\t\tSave",
+      "\t</UBtn>",
+      "\t<UBtn variant=\"outlined\" @click=\"${2:handleCancel}\">",
+      "\t\tCancel",
+      "\t</UBtn>",
+      "</div>$0"
+    ],
+    "description": "Common action buttons (Save/Cancel)"
+  },
+  "Icon Buttons Row": {
+    "prefix": ["uIconBtns", "u-icon-btns"],
+    "body": [
+      "<div class=\"d-flex gap-1\">",
+      "\t<UBtn icon=\"${1:mdi-pencil}\" size=\"small\" />",
+      "\t<UBtn icon=\"${2:mdi-delete}\" size=\"small\" color=\"error\" />",
+      "\t<UBtn icon=\"${3:mdi-eye}\" size=\"small\" />",
+      "</div>$0"
+    ],
+    "description": "Row of icon buttons"
+  },
+  "Submit Button": {
+    "prefix": ["uBtnSubmit", "u-btn-submit"],
+    "body": [
+      "<UBtn",
+      "\ttype=\"submit\"",
+      "\tcolor=\"primary\"",
+      "\t:loading=\"${1:loading}\"",
+      "\t:disabled=\"${2:!valid}\"",
+      ">",
+      "\t${3:Submit}",
+      "</UBtn>$0"
+    ],
+    "description": "Form submit button with loading/disabled states"
+  }
+}

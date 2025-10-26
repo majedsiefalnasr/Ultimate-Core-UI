@@ -1,0 +1,389 @@
+{
+  "UTextField Component": {
+    "prefix": ["UTextField", "u-text-field"],
+    "body": ["<UTextField v-model=\"${1:value}\" label=\"${2:Label}\" />$0"],
+    "description": "Text field input component"
+  },
+  "UTextField with validation": {
+    "prefix": ["UTextFieldValidation", "u-text-field-validation"],
+    "body": [
+      "<UTextField",
+      "\tv-model=\"${1:value}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:rules=\"${3:rules}\"",
+      "\t:error-messages=\"${4:errors}\"",
+      "/>$0"
+    ],
+    "description": "Text field with validation"
+  },
+  "UTextField with props": {
+    "prefix": ["UTextFieldProps", "u-text-field-props"],
+    "body": [
+      "<UTextField",
+      "\tv-model=\"${1:value}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\tplaceholder=\"${3:Enter text...}\"",
+      "\t:hint=\"${4:Hint text}\"",
+      "\t:persistent-hint=\"${5:false}\"",
+      "\t:clearable=\"${6:true}\"",
+      "\t:disabled=\"${7:false}\"",
+      "/>$0"
+    ],
+    "description": "Text field with common props"
+  },
+  "UTextField password": {
+    "prefix": ["UTextFieldPassword", "u-text-field-password"],
+    "body": [
+      "<UTextField",
+      "\tv-model=\"${1:password}\"",
+      "\tlabel=\"${2:Password}\"",
+      "\t:type=\"${3:showPassword} ? 'text' : 'password'\"",
+      "\t:append-inner-icon=\"${3:showPassword} ? 'mdi-eye' : 'mdi-eye-off'\"",
+      "\t@click:append-inner=\"${3:showPassword} = !${3:showPassword}\"",
+      "/>$0"
+    ],
+    "description": "Password field with toggle visibility"
+  },
+  "UTextField with icons": {
+    "prefix": ["UTextFieldIcons", "u-text-field-icons"],
+    "body": [
+      "<UTextField",
+      "\tv-model=\"${1:value}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\tprepend-icon=\"${3:mdi-account}\"",
+      "\tappend-inner-icon=\"${4:mdi-magnify}\"",
+      "/>$0"
+    ],
+    "description": "Text field with icons"
+  },
+  "UTextarea Component": {
+    "prefix": ["UTextarea", "u-textarea"],
+    "body": ["<UTextarea v-model=\"${1:value}\" label=\"${2:Label}\" />$0"],
+    "description": "Textarea component"
+  },
+  "UTextarea with props": {
+    "prefix": ["UTextareaProps", "u-textarea-props"],
+    "body": [
+      "<UTextarea",
+      "\tv-model=\"${1:value}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:rows=\"${3:3}\"",
+      "\t:auto-grow=\"${4:true}\"",
+      "\t:clearable=\"${5:true}\"",
+      "/>$0"
+    ],
+    "description": "Textarea with auto-grow"
+  },
+  "USelect Component": {
+    "prefix": ["USelect", "u-select"],
+    "body": [
+      "<USelect",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:items=\"${3:items}\"",
+      "/>$0"
+    ],
+    "description": "Select dropdown component"
+  },
+  "USelect with item props": {
+    "prefix": ["USelectProps", "u-select-props"],
+    "body": [
+      "<USelect",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:items=\"${3:items}\"",
+      "\titem-title=\"${4:title}\"",
+      "\titem-value=\"${5:value}\"",
+      "\t:clearable=\"${6:true}\"",
+      "/>$0"
+    ],
+    "description": "Select with item configuration"
+  },
+  "USelect multiple": {
+    "prefix": ["USelectMultiple", "u-select-multiple"],
+    "body": [
+      "<USelect",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Select Items}\"",
+      "\t:items=\"${3:items}\"",
+      "\tmultiple",
+      "\tchips",
+      "\t:closable-chips=\"true\"",
+      "/>$0"
+    ],
+    "description": "Multiple select with chips"
+  },
+  "UCombobox Component": {
+    "prefix": ["UCombobox", "u-combobox"],
+    "body": [
+      "<UCombobox",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:items=\"${3:items}\"",
+      "/>$0"
+    ],
+    "description": "Combobox component"
+  },
+  "UCombobox multiple": {
+    "prefix": ["UComboboxMultiple", "u-combobox-multiple"],
+    "body": [
+      "<UCombobox",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:items=\"${3:items}\"",
+      "\tmultiple",
+      "\tchips",
+      "/>$0"
+    ],
+    "description": "Multiple selection combobox"
+  },
+  "UAutocomplete Component": {
+    "prefix": ["UAutocomplete", "u-autocomplete"],
+    "body": [
+      "<UAutocomplete",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:items=\"${3:items}\"",
+      "\t:loading=\"${4:loading}\"",
+      "/>$0"
+    ],
+    "description": "Autocomplete component"
+  },
+  "UAutocomplete with search": {
+    "prefix": ["UAutocompleteSearch", "u-autocomplete-search"],
+    "body": [
+      "<UAutocomplete",
+      "\tv-model=\"${1:selected}\"",
+      "\tv-model:search=\"${2:search}\"",
+      "\tlabel=\"${3:Search...}\"",
+      "\t:items=\"${4:items}\"",
+      "\t:loading=\"${5:loading}\"",
+      "\t@update:search=\"${6:handleSearch}\"",
+      "/>$0"
+    ],
+    "description": "Autocomplete with search handler"
+  },
+  "UCheckbox Component": {
+    "prefix": ["UCheckbox", "u-checkbox"],
+    "body": ["<UCheckbox v-model=\"${1:checked}\" label=\"${2:Label}\" />$0"],
+    "description": "Checkbox component"
+  },
+  "UCheckbox with value": {
+    "prefix": ["UCheckboxValue", "u-checkbox-value"],
+    "body": [
+      "<UCheckbox",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\tvalue=\"${3:value}\"",
+      "/>$0"
+    ],
+    "description": "Checkbox with specific value"
+  },
+  "UCheckbox group": {
+    "prefix": ["UCheckboxGroup", "u-checkbox-group"],
+    "body": [
+      "<div>",
+      "\t<UCheckbox v-model=\"${1:selected}\" label=\"${2:Option 1}\" value=\"${3:option1}\" />",
+      "\t<UCheckbox v-model=\"${1:selected}\" label=\"${4:Option 2}\" value=\"${5:option2}\" />",
+      "\t<UCheckbox v-model=\"${1:selected}\" label=\"${6:Option 3}\" value=\"${7:option3}\" />",
+      "</div>$0"
+    ],
+    "description": "Group of checkboxes"
+  },
+  "URadio Component": {
+    "prefix": ["URadio", "u-radio"],
+    "body": [
+      "<URadio",
+      "\tv-model=\"${1:selected}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\tvalue=\"${3:value}\"",
+      "/>$0"
+    ],
+    "description": "Radio button component"
+  },
+  "URadioGroup Component": {
+    "prefix": ["URadioGroup", "u-radio-group"],
+    "body": [
+      "<URadioGroup v-model=\"${1:selected}\">",
+      "\t<URadio label=\"${2:Option 1}\" value=\"${3:option1}\" />",
+      "\t<URadio label=\"${4:Option 2}\" value=\"${5:option2}\" />",
+      "\t<URadio label=\"${6:Option 3}\" value=\"${7:option3}\" />",
+      "</URadioGroup>$0"
+    ],
+    "description": "Radio group component"
+  },
+  "URadioGroup inline": {
+    "prefix": ["URadioGroupInline", "u-radio-group-inline"],
+    "body": [
+      "<URadioGroup v-model=\"${1:selected}\" inline>",
+      "\t<URadio label=\"${2:Option 1}\" value=\"${3:option1}\" />",
+      "\t<URadio label=\"${4:Option 2}\" value=\"${5:option2}\" />",
+      "\t<URadio label=\"${6:Option 3}\" value=\"${7:option3}\" />",
+      "</URadioGroup>$0"
+    ],
+    "description": "Inline radio group"
+  },
+  "USwitch Component": {
+    "prefix": ["USwitch", "u-switch"],
+    "body": ["<USwitch v-model=\"${1:enabled}\" label=\"${2:Label}\" />$0"],
+    "description": "Switch toggle component"
+  },
+  "USwitch with props": {
+    "prefix": ["USwitchProps", "u-switch-props"],
+    "body": [
+      "<USwitch",
+      "\tv-model=\"${1:enabled}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\tcolor=\"${3:primary}\"",
+      "\t:inset=\"${4:false}\"",
+      "/>$0"
+    ],
+    "description": "Switch with props"
+  },
+  "USlider Component": {
+    "prefix": ["USlider", "u-slider"],
+    "body": [
+      "<USlider",
+      "\tv-model=\"${1:value}\"",
+      "\t:min=\"${2:0}\"",
+      "\t:max=\"${3:100}\"",
+      "\t:step=\"${4:1}\"",
+      "/>$0"
+    ],
+    "description": "Slider component"
+  },
+  "USlider with labels": {
+    "prefix": ["USliderLabels", "u-slider-labels"],
+    "body": [
+      "<USlider",
+      "\tv-model=\"${1:value}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:min=\"${3:0}\"",
+      "\t:max=\"${4:100}\"",
+      "\tthumb-label",
+      "\ttick-size=\"4\"",
+      "/>$0"
+    ],
+    "description": "Slider with thumb label"
+  },
+  "URangeSlider Component": {
+    "prefix": ["URangeSlider", "u-range-slider"],
+    "body": [
+      "<URangeSlider",
+      "\tv-model=\"${1:range}\"",
+      "\t:min=\"${2:0}\"",
+      "\t:max=\"${3:100}\"",
+      "/>$0"
+    ],
+    "description": "Range slider component"
+  },
+  "UFileInput Component": {
+    "prefix": ["UFileInput", "u-file-input"],
+    "body": ["<UFileInput", "\tv-model=\"${1:files}\"", "\tlabel=\"${2:Select file}\"", "/>$0"],
+    "description": "File input component"
+  },
+  "UFileInput multiple": {
+    "prefix": ["UFileInputMultiple", "u-file-input-multiple"],
+    "body": [
+      "<UFileInput",
+      "\tv-model=\"${1:files}\"",
+      "\tlabel=\"${2:Select files}\"",
+      "\tmultiple",
+      "\tchips",
+      "\t:show-size=\"true\"",
+      "/>$0"
+    ],
+    "description": "Multiple file input"
+  },
+  "UColorPicker Component": {
+    "prefix": ["UColorPicker", "u-color-picker"],
+    "body": ["<UColorPicker v-model=\"${1:color}\" />$0"],
+    "description": "Color picker component"
+  },
+  "UDatePicker Component": {
+    "prefix": ["UDatePicker", "u-date-picker"],
+    "body": ["<UDatePicker v-model=\"${1:date}\" />$0"],
+    "description": "Date picker component"
+  },
+  "UTimePicker Component": {
+    "prefix": ["UTimePicker", "u-time-picker"],
+    "body": ["<UTimePicker v-model=\"${1:time}\" />$0"],
+    "description": "Time picker component"
+  },
+  "UOtpInput Component": {
+    "prefix": ["UOtpInput", "u-otp-input"],
+    "body": ["<UOtpInput", "\tv-model=\"${1:otp}\"", "\t:length=\"${2:6}\"", "/>$0"],
+    "description": "OTP input component"
+  },
+  "UNumberInput Component": {
+    "prefix": ["UNumberInput", "u-number-input"],
+    "body": [
+      "<UNumberInput",
+      "\tv-model=\"${1:number}\"",
+      "\tlabel=\"${2:Label}\"",
+      "\t:min=\"${3:0}\"",
+      "\t:max=\"${4:100}\"",
+      "/>$0"
+    ],
+    "description": "Number input component"
+  },
+  "URating Component": {
+    "prefix": ["URating", "u-rating"],
+    "body": ["<URating", "\tv-model=\"${1:rating}\"", "\t:length=\"${2:5}\"", "/>$0"],
+    "description": "Rating component"
+  },
+  "UForm Component": {
+    "prefix": ["UForm", "u-form"],
+    "body": ["<UForm @submit.prevent=\"${1:handleSubmit}\">", "\t$0", "</UForm>"],
+    "description": "Form wrapper component"
+  },
+  "UForm with validation": {
+    "prefix": ["UFormValidation", "u-form-validation"],
+    "body": [
+      "<UForm ref=\"${1:form}\" v-model=\"${2:valid}\" @submit.prevent=\"${3:handleSubmit}\">",
+      "\t$0",
+      "",
+      "\t<div class=\"d-flex gap-2 mt-4\">",
+      "\t\t<UBtn type=\"submit\" :disabled=\"!${2:valid}\">Submit</UBtn>",
+      "\t\t<UBtn variant=\"outlined\" @click=\"${1:form}.reset()\">Reset</UBtn>",
+      "\t</div>",
+      "</UForm>"
+    ],
+    "description": "Form with validation ref"
+  },
+  "Complete Form Example": {
+    "prefix": ["uFormComplete", "u-form-complete"],
+    "body": [
+      "<UForm ref=\"form\" v-model=\"valid\" @submit.prevent=\"handleSubmit\">",
+      "\t<UTextField",
+      "\t\tv-model=\"formData.${1:name}\"",
+      "\t\tlabel=\"${2:Name}\"",
+      "\t\t:rules=\"[rules.required]\"",
+      "\t/>",
+      "",
+      "\t<UTextField",
+      "\t\tv-model=\"formData.${3:email}\"",
+      "\t\tlabel=\"${4:Email}\"",
+      "\t\ttype=\"email\"",
+      "\t\t:rules=\"[rules.required, rules.email]\"",
+      "\t/>",
+      "",
+      "\t<UTextarea",
+      "\t\tv-model=\"formData.${5:message}\"",
+      "\t\tlabel=\"${6:Message}\"",
+      "\t\t:rules=\"[rules.required]\"",
+      "\t/>",
+      "",
+      "\t<div class=\"d-flex gap-2 mt-4\">",
+      "\t\t<UBtn type=\"submit\" color=\"primary\" :disabled=\"!valid\">",
+      "\t\t\tSubmit",
+      "\t\t</UBtn>",
+      "\t\t<UBtn variant=\"outlined\" @click=\"form.reset()\">",
+      "\t\t\tReset",
+      "\t\t</UBtn>",
+      "\t</div>",
+      "</UForm>$0"
+    ],
+    "description": "Complete form example with validation"
+  }
+}

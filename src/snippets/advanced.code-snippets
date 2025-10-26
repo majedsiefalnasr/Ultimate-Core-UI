@@ -1,0 +1,358 @@
+{
+  "UTimeline Component": {
+    "prefix": ["UTimeline", "u-timeline"],
+    "body": [
+      "<UTimeline>",
+      "\t<UTimelineItem>",
+      "\t\t$1",
+      "\t</UTimelineItem>",
+      "\t<UTimelineItem>",
+      "\t\t$2",
+      "\t</UTimelineItem>",
+      "\t<UTimelineItem>",
+      "\t\t$0",
+      "\t</UTimelineItem>",
+      "</UTimeline>"
+    ],
+    "description": "Timeline component"
+  },
+  "UTimeline with props": {
+    "prefix": ["UTimelineProps", "u-timeline-props"],
+    "body": [
+      "<UTimeline side=\"${1|start,end|}\">",
+      "\t<UTimelineItem",
+      "\t\tdot-color=\"${2:primary}\"",
+      "\t\tsize=\"${3:small}\"",
+      "\t>",
+      "\t\t$0",
+      "\t</UTimelineItem>",
+      "</UTimeline>"
+    ],
+    "description": "Timeline with side and colors"
+  },
+  "UCarousel Component": {
+    "prefix": ["UCarousel", "u-carousel"],
+    "body": [
+      "<UCarousel>",
+      "\t<UCarouselItem src=\"${1:image1.jpg}\" />",
+      "\t<UCarouselItem src=\"${2:image2.jpg}\" />",
+      "\t<UCarouselItem src=\"${3:image3.jpg}\" />",
+      "</UCarousel>$0"
+    ],
+    "description": "Carousel component"
+  },
+  "UCarousel with props": {
+    "prefix": ["UCarouselProps", "u-carousel-props"],
+    "body": [
+      "<UCarousel",
+      "\tv-model=\"${1:slide}\"",
+      "\t:show-arrows=\"${2:true}\"",
+      "\t:cycle=\"${3:true}\"",
+      "\t:height=\"${4:400}\"",
+      ">",
+      "\t<UCarouselItem",
+      "\t\tv-for=\"(item, i) in ${5:items}\"",
+      "\t\t:key=\"i\"",
+      "\t\t:src=\"item.src\"",
+      "\t/>",
+      "</UCarousel>$0"
+    ],
+    "description": "Carousel with cycle and arrows"
+  },
+  "UParallax Component": {
+    "prefix": ["UParallax", "u-parallax"],
+    "body": [
+      "<UParallax src=\"${1:image-url}\" height=\"${2:500}\">",
+      "\t<div class=\"d-flex flex-column fill-height justify-center align-center text-white\">",
+      "\t\t<h1 class=\"text-h2 font-weight-thin mb-4\">${3:Title}</h1>",
+      "\t\t<h4 class=\"subheading\">${4:Subtitle}</h4>",
+      "\t</div>",
+      "</UParallax>$0"
+    ],
+    "description": "Parallax component with content"
+  },
+  "UDataIterator Component": {
+    "prefix": ["UDataIterator", "u-data-iterator"],
+    "body": [
+      "<UDataIterator :items=\"${1:items}\">",
+      "\t<template #default=\"{ items }\">",
+      "\t\t<v-row>",
+      "\t\t\t<v-col",
+      "\t\t\t\tv-for=\"item in items\"",
+      "\t\t\t\t:key=\"item.${2:id}\"",
+      "\t\t\t\tcols=\"12\"",
+      "\t\t\t\tsm=\"6\"",
+      "\t\t\t\tmd=\"4\"",
+      "\t\t\t>",
+      "\t\t\t\t$0",
+      "\t\t\t</v-col>",
+      "\t\t</v-row>",
+      "\t</template>",
+      "</UDataIterator>"
+    ],
+    "description": "Data iterator component"
+  },
+  "UDataIterator with search": {
+    "prefix": ["UDataIteratorSearch", "u-data-iterator-search"],
+    "body": [
+      "<UDataIterator",
+      "\tv-model:search=\"${1:search}\"",
+      "\t:items=\"${2:items}\"",
+      ">",
+      "\t<template #header>",
+      "\t\t<UTextField",
+      "\t\t\tv-model=\"${1:search}\"",
+      "\t\t\tprepend-inner-icon=\"mdi-magnify\"",
+      "\t\t\tlabel=\"Search\"",
+      "\t\t\tclearable",
+      "\t\t/>",
+      "\t</template>",
+      "",
+      "\t<template #default=\"{ items }\">",
+      "\t\t$0",
+      "\t</template>",
+      "</UDataIterator>"
+    ],
+    "description": "Data iterator with search"
+  },
+  "UVirtualScroll Component": {
+    "prefix": ["UVirtualScroll", "u-virtual-scroll"],
+    "body": [
+      "<UVirtualScroll",
+      "\t:items=\"${1:items}\"",
+      "\t:height=\"${2:400}\"",
+      "\titem-height=\"${3:48}\"",
+      ">",
+      "\t<template #default=\"{ item }\">",
+      "\t\t$0",
+      "\t</template>",
+      "</UVirtualScroll>"
+    ],
+    "description": "Virtual scroll component"
+  },
+  "UInfiniteScroll Component": {
+    "prefix": ["UInfiniteScroll", "u-infinite-scroll"],
+    "body": [
+      "<UInfiniteScroll",
+      "\t@load=\"${1:loadMore}\"",
+      "\t:loading=\"${2:loading}\"",
+      ">",
+      "\t<div v-for=\"item in ${3:items}\" :key=\"item.id\">",
+      "\t\t$0",
+      "\t</div>",
+      "</UInfiniteScroll>"
+    ],
+    "description": "Infinite scroll component"
+  },
+  "UStepper Component": {
+    "prefix": ["UStepper", "u-stepper"],
+    "body": [
+      "<UStepper v-model=\"${1:step}\">",
+      "\t<UStepperHeader>",
+      "\t\t<UStepperItem value=\"${2:1}\" title=\"${3:Step 1}\" />",
+      "\t\t<UStepperItem value=\"${4:2}\" title=\"${5:Step 2}\" />",
+      "\t\t<UStepperItem value=\"${6:3}\" title=\"${7:Step 3}\" />",
+      "\t</UStepperHeader>",
+      "",
+      "\t<UStepperWindow v-model=\"${1:step}\">",
+      "\t\t<UStepperWindowItem value=\"${2:1}\">",
+      "\t\t\t$8",
+      "\t\t</UStepperWindowItem>",
+      "\t\t<UStepperWindowItem value=\"${4:2}\">",
+      "\t\t\t$9",
+      "\t\t</UStepperWindowItem>",
+      "\t\t<UStepperWindowItem value=\"${6:3}\">",
+      "\t\t\t$0",
+      "\t\t</UStepperWindowItem>",
+      "\t</UStepperWindow>",
+      "</UStepper>"
+    ],
+    "description": "Stepper component"
+  },
+  "UStepper with actions": {
+    "prefix": ["UStepperActions", "u-stepper-actions"],
+    "body": [
+      "<UStepper v-model=\"${1:step}\">",
+      "\t<UStepperHeader>",
+      "\t\t<UStepperItem value=\"${2:1}\" title=\"${3:Step 1}\" />",
+      "\t\t<UStepperItem value=\"${4:2}\" title=\"${5:Step 2}\" />",
+      "\t</UStepperHeader>",
+      "",
+      "\t<UStepperWindow v-model=\"${1:step}\">",
+      "\t\t<UStepperWindowItem value=\"${2:1}\">",
+      "\t\t\t$6",
+      "\t\t</UStepperWindowItem>",
+      "\t\t<UStepperWindowItem value=\"${4:2}\">",
+      "\t\t\t$7",
+      "\t\t</UStepperWindowItem>",
+      "\t</UStepperWindow>",
+      "",
+      "\t<UStepperActions",
+      "\t\t@click:prev=\"${1:step}--\"",
+      "\t\t@click:next=\"${1:step}++\"",
+      "\t\t:disabled=\"${1:step} === 1\"",
+      "\t/>",
+      "</UStepper>$0"
+    ],
+    "description": "Stepper with navigation actions"
+  },
+  "UWindow Component": {
+    "prefix": ["UWindow", "u-window"],
+    "body": [
+      "<UWindow v-model=\"${1:window}\">",
+      "\t<UWindowItem value=\"${2:item1}\">",
+      "\t\t$3",
+      "\t</UWindowItem>",
+      "\t<UWindowItem value=\"${4:item2}\">",
+      "\t\t$0",
+      "\t</UWindowItem>",
+      "</UWindow>"
+    ],
+    "description": "Window component"
+  },
+  "USlideGroup Component": {
+    "prefix": ["USlideGroup", "u-slide-group"],
+    "body": [
+      "<USlideGroup v-model=\"${1:model}\" show-arrows>",
+      "\t<USlideGroupItem",
+      "\t\tv-for=\"item in ${2:items}\"",
+      "\t\t:key=\"item\"",
+      "\t\t:value=\"item\"",
+      "\t>",
+      "\t\t$0",
+      "\t</USlideGroupItem>",
+      "</USlideGroup>"
+    ],
+    "description": "Slide group component"
+  },
+  "USparkline Component": {
+    "prefix": ["USparkline", "u-sparkline"],
+    "body": [
+      "<USparkline",
+      "\t:model-value=\"${1:data}\"",
+      "\tcolor=\"${2:primary}\"",
+      "\tline-width=\"${3:2}\"",
+      "\t:smooth=\"${4:true}\"",
+      "/>$0"
+    ],
+    "description": "Sparkline chart component"
+  },
+  "USparkline with gradient": {
+    "prefix": ["USparklineGradient", "u-sparkline-gradient"],
+    "body": [
+      "<USparkline",
+      "\t:model-value=\"${1:data}\"",
+      "\t:gradient=\"['${2:#f72047}', '${3:#ffd200}', '${4:#1feaea}']\"",
+      "\t:smooth=\"16\"",
+      "\t:padding=\"8\"",
+      "\tline-width=\"2\"",
+      "\tstroke-linecap=\"round\"",
+      "\tgradient-direction=\"top\"",
+      "\tfill",
+      "/>$0"
+    ],
+    "description": "Sparkline with gradient fill"
+  },
+  "UTreeview Component": {
+    "prefix": ["UTreeview", "u-treeview"],
+    "body": ["<UTreeview :items=\"${1:items}\" />$0"],
+    "description": "Treeview component"
+  },
+  "UTreeview with props": {
+    "prefix": ["UTreeviewProps", "u-treeview-props"],
+    "body": [
+      "<UTreeview",
+      "\tv-model:opened=\"${1:open}\"",
+      "\tv-model:selected=\"${2:selected}\"",
+      "\t:items=\"${3:items}\"",
+      "\tselectable",
+      "\tactivatable",
+      "\topen-on-click",
+      "/>$0"
+    ],
+    "description": "Treeview with selection"
+  },
+  "UHover Component": {
+    "prefix": ["UHover", "u-hover"],
+    "body": [
+      "<UHover>",
+      "\t<template #default=\"{ isHovering, props }\">",
+      "\t\t<div v-bind=\"props\">",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t</template>",
+      "</UHover>"
+    ],
+    "description": "Hover state wrapper"
+  },
+  "ULazy Component": {
+    "prefix": ["ULazy", "u-lazy"],
+    "body": [
+      "<ULazy",
+      "\t:options=\"{ threshold: ${1:0.5} }\"",
+      "\t:min-height=\"${2:200}\"",
+      ">",
+      "\t$0",
+      "</ULazy>"
+    ],
+    "description": "Lazy loading wrapper"
+  },
+  "UNoSsr Component": {
+    "prefix": ["UNoSsr", "u-no-ssr"],
+    "body": ["<UNoSsr>", "\t$0", "</UNoSsr>"],
+    "description": "No SSR wrapper component"
+  },
+  "UConfirmEdit Component": {
+    "prefix": ["UConfirmEdit", "u-confirm-edit"],
+    "body": [
+      "<UConfirmEdit v-model=\"${1:model}\">",
+      "\t<template #default=\"{ model, save, cancel, isPristine }\">",
+      "\t\t$0",
+      "\t</template>",
+      "</UConfirmEdit>"
+    ],
+    "description": "Confirm edit wrapper"
+  },
+  "UCounter Component": {
+    "prefix": ["UCounter", "u-counter"],
+    "body": [
+      "<UCounter>",
+      "\t<template #default=\"{ counter, max }\">",
+      "\t\t{{ counter }} / {{ max }}",
+      "\t</template>",
+      "</UCounter>$0"
+    ],
+    "description": "Counter component"
+  },
+  "UValidation Component": {
+    "prefix": ["UValidation", "u-validation"],
+    "body": ["<UValidation v-slot=\"{ isValid, errors }\">", "\t$0", "</UValidation>"],
+    "description": "Validation wrapper component"
+  },
+  "UDefaultsProvider Component": {
+    "prefix": ["UDefaultsProvider", "u-defaults-provider"],
+    "body": [
+      "<UDefaultsProvider",
+      "\t:defaults=\"{",
+      "\t\tUBtn: {",
+      "\t\t\tcolor: '${1:primary}',",
+      "\t\t\tvariant: '${2:elevated}'",
+      "\t\t}",
+      "\t}\"",
+      ">",
+      "\t$0",
+      "</UDefaultsProvider>"
+    ],
+    "description": "Defaults provider for component props"
+  },
+  "ULocaleProvider Component": {
+    "prefix": ["ULocaleProvider", "u-locale-provider"],
+    "body": ["<ULocaleProvider locale=\"${1:en}\">", "\t$0", "</ULocaleProvider>"],
+    "description": "Locale provider component"
+  },
+  "UThemeProvider Component": {
+    "prefix": ["UThemeProvider", "u-theme-provider"],
+    "body": ["<UThemeProvider theme=\"${1|light,dark|}\">", "\t$0", "</UThemeProvider>"],
+    "description": "Theme provider component"
+  }
+}
