@@ -1,226 +1,319 @@
 {
   "UAppBar Component": {
-    "prefix": ["UAppBar", "u-app-bar"],
-    "body": ["<UAppBar>", "\t$0", "</UAppBar>"],
+    "prefix": [
+      "UAppBar",
+      "u-app-bar"
+    ],
+    "body": [
+      "<u-app-bar>",
+      "\t$0",
+      "</u-app-bar>"
+    ],
     "description": "App bar component"
   },
   "UAppBar with title": {
-    "prefix": ["UAppBarTitle", "u-app-bar-title"],
+    "prefix": [
+      "UAppBarTitle",
+      "u-app-bar-title"
+    ],
     "body": [
-      "<UAppBar>",
-      "\t<UAppBarNavIcon @click=\"${1:drawer} = !${1:drawer}\" />",
-      "\t<UAppBarTitle>${2:App Title}</UAppBarTitle>",
+      "<u-app-bar>",
+      "\t<u-app-bar-nav-icon @click=\"${1:drawer} = !${1:drawer}\" />",
+      "\t<u-app-bar-title>${2:App Title}</u-app-bar-title>",
       "\t<v-spacer />",
       "\t$0",
-      "</UAppBar>"
+      "</u-app-bar>"
     ],
     "description": "App bar with navigation icon and title"
   },
   "UAppBar with actions": {
-    "prefix": ["UAppBarActions", "u-app-bar-actions"],
+    "prefix": [
+      "UAppBarActions",
+      "u-app-bar-actions"
+    ],
     "body": [
-      "<UAppBar>",
-      "\t<UAppBarTitle>${1:App Title}</UAppBarTitle>",
+      "<u-app-bar>",
+      "\t<u-app-bar-title>${1:App Title}</u-app-bar-title>",
       "\t<v-spacer />",
-      "\t<UBtn icon=\"${2:mdi-magnify}\" />",
-      "\t<UBtn icon=\"${3:mdi-dots-vertical}\" />",
-      "</UAppBar>$0"
+      "\t<u-btn icon=\"${2:mdi-magnify}\" />",
+      "\t<u-btn icon=\"${3:mdi-dots-vertical}\" />",
+      "</u-app-bar>$0"
     ],
     "description": "App bar with action buttons"
   },
   "UNavigationDrawer Component": {
-    "prefix": ["UNavigationDrawer", "u-navigation-drawer"],
-    "body": ["<UNavigationDrawer v-model=\"${1:drawer}\">", "\t$0", "</UNavigationDrawer>"],
+    "prefix": [
+      "UNavigationDrawer",
+      "u-navigation-drawer"
+    ],
+    "body": [
+      "<u-navigation-drawer v-model=\"${1:drawer}\">",
+      "\t$0",
+      "</u-navigation-drawer>"
+    ],
     "description": "Navigation drawer component"
   },
   "UNavigationDrawer with list": {
-    "prefix": ["UNavigationDrawerList", "u-navigation-drawer-list"],
+    "prefix": [
+      "UNavigationDrawerList",
+      "u-navigation-drawer-list"
+    ],
     "body": [
-      "<UNavigationDrawer v-model=\"${1:drawer}\">",
-      "\t<UList>",
-      "\t\t<UListItem",
+      "<u-navigation-drawer v-model=\"${1:drawer}\">",
+      "\t<u-list>",
+      "\t\t<u-list-item",
       "\t\t\tprepend-icon=\"${2:mdi-home}\"",
       "\t\t\ttitle=\"${3:Home}\"",
       "\t\t\tvalue=\"${4:home}\"",
       "\t\t/>",
-      "\t\t<UListItem",
+      "\t\t<u-list-item",
       "\t\t\tprepend-icon=\"${5:mdi-account}\"",
       "\t\t\ttitle=\"${6:Profile}\"",
       "\t\t\tvalue=\"${7:profile}\"",
       "\t\t/>",
-      "\t</UList>",
-      "</UNavigationDrawer>$0"
+      "\t</u-list>",
+      "</u-navigation-drawer>$0"
     ],
     "description": "Navigation drawer with list items"
   },
   "UNavigationDrawer permanent": {
-    "prefix": ["UNavigationDrawerPermanent", "u-navigation-drawer-permanent"],
-    "body": ["<UNavigationDrawer permanent>", "\t$0", "</UNavigationDrawer>"],
+    "prefix": [
+      "UNavigationDrawerPermanent",
+      "u-navigation-drawer-permanent"
+    ],
+    "body": [
+      "<u-navigation-drawer permanent>",
+      "\t$0",
+      "</u-navigation-drawer>"
+    ],
     "description": "Permanent navigation drawer"
   },
   "UNavigationDrawer rail": {
-    "prefix": ["UNavigationDrawerRail", "u-navigation-drawer-rail"],
-    "body": ["<UNavigationDrawer v-model=\"${1:drawer}\" rail>", "\t$0", "</UNavigationDrawer>"],
+    "prefix": [
+      "UNavigationDrawerRail",
+      "u-navigation-drawer-rail"
+    ],
+    "body": [
+      "<u-navigation-drawer v-model=\"${1:drawer}\" rail>",
+      "\t$0",
+      "</u-navigation-drawer>"
+    ],
     "description": "Rail navigation drawer (mini variant)"
   },
   "UBottomNavigation Component": {
-    "prefix": ["UBottomNavigation", "u-bottom-navigation"],
+    "prefix": [
+      "UBottomNavigation",
+      "u-bottom-navigation"
+    ],
     "body": [
-      "<UBottomNavigation v-model=\"${1:tab}\">",
-      "\t<UBtn value=\"${2:recent}\" icon=\"${3:mdi-history}\">",
+      "<u-bottom-navigation v-model=\"${1:tab}\">",
+      "\t<u-btn value=\"${2:recent}\" icon=\"${3:mdi-history}\">",
       "\t\t${4:Recent}",
-      "\t</UBtn>",
-      "\t<UBtn value=\"${5:favorites}\" icon=\"${6:mdi-heart}\">",
+      "\t</u-btn>",
+      "\t<u-btn value=\"${5:favorites}\" icon=\"${6:mdi-heart}\">",
       "\t\t${7:Favorites}",
-      "\t</UBtn>",
-      "\t<UBtn value=\"${8:nearby}\" icon=\"${9:mdi-map-marker}\">",
+      "\t</u-btn>",
+      "\t<u-btn value=\"${8:nearby}\" icon=\"${9:mdi-map-marker}\">",
       "\t\t${10:Nearby}",
-      "\t</UBtn>",
-      "</UBottomNavigation>$0"
+      "\t</u-btn>",
+      "</u-bottom-navigation>$0"
     ],
     "description": "Bottom navigation component"
   },
   "UBottomSheet Component": {
-    "prefix": ["UBottomSheet", "u-bottom-sheet"],
-    "body": ["<UBottomSheet v-model=\"${1:sheet}\">", "\t$0", "</UBottomSheet>"],
+    "prefix": [
+      "UBottomSheet",
+      "u-bottom-sheet"
+    ],
+    "body": [
+      "<u-bottom-sheet v-model=\"${1:sheet}\">",
+      "\t$0",
+      "</u-bottom-sheet>"
+    ],
     "description": "Bottom sheet component"
   },
   "UBreadcrumbs Component": {
-    "prefix": ["UBreadcrumbs", "u-breadcrumbs"],
-    "body": ["<UBreadcrumbs :items=\"${1:breadcrumbs}\" />$0"],
+    "prefix": [
+      "UBreadcrumbs",
+      "u-breadcrumbs"
+    ],
+    "body": [
+      "<u-breadcrumbs :items=\"${1:breadcrumbs}\" />$0"
+    ],
     "description": "Breadcrumbs navigation component"
   },
   "UBreadcrumbs with custom items": {
-    "prefix": ["UBreadcrumbsItems", "u-breadcrumbs-items"],
+    "prefix": [
+      "UBreadcrumbsItems",
+      "u-breadcrumbs-items"
+    ],
     "body": [
-      "<UBreadcrumbs>",
-      "\t<UBreadcrumbsItem title=\"${1:Home}\" :to=\"${2:'/'}\" />",
-      "\t<UBreadcrumbsItem title=\"${3:Category}\" :to=\"${4:'/category'}\" />",
-      "\t<UBreadcrumbsItem title=\"${5:Item}\" :disabled=\"true\" />",
-      "</UBreadcrumbs>$0"
+      "<u-breadcrumbs>",
+      "\t<u-breadcrumbs-item title=\"${1:Home}\" :to=\"${2:'/'}\" />",
+      "\t<u-breadcrumbs-item title=\"${3:Category}\" :to=\"${4:'/category'}\" />",
+      "\t<u-breadcrumbs-item title=\"${5:Item}\" :disabled=\"true\" />",
+      "</u-breadcrumbs>$0"
     ],
     "description": "Breadcrumbs with custom items"
   },
   "UTabs Component": {
-    "prefix": ["UTabs", "u-tabs"],
+    "prefix": [
+      "UTabs",
+      "u-tabs"
+    ],
     "body": [
-      "<UTabs v-model=\"${1:tab}\">",
-      "\t<UTab value=\"${2:tab1}\">${3:Tab 1}</UTab>",
-      "\t<UTab value=\"${4:tab2}\">${5:Tab 2}</UTab>",
-      "\t<UTab value=\"${6:tab3}\">${7:Tab 3}</UTab>",
-      "</UTabs>$0"
+      "<u-tabs v-model=\"${1:tab}\">",
+      "\t<u-tab value=\"${2:tab1}\">${3:Tab 1}</u-tab>",
+      "\t<u-tab value=\"${4:tab2}\">${5:Tab 2}</u-tab>",
+      "\t<u-tab value=\"${6:tab3}\">${7:Tab 3}</u-tab>",
+      "</u-tabs>$0"
     ],
     "description": "Tabs component"
   },
   "UTabs with icons": {
-    "prefix": ["UTabsIcons", "u-tabs-icons"],
+    "prefix": [
+      "UTabsIcons",
+      "u-tabs-icons"
+    ],
     "body": [
-      "<UTabs v-model=\"${1:tab}\">",
-      "\t<UTab value=\"${2:tab1}\">",
-      "\t\t<UIcon>${3:mdi-phone}</UIcon>",
+      "<u-tabs v-model=\"${1:tab}\">",
+      "\t<u-tab value=\"${2:tab1}\">",
+      "\t\t<u-icon>${3:mdi-phone}</u-icon>",
       "\t\t${4:Phone}",
-      "\t</UTab>",
-      "\t<UTab value=\"${5:tab2}\">",
-      "\t\t<UIcon>${6:mdi-heart}</UIcon>",
+      "\t</u-tab>",
+      "\t<u-tab value=\"${5:tab2}\">",
+      "\t\t<u-icon>${6:mdi-heart}</u-icon>",
       "\t\t${7:Favorites}",
-      "\t</UTab>",
-      "\t<UTab value=\"${8:tab3}\">",
-      "\t\t<UIcon>${9:mdi-account}</UIcon>",
+      "\t</u-tab>",
+      "\t<u-tab value=\"${8:tab3}\">",
+      "\t\t<u-icon>${9:mdi-account}</u-icon>",
       "\t\t${10:Profile}",
-      "\t</UTab>",
-      "</UTabs>$0"
+      "\t</u-tab>",
+      "</u-tabs>$0"
     ],
     "description": "Tabs with icons"
   },
   "UTabs with Window": {
-    "prefix": ["UTabsWindow", "u-tabs-window"],
+    "prefix": [
+      "UTabsWindow",
+      "u-tabs-window"
+    ],
     "body": [
-      "<UTabs v-model=\"${1:tab}\">",
-      "\t<UTab value=\"${2:tab1}\">${3:Tab 1}</UTab>",
-      "\t<UTab value=\"${4:tab2}\">${5:Tab 2}</UTab>",
-      "</UTabs>",
+      "<u-tabs v-model=\"${1:tab}\">",
+      "\t<u-tab value=\"${2:tab1}\">${3:Tab 1}</u-tab>",
+      "\t<u-tab value=\"${4:tab2}\">${5:Tab 2}</u-tab>",
+      "</u-tabs>",
       "",
-      "<UWindow v-model=\"${1:tab}\">",
-      "\t<UWindowItem value=\"${2:tab1}\">",
+      "<u-window v-model=\"${1:tab}\">",
+      "\t<u-window-item value=\"${2:tab1}\">",
       "\t\t$6",
-      "\t</UWindowItem>",
-      "\t<UWindowItem value=\"${4:tab2}\">",
+      "\t</u-window-item>",
+      "\t<u-window-item value=\"${4:tab2}\">",
       "\t\t$0",
-      "\t</UWindowItem>",
-      "</UWindow>"
+      "\t</u-window-item>",
+      "</u-window>"
     ],
     "description": "Tabs with window items"
   },
   "UMenu Component": {
-    "prefix": ["UMenu", "u-menu"],
+    "prefix": [
+      "UMenu",
+      "u-menu"
+    ],
     "body": [
-      "<UMenu>",
+      "<u-menu>",
       "\t<template #activator=\"{ props }\">",
-      "\t\t<UBtn v-bind=\"props\">${1:Menu}</UBtn>",
+      "\t\t<u-btn v-bind=\"props\">${1:Menu}</u-btn>",
       "\t</template>",
       "",
-      "\t<UList>",
-      "\t\t<UListItem title=\"${2:Item 1}\" />",
-      "\t\t<UListItem title=\"${3:Item 2}\" />",
-      "\t\t<UListItem title=\"${4:Item 3}\" />",
-      "\t</UList>",
-      "</UMenu>$0"
+      "\t<u-list>",
+      "\t\t<u-list-item title=\"${2:Item 1}\" />",
+      "\t\t<u-list-item title=\"${3:Item 2}\" />",
+      "\t\t<u-list-item title=\"${4:Item 3}\" />",
+      "\t</u-list>",
+      "</u-menu>$0"
     ],
     "description": "Menu component with activator"
   },
   "UMenu with icon button": {
-    "prefix": ["UMenuIcon", "u-menu-icon"],
+    "prefix": [
+      "UMenuIcon",
+      "u-menu-icon"
+    ],
     "body": [
-      "<UMenu>",
+      "<u-menu>",
       "\t<template #activator=\"{ props }\">",
-      "\t\t<UBtn icon=\"${1:mdi-dots-vertical}\" v-bind=\"props\" />",
+      "\t\t<u-btn icon=\"${1:mdi-dots-vertical}\" v-bind=\"props\" />",
       "\t</template>",
       "",
-      "\t<UList>",
-      "\t\t<UListItem prepend-icon=\"${2:mdi-pencil}\" title=\"${3:Edit}\" />",
-      "\t\t<UListItem prepend-icon=\"${4:mdi-delete}\" title=\"${5:Delete}\" />",
-      "\t</UList>",
-      "</UMenu>$0"
+      "\t<u-list>",
+      "\t\t<u-list-item prepend-icon=\"${2:mdi-pencil}\" title=\"${3:Edit}\" />",
+      "\t\t<u-list-item prepend-icon=\"${4:mdi-delete}\" title=\"${5:Delete}\" />",
+      "\t</u-list>",
+      "</u-menu>$0"
     ],
     "description": "Menu with icon button activator"
   },
   "UMenu offset": {
-    "prefix": ["UMenuOffset", "u-menu-offset"],
+    "prefix": [
+      "UMenuOffset",
+      "u-menu-offset"
+    ],
     "body": [
-      "<UMenu offset=\"${1:10}\">",
+      "<u-menu offset=\"${1:10}\">",
       "\t<template #activator=\"{ props }\">",
-      "\t\t<UBtn v-bind=\"props\">${2:Menu}</UBtn>",
+      "\t\t<u-btn v-bind=\"props\">${2:Menu}</u-btn>",
       "\t</template>",
-      "\t<UList>",
+      "\t<u-list>",
       "\t\t$0",
-      "\t</UList>",
-      "</UMenu>"
+      "\t</u-list>",
+      "</u-menu>"
     ],
     "description": "Menu with offset positioning"
   },
   "UToolbar Component": {
-    "prefix": ["UToolbar", "u-toolbar"],
-    "body": ["<UToolbar>", "\t$0", "</UToolbar>"],
+    "prefix": [
+      "UToolbar",
+      "u-toolbar"
+    ],
+    "body": [
+      "<u-toolbar>",
+      "\t$0",
+      "</u-toolbar>"
+    ],
     "description": "Toolbar component"
   },
   "UToolbar with title": {
-    "prefix": ["UToolbarTitle", "u-toolbar-title"],
+    "prefix": [
+      "UToolbarTitle",
+      "u-toolbar-title"
+    ],
     "body": [
-      "<UToolbar>",
-      "\t<UToolbarTitle>${1:Title}</UToolbarTitle>",
+      "<u-toolbar>",
+      "\t<u-toolbar-title>${1:Title}</u-toolbar-title>",
       "\t<v-spacer />",
       "\t$0",
-      "</UToolbar>"
+      "</u-toolbar>"
     ],
     "description": "Toolbar with title"
   },
   "USystemBar Component": {
-    "prefix": ["USystemBar", "u-system-bar"],
-    "body": ["<USystemBar>", "\t$0", "</USystemBar>"],
+    "prefix": [
+      "USystemBar",
+      "u-system-bar"
+    ],
+    "body": [
+      "<u-system-bar>",
+      "\t$0",
+      "</u-system-bar>"
+    ],
     "description": "System bar component"
   },
   "Complete Navigation Layout": {
-    "prefix": ["uNavLayout", "u-nav-layout"],
+    "prefix": [
+      "uNavLayout",
+      "u-nav-layout"
+    ],
     "body": [
       "<template>",
       "\t<UApp>",

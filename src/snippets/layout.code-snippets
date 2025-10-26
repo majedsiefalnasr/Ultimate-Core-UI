@@ -1,76 +1,148 @@
 {
   "UApp Component": {
-    "prefix": ["UApp", "u-app"],
-    "body": ["<UApp>", "\t$0", "</UApp>"],
+    "prefix": [
+      "UApp",
+      "u-app"
+    ],
+    "body": [
+      "<u-app>",
+      "\t$0",
+      "</u-app>"
+    ],
     "description": "Ultimate Core UI App wrapper component"
   },
   "UApp with theme": {
-    "prefix": ["UAppTheme", "u-app-theme"],
-    "body": ["<UApp theme=\"${1|light,dark|}\">", "\t$0", "</UApp>"],
+    "prefix": [
+      "UAppTheme",
+      "u-app-theme"
+    ],
+    "body": [
+      "<u-app theme=\"${1|light,dark|}\">",
+      "\t$0",
+      "</u-app>"
+    ],
     "description": "UApp with theme prop"
   },
   "UMain Component": {
-    "prefix": ["UMain", "u-main"],
-    "body": ["<UMain>", "\t$0", "</UMain>"],
+    "prefix": [
+      "UMain",
+      "u-main"
+    ],
+    "body": [
+      "<u-main>",
+      "\t$0",
+      "</u-main>"
+    ],
     "description": "Main content area component"
   },
   "UContainer Component": {
-    "prefix": ["UContainer", "u-container"],
-    "body": ["<UContainer>", "\t$0", "</UContainer>"],
+    "prefix": [
+      "UContainer",
+      "u-container"
+    ],
+    "body": [
+      "<u-container>",
+      "\t$0",
+      "</u-container>"
+    ],
     "description": "Container component for layout"
   },
   "UContainer fluid": {
-    "prefix": ["UContainerFluid", "u-container-fluid"],
-    "body": ["<UContainer fluid>", "\t$0", "</UContainer>"],
+    "prefix": [
+      "UContainerFluid",
+      "u-container-fluid"
+    ],
+    "body": [
+      "<u-container fluid>",
+      "\t$0",
+      "</u-container>"
+    ],
     "description": "Fluid container without max-width"
   },
   "UContainer with props": {
-    "prefix": ["UContainerProps", "u-container-props"],
+    "prefix": [
+      "UContainerProps",
+      "u-container-props"
+    ],
     "body": [
-      "<UContainer",
+      "<u-container",
       "\t:fluid=\"${1:false}\"",
       "\t:max-width=\"${2:1200}\"",
       ">",
       "\t$0",
-      "</UContainer>"
+      "</u-container>"
     ],
     "description": "Container with common props"
   },
   "ULayout Component": {
-    "prefix": ["ULayout", "u-layout"],
-    "body": ["<ULayout>", "\t$0", "</ULayout>"],
+    "prefix": [
+      "ULayout",
+      "u-layout"
+    ],
+    "body": [
+      "<u-layout>",
+      "\t$0",
+      "</u-layout>"
+    ],
     "description": "Layout component wrapper"
   },
   "USheet Component": {
-    "prefix": ["USheet", "u-sheet"],
-    "body": ["<USheet>", "\t$0", "</USheet>"],
+    "prefix": [
+      "USheet",
+      "u-sheet"
+    ],
+    "body": [
+      "<u-sheet>",
+      "\t$0",
+      "</u-sheet>"
+    ],
     "description": "Sheet component with elevation"
   },
   "USheet with props": {
-    "prefix": ["USheetProps", "u-sheet-props"],
+    "prefix": [
+      "USheetProps",
+      "u-sheet-props"
+    ],
     "body": [
-      "<USheet",
+      "<u-sheet",
       "\t:elevation=\"${1:2}\"",
       "\t:rounded=\"${2:true}\"",
       "\tcolor=\"${3:white}\"",
       ">",
       "\t$0",
-      "</USheet>"
+      "</u-sheet>"
     ],
     "description": "Sheet with elevation and styling"
   },
   "UResponsive Component": {
-    "prefix": ["UResponsive", "u-responsive"],
-    "body": ["<UResponsive :aspect-ratio=\"${1:16/9}\">", "\t$0", "</UResponsive>"],
+    "prefix": [
+      "UResponsive",
+      "u-responsive"
+    ],
+    "body": [
+      "<u-responsive :aspect-ratio=\"${1:16/9}\">",
+      "\t$0",
+      "</u-responsive>"
+    ],
     "description": "Responsive container with aspect ratio"
   },
   "UGrid Row": {
-    "prefix": ["URow", "u-row"],
-    "body": ["<v-row>", "\t$0", "</v-row>"],
+    "prefix": [
+      "URow",
+      "u-row"
+    ],
+    "body": [
+      "<v-row>",
+      "\t$0",
+      "</v-row>"
+    ],
     "description": "Grid row component"
   },
   "UGrid Row with props": {
-    "prefix": ["URowProps", "u-row-props"],
+    "prefix": [
+      "URowProps",
+      "u-row-props"
+    ],
     "body": [
       "<v-row",
       "\t:align=\"${1|start,center,end|}\"",
@@ -82,12 +154,22 @@
     "description": "Grid row with alignment props"
   },
   "UGrid Column": {
-    "prefix": ["UCol", "u-col"],
-    "body": ["<v-col>", "\t$0", "</v-col>"],
+    "prefix": [
+      "UCol",
+      "u-col"
+    ],
+    "body": [
+      "<v-col>",
+      "\t$0",
+      "</v-col>"
+    ],
     "description": "Grid column component"
   },
   "UGrid Column with breakpoints": {
-    "prefix": ["UColBreakpoints", "u-col-breakpoints"],
+    "prefix": [
+      "UColBreakpoints",
+      "u-col-breakpoints"
+    ],
     "body": [
       "<v-col",
       "\tcols=\"${1:12}\"",
@@ -101,24 +183,42 @@
     "description": "Grid column with responsive breakpoints"
   },
   "UGrid Spacer": {
-    "prefix": ["USpacer", "u-spacer"],
-    "body": ["<v-spacer />"],
+    "prefix": [
+      "USpacer",
+      "u-spacer"
+    ],
+    "body": [
+      "<v-spacer />"
+    ],
     "description": "Spacer component for layouts"
   },
   "UDivider Component": {
-    "prefix": ["UDivider", "u-divider"],
-    "body": ["<UDivider />"],
+    "prefix": [
+      "UDivider",
+      "u-divider"
+    ],
+    "body": [
+      "<u-divider />"
+    ],
     "description": "Divider component"
   },
   "UDivider vertical": {
-    "prefix": ["UDividerVertical", "u-divider-vertical"],
-    "body": ["<UDivider vertical />"],
+    "prefix": [
+      "UDividerVertical",
+      "u-divider-vertical"
+    ],
+    "body": [
+      "<u-divider vertical />"
+    ],
     "description": "Vertical divider"
   },
   "UDivider with props": {
-    "prefix": ["UDividerProps", "u-divider-props"],
+    "prefix": [
+      "UDividerProps",
+      "u-divider-props"
+    ],
     "body": [
-      "<UDivider",
+      "<u-divider",
       "\t:thickness=\"${1:2}\"",
       "\t:vertical=\"${2:false}\"",
       "\tcolor=\"${3:primary}\"",
@@ -127,68 +227,80 @@
     "description": "Divider with styling props"
   },
   "Basic App Layout": {
-    "prefix": ["uAppLayout", "u-app-layout"],
+    "prefix": [
+      "uAppLayout",
+      "u-app-layout"
+    ],
     "body": [
-      "<UApp>",
-      "\t<UAppBar>",
-      "\t\t<UAppBarTitle>$1</UAppBarTitle>",
-      "\t</UAppBar>",
+      "<u-app>",
+      "\t<u-app-bar>",
+      "\t\t<u-app-bar-title>$1</u-app-bar-title>",
+      "\t</u-app-bar>",
       "",
-      "\t<UMain>",
-      "\t\t<UContainer>",
+      "\t<u-main>",
+      "\t\t<u-container>",
       "\t\t\t$0",
-      "\t\t</UContainer>",
-      "\t</UMain>",
+      "\t\t</u-container>",
+      "\t</u-main>",
       "",
-      "\t<UFooter>",
+      "\t<u-footer>",
       "\t\t<v-row justify=\"center\">",
       "\t\t\t<v-col cols=\"auto\">",
       "\t\t\t\t© ${2:2025} ${3:Your Company}",
       "\t\t\t</v-col>",
       "\t\t</v-row>",
-      "\t</UFooter>",
-      "</UApp>"
+      "\t</u-footer>",
+      "</u-app>"
     ],
     "description": "Basic app layout with header and footer"
   },
   "App Layout with Navigation": {
-    "prefix": ["uAppLayoutNav", "u-app-layout-nav"],
+    "prefix": [
+      "uAppLayoutNav",
+      "u-app-layout-nav"
+    ],
     "body": [
-      "<UApp>",
-      "\t<UNavigationDrawer v-model=\"drawer\">",
+      "<u-app>",
+      "\t<u-navigation-drawer v-model=\"drawer\">",
       "\t\t<!-- Navigation content -->",
       "\t\t$1",
-      "\t</UNavigationDrawer>",
+      "\t</u-navigation-drawer>",
       "",
-      "\t<UAppBar>",
-      "\t\t<UAppBarNavIcon @click=\"drawer = !drawer\" />",
-      "\t\t<UAppBarTitle>$2</UAppBarTitle>",
-      "\t</UAppBar>",
+      "\t<u-app-bar>",
+      "\t\t<u-app-bar-nav-icon @click=\"drawer = !drawer\" />",
+      "\t\t<u-app-bar-title>$2</u-app-bar-title>",
+      "\t</u-app-bar>",
       "",
-      "\t<UMain>",
-      "\t\t<UContainer>",
+      "\t<u-main>",
+      "\t\t<u-container>",
       "\t\t\t$0",
-      "\t\t</UContainer>",
-      "\t</UMain>",
-      "</UApp>"
+      "\t\t</u-container>",
+      "\t</u-main>",
+      "</u-app>"
     ],
     "description": "App layout with navigation drawer"
   },
   "Centered Layout": {
-    "prefix": ["uCenteredLayout", "u-centered-layout"],
+    "prefix": [
+      "uCenteredLayout",
+      "u-centered-layout"
+    ],
     "body": [
-      "<UContainer fluid class=\"fill-height\">",
+      "<u-container fluid class=\"fill-height\">",
       "\t<v-row align=\"center\" justify=\"center\">",
       "\t\t<v-col cols=\"12\" sm=\"8\" md=\"6\" lg=\"4\">",
       "\t\t\t$0",
       "\t\t</v-col>",
       "\t</v-row>",
-      "</UContainer>"
+      "</u-container>"
     ],
     "description": "Centered layout with responsive sizing"
   },
   "Grid 12 Column Layout": {
-    "prefix": ["uGrid12", "u-grid-12"],
+    "prefix": [
+      "uGrid12",
+      "u-grid-12"
+    ],
     "body": [
       "<v-row>",
       "\t<v-col v-for=\"i in 12\" :key=\"i\" cols=\"1\">",
@@ -199,7 +311,10 @@
     "description": "12 column grid layout"
   },
   "Grid 3 Column Layout": {
-    "prefix": ["uGrid3", "u-grid-3"],
+    "prefix": [
+      "uGrid3",
+      "u-grid-3"
+    ],
     "body": [
       "<v-row>",
       "\t<v-col cols=\"12\" md=\"4\">",
@@ -216,7 +331,10 @@
     "description": "3 column responsive grid"
   },
   "Grid 2 Column Layout": {
-    "prefix": ["uGrid2", "u-grid-2"],
+    "prefix": [
+      "uGrid2",
+      "u-grid-2"
+    ],
     "body": [
       "<v-row>",
       "\t<v-col cols=\"12\" md=\"6\">",
@@ -230,20 +348,30 @@
     "description": "2 column responsive grid"
   },
   "UFooter Component": {
-    "prefix": ["UFooter", "u-footer"],
-    "body": ["<UFooter>", "\t$0", "</UFooter>"],
+    "prefix": [
+      "UFooter",
+      "u-footer"
+    ],
+    "body": [
+      "<u-footer>",
+      "\t$0",
+      "</u-footer>"
+    ],
     "description": "Footer component"
   },
   "UFooter with props": {
-    "prefix": ["UFooterProps", "u-footer-props"],
+    "prefix": [
+      "UFooterProps",
+      "u-footer-props"
+    ],
     "body": [
-      "<UFooter",
+      "<u-footer",
       "\tapp",
       "\t:elevation=\"${1:4}\"",
       "\tcolor=\"${2:primary}\"",
       ">",
       "\t$0",
-      "</UFooter>"
+      "</u-footer>"
     ],
     "description": "Footer with common props"
   }

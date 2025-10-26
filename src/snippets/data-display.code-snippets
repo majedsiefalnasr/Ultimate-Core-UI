@@ -1,83 +1,115 @@
 {
   "UCard Component": {
-    "prefix": ["UCard", "u-card"],
-    "body": ["<UCard>", "\t$0", "</UCard>"],
+    "prefix": [
+      "UCard",
+      "u-card"
+    ],
+    "body": [
+      "<u-card>",
+      "\t$0",
+      "</u-card>"
+    ],
     "description": "Card component"
   },
   "UCard with title": {
-    "prefix": ["UCardTitle", "u-card-title"],
+    "prefix": [
+      "UCardTitle",
+      "u-card-title"
+    ],
     "body": [
-      "<UCard>",
-      "\t<UCardTitle>${1:Card Title}</UCardTitle>",
-      "\t<UCardText>",
+      "<u-card>",
+      "\t<u-card-title>${1:Card Title}</u-card-title>",
+      "\t<u-card-text>",
       "\t\t$0",
-      "\t</UCardText>",
-      "</UCard>"
+      "\t</u-card-text>",
+      "</u-card>"
     ],
     "description": "Card with title and text"
   },
   "UCard complete": {
-    "prefix": ["UCardComplete", "u-card-complete"],
+    "prefix": [
+      "UCardComplete",
+      "u-card-complete"
+    ],
     "body": [
-      "<UCard>",
-      "\t<UCardTitle>${1:Card Title}</UCardTitle>",
-      "\t<UCardSubtitle>${2:Subtitle}</UCardSubtitle>",
-      "\t<UCardText>",
+      "<u-card>",
+      "\t<u-card-title>${1:Card Title}</u-card-title>",
+      "\t<u-card-subtitle>${2:Subtitle}</u-card-subtitle>",
+      "\t<u-card-text>",
       "\t\t$3",
-      "\t</UCardText>",
-      "\t<UCardActions>",
-      "\t\t<UBtn>${4:Action}</UBtn>",
-      "\t</UCardActions>",
-      "</UCard>$0"
+      "\t</u-card-text>",
+      "\t<u-card-actions>",
+      "\t\t<u-btn>${4:Action}</u-btn>",
+      "\t</u-card-actions>",
+      "</u-card>$0"
     ],
     "description": "Complete card with all sections"
   },
   "UCard with image": {
-    "prefix": ["UCardImage", "u-card-image"],
+    "prefix": [
+      "UCardImage",
+      "u-card-image"
+    ],
     "body": [
-      "<UCard>",
-      "\t<UImg src=\"${1:image-url}\" height=\"${2:200}\" cover />",
-      "\t<UCardTitle>${3:Title}</UCardTitle>",
-      "\t<UCardText>",
+      "<u-card>",
+      "\t<u-img src=\"${1:image-url}\" height=\"${2:200}\" cover />",
+      "\t<u-card-title>${3:Title}</u-card-title>",
+      "\t<u-card-text>",
       "\t\t$0",
-      "\t</UCardText>",
-      "</UCard>"
+      "\t</u-card-text>",
+      "</u-card>"
     ],
     "description": "Card with image"
   },
   "UCard with props": {
-    "prefix": ["UCardProps", "u-card-props"],
+    "prefix": [
+      "UCardProps",
+      "u-card-props"
+    ],
     "body": [
-      "<UCard",
+      "<u-card",
       "\t:elevation=\"${1:2}\"",
       "\t:rounded=\"${2:true}\"",
       "\tcolor=\"${3:white}\"",
       ">",
       "\t$0",
-      "</UCard>"
+      "</u-card>"
     ],
     "description": "Card with props"
   },
   "UList Component": {
-    "prefix": ["UList", "u-list"],
-    "body": ["<UList>", "\t$0", "</UList>"],
+    "prefix": [
+      "UList",
+      "u-list"
+    ],
+    "body": [
+      "<u-list>",
+      "\t$0",
+      "</u-list>"
+    ],
     "description": "List component"
   },
   "UList with items": {
-    "prefix": ["UListItems", "u-list-items"],
+    "prefix": [
+      "UListItems",
+      "u-list-items"
+    ],
     "body": [
-      "<UList>",
-      "\t<UListItem title=\"${1:Item 1}\" />",
-      "\t<UListItem title=\"${2:Item 2}\" />",
-      "\t<UListItem title=\"${3:Item 3}\" />",
-      "</UList>$0"
+      "<u-list>",
+      "\t<u-list-item title=\"${1:Item 1}\" />",
+      "\t<u-list-item title=\"${2:Item 2}\" />",
+      "\t<u-list-item title=\"${3:Item 3}\" />",
+      "</u-list>$0"
     ],
     "description": "List with list items"
   },
   "UListItem with props": {
-    "prefix": ["UListItemProps", "u-list-item-props"],
+    "prefix": [
+      "UListItemProps",
+      "u-list-item-props"
+    ],
     "body": [
-      "<UListItem",
+      "<u-list-item",
       "\tprepend-icon=\"${1:mdi-home}\"",
       "\ttitle=\"${2:Title}\"",
       "\tsubtitle=\"${3:Subtitle}\"",
@@ -87,54 +119,71 @@
     "description": "List item with icon and subtitle"
   },
   "UListItem with avatar": {
-    "prefix": ["UListItemAvatar", "u-list-item-avatar"],
+    "prefix": [
+      "UListItemAvatar",
+      "u-list-item-avatar"
+    ],
     "body": [
-      "<UListItem>",
+      "<u-list-item>",
       "\t<template #prepend>",
-      "\t\t<UAvatar color=\"${1:primary}\">",
-      "\t\t\t<UIcon>${2:mdi-account}</UIcon>",
-      "\t\t</UAvatar>",
+      "\t\t<u-avatar color=\"${1:primary}\">",
+      "\t\t\t<u-icon>${2:mdi-account}</u-icon>",
+      "\t\t</u-avatar>",
       "\t</template>",
-      "\t<UListItemTitle>${3:Title}</UListItemTitle>",
-      "\t<UListItemSubtitle>${4:Subtitle}</UListItemSubtitle>",
-      "</UListItem>$0"
+      "\t<u-list-item-title>${3:Title}</u-list-item-title>",
+      "\t<u-list-item-subtitle>${4:Subtitle}</u-list-item-subtitle>",
+      "</u-list-item>$0"
     ],
     "description": "List item with avatar"
   },
   "UListGroup Component": {
-    "prefix": ["UListGroup", "u-list-group"],
+    "prefix": [
+      "UListGroup",
+      "u-list-group"
+    ],
     "body": [
-      "<UListGroup>",
+      "<u-list-group>",
       "\t<template #activator=\"{ props }\">",
-      "\t\t<UListItem v-bind=\"props\" title=\"${1:Group}\" />",
+      "\t\t<u-list-item v-bind=\"props\" title=\"${1:Group}\" />",
       "\t</template>",
       "",
-      "\t<UListItem title=\"${2:Item 1}\" />",
-      "\t<UListItem title=\"${3:Item 2}\" />",
-      "</UListGroup>$0"
+      "\t<u-list-item title=\"${2:Item 1}\" />",
+      "\t<u-list-item title=\"${3:Item 2}\" />",
+      "</u-list-group>$0"
     ],
     "description": "Collapsible list group"
   },
   "UTable Component": {
-    "prefix": ["UTable", "u-table"],
-    "body": ["<UTable :items=\"${1:items}\" :headers=\"${2:headers}\" />$0"],
+    "prefix": [
+      "UTable",
+      "u-table"
+    ],
+    "body": [
+      "<u-table :items=\"${1:items}\" :headers=\"${2:headers}\" />$0"
+    ],
     "description": "Simple table component"
   },
   "UTable with slots": {
-    "prefix": ["UTableSlots", "u-table-slots"],
+    "prefix": [
+      "UTableSlots",
+      "u-table-slots"
+    ],
     "body": [
-      "<UTable :items=\"${1:items}\" :headers=\"${2:headers}\">",
+      "<u-table :items=\"${1:items}\" :headers=\"${2:headers}\">",
       "\t<template #item.${3:column}=\"{ item }\">",
       "\t\t$0",
       "\t</template>",
-      "</UTable>"
+      "</u-table>"
     ],
     "description": "Table with custom column slot"
   },
   "UDataTable Component": {
-    "prefix": ["UDataTable", "u-data-table"],
+    "prefix": [
+      "UDataTable",
+      "u-data-table"
+    ],
     "body": [
-      "<UDataTable",
+      "<u-data-table",
       "\t:items=\"${1:items}\"",
       "\t:headers=\"${2:headers}\"",
       "\t:loading=\"${3:loading}\"",
@@ -143,9 +192,12 @@
     "description": "Data table component"
   },
   "UDataTable with search": {
-    "prefix": ["UDataTableSearch", "u-data-table-search"],
+    "prefix": [
+      "UDataTableSearch",
+      "u-data-table-search"
+    ],
     "body": [
-      "<UDataTable",
+      "<u-data-table",
       "\tv-model:search=\"${1:search}\"",
       "\t:items=\"${2:items}\"",
       "\t:headers=\"${3:headers}\"",
@@ -154,9 +206,12 @@
     "description": "Data table with search"
   },
   "UDataTable with selection": {
-    "prefix": ["UDataTableSelect", "u-data-table-select"],
+    "prefix": [
+      "UDataTableSelect",
+      "u-data-table-select"
+    ],
     "body": [
-      "<UDataTable",
+      "<u-data-table",
       "\tv-model=\"${1:selected}\"",
       "\t:items=\"${2:items}\"",
       "\t:headers=\"${3:headers}\"",
@@ -166,9 +221,12 @@
     "description": "Data table with row selection"
   },
   "UDataTable with pagination": {
-    "prefix": ["UDataTablePagination", "u-data-table-pagination"],
+    "prefix": [
+      "UDataTablePagination",
+      "u-data-table-pagination"
+    ],
     "body": [
-      "<UDataTable",
+      "<u-data-table",
       "\t:items=\"${1:items}\"",
       "\t:headers=\"${2:headers}\"",
       "\t:items-per-page=\"${3:10}\"",
@@ -179,113 +237,195 @@
     "description": "Data table with pagination"
   },
   "UChip Component": {
-    "prefix": ["UChip", "u-chip"],
-    "body": ["<UChip>$1</UChip>$0"],
+    "prefix": [
+      "UChip",
+      "u-chip"
+    ],
+    "body": [
+      "<u-chip>$1</u-chip>$0"
+    ],
     "description": "Chip component"
   },
   "UChip with props": {
-    "prefix": ["UChipProps", "u-chip-props"],
+    "prefix": [
+      "UChipProps",
+      "u-chip-props"
+    ],
     "body": [
-      "<UChip",
+      "<u-chip",
       "\tcolor=\"${1:primary}\"",
       "\tvariant=\"${2|elevated,flat,tonal,outlined,text,plain|}\"",
       "\tsize=\"${3|x-small,small,default,large,x-large|}\"",
       ">",
       "\t$4",
-      "</UChip>$0"
+      "</u-chip>$0"
     ],
     "description": "Chip with props"
   },
   "UChip closable": {
-    "prefix": ["UChipClosable", "u-chip-closable"],
-    "body": ["<UChip closable @click:close=\"${1:handleClose}\">", "\t$2", "</UChip>$0"],
+    "prefix": [
+      "UChipClosable",
+      "u-chip-closable"
+    ],
+    "body": [
+      "<u-chip closable @click:close=\"${1:handleClose}\">",
+      "\t$2",
+      "</u-chip>$0"
+    ],
     "description": "Closable chip"
   },
   "UChipGroup Component": {
-    "prefix": ["UChipGroup", "u-chip-group"],
+    "prefix": [
+      "UChipGroup",
+      "u-chip-group"
+    ],
     "body": [
-      "<UChipGroup v-model=\"${1:selected}\">",
-      "\t<UChip value=\"${2:chip1}\">${3:Chip 1}</UChip>",
-      "\t<UChip value=\"${4:chip2}\">${5:Chip 2}</UChip>",
-      "\t<UChip value=\"${6:chip3}\">${7:Chip 3}</UChip>",
-      "</UChipGroup>$0"
+      "<u-chip-group v-model=\"${1:selected}\">",
+      "\t<u-chip value=\"${2:chip1}\">${3:Chip 1}</u-chip>",
+      "\t<u-chip value=\"${4:chip2}\">${5:Chip 2}</u-chip>",
+      "\t<u-chip value=\"${6:chip3}\">${7:Chip 3}</u-chip>",
+      "</u-chip-group>$0"
     ],
     "description": "Chip group component"
   },
   "UBadge Component": {
-    "prefix": ["UBadge", "u-badge"],
-    "body": ["<UBadge content=\"${1:5}\" color=\"${2:error}\">", "\t$0", "</UBadge>"],
+    "prefix": [
+      "UBadge",
+      "u-badge"
+    ],
+    "body": [
+      "<u-badge content=\"${1:5}\" color=\"${2:error}\">",
+      "\t$0",
+      "</u-badge>"
+    ],
     "description": "Badge component"
   },
   "UBadge with icon": {
-    "prefix": ["UBadgeIcon", "u-badge-icon"],
+    "prefix": [
+      "UBadgeIcon",
+      "u-badge-icon"
+    ],
     "body": [
-      "<UBadge content=\"${1:5}\" color=\"${2:error}\">",
-      "\t<UIcon>${3:mdi-bell}</UIcon>",
-      "</UBadge>$0"
+      "<u-badge content=\"${1:5}\" color=\"${2:error}\">",
+      "\t<u-icon>${3:mdi-bell}</u-icon>",
+      "</u-badge>$0"
     ],
     "description": "Badge with icon"
   },
   "UBadge dot": {
-    "prefix": ["UBadgeDot", "u-badge-dot"],
-    "body": ["<UBadge dot color=\"${1:success}\">", "\t$0", "</UBadge>"],
+    "prefix": [
+      "UBadgeDot",
+      "u-badge-dot"
+    ],
+    "body": [
+      "<u-badge dot color=\"${1:success}\">",
+      "\t$0",
+      "</u-badge>"
+    ],
     "description": "Dot badge"
   },
   "UAvatar Component": {
-    "prefix": ["UAvatar", "u-avatar"],
-    "body": ["<UAvatar>", "\t$0", "</UAvatar>"],
+    "prefix": [
+      "UAvatar",
+      "u-avatar"
+    ],
+    "body": [
+      "<u-avatar>",
+      "\t$0",
+      "</u-avatar>"
+    ],
     "description": "Avatar component"
   },
   "UAvatar with image": {
-    "prefix": ["UAvatarImage", "u-avatar-image"],
-    "body": ["<UAvatar>", "\t<UImg src=\"${1:image-url}\" alt=\"${2:avatar}\" />", "</UAvatar>$0"],
+    "prefix": [
+      "UAvatarImage",
+      "u-avatar-image"
+    ],
+    "body": [
+      "<u-avatar>",
+      "\t<u-img src=\"${1:image-url}\" alt=\"${2:avatar}\" />",
+      "</u-avatar>$0"
+    ],
     "description": "Avatar with image"
   },
   "UAvatar with icon": {
-    "prefix": ["UAvatarIcon", "u-avatar-icon"],
+    "prefix": [
+      "UAvatarIcon",
+      "u-avatar-icon"
+    ],
     "body": [
-      "<UAvatar color=\"${1:primary}\">",
-      "\t<UIcon>${2:mdi-account}</UIcon>",
-      "</UAvatar>$0"
+      "<u-avatar color=\"${1:primary}\">",
+      "\t<u-icon>${2:mdi-account}</u-icon>",
+      "</u-avatar>$0"
     ],
     "description": "Avatar with icon"
   },
   "UAvatar with text": {
-    "prefix": ["UAvatarText", "u-avatar-text"],
-    "body": ["<UAvatar color=\"${1:primary}\">", "\t${2:AB}", "</UAvatar>$0"],
+    "prefix": [
+      "UAvatarText",
+      "u-avatar-text"
+    ],
+    "body": [
+      "<u-avatar color=\"${1:primary}\">",
+      "\t${2:AB}",
+      "</u-avatar>$0"
+    ],
     "description": "Avatar with text initials"
   },
   "UAvatar with size": {
-    "prefix": ["UAvatarSize", "u-avatar-size"],
-    "body": ["<UAvatar size=\"${1|x-small,small,default,large,x-large|}\">", "\t$0", "</UAvatar>"],
+    "prefix": [
+      "UAvatarSize",
+      "u-avatar-size"
+    ],
+    "body": [
+      "<u-avatar size=\"${1|x-small,small,default,large,x-large|}\">",
+      "\t$0",
+      "</u-avatar>"
+    ],
     "description": "Avatar with size"
   },
   "UIcon Component": {
-    "prefix": ["UIcon", "u-icon"],
-    "body": ["<UIcon>${1:mdi-home}</UIcon>$0"],
+    "prefix": [
+      "UIcon",
+      "u-icon"
+    ],
+    "body": [
+      "<u-icon>${1:mdi-home}</u-icon>$0"
+    ],
     "description": "Icon component"
   },
   "UIcon with props": {
-    "prefix": ["UIconProps", "u-icon-props"],
+    "prefix": [
+      "UIconProps",
+      "u-icon-props"
+    ],
     "body": [
-      "<UIcon",
+      "<u-icon",
       "\tcolor=\"${1:primary}\"",
       "\tsize=\"${2|x-small,small,default,large,x-large|}\"",
       ">",
       "\t${3:mdi-home}",
-      "</UIcon>$0"
+      "</u-icon>$0"
     ],
     "description": "Icon with props"
   },
   "UImg Component": {
-    "prefix": ["UImg", "u-img"],
-    "body": ["<UImg src=\"${1:image-url}\" alt=\"${2:description}\" />$0"],
+    "prefix": [
+      "UImg",
+      "u-img"
+    ],
+    "body": [
+      "<u-img src=\"${1:image-url}\" alt=\"${2:description}\" />$0"
+    ],
     "description": "Image component"
   },
   "UImg with cover": {
-    "prefix": ["UImgCover", "u-img-cover"],
+    "prefix": [
+      "UImgCover",
+      "u-img-cover"
+    ],
     "body": [
-      "<UImg",
+      "<u-img",
       "\tsrc=\"${1:image-url}\"",
       "\talt=\"${2:description}\"",
       "\theight=\"${3:300}\"",
@@ -295,9 +435,12 @@
     "description": "Image with cover and height"
   },
   "UImg with aspect ratio": {
-    "prefix": ["UImgAspect", "u-img-aspect"],
+    "prefix": [
+      "UImgAspect",
+      "u-img-aspect"
+    ],
     "body": [
-      "<UImg",
+      "<u-img",
       "\tsrc=\"${1:image-url}\"",
       "\talt=\"${2:description}\"",
       "\taspect-ratio=\"${3:16/9}\"",
@@ -306,53 +449,79 @@
     "description": "Image with aspect ratio"
   },
   "UCode Component": {
-    "prefix": ["UCode", "u-code"],
-    "body": ["<UCode>", "\t$0", "</UCode>"],
+    "prefix": [
+      "UCode",
+      "u-code"
+    ],
+    "body": [
+      "<u-code>",
+      "\t$0",
+      "</u-code>"
+    ],
     "description": "Code display component"
   },
   "UKbd Component": {
-    "prefix": ["UKbd", "u-kbd"],
-    "body": ["<UKbd>${1:Ctrl}</UKbd>$0"],
+    "prefix": [
+      "UKbd",
+      "u-kbd"
+    ],
+    "body": [
+      "<u-kbd>${1:Ctrl}</u-kbd>$0"
+    ],
     "description": "Keyboard key component"
   },
   "UEmptyState Component": {
-    "prefix": ["UEmptyState", "u-empty-state"],
+    "prefix": [
+      "UEmptyState",
+      "u-empty-state"
+    ],
     "body": [
-      "<UEmptyState",
+      "<u-empty-state",
       "\ticon=\"${1:mdi-inbox}\"",
       "\ttitle=\"${2:No data}\"",
       "\ttext=\"${3:There is no data to display}\"",
       ">",
       "\t<template #actions>",
-      "\t\t<UBtn color=\"primary\">${4:Action}</UBtn>",
+      "\t\t<u-btn color=\"primary\">${4:Action}</u-btn>",
       "\t</template>",
-      "</UEmptyState>$0"
+      "</u-empty-state>$0"
     ],
     "description": "Empty state component"
   },
   "UExpansionPanels Component": {
-    "prefix": ["UExpansionPanels", "u-expansion-panels"],
+    "prefix": [
+      "UExpansionPanels",
+      "u-expansion-panels"
+    ],
     "body": [
-      "<UExpansionPanels>",
-      "\t<UExpansionPanel>",
-      "\t\t<UExpansionPanelTitle>${1:Panel 1}</UExpansionPanelTitle>",
-      "\t\t<UExpansionPanelText>",
+      "<u-expansion-panels>",
+      "\t<u-expansion-panel>",
+      "\t\t<u-expansion-panel-title>${1:Panel 1}</u-expansion-panel-title>",
+      "\t\t<u-expansion-panel-text>",
       "\t\t\t$2",
-      "\t\t</UExpansionPanelText>",
-      "\t</UExpansionPanel>",
-      "\t<UExpansionPanel>",
-      "\t\t<UExpansionPanelTitle>${3:Panel 2}</UExpansionPanelTitle>",
-      "\t\t<UExpansionPanelText>",
+      "\t\t</u-expansion-panel-text>",
+      "\t</u-expansion-panel>",
+      "\t<u-expansion-panel>",
+      "\t\t<u-expansion-panel-title>${3:Panel 2}</u-expansion-panel-title>",
+      "\t\t<u-expansion-panel-text>",
       "\t\t\t$0",
-      "\t\t</UExpansionPanelText>",
-      "\t</UExpansionPanel>",
-      "</UExpansionPanels>"
+      "\t\t</u-expansion-panel-text>",
+      "\t</u-expansion-panel>",
+      "</u-expansion-panels>"
     ],
     "description": "Expansion panels component"
   },
   "UPagination Component": {
-    "prefix": ["UPagination", "u-pagination"],
-    "body": ["<UPagination", "\tv-model=\"${1:page}\"", "\t:length=\"${2:10}\"", "/>$0"],
+    "prefix": [
+      "UPagination",
+      "u-pagination"
+    ],
+    "body": [
+      "<u-pagination",
+      "\tv-model=\"${1:page}\"",
+      "\t:length=\"${2:10}\"",
+      "/>$0"
+    ],
     "description": "Pagination component"
   }
 }
