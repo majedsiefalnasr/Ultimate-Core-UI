@@ -1,4 +1,1 @@
-import UApp from './UApp.vue';
-
-export default UApp;
-export { UApp };
+export { default as UApp } from './UApp.vue';

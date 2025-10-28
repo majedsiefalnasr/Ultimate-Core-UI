@@ -1,4 +1,1 @@
-import UValidation from './UValidation.vue';
-
-export { UValidation };
-export default UValidation;
+export { default as UValidation } from './UValidation.vue';

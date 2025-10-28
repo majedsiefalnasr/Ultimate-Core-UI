@@ -1,4 +1,1 @@
-import UDivider from './UDivider.vue';
-
-export default UDivider;
-export { UDivider };
+export { default as UDivider } from './UDivider.vue';

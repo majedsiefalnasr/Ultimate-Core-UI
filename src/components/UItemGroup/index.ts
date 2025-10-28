@@ -1,5 +1,2 @@
-import UItem from './UItem.vue';
-import UItemGroup from './UItemGroup.vue';
-
-export default { UItemGroup, UItem };
-export { UItem, UItemGroup };
+export { default as UItem } from './UItem.vue';
+export { default as UItemGroup } from './UItemGroup.vue';

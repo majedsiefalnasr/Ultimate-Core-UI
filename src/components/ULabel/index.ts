@@ -1,4 +1,1 @@
-import ULabel from './ULabel.vue';
-
-export default ULabel;
-export { ULabel };
+export { default as ULabel } from './ULabel.vue';

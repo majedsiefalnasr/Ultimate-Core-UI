@@ -1,7 +1,4 @@
-import UTab from './UTab.vue';
-import UTabs from './UTabs.vue';
-import UTabsWindow from './UTabsWindow.vue';
-import UTabsWindowItem from './UTabsWindowItem.vue';
-
-export { UTab, UTabs, UTabsWindow, UTabsWindowItem };
-export default { UTab, UTabs, UTabsWindow, UTabsWindowItem };
+export { default as UTab } from './UTab.vue';
+export { default as UTabs } from './UTabs.vue';
+export { default as UTabsWindow } from './UTabsWindow.vue';
+export { default as UTabsWindowItem } from './UTabsWindowItem.vue';

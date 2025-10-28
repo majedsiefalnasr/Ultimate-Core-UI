@@ -1,6 +1,3 @@
-import UBanner from './UBanner.vue';
-import UBannerActions from './UBannerActions.vue';
-import UBannerText from './UBannerText.vue';
-
-export default { UBanner, UBannerActions, UBannerText };
-export { UBanner, UBannerActions, UBannerText };
+export { default as UBanner } from './UBanner.vue';
+export { default as UBannerActions } from './UBannerActions.vue';
+export { default as UBannerText } from './UBannerText.vue';

@@ -1,18 +1,7 @@
-import UDataTable from './UDataTable.vue';
-import UDataTableFooter from './UDataTableFooter.vue';
-import UDataTableHeaders from './UDataTableHeaders.vue';
-import UDataTableRow from './UDataTableRow.vue';
-import UDataTableRows from './UDataTableRows.vue';
-import UDataTableServer from './UDataTableServer.vue';
-import UDataTableVirtual from './UDataTableVirtual.vue';
-
-export default UDataTable;
-export {
-  UDataTable,
-  UDataTableFooter,
-  UDataTableHeaders,
-  UDataTableRow,
-  UDataTableRows,
-  UDataTableServer,
-  UDataTableVirtual,
-};
+export { default as UDataTable } from './UDataTable.vue';
+export { default as UDataTableFooter } from './UDataTableFooter.vue';
+export { default as UDataTableHeaders } from './UDataTableHeaders.vue';
+export { default as UDataTableRow } from './UDataTableRow.vue';
+export { default as UDataTableRows } from './UDataTableRows.vue';
+export { default as UDataTableServer } from './UDataTableServer.vue';
+export { default as UDataTableVirtual } from './UDataTableVirtual.vue';

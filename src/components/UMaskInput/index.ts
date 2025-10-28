@@ -1,4 +1,1 @@
-import UMaskInput from './UMaskInput.vue';
-
-export default UMaskInput;
-export { UMaskInput };
+export { default as UMaskInput } from './UMaskInput.vue';

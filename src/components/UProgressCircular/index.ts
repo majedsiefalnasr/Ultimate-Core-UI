@@ -1,4 +1,1 @@
-import UProgressCircular from './UProgressCircular.vue';
-
-export default UProgressCircular;
-export { UProgressCircular };
+export { default as UProgressCircular } from './UProgressCircular.vue';

@@ -1,4 +1,1 @@
-import UBtn from './UBtn.vue';
-
-export default UBtn;
-export { UBtn };
+export { default as UBtn } from './UBtn.vue';

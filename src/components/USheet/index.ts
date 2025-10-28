@@ -1,4 +1,1 @@
-import USheet from './USheet.vue';
-
-export { USheet };
-export default USheet;
+export { default as USheet } from './USheet.vue';

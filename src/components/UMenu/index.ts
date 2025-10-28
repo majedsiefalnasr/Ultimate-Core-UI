@@ -1,3 +1,1 @@
-import UMenu from './UMenu.vue';
-export { UMenu };
-export default UMenu;
+export { default as UMenu } from './UMenu.vue';

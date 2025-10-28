@@ -1,8 +1,7 @@
-// import UBtn from './UBtn.vue'
 import type { Meta, StoryFn } from '@storybook/vue3';
 import { ref, watch } from 'vue';
 
-import UBtn from './index';
+import { UBtn } from './index';
 
 interface ComponentArgs {
   density?: 'default' | 'comfortable' | 'compact';

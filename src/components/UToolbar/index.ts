@@ -1,6 +1,3 @@
-import UToolbar from './UToolbar.vue';
-import UToolbarItems from './UToolbarItems.vue';
-import UToolbarTitle from './UToolbarTitle.vue';
-
-export { UToolbar, UToolbarItems, UToolbarTitle };
-export default { UToolbar, UToolbarItems, UToolbarTitle };
+export { default as UToolbar } from './UToolbar.vue';
+export { default as UToolbarItems } from './UToolbarItems.vue';
+export { default as UToolbarTitle } from './UToolbarTitle.vue';

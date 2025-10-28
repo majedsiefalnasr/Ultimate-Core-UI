@@ -1,4 +1,1 @@
-import USnackbarQueue from './USnackbarQueue.vue';
-
-export { USnackbarQueue };
-export default USnackbarQueue;
+export { default as USnackbarQueue } from './USnackbarQueue.vue';

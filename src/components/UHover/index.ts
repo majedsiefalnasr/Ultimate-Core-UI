@@ -1,4 +1,1 @@
-import UHover from './UHover.vue';
-
-export default UHover;
-export { UHover };
+export { default as UHover } from './UHover.vue';

@@ -1,4 +1,1 @@
-import UNoSsr from './UNoSsr.vue';
-
-export default UNoSsr;
-export { UNoSsr };
+export { default as UNoSsr } from './UNoSsr.vue';

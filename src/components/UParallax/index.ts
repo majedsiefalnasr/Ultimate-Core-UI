@@ -1,4 +1,1 @@
-import UParallax from './UParallax.vue';
-
-export default UParallax;
-export { UParallax };
+export { default as UParallax } from './UParallax.vue';

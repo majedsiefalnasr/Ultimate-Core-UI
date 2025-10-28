@@ -1,4 +1,1 @@
-import UPullToRefresh from './UPullToRefresh.vue';
-
-export default UPullToRefresh;
-export { UPullToRefresh };
+export { default as UPullToRefresh } from './UPullToRefresh.vue';

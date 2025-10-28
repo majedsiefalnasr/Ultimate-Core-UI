@@ -1,4 +1,1 @@
-import UKbd from './UKbd.vue';
-
-export default UKbd;
-export { UKbd };
+export { default as UKbd } from './UKbd.vue';

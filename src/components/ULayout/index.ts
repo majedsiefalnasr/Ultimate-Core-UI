@@ -1,5 +1,2 @@
-import ULayout from './ULayout.vue';
-import ULayoutItem from './ULayoutItem.vue';
-
-export default { ULayout, ULayoutItem };
-export { ULayout, ULayoutItem };
+export { default as ULayout } from './ULayout.vue';
+export { default as ULayoutItem } from './ULayoutItem.vue';

@@ -1,4 +1,1 @@
-import UInfiniteScroll from './UInfiniteScroll.vue';
-
-export default UInfiniteScroll;
-export { UInfiniteScroll };
+export { default as UInfiniteScroll } from './UInfiniteScroll.vue';

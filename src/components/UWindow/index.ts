@@ -1,5 +1,2 @@
-import UWindow from './UWindow.vue';
-import UWindowItem from './UWindowItem.vue';
-
-export { UWindow, UWindowItem };
-export default { UWindow, UWindowItem };
+export { default as UWindow } from './UWindow.vue';
+export { default as UWindowItem } from './UWindowItem.vue';

@@ -1,4 +1,1 @@
-import UOtpInput from './UOtpInput.vue';
-
-export default UOtpInput;
-export { UOtpInput };
+export { default as UOtpInput } from './UOtpInput.vue';

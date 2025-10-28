@@ -1,23 +1,6 @@
-import UDatePicker from './UDatePicker.vue';
-import UDatePickerControls from './UDatePickerControls.vue';
-import UDatePickerHeader from './UDatePickerHeader.vue';
-import UDatePickerMonth from './UDatePickerMonth.vue';
-import UDatePickerMonths from './UDatePickerMonths.vue';
-import UDatePickerYears from './UDatePickerYears.vue';
-
-export default {
-  UDatePicker,
-  UDatePickerControls,
-  UDatePickerHeader,
-  UDatePickerMonth,
-  UDatePickerMonths,
-  UDatePickerYears,
-};
-export {
-  UDatePicker,
-  UDatePickerControls,
-  UDatePickerHeader,
-  UDatePickerMonth,
-  UDatePickerMonths,
-  UDatePickerYears,
-};
+export { default as UDatePicker } from './UDatePicker.vue';
+export { default as UDatePickerControls } from './UDatePickerControls.vue';
+export { default as UDatePickerHeader } from './UDatePickerHeader.vue';
+export { default as UDatePickerMonth } from './UDatePickerMonth.vue';
+export { default as UDatePickerMonths } from './UDatePickerMonths.vue';
+export { default as UDatePickerYears } from './UDatePickerYears.vue';

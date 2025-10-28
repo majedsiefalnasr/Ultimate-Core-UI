@@ -1,7 +1,4 @@
-import UExpansionPanel from './UExpansionPanel.vue';
-import UExpansionPanels from './UExpansionPanels.vue';
-import UExpansionPanelText from './UExpansionPanelText.vue';
-import UExpansionPanelTitle from './UExpansionPanelTitle.vue';
-
-export default { UExpansionPanel, UExpansionPanels, UExpansionPanelText, UExpansionPanelTitle };
-export { UExpansionPanel, UExpansionPanels, UExpansionPanelText, UExpansionPanelTitle };
+export { default as UExpansionPanel } from './UExpansionPanel.vue';
+export { default as UExpansionPanels } from './UExpansionPanels.vue';
+export { default as UExpansionPanelText } from './UExpansionPanelText.vue';
+export { default as UExpansionPanelTitle } from './UExpansionPanelTitle.vue';

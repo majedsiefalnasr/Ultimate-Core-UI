@@ -1,4 +1,1 @@
-import UProgressLinear from './UProgressLinear.vue';
-
-export default UProgressLinear;
-export { UProgressLinear };
+export { default as UProgressLinear } from './UProgressLinear.vue';

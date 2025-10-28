@@ -1,5 +1,2 @@
-import UTimeline from './UTimeline.vue';
-import UTimelineItem from './UTimelineItem.vue';
-
-export { UTimeline, UTimelineItem };
-export default { UTimeline, UTimelineItem };
+export { default as UTimeline } from './UTimeline.vue';
+export { default as UTimelineItem } from './UTimelineItem.vue';

@@ -1,4 +1,1 @@
-import UInput from './UInput.vue';
-
-export default UInput;
-export { UInput };
+export { default as UInput } from './UInput.vue';

@@ -1,4 +1,1 @@
-import UAvatar from './UAvatar.vue';
-
-export default UAvatar;
-export { UAvatar };
+export { default as UAvatar } from './UAvatar.vue';

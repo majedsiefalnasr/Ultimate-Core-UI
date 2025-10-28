@@ -1,4 +1,1 @@
-import URating from './URating.vue';
-
-export { URating };
-export default URating;
+export { default as URating } from './URating.vue';

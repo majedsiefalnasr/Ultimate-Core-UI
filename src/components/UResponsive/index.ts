@@ -1,4 +1,1 @@
-import UResponsive from './UResponsive.vue';
-
-export { UResponsive };
-export default UResponsive;
+export { default as UResponsive } from './UResponsive.vue';

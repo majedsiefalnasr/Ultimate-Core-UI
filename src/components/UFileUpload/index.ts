@@ -1,4 +1,1 @@
-import UFileUpload from './UFileUpload.vue';
-
-export default UFileUpload;
-export { UFileUpload };
+export { default as UFileUpload } from './UFileUpload.vue';

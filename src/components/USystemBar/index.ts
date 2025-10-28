@@ -1,4 +1,1 @@
-import USystemBar from './USystemBar.vue';
-
-export { USystemBar };
-export default USystemBar;
+export { default as USystemBar } from './USystemBar.vue';

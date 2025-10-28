@@ -1,5 +1,2 @@
-import USlideGroup from './USlideGroup.vue';
-import USlideGroupItem from './USlideGroupItem.vue';
-
-export default { USlideGroup, USlideGroupItem };
-export { USlideGroup, USlideGroupItem };
+export { default as USlideGroup } from './USlideGroup.vue';
+export { default as USlideGroupItem } from './USlideGroupItem.vue';

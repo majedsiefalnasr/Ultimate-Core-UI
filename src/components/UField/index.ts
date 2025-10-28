@@ -1,5 +1,2 @@
-import UField from './UField.vue';
-import UFieldLabel from './UFieldLabel.vue';
-
-export default { UField, UFieldLabel };
-export { UField, UFieldLabel };
+export { default as UField } from './UField.vue';
+export { default as UFieldLabel } from './UFieldLabel.vue';

@@ -1,4 +1,1 @@
-import UOverlay from './UOverlay.vue';
-
-export default UOverlay;
-export { UOverlay };
+export { default as UOverlay } from './UOverlay.vue';

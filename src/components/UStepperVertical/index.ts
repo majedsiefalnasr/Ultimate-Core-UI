@@ -1,4 +1,1 @@
-import UStepperVertical from './UStepperVertical.vue';
-
-export default UStepperVertical;
-export { UStepperVertical };
+export { default as UStepperVertical } from './UStepperVertical.vue';

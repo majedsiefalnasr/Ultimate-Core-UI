@@ -1,5 +1,2 @@
-import UCheckbox from './UCheckbox.vue';
-import UCheckboxBtn from './UCheckboxBtn.vue';
-
-export default { UCheckbox, UCheckboxBtn };
-export { UCheckbox, UCheckboxBtn };
+export { default as UCheckbox } from './UCheckbox.vue';
+export { default as UCheckboxBtn } from './UCheckboxBtn.vue';

@@ -1,4 +1,1 @@
-import URadio from './URadio.vue';
-
-export default URadio;
-export { URadio };
+export { default as URadio } from './URadio.vue';

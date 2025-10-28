@@ -1,32 +1,9 @@
-import UList from './UList.vue';
-import UListGroup from './UListGroup.vue';
-import UListImg from './UListImg.vue';
-import UListItem from './UListItem.vue';
-import UListItemAction from './UListItemAction.vue';
-import UListItemMedia from './UListItemMedia.vue';
-import UListItemSubtitle from './UListItemSubtitle.vue';
-import UListItemTitle from './UListItemTitle.vue';
-import UListSubheader from './UListSubheader.vue';
-
-export default {
-  UList,
-  UListGroup,
-  UListImg,
-  UListItem,
-  UListItemAction,
-  UListItemMedia,
-  UListItemSubtitle,
-  UListItemTitle,
-  UListSubheader,
-};
-export {
-  UList,
-  UListGroup,
-  UListImg,
-  UListItem,
-  UListItemAction,
-  UListItemMedia,
-  UListItemSubtitle,
-  UListItemTitle,
-  UListSubheader,
-};
+export { default as UList } from './UList.vue';
+export { default as UListGroup } from './UListGroup.vue';
+export { default as UListImg } from './UListImg.vue';
+export { default as UListItem } from './UListItem.vue';
+export { default as UListItemAction } from './UListItemAction.vue';
+export { default as UListItemMedia } from './UListItemMedia.vue';
+export { default as UListItemSubtitle } from './UListItemSubtitle.vue';
+export { default as UListItemTitle } from './UListItemTitle.vue';
+export { default as UListSubheader } from './UListSubheader.vue';

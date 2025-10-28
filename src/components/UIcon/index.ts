@@ -1,4 +1,1 @@
-import UIcon from './UIcon.vue';
-
-export default UIcon;
-export { UIcon };
+export { default as UIcon } from './UIcon.vue';

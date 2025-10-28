@@ -1,5 +1,17 @@
-// Auto-generated index file for component exports
-// Do not modify this file directly.
+/**
+ * @module @ultimate/core-ui/components
+ * @description Barrel export for all Ultimate Core UI components.
+ * This file provides centralized access to all components in the library.
+ *
+ * @example
+ * ```ts
+ * // Import individual components
+ * import { UBtn, UAlert, UCard } from '@ultimate/core-ui/components';
+ *
+ * // Import multiple components
+ * import { UTextField, USelect, UAutocomplete } from '@ultimate/core-ui/components';
+ * ```
+ */
 
 export * from './Transitions';
 export * from './UAlert';
@@ -96,6 +108,7 @@ export * from './UTabs';
 export * from './UTextarea';
 export * from './UTextField';
 export * from './UThemeProvider';
+export * from './UTimeline';
 export * from './UTimePicker';
 export * from './UToolbar';
 export * from './UTooltip';

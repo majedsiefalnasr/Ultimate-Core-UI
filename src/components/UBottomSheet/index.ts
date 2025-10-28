@@ -1,4 +1,1 @@
-import UBottomSheet from './UBottomSheet.vue';
-
-export default UBottomSheet;
-export { UBottomSheet };
+export { default as UBottomSheet } from './UBottomSheet.vue';

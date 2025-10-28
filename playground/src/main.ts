@@ -9,6 +9,7 @@ import * as directives from 'vuetify/directives';
 
 import 'vuetify/styles';
 import App from './App.vue';
+import './main.scss';
 
 // Include Material Design Icons font for the playground preview
 import '@mdi/font/css/materialdesignicons.css';
@@ -18,6 +19,9 @@ import UltimateCoreUI from '@ultimate/core-ui';
 const vuetify = createVuetify({
   components,
   directives,
+  theme: {
+    defaultTheme: 'light',
+  },
 });
 
 const app = createApp(App);

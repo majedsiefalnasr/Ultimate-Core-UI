@@ -1,4 +1,1 @@
-import UBtnGroup from './UBtnGroup.vue';
-
-export default UBtnGroup;
-export { UBtnGroup };
+export { default as UBtnGroup } from './UBtnGroup.vue';

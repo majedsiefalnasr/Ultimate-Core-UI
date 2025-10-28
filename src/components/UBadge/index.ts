@@ -1,4 +1,1 @@
-import UBadge from './UBadge.vue';
-
-export default UBadge;
-export { UBadge };
+export { default as UBadge } from './UBadge.vue';

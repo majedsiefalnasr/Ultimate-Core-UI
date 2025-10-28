@@ -1,4 +1,1 @@
-import URangeSlider from './URangeSlider.vue';
-
-export default URangeSlider;
-export { URangeSlider };
+export { default as URangeSlider } from './URangeSlider.vue';

@@ -1,4 +1,1 @@
-import UTable from './UTable.vue';
-
-export { UTable };
-export default UTable;
+export { default as UTable } from './UTable.vue';

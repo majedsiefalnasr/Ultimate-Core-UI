@@ -1,7 +1,4 @@
-import UCol from './UCol.vue';
-import UContainer from './UContainer.vue';
-import URow from './URow.vue';
-import USpacer from './USpacer.vue';
-
-export default { UCol, UContainer, URow, USpacer };
-export { UCol, UContainer, URow, USpacer };
+export { default as UCol } from './UCol.vue';
+export { default as UContainer } from './UContainer.vue';
+export { default as URow } from './URow.vue';
+export { default as USpacer } from './USpacer.vue';

@@ -1,4 +1,1 @@
-import UTextarea from './UTextarea.vue';
-
-export { UTextarea };
-export default UTextarea;
+export { default as UTextarea } from './UTextarea.vue';

@@ -1,23 +1,6 @@
-import UStepper from './UStepper.vue';
-import UStepperActions from './UStepperActions.vue';
-import UStepperHeader from './UStepperHeader.vue';
-import UStepperItem from './UStepperItem.vue';
-import UStepperWindow from './UStepperWindow.vue';
-import UStepperWindowItem from './UStepperWindowItem.vue';
-
-export {
-  UStepper,
-  UStepperActions,
-  UStepperHeader,
-  UStepperItem,
-  UStepperWindow,
-  UStepperWindowItem,
-};
-export default {
-  UStepper,
-  UStepperActions,
-  UStepperHeader,
-  UStepperItem,
-  UStepperWindow,
-  UStepperWindowItem,
-};
+export { default as UStepper } from './UStepper.vue';
+export { default as UStepperActions } from './UStepperActions.vue';
+export { default as UStepperHeader } from './UStepperHeader.vue';
+export { default as UStepperItem } from './UStepperItem.vue';
+export { default as UStepperWindow } from './UStepperWindow.vue';
+export { default as UStepperWindowItem } from './UStepperWindowItem.vue';

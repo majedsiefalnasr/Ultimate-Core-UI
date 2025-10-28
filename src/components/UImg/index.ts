@@ -1,4 +1,1 @@
-import UImg from './UImg.vue';
-
-export { UImg };
-export default UImg;
+export { default as UImg } from './UImg.vue';

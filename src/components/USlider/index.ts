@@ -1,4 +1,1 @@
-import USlider from './USlider.vue';
-
-export default USlider;
-export { USlider };
+export { default as USlider } from './USlider.vue';

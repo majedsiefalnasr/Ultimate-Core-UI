@@ -1,4 +1,1 @@
-import UAutocomplete from './UAutocomplete.vue';
-
-export default UAutocomplete;
-export { UAutocomplete };
+export { default as UAutocomplete } from './UAutocomplete.vue';

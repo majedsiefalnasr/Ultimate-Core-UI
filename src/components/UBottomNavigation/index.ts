@@ -1,4 +1,1 @@
-import UBottomNavigation from './UBottomNavigation.vue';
-
-export default UBottomNavigation;
-export { UBottomNavigation };
+export { default as UBottomNavigation } from './UBottomNavigation.vue';

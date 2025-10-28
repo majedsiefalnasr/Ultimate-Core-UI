@@ -1,4 +1,1 @@
-import UConfirmEdit from './UConfirmEdit.vue';
-
-export default UConfirmEdit;
-export { UConfirmEdit };
+export { default as UConfirmEdit } from './UConfirmEdit.vue';

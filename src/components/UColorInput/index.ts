@@ -1,4 +1,1 @@
-import UColorInput from './UColorInput.vue';
-
-export default UColorInput;
-export { UColorInput };
+export { default as UColorInput } from './UColorInput.vue';

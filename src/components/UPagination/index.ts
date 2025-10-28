@@ -1,4 +1,1 @@
-import UPagination from './UPagination.vue';
-
-export default UPagination;
-export { UPagination };
+export { default as UPagination } from './UPagination.vue';

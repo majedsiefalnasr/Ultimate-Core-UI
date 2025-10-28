@@ -1,4 +1,1 @@
-import UDefaultsProvider from './UDefaultsProvider.vue';
-
-export default UDefaultsProvider;
-export { UDefaultsProvider };
+export { default as UDefaultsProvider } from './UDefaultsProvider.vue';

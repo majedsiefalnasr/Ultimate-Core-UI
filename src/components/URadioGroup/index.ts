@@ -1,4 +1,1 @@
-import URadioGroup from './URadioGroup.vue';
-
-export default URadioGroup;
-export { URadioGroup };
+export { default as URadioGroup } from './URadioGroup.vue';

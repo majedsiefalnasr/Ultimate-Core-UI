@@ -1,4 +1,1 @@
-import UBtnToggle from './UBtnToggle.vue';
-
-export default UBtnToggle;
-export { UBtnToggle };
+export { default as UBtnToggle } from './UBtnToggle.vue';

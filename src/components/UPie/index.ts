@@ -1,4 +1,1 @@
-import UPie from './UPie.vue';
-
-export default UPie;
-export { UPie };
+export { default as UPie } from './UPie.vue';

@@ -1,4 +1,1 @@
-import UTextField from './UTextField.vue';
-
-export { UTextField };
-export default UTextField;
+export { default as UTextField } from './UTextField.vue';

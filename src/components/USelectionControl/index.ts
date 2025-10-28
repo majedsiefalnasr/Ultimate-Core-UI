@@ -1,4 +1,1 @@
-import USelectionControl from './USelectionControl.vue';
-
-export { USelectionControl };
-export default USelectionControl;
+export { default as USelectionControl } from './USelectionControl.vue';

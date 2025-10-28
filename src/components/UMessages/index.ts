@@ -1,4 +1,1 @@
-import UMessages from './UMessages.vue';
-
-export default UMessages;
-export { UMessages };
+export { default as UMessages } from './UMessages.vue';

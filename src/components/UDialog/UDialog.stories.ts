@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 import { UBtn, UCard } from '@ultimate/core-ui/components';
 
-import UDialog from './index';
+import { UDialog } from './index';
 
 interface ComponentArgs {
   modelValue?: boolean;

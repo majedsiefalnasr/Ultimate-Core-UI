@@ -1,5 +1,2 @@
-import UCarousel from './UCarousel.vue';
-import UCarouselItem from './UCarouselItem.vue';
-
-export default { UCarousel, UCarouselItem };
-export { UCarousel, UCarouselItem };
+export { default as UCarousel } from './UCarousel.vue';
+export { default as UCarouselItem } from './UCarouselItem.vue';

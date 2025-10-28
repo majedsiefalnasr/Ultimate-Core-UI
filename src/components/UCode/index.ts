@@ -1,4 +1,1 @@
-import UCode from './UCode.vue';
-
-export default UCode;
-export { UCode };
+export { default as UCode } from './UCode.vue';

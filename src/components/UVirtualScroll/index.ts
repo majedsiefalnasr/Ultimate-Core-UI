@@ -1,4 +1,1 @@
-import UVirtualScroll from './UVirtualScroll.vue';
-
-export { UVirtualScroll };
-export default UVirtualScroll;
+export { default as UVirtualScroll } from './UVirtualScroll.vue';

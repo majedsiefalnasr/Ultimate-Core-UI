@@ -1,4 +1,1 @@
-import UNavigationDrawer from './UNavigationDrawer.vue';
-
-export default UNavigationDrawer;
-export { UNavigationDrawer };
+export { default as UNavigationDrawer } from './UNavigationDrawer.vue';

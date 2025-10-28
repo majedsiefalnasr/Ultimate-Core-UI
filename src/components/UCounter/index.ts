@@ -1,4 +1,1 @@
-import UCounter from './UCounter.vue';
-
-export default UCounter;
-export { UCounter };
+export { default as UCounter } from './UCounter.vue';

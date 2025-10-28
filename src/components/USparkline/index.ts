@@ -1,4 +1,1 @@
-import USparkline from './USparkline.vue';
-
-export { USparkline };
-export default USparkline;
+export { default as USparkline } from './USparkline.vue';

@@ -1,4 +1,1 @@
-import UHotkey from './UHotkey.vue';
-
-export default UHotkey;
-export { UHotkey };
+export { default as UHotkey } from './UHotkey.vue';

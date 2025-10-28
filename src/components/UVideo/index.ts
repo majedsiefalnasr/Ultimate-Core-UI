@@ -1,4 +1,1 @@
-import UVideo from './UVideo.vue';
-
-export default UVideo;
-export { UVideo };
+export { default as UVideo } from './UVideo.vue';

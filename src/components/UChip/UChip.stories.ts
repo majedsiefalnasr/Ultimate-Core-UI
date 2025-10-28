@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 
-import UChip from './index';
+import { UChip } from './index';
 
 interface ComponentArgs {
   // Theme color or CSS color

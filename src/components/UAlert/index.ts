@@ -1,5 +1,2 @@
-import UAlert from './UAlert.vue';
-import UAlertTitle from './UAlertTitle.vue';
-
-export default { UAlert, UAlertTitle };
-export { UAlert, UAlertTitle };
+export { default as UAlert } from './UAlert.vue';
+export { default as UAlertTitle } from './UAlertTitle.vue';

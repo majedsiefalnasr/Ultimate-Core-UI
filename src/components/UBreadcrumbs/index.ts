@@ -1,6 +1,3 @@
-import UBreadcrumbs from './UBreadcrumbs.vue';
-import VBreadcrumbsDivider from './VBreadcrumbsDivider.vue';
-import VBreadcrumbsItem from './VBreadcrumbsItem.vue';
-
-export default { UBreadcrumbs, VBreadcrumbsDivider, VBreadcrumbsItem };
-export { UBreadcrumbs, VBreadcrumbsDivider, VBreadcrumbsItem };
+export { default as UBreadcrumbs } from './UBreadcrumbs.vue';
+export { default as VBreadcrumbsDivider } from './VBreadcrumbsDivider.vue';
+export { default as VBreadcrumbsItem } from './VBreadcrumbsItem.vue';

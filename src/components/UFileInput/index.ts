@@ -1,4 +1,1 @@
-import UFileInput from './UFileInput.vue';
-
-export { UFileInput };
-export default UFileInput;
+export { default as UFileInput } from './UFileInput.vue';

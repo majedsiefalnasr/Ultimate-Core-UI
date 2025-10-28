@@ -1,4 +1,1 @@
-import UDateInput from './UDateInput.vue';
-
-export default UDateInput;
-export { UDateInput };
+export { default as UDateInput } from './UDateInput.vue';

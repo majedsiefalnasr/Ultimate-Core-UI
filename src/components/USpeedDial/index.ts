@@ -1,4 +1,1 @@
-import USpeedDial from './USpeedDial.vue';
-
-export { USpeedDial };
-export default USpeedDial;
+export { default as USpeedDial } from './USpeedDial.vue';

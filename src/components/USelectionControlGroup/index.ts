@@ -1,4 +1,1 @@
-import USelectionControlGroup from './USelectionControlGroup.vue';
-
-export { USelectionControlGroup };
-export default USelectionControlGroup;
+export { default as USelectionControlGroup } from './USelectionControlGroup.vue';

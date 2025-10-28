@@ -1,4 +1,1 @@
-import UEmptyState from './UEmptyState.vue';
-
-export default UEmptyState;
-export { UEmptyState };
+export { default as UEmptyState } from './UEmptyState.vue';

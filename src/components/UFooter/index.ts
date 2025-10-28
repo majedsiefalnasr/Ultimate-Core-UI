@@ -1,4 +1,1 @@
-import UFooter from './UFooter.vue';
-
-export default UFooter;
-export { UFooter };
+export { default as UFooter } from './UFooter.vue';

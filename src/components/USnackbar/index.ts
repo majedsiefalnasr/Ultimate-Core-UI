@@ -1,4 +1,1 @@
-import USnackbar from './USnackbar.vue';
-
-export { USnackbar };
-export default USnackbar;
+export { default as USnackbar } from './USnackbar.vue';

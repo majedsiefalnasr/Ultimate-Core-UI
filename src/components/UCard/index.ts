@@ -1,8 +1,5 @@
-import UCard from './UCard.vue';
-import UCardActions from './UCardActions.vue';
-import UCardSubtitle from './UCardSubtitle.vue';
-import UCardText from './UCardText.vue';
-import UCardTitle from './UCardTitle.vue';
-
-export default { UCard, UCardActions, UCardSubtitle, UCardText, UCardTitle };
-export { UCard, UCardActions, UCardSubtitle, UCardText, UCardTitle };
+export { default as UCard } from './UCard.vue';
+export { default as UCardActions } from './UCardActions.vue';
+export { default as UCardSubtitle } from './UCardSubtitle.vue';
+export { default as UCardText } from './UCardText.vue';
+export { default as UCardTitle } from './UCardTitle.vue';
