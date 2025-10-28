@@ -6,7 +6,7 @@
    * @extends VScaleTransition
    */
   import { VScaleTransition } from 'vuetify/components';
-  import './UScaleTransition.scss';
+  import './Transitions.scss';
 
   // Component options
   defineOptions({ name: 'UScaleTransition', inheritAttrs: false });

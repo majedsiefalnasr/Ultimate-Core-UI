@@ -6,7 +6,7 @@
    * @extends VExpandTransition
    */
   import { VExpandTransition } from 'vuetify/components';
-  import './UExpandTransition.scss';
+  import './Transitions.scss';
 
   // Component options
   defineOptions({ name: 'UExpandTransition', inheritAttrs: false });

@@ -6,7 +6,7 @@
    * @extends VSlideYTransition
    */
   import { VSlideYTransition } from 'vuetify/components';
-  import './USlideYTransition.scss';
+  import './Transitions.scss';
 
   // Component options
   defineOptions({ name: 'USlideYTransition', inheritAttrs: false });

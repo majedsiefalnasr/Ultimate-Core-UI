@@ -6,7 +6,7 @@
    * @extends VFadeTransition
    */
   import { VFadeTransition } from 'vuetify/components';
-  import './UFadeTransition.scss';
+  import './Transitions.scss';
 
   // Component options
   defineOptions({ name: 'UFadeTransition', inheritAttrs: false });
