@@ -5,6 +5,7 @@
    * @component
    * @extends VRadioGroup
    */
+  import { computed, useAttrs, useId } from 'vue';
   import { VRadioGroup } from 'vuetify/components';
   import './URadioGroup.scss';
 
@@ -13,10 +14,25 @@
 
   // Define slots with generic props
   defineSlots<{ [key: string]: (props: Record<string, unknown>) => unknown }>();
+
+  // Get attrs to check for id
+  const attrs = useAttrs();
+
+  // Generate unique ID if not provided
+  const generatedId = useId();
+
+  // Compute final attributes with ID fallback
+  const computedAttrs = computed(() => {
+    const id = attrs.id as string | undefined;
+    return {
+      ...attrs,
+      id: id && id.trim() !== '' ? id : generatedId,
+    };
+  });
 </script>
 
 <template>
-  <v-radio-group v-bind="$attrs">
+  <v-radio-group v-bind="computedAttrs">
     <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
       <slot :name="name" v-bind="slotData || {}" />
     </template>
