@@ -4,10 +4,10 @@
    * Inherits all VColorPicker props, slots, and emits.
    *
    * @component
-   * @extends VColorPicker
+   * @extends VColorInput
    */
-  // Import Vuetify's VColorPicker component (Base component)
-  import { VColorPicker } from 'vuetify/components';
+  // Import Vuetify's VColorInput component (Base component)
+  import { VColorInput } from 'vuetify/labs/VColorInput';
   // Import local styles
   import './UColorInput.scss';
 
@@ -19,11 +19,11 @@
 </script>
 
 <template>
-  <v-color-picker v-bind="$attrs">
+  <v-color-input v-bind="$attrs">
     <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
       <slot :name="name" v-bind="slotData || {}" />
     </template>
-  </v-color-picker>
+  </v-color-input>
 </template>
 
 <style scoped lang="scss"></style>
