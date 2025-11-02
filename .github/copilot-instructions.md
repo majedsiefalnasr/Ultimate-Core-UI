@@ -1,35 +1,135 @@
 # 🧠 Copilot Instructions for @UltimateCoreUI
 
-## 1. Purpose & Overview
-
-These instructions guide GitHub Copilot to generate **Vue 3 components** for the `@UltimateCoreUI` library, built on top of **Vuetify**.  
-Each component must behave as an **extended Vuetify component** (like `VBtn`), inheriting all props, emits, attrs, and slots.
-
-Copilot should ensure:
-
-- The component works as `<UComponent>` and `<u-component>`.
-- Follows the structure and coding style shown in the canonical `UBtn` example below.
-- Automatically generates Storybook files and snippet entries.
+> **Version**: 2.0  
+> **Last Updated**: October 2025  
+> **Purpose**: Comprehensive guidelines for generating Vue 3 components and Storybook stories
 
 ---
 
-## 2. Component Generation Template
+## 📋 Table of Contents
 
-When generating a new component (e.g., `UInput`), Copilot must:
-
-1. Create a Vue component that **extends a Vuetify base component** (e.g., `VInput`).
-2. Inherit **all props, slots, emits, and attrs** using `v-bind="$attrs"` and slot forwarding.
-3. Set `inheritAttrs: false`.
-4. Define a component name like `UInput`.
-5. Support both **PascalCase** and **kebab-case** usages.
-6. Include **JSDoc** with examples.
-7. Add **optional local props** or style sections if the user requests enhancement.
+1. [Overview & Philosophy](#1-overview--philosophy)
+2. [Vue Component Structure](#2-vue-component-structure)
+3. [Storybook Stories](#3-storybook-stories)
+4. [VS Code Snippets](#4-vs-code-snippets)
+5. [File Organization](#5-file-organization)
+6. [TypeScript Guidelines](#6-typescript-guidelines)
+7. [Quick Reference](#7-quick-reference)
+8. [Additional Guidelines](#8-additional-guidelines)
+9. [Troubleshooting](#9-troubleshooting)
 
 ---
 
-## 3. Canonical Example — `UBtn.vue`
+## 1. Overview & Philosophy
 
-This file is the reference pattern for all components.
+### Purpose
+
+The `@UltimateCoreUI` library extends **Vuetify** components with a unified design system and enhanced functionality. Each U-component is a **wrapper** that:
+
+- ✅ Inherits **all** Vuetify props, slots, emits, and attrs
+- ✅ Supports both `<UComponent>` (PascalCase) and `<u-component>` (kebab-case)
+- ✅ Maintains full Vuetify API compatibility
+- ✅ Allows optional enhancements when needed
+
+### Core Principles
+
+1. **Transparency**: Components pass through all Vuetify functionality
+2. **Consistency**: Follow the canonical `UBtn` pattern for all components
+3. **Documentation**: Every component includes JSDoc, stories, and snippets
+4. **Type Safety**: Strict TypeScript without `any` types
+
+---
+
+---
+
+## 2. Vue Component Structure
+
+### 2.1 Component Generation Checklist
+
+When generating a new component (e.g., `UInput`), ensure:
+
+- [ ] Extends the corresponding Vuetify base component (e.g., `VInput`)
+- [ ] Uses `inheritAttrs: false`
+- [ ] Forwards all props via `v-bind="$attrs"`
+- [ ] Forwards all slots dynamically
+- [ ] Includes proper JSDoc documentation
+- [ ] Supports both PascalCase and kebab-case usage
+- [ ] Has optional SCSS file (if styling needed)
+
+### 2.2 File Structure
+
+```vue
+<!-- snippet:UComponentName -->
+<!-- <UComponentName>Example</UComponentName> -->
+
+<script setup lang="ts">
+  /**
+   * [Component Description]
+   *
+   * @component UComponentName
+   * @extends VComponentName
+   * @example
+   * <u-component-name prop="value">Content</u-component-name>
+   */
+  import { VComponentName } from 'vuetify/components';
+  import './UComponentName.scss'; // Optional
+
+  defineOptions({
+    name: 'UComponentName',
+    inheritAttrs: false,
+  });
+
+  defineSlots<{
+    [key: string]: (props: Record<string, unknown>) => unknown;
+  }>();
+</script>
+
+<template>
+  <v-component-name v-bind="$attrs">
+    <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
+      <slot :name="name" v-bind="slotData || {}" />
+    </template>
+  </v-component-name>
+</template>
+
+<style scoped lang="scss">
+  // Component-specific styles (optional)
+</style>
+```
+
+### 2.3 Key Requirements
+
+#### Script Section
+
+1. **Imports**
+   - Import Vuetify base component from `'vuetify/components'`
+   - Import local SCSS only if needed
+2. **JSDoc Documentation**
+   - Brief description of component purpose
+   - `@component` tag with component name
+   - `@extends` tag referencing Vuetify base
+   - `@example` tag with usage code
+
+3. **Component Options**
+   - Always set `name: 'UComponentName'`
+   - Always set `inheritAttrs: false`
+
+4. **Slots Definition**
+   - Use dynamic slot typing: `{ [key: string]: (props: Record<string, unknown>) => unknown }`
+
+#### Template Section
+
+- Wrap Vuetify component with `v-bind="$attrs"`
+- Forward all slots using `v-for` loop on `$slots`
+- Use dynamic slot binding with `#[name]` syntax
+
+#### Style Section
+
+- Use `<style scoped lang="scss"></style>`
+- Keep empty unless specific enhancements requested
+- Never add styles without user request
+
+### 2.4 Complete Example: UBtn
 
 ```vue
 <!-- snippet:UBtn -->
@@ -37,17 +137,14 @@ This file is the reference pattern for all components.
 
 <script setup lang="ts">
   /**
-   * Extended UBtn component built on Vuetify's VBtn.
-   * Inherits all VBtn props, slots, and emits.
+   * Enhanced Vuetify button component with additional styling capabilities.
    *
-   * @component
+   * @component UBtn
    * @extends VBtn
    * @example
-   * <UBtn color="primary" @click="onClick">Click Me</UBtn>
+   * <u-btn color="primary" @click="handleClick">Click Me</u-btn>
    */
-  // Import Vuetify's VBtn component (Base component)
   import { VBtn } from 'vuetify/components';
-  // Import local styles
   import './UBtn.scss';
 
   defineOptions({
@@ -55,7 +152,6 @@ This file is the reference pattern for all components.
     inheritAttrs: false,
   });
 
-  // Define slots with proper typing
   defineSlots<{
     [key: string]: (props: Record<string, unknown>) => unknown;
   }>();
@@ -74,43 +170,67 @@ This file is the reference pattern for all components.
 
 ---
 
-## 4. Storybook Example — `UBtn.stories.ts`
+---
+
+## 3. Storybook Stories
+
+### 3.1 Story File Structure
+
+Each component must have a corresponding `.stories.ts` file with:
+
+- [ ] Proper TypeScript imports
+- [ ] ComponentArgs interface
+- [ ] Meta configuration
+- [ ] ArgTypes definitions
+- [ ] Multiple story examples
+- [ ] Documentation parameters
+
+### 3.2 Required Imports
 
 ```ts
-import type { Meta, StoryObj } from '@storybook/vue3';
-import UBtn from './UBtn.vue';
+import type { Meta, StoryFn } from '@storybook/vue3';
+import { ref, computed } from 'vue'; // Import as needed
+import { UComponentName } from '../index';
+```
 
+### 3.3 ComponentArgs Interface
+
+Define all relevant props with proper TypeScript types:
+
+```ts
 interface ComponentArgs {
-  density?: 'default' | 'comfortable' | 'compact';
-  size?: 'x-small' | 'small' | 'default' | 'large' | 'x-large';
-  block?: boolean;
-  rounded?: string | number | boolean;
-  elevation?: number;
-  ripple?: boolean;
-  variant?: 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plain';
-  icon?: string;
-  loading?: boolean;
-  spaced?: 'start' | 'end' | 'both';
-  color?: string;
-  disabled?: boolean;
+  // Required props
   label?: string;
-}
+  modelValue?: string | number | boolean;
 
+  // Optional props
+  color?: string;
+  variant?: 'flat' | 'text' | 'elevated' | 'tonal' | 'outlined' | 'plain';
+  disabled?: boolean;
+  loading?: boolean;
+
+  // Story-specific props (for slot content, etc.)
+  content?: string;
+}
+```
+
+### 3.4 Meta Configuration
+
+```ts
 const meta: Meta<ComponentArgs> = {
-  title: 'Component/Containment/Button',
-  component: UBtn,
+  title: 'Components/Category/ComponentName',
+  component: UComponentName,
   parameters: {
     docs: {
       description: {
-        component:
-          'The UBtn component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.',
+        component: 'Brief description of what the component does.',
       },
-      import: `import { UBtn } from '@ultimate/core-ui/components'`,
+      import: `import { UComponentName } from '@ultimate/core-ui/components'`,
       source: {
         transform: (src: string, storyContext: { args: ComponentArgs }) => {
           const { args } = storyContext;
 
-          // Build attributes string from args
+          // Build clean code example from args
           const attrsArray = Object.entries(args as Record<string, unknown>)
             .filter(([_, value]) => value !== undefined && value !== false)
             .map(([key, value]) => {
@@ -121,269 +241,608 @@ const meta: Meta<ComponentArgs> = {
             });
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
-
-          return `<UBtn${attrsString}>${args.label || 'Button'}</UBtn>`;
+          return `<u-component-name${attrsString}></u-component-name>`;
         },
       },
     },
+    // Add these ONLY if specifically requested:
     Vuetify: {
-      component: 'VBtn',
-      content:
-        "This component is built on top of Vuetify's VBtn component. For detailed usage and props, refer to the Vuetify documentation linked below.",
-      link: 'https://vuetifyjs.com/en/components/buttons/',
+      component: 'VComponentName',
+      content: 'Brief note about the base Vuetify component.',
+      link: 'https://vuetifyjs.com/en/components/component-name/',
     },
-    anatomy: {
-      title: 'Anatomy',
-      description:
-        'The recommended placement of elements inside of <UBtn> is: Place text in the center. Place visual content around container text',
-      Image: '/images/stories/ubtn.anatomy.png',
+    Primary: {
+      description: 'Usage description or key features.',
+    },
+    api: {
       data: [
         {
-          element: '1. Container',
-          description:
-            'In addition to text, the Button container typically holds a v-icon component',
-        },
-        {
-          element: '2. Icon (optional)',
-          description: 'Leading media content intended to improve visual context',
-        },
-        {
-          element: '3. Text',
-          description: 'A content area for displaying text and other inline elements',
+          element: { title: 'v-component', link: 'https://...' },
+          description: 'Primary component',
         },
       ],
     },
   },
   argTypes: {
-    density: {
-      control: { type: 'select' },
-      options: ['default', 'comfortable', 'compact'],
-      description:
-        'The density prop is used to control the vertical space that the button takes up.',
-      table: {
-        type: { summary: 'default | comfortable | compact' },
-        defaultValue: { summary: 'default' },
-      },
-    },
-    size: {
-      control: { type: 'select' },
-      options: ['x-small', 'small', 'default', 'large', 'x-large'],
-      description:
-        'The size property is used to control the size of the button and scales with density. The default size is undefined which essentially translates to medium.',
-      table: {
-        type: { summary: 'x-small | small | default | large | x-large' },
-        defaultValue: { summary: 'default' },
-      },
-    },
-    block: {
-      control: 'boolean',
-      description:
-        'Block buttons extend the full available width of their container. This is useful for creating buttons that span the full width of a card or dialog.',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
-    rounded: {
+    label: {
       control: 'text',
-      description:
-        'Use the rounded prop to control the border radius of a button. This can be 0, xs, sm, true, lg, xl, pill, circle, and shaped.',
-      table: { type: { summary: 'string' }, defaultValue: { summary: 'rounded' } },
-    },
-    elevation: {
-      control: 'number',
-      description:
-        'The elevation property provides up to 24 levels of shadow depth. By default, buttons rest at 2dp.',
-      table: { type: { summary: 'number' }, defaultValue: { summary: '2' } },
-    },
-    ripple: {
-      control: 'boolean',
-      description: 'The ripple property determines whether the v-ripple\n directive is used.',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'true' } },
-    },
-    variant: {
-      control: { type: 'select' },
-      options: ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'],
-      description: 'The variant prop gives you easy access to several different button styles.',
+      description: 'Sets the component label',
       table: {
-        type: { summary: 'elevated | flat | tonal | outlined | text | plain' },
-        defaultValue: { summary: 'elevated' },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
-    icon: {
-      control: 'text',
-      description:
-        'Icons can be used for the primary content of a button. They are commonly used in the v-toolbar and v-app-bar components.',
-      table: { type: { summary: 'string' } },
-    },
-    loading: {
-      control: 'boolean',
-      description:
-        'Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a v-progress-circular component but this can be customized with the loader slot.',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
-    spaced: {
-      control: { type: 'select' },
-      options: ['start', 'end', 'both'],
-      description: 'Adds space when using icon with label',
-      table: { type: { summary: 'start | end | both' } },
-    },
-    color: {
-      control: 'color',
-      description: 'Theme color or CSS color',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disabled state',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
-    label: { control: 'text', description: 'Default slot text (used by the Default story)' },
+    // ... more argTypes
   },
 };
 
 export default meta;
+```
 
+### 3.5 Story Pattern (CRITICAL)
+
+**Always use `StoryFn` pattern**, never `StoryObj`:
+
+```ts
+export const StoryName: StoryFn<ComponentArgs> = (args) => ({
+  components: { UComponentName, UContainer, URow, UCol }, // Include needed components
+  setup() {
+    const state = ref('value');
+    return { args, state };
+  },
+  template: `
+    <u-component-name v-bind="args">
+      Content
+    </u-component-name>
+  `,
+});
+
+// Separate args definition
+StoryName.args = {
+  label: 'Example',
+  color: 'primary',
+};
+
+// Separate parameters definition
+StoryName.parameters = {
+  docs: {
+    description: {
+      story: 'Description of what this story demonstrates.',
+    },
+    source: {
+      code: `<template>
+  <u-component-name label="Example" color="primary">
+    Content
+  </u-component-name>
+</template>`,
+    },
+  },
+};
+```
+
+### 3.6 Using U-Components in Stories (CRITICAL)
+
+**NEVER use V-components in stories**. Always use U-components for layout and helpers.
+
+#### ❌ Wrong:
+
+```ts
+template: `
+  <v-container>
+    <v-row>
+      <v-col>...</v-col>
+    </v-row>
+  </v-container>
+`;
+```
+
+#### ✅ Correct:
+
+```ts
+// 1. Import U-components
+import { UContainer, URow, UCol } from '../UGrid';
+
+// 2. Add to components object
+export const Example: StoryFn<ComponentArgs> = () => ({
+  components: { UComponentName, UContainer, URow, UCol },
+  setup() {
+    return {};
+  },
+  template: `
+    <u-container>
+      <u-row>
+        <u-col cols="12" sm="6">
+          <u-component-name></u-component-name>
+        </u-col>
+      </u-row>
+    </u-container>
+  `,
+});
+
+// 3. Use U-components in docs too
+Example.parameters = {
+  docs: {
+    source: {
+      code: `<template>
+  <u-container>
+    <u-row>
+      <u-col cols="12" sm="6">
+        <u-component-name></u-component-name>
+      </u-col>
+    </u-row>
+  </u-container>
+</template>`,
+    },
+  },
+};
+```
+
+### 3.7 Common U-Components for Stories
+
+| Category       | Components                                         |
+| -------------- | -------------------------------------------------- |
+| **Layout**     | `UContainer`, `URow`, `UCol`, `USpacer`            |
+| **Cards**      | `UCard`, `UCardTitle`, `UCardText`, `UCardActions` |
+| **Buttons**    | `UBtn`, `UBtnGroup`, `UBtnToggle`, `UIconBtn`      |
+| **Typography** | `UIcon`, `ULabel`, `UDivider`                      |
+| **Forms**      | `UTextField`, `USelect`, `UCheckbox`, `URadio`     |
+
+### 3.8 Story Examples
+
+#### Basic Story with Args
+
+```ts
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBtn },
   setup() {
     return { args };
   },
-  template: '<UBtn v-bind="args">{{ args.label || "Button" }}</UBtn>',
+  template: '<u-btn v-bind="args">Click Me</u-btn>',
 });
 
 Default.args = {
   color: 'primary',
-  label: 'Primary',
-} as ComponentArgs;
+  variant: 'elevated',
+};
+```
+
+#### Story with Reactive State
+
+```ts
+export const WithCounter: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn },
+  setup() {
+    const count = ref(0);
+    const increment = () => count.value++;
+    return { count, increment };
+  },
+  template: `
+    <u-btn @click="increment">
+      Clicked {{ count }} times
+    </u-btn>
+  `,
+});
+
+WithCounter.parameters = {
+  docs: {
+    source: {
+      code: `<template>
+  <u-btn @click="increment">
+    Clicked {{ count }} times
+  </u-btn>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+const count = ref(0);
+const increment = () => count.value++;
+</script>`,
+    },
+  },
+};
+```
+
+#### Story with Layout
+
+```ts
+export const Variants: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UContainer, URow, UCol },
+  setup() {
+    return {};
+  },
+  template: `
+    <u-container>
+      <u-row>
+        <u-col cols="12" sm="6" md="4">
+          <u-btn variant="elevated">Elevated</u-btn>
+        </u-col>
+        <u-col cols="12" sm="6" md="4">
+          <u-btn variant="flat">Flat</u-btn>
+        </u-col>
+        <u-col cols="12" sm="6" md="4">
+          <u-btn variant="outlined">Outlined</u-btn>
+        </u-col>
+      </u-row>
+    </u-container>
+  `,
+});
 ```
 
 ---
 
-## 5. VS Code Snippet Generation
+---
 
-For each component, Copilot must generate snippets under:  
-`src/snippets/<component>.code-snippets`
+## 4. VS Code Snippets
 
-Each snippet must support **PascalCase** and **kebab-case** triggers.
+### 4.1 Snippet Requirements
 
-Example — `UBtn.code-snippets`:
+For each component, generate a snippet file:  
+`src/snippets/<component-name>.code-snippets`
+
+Each snippet must support **both** PascalCase and kebab-case triggers.
+
+### 4.2 Snippet Template
 
 ```json
 {
-  "UBtn Component": {
-    "prefix": "UBtn",
-    "body": ["<UBtn>$1</UBtn>"],
-    "description": "Insert a UBtn component"
+  "UComponentName Component": {
+    "prefix": "UComponentName",
+    "body": ["<UComponentName $1>$2</UComponentName>"],
+    "description": "Insert a UComponentName component"
   },
-  "u-btn Component": {
-    "prefix": "u-btn",
-    "body": ["<u-btn>$1</u-btn>"],
-    "description": "Insert a u-btn component"
+  "u-component-name Component": {
+    "prefix": "u-component-name",
+    "body": ["<u-component-name $1>$2</u-component-name>"],
+    "description": "Insert a u-component-name component"
+  }
+}
+```
+
+### 4.3 Advanced Snippet Example
+
+For components with common props:
+
+```json
+{
+  "UBtn with props": {
+    "prefix": "UBtnFull",
+    "body": [
+      "<UBtn",
+      "  color=\"${1:primary}\"",
+      "  variant=\"${2:elevated}\"",
+      "  @click=\"${3:handleClick}\"",
+      ">",
+      "  ${4:Button Text}",
+      "</UBtn>"
+    ],
+    "description": "Insert a UBtn with common props"
   }
 }
 ```
 
 ---
 
-## 6. Optional Enhancements
+## 5. File Organization
 
-If user specifies **“add Optional Enhancement”**, Copilot may:
-
-- Add new local props (e.g., `loading`, `variant`, `size`).
-- Import and use component-specific SCSS.
-- Add slots or computed helpers for extended functionality.
-
----
-
-## 7. File Naming & Folder Rules
-
-Each component folder follows this pattern:
+### 5.1 Component Folder Structure
 
 ```
-src
-├── components/UComponent/
-│   ├── UComponent.vue
-│   ├── UComponent.stories.ts
-│   ├── index.ts
-│   └── UComponent.scss (optional)
-├── snippets/
-│   ├── UComponent.code-snippets
-│   ├── ...
-│   └── README.md
-└── ...
+src/components/UComponentName/
+├── UComponentName.vue       # Component file
+├── UComponentName.stories.ts # Storybook stories
+├── UComponentName.scss       # Optional styles
+└── index.ts                  # Export file
 ```
 
-Example for `UBtn`:
-
-```
-src
-├── components/UBtn/
-│   ├── UBtn.vue
-│   ├── UBtn.stories.ts
-│   ├── index.ts
-│   └── UBtn.scss (optional)
-├── snippets/
-│   ├── UBtn.code-snippets
-│   ├── ...
-│   └── README.md
-└── ...
-```
-
----
-
-✅ **Copilot Rule Summary**
-
-1. Follow the canonical `UBtn.vue` structure.
-2. Generate `.stories.ts` beside the component.
-3. Create `.code-snippets` entries for both `<UComponent>` and `<u-component>`.
-4. Support both naming styles.
-5. Add enhancements only when requested.
-6. Always use Vuetify base components.
-
----
-
-## 8. TypeScript typing rules (important)
-
-When Copilot generates TypeScript code for this repository, avoid using the `any` type. This project enforces `@typescript-eslint/no-explicit-any` and `strict`-like typing rules. Use the following guidance when producing TypeScript:
-
-- Never emit `: any` or cast values to `any` (for example `(x as any)`).
-- Prefer narrow, explicit types. When the exact type is unknown, use safe alternatives:
-  - Use `unknown` when you truly don't know the type, then narrow it with type guards before use.
-  - Use union types or indexed types when appropriate (for example `Record<string, unknown>`).
-  - Define small, local interfaces or types for structural typing rather than falling back to `any`.
-
-Examples:
-
-- Bad (forbidden):
+### 5.2 Index File Pattern
 
 ```ts
-const c = comp as any;
-if (c.name) {
-  app.component((c as any).name, c as any);
+export { default as UComponentName } from './UComponentName.vue';
+```
+
+### 5.3 Complete Project Structure
+
+```
+ultimate-core-ui/
+├── src/
+│   ├── components/
+│   │   ├── UBtn/
+│   │   │   ├── UBtn.vue
+│   │   │   ├── UBtn.stories.ts
+│   │   │   ├── UBtn.scss
+│   │   │   └── index.ts
+│   │   ├── UTextField/
+│   │   │   ├── UTextField.vue
+│   │   │   ├── UTextField.stories.ts
+│   │   │   └── index.ts
+│   │   └── index.ts           # Export all components
+│   ├── snippets/
+│   │   ├── UBtn.code-snippets
+│   │   ├── UTextField.code-snippets
+│   │   └── README.md
+│   ├── styles/
+│   │   └── _mixins.scss
+│   └── index.ts               # Main library entry
+├── .github/
+│   └── copilot-instructions.md
+└── package.json
+```
+
+---
+
+## 6. TypeScript Guidelines
+
+### 6.1 Core Principles
+
+**CRITICAL**: This project enforces strict TypeScript rules:
+
+- ❌ **NEVER use `any`**
+- ✅ Use `unknown` when type is unclear
+- ✅ Use union types for multiple possible types
+- ✅ Use `Record<string, unknown>` for object types
+- ✅ Create specific interfaces/types instead of `any`
+
+### 6.2 Type Safety Rules
+
+#### ❌ Bad (Forbidden):
+
+```ts
+const component = comp as any;
+const handler = (data: any) => {};
+const result: any = getValue();
+```
+
+#### ✅ Good (Required):
+
+```ts
+type InstallableComponent = Component & {
+  install?: (app: App) => void;
+  name?: string;
+};
+
+const component = comp as unknown as InstallableComponent;
+
+const handler = (data: Record<string, unknown>) => {
+  // Type guard to narrow
+  if ('value' in data && typeof data.value === 'string') {
+    console.log(data.value);
+  }
+};
+
+const result: string | number | undefined = getValue();
+```
+
+### 6.3 Common Patterns
+
+#### Type Guards
+
+```ts
+function isValidComponent(comp: unknown): comp is Component {
+  return typeof comp === 'object' && comp !== null && 'render' in comp;
+}
+
+if (isValidComponent(component)) {
+  // TypeScript knows component is Component here
+  app.component('MyComp', component);
 }
 ```
 
-- Good (preferred):
+#### Generic Constraints
 
 ```ts
-type InstallableComponent = Component & { install?: (app: App) => void; name?: string };
-const c = comp as unknown as InstallableComponent;
-if (!c) return;
-if (typeof c.install === 'function') {
-  c.install(app);
-} else if (typeof c.name === 'string') {
-  app.component(c.name, c as Component);
+function processValue<T extends string | number>(value: T): T {
+  return value;
 }
 ```
 
-If narrowing requires runtime checks, generate explicit type guards rather than using `any` or suppressing lint rules. If you must use a temporary broader type, prefer `unknown` and document why with a short comment.
-
-If Copilot cannot produce a well-typed result, produce a brief TODO comment and leave the specific typing to a human. Example:
+#### Unknown with Narrowing
 
 ```ts
-// TODO: determine exact component export type here — using `unknown` until clarified
-const comp = exports[name] as unknown;
-// human: replace `unknown` with specific interface if needed
+function handleData(data: unknown): void {
+  if (typeof data === 'string') {
+    console.log(data.toUpperCase());
+  } else if (typeof data === 'object' && data !== null) {
+    console.log(Object.keys(data));
+  }
+}
 ```
 
-This rule is enforced by CI and local linting; follow it to avoid pre-commit failures.
+### 6.4 Slot Types
+
+For Vue component slots, use:
+
+```ts
+defineSlots<{
+  default?: (props: { item: string }) => unknown;
+  header?: (props: { title: string }) => unknown;
+  [key: string]: (props: Record<string, unknown>) => unknown;
+}>();
+```
+
+### 6.5 Event Handler Types
+
+```ts
+interface ComponentEmits {
+  (e: 'update:modelValue', value: string): void;
+  (e: 'click', event: MouseEvent): void;
+  (e: 'change', payload: { value: string; index: number }): void;
+}
+
+const emit = defineEmits<ComponentEmits>();
+```
+
+---
+
+## 7. Quick Reference
+
+### 7.1 Component Checklist
+
+- [ ] Component extends Vuetify base with `v-bind="$attrs"`
+- [ ] `inheritAttrs: false` is set
+- [ ] All slots forwarded dynamically
+- [ ] JSDoc with `@component`, `@extends`, `@example`
+- [ ] Both PascalCase and kebab-case work
+- [ ] Optional SCSS file imported if needed
+- [ ] Story file created with multiple examples
+- [ ] VS Code snippets created (both naming styles)
+- [ ] No `any` types in TypeScript code
+
+### 7.2 Story Checklist
+
+- [ ] Import `StoryFn` from `@storybook/vue3`
+- [ ] Define `ComponentArgs` interface
+- [ ] Create meta configuration with proper title
+- [ ] Define argTypes with controls and descriptions
+- [ ] Use U-components (not V-components) in templates
+- [ ] Import needed U-components for layout
+- [ ] Separate `.args` and `.parameters` definitions
+- [ ] Include documentation source code
+- [ ] Multiple story examples (Default, Variants, Interactive)
+
+### 7.3 Common U-Components Import
+
+```ts
+// Layout
+import { UContainer, URow, UCol, USpacer } from '../UGrid';
+
+// Cards
+import { UCard, UCardTitle, UCardText, UCardActions } from '../UCard';
+
+// Buttons
+import { UBtn, UBtnGroup, UBtnToggle, UIconBtn } from '../UBtn';
+
+// Form Controls
+import { UTextField, USelect, UCheckbox, URadio } from '../UTextField';
+```
+
+### 7.4 Copilot Rules Summary
+
+1. ✅ Follow the canonical `UBtn` structure for all components
+2. ✅ Always use Vuetify base components in Vue files
+3. ✅ Always use U-components in story templates and docs
+4. ✅ Use `StoryFn<ComponentArgs>` pattern (never `StoryObj`)
+5. ✅ Support both `<UComponent>` and `<u-component>` naming
+6. ✅ Generate snippets for both naming styles
+7. ✅ No `any` types - use `unknown` with type guards
+8. ✅ Separate story function, `.args`, and `.parameters`
+9. ✅ Import U-components for story layouts
+10. ✅ Include comprehensive JSDoc documentation
+
+### 7.5 File Generation Order
+
+When creating a new component:
+
+1. **Component File** → `UComponentName.vue`
+2. **Index File** → `index.ts` (export statement)
+3. **Story File** → `UComponentName.stories.ts`
+4. **Snippet File** → `UComponentName.code-snippets`
+5. **Style File** → `UComponentName.scss` (if needed)
+
+---
+
+## 8. Additional Guidelines
+
+### 8.1 Optional Enhancements
+
+If user requests **"add Optional Enhancement"**, you may:
+
+- ✅ Add new local props beyond Vuetify base
+- ✅ Implement custom computed properties
+- ✅ Add component-specific methods
+- ✅ Create custom SCSS styles
+- ✅ Add extra slots for customization
+
+**Example**:
+
+```vue
+<script setup lang="ts">
+  import { VBtn } from 'vuetify/components';
+  import { computed } from 'vue';
+
+  interface Props {
+    loading?: boolean; // Custom prop
+    loadingText?: string; // Custom prop
+  }
+
+  const props = defineProps<Props>();
+
+  const buttonText = computed(() => {
+    return props.loading ? props.loadingText : undefined;
+  });
+</script>
+```
+
+### 8.2 Naming Conventions
+
+- **Components**: PascalCase `UButton`, `UTextField`
+- **Files**: PascalCase `UButton.vue`, `UButton.stories.ts`
+- **Snippets**: PascalCase files `UButton.code-snippets`
+- **Props**: camelCase `modelValue`, `hideDetails`
+- **Events**: kebab-case in template, camelCase in emit
+
+### 8.3 Documentation Best Practices
+
+#### Component Description
+
+- Start with what the component does
+- Mention key features
+- Reference Vuetify base component
+
+```ts
+/**
+ * Enhanced button component with loading states and icon support.
+ * Extends Vuetify's VBtn with additional customization options.
+ *
+ * @component UBtn
+ * @extends VBtn
+ * @example
+ * <u-btn color="primary" loading @click="submit">Submit</u-btn>
+ */
+```
+
+#### Story Descriptions
+
+- Explain what the story demonstrates
+- Include use cases
+- Mention important props shown
+
+```ts
+StoryName.parameters = {
+  docs: {
+    description: {
+      story:
+        'Demonstrates button variants including elevated, flat, outlined, and text. Use the variant prop to change the button appearance.',
+    },
+  },
+};
+```
+
+---
+
+## 9. Troubleshooting
+
+### Common Issues
+
+**Issue**: Slots not forwarding properly  
+**Solution**: Ensure using `v-for="(_, name) in $slots"` with dynamic slot names
+
+**Issue**: TypeScript errors with `any`  
+**Solution**: Replace with `unknown` and add type guards
+
+**Issue**: Stories using V-components  
+**Solution**: Import and use U-components instead
+
+**Issue**: Props not passing through  
+**Solution**: Verify `v-bind="$attrs"` and `inheritAttrs: false`
+
+---
+
+## 10. Version History
+
+- **v2.0** (October 2025): Complete reorganization with enhanced guidelines
+- **v1.5**: Added U-component requirement for stories
+- **v1.0**: Initial copilot instructions
+
+---
+
+**End of Instructions**
