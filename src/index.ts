@@ -1,6 +1,3 @@
-// Ensure Material Design Icons font CSS is included when the library is used
-// This allows consumers of the library to have the MDI font available by default.
-import '@mdi/font/css/materialdesignicons.css';
 import type { App, Component } from 'vue';
 
 // Re-export everything from the components barrel so consumers can import
@@ -24,3 +21,8 @@ const install = (app: App): void => {
 };
 
 export default { install };
+
+// Factories / Plugins
+export { createUltimateCoreUI } from './plugins/createUltimateCoreUI';
+export type { UltimateCoreUIOptions } from './plugins/createUltimateCoreUI';
+export { hugeiconsSet } from './plugins/iconify';
