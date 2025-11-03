@@ -79,7 +79,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<UCard${attrsString}></UCard>`;
+          return `<u-card${attrsString}></u-card>`;
         },
       },
     },
@@ -401,14 +401,6 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {
   text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!',
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<u-card text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"></u-card>`,
-    },
-  },
 };
 
 export const Basics: StoryFn<ComponentArgs> = () => ({
