@@ -1,7 +1,7 @@
 # 🧠 Copilot Instructions for @UltimateCoreUI
 
-> **Version**: 2.0  
-> **Last Updated**: October 2025  
+> **Version**: 2.1  
+> **Last Updated**: November 2025  
 > **Purpose**: Comprehensive guidelines for generating Vue 3 components and Storybook stories
 
 ---
@@ -686,6 +686,7 @@ const emit = defineEmits<ComponentEmits>();
 - [ ] Story file created with multiple examples
 - [ ] VS Code snippets created (both naming styles)
 - [ ] No `any` types in TypeScript code
+- [ ] All icons use Iconify Hugeicons format (`hugeicons:icon-name-##`)
 
 ### 7.2 Story Checklist
 
@@ -698,6 +699,7 @@ const emit = defineEmits<ComponentEmits>();
 - [ ] Separate `.args` and `.parameters` definitions
 - [ ] Include documentation source code
 - [ ] Multiple story examples (Default, Variants, Interactive)
+- [ ] All icons use Iconify Hugeicons format (`hugeicons:icon-name-##`)
 
 ### 7.3 Common U-Components Import
 
@@ -727,6 +729,7 @@ import { UTextField, USelect, UCheckbox, URadio } from '../UTextField';
 8. ✅ Separate story function, `.args`, and `.parameters`
 9. ✅ Import U-components for story layouts
 10. ✅ Include comprehensive JSDoc documentation
+11. ✅ **ALWAYS use Iconify Hugeicons (`hugeicons:icon-name-##`) - NEVER use MDI or other icon libraries**
 
 ### 7.5 File Generation Order
 
@@ -780,7 +783,84 @@ If user requests **"add Optional Enhancement"**, you may:
 - **Props**: camelCase `modelValue`, `hideDetails`
 - **Events**: kebab-case in template, camelCase in emit
 
-### 8.3 Documentation Best Practices
+### 8.3 Icon Guidelines (CRITICAL)
+
+**ALWAYS use Iconify Hugeicons for all icons** - Never use Material Design Icons (MDI) or any other icon library.
+
+#### Icon Usage Rules
+
+1. **Format**: All icons MUST use the Iconify Hugeicons format: `hugeicons:icon-name-##`
+2. **Finding Icons**: Search the Iconify Hugeicons library at [Iconify - Hugeicons](https://icon-sets.iconify.design/hugeicons/)
+3. **Naming Pattern**: Follow the pattern `hugeicons:icon-name-##` where `##` is typically `01`, `02`, etc.
+
+#### Common Icon Mappings
+
+| Purpose         | Icon                           | Usage                 |
+| --------------- | ------------------------------ | --------------------- |
+| **Navigation**  | `hugeicons:arrow-left-01`      | Previous/back buttons |
+|                 | `hugeicons:arrow-right-01`     | Next/forward buttons  |
+|                 | `hugeicons:arrow-up-01`        | Scroll up/expand      |
+|                 | `hugeicons:arrow-down-01`      | Scroll down/collapse  |
+| **Actions**     | `hugeicons:search-01`          | Search fields         |
+|                 | `hugeicons:add-01`             | Add/create buttons    |
+|                 | `hugeicons:delete-02`          | Delete actions        |
+|                 | `hugeicons:edit-02`            | Edit actions          |
+|                 | `hugeicons:save-01`            | Save actions          |
+|                 | `hugeicons:cancel-01`          | Cancel/close actions  |
+| **UI Elements** | `hugeicons:menu-01`            | Menu/hamburger        |
+|                 | `hugeicons:home-01`            | Home navigation       |
+|                 | `hugeicons:settings-01`        | Settings/config       |
+|                 | `hugeicons:notification-01`    | Notifications/alerts  |
+|                 | `hugeicons:user-01`            | User/profile          |
+|                 | `hugeicons:calendar-01`        | Date pickers          |
+|                 | `hugeicons:clock-01`           | Time/duration         |
+| **Status**      | `hugeicons:tick-01`            | Success/complete      |
+|                 | `hugeicons:alert-02`           | Warning/caution       |
+|                 | `hugeicons:information-circle` | Info/help             |
+|                 | `hugeicons:cancel-circle`      | Error/failure         |
+
+#### Icon Replacement Process
+
+When migrating existing icons or creating new components:
+
+1. **Search for MDI icons**: Look for any `mdi-*` patterns
+2. **Find Hugeicons equivalent**: Search Iconify Hugeicons library
+3. **Replace with proper format**: Use `hugeicons:icon-name-##` format
+4. **Update documentation**: Ensure code examples use Hugeicons
+
+**Example Migration**:
+
+```ts
+// ❌ Wrong (MDI)
+icon = 'mdi-arrow-left';
+icon = 'mdi-magnify';
+icon = 'mdi-account';
+
+// ✅ Correct (Hugeicons)
+icon = 'hugeicons:arrow-left-01';
+icon = 'hugeicons:search-01';
+icon = 'hugeicons:user-01';
+```
+
+#### In Stories
+
+Always use Hugeicons in:
+
+- Component templates
+- Story examples
+- Documentation code blocks
+- Data arrays with icon properties
+
+```ts
+// Example in story data
+const items = [
+  { name: 'Home', icon: 'hugeicons:home-01' },
+  { name: 'Search', icon: 'hugeicons:search-01' },
+  { name: 'Settings', icon: 'hugeicons:settings-01' },
+];
+```
+
+### 8.4 Documentation Best Practices
 
 #### Component Description
 
@@ -839,6 +919,7 @@ StoryName.parameters = {
 
 ## 10. Version History
 
+- **v2.1** (November 2025): Added mandatory Iconify Hugeicons guidelines with comprehensive icon usage rules
 - **v2.0** (October 2025): Complete reorganization with enhanced guidelines
 - **v1.5**: Added U-component requirement for stories
 - **v1.0**: Initial copilot instructions
