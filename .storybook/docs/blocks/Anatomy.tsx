@@ -1,5 +1,6 @@
-import {useOf} from '@storybook/addon-docs/blocks'
-import React from 'react'
+import { useOf } from '@storybook/addon-docs/blocks';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import './style/DataTable.scss';
 
@@ -26,7 +27,7 @@ const Anatomy: React.FC = () => {
   return (
     <div>
       <h3 style={{marginTop: 0}}>{title}</h3>
-      {description ? <p>{description}</p> : null}
+      {description ? <ReactMarkdown>{description}</ReactMarkdown> : null}
 
       {Image ? (
         <div style={{margin: '1rem 0'}}>

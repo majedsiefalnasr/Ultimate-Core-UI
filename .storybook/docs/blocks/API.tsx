@@ -1,5 +1,6 @@
 import {useOf} from '@storybook/addon-docs/blocks'
 import React from 'react'
+import ReactMarkdown from 'react-markdown';
 
 import './style/DataTable.scss';
 
@@ -17,10 +18,7 @@ const API: React.FC = () => {
   const storyOf: any = useOf('story')
 
   const api: any =
-    storyOf?.parameters?.APIs || storyOf?.story?.parameters?.APIs || null
-
-  console.log('API block api:', storyOf?.story?.parameters)
-  console.log('API block api:', api)
+    storyOf?.parameters?.api || storyOf?.story?.parameters?.api || null
 
   if (!api) return null
 
@@ -29,7 +27,7 @@ const API: React.FC = () => {
   return (
     <div>
       <h3 style={{marginTop: 0}}>{title}</h3>
-      {description ? <p>{description}</p> : null}
+      {description ? <ReactMarkdown>{description}</ReactMarkdown> : null}
 
       {Array.isArray(data) && data.length > 0 ? (
         <table style={{width: '100%'}} className='docblock-argstable sb-unstyled'>
