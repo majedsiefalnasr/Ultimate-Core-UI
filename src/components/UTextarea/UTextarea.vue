@@ -46,6 +46,54 @@
     // Use provided ID or fallback to Vue's SSR-safe generated ID
     return providedId ?? generatedId;
   });
+
+  // Convert width-related props to inline styles for container
+  const containerStyle = computed(() => {
+    const styles: Record<string, string> = {};
+
+    // Check for both kebab-case and camelCase versions
+    const maxWidthValue = attrs['max-width'] || attrs.maxWidth;
+    const minWidthValue = attrs['min-width'] || attrs.minWidth;
+    const widthValue = attrs.width;
+
+    if (maxWidthValue) {
+      const value = String(maxWidthValue);
+      // Add 'px' only if the value is a pure number without units
+      styles['max-width'] = /^\d+$/.test(value) ? `${value}px` : value;
+    }
+
+    if (minWidthValue) {
+      const value = String(minWidthValue);
+      styles['min-width'] = /^\d+$/.test(value) ? `${value}px` : value;
+    }
+
+    if (widthValue) {
+      const value = String(widthValue);
+      styles.width = /^\d+$/.test(value) ? `${value}px` : value;
+    }
+
+    return styles;
+  });
+
+  // Filter out width-related props from attrs for VTextarea
+  const inputAttrs = computed(() => {
+    const rest: Record<string, unknown> = {};
+
+    for (const key in attrs) {
+      // Skip width-related props in both kebab-case and camelCase
+      if (
+        key !== 'max-width' &&
+        key !== 'maxWidth' &&
+        key !== 'min-width' &&
+        key !== 'minWidth' &&
+        key !== 'width'
+      ) {
+        rest[key] = attrs[key];
+      }
+    }
+
+    return rest;
+  });
 </script>
 
 <template>
@@ -57,10 +105,10 @@
   </v-textarea>
 
   <!-- Custom mode: External label with outlined, compact styling when no variant -->
-  <div v-else class="u-textarea-wrapper">
+  <div v-else class="v-input" :style="containerStyle">
     <v-label v-if="label" :for="elementId" class="mb-1 text-body-2" :text="label" />
 
-    <v-textarea v-bind="$attrs" :id="elementId" label="" variant="outlined" density="compact">
+    <v-textarea v-bind="inputAttrs" :id="elementId" label="" variant="outlined" density="compact">
       <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
         <slot :name="name" v-bind="slotData || {}" />
       </template>
