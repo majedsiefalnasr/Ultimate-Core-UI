@@ -1,0 +1,44 @@
+/* This is for documentation purposes and will not be needed in your application */
+::v-deep(.v-application__wrap) {
+  min-height: 0 !important;
+}
+
+#appSpeedDial > .v-application__wrap {
+  min-height: 0 !important;
+}
+
+.demo-panel-static,
+.demo-panel-relative {
+  margin: 0 80px 50px;
+  padding: 24px;
+  min-height: 300px;
+}
+.demo-panel-static {
+  position: static;
+}
+.demo-panel-relative {
+  position: relative;
+}
+
+.v-selection-control--disabled,
+.v-input--disabled .v-selection-control {
+  opacity: 0.1;
+}
+
+.v-radio {
+  flex-grow: 0 !important;
+}
+
+h5 {
+  margin-bottom: 12px;
+}
+
+code {
+  display: block;
+  font-size: 0.8rem;
+  margin-top: 12px;
+}
+
+::v-deep(.v-label) {
+  margin-left: 8px;
+}
