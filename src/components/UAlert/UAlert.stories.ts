@@ -381,14 +381,14 @@ Default.args = {
 export const Variants: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
   template: `
-    <v-container class="pa-4 d-flex flex-column ga-4" >
+    <u-container class="pa-4 d-flex flex-column ga-4" >
       <UAlert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
       <UAlert title="Flat Alert" text="This is a flat alert" variant="flat" />
       <UAlert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
       <UAlert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
       <UAlert title="Text Alert" text="This is a text alert" variant="text" />
       <UAlert title="Plain Alert" text="This is a plain alert" variant="plain" />
-    </v-container>
+    </u-container>
   `,
 });
 
@@ -411,7 +411,7 @@ Variants.parameters = {
 export const BorderColors: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
   template: `
-    <v-container class="pa-4 d-flex flex-column ga-4" >
+    <u-container class="pa-4 d-flex flex-column ga-4" >
       <u-alert border="start" border-color="deep-purple accent-4" elevation="2">
         Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut velit. Nulla facilisi..
         Morbi mollis tellus ac sapien. Fusce vel dui. Praesent ut ligula non mi varius sagittis. Vivamus
@@ -435,7 +435,7 @@ export const BorderColors: StoryFn<ComponentArgs> = () => ({
         Fusce commodo aliquam arcu. Pellentesque posuere. Phasellus tempus. Donec posuere vulputate
         arcu.
       </u-alert>
-    </v-container>
+    </u-container>
   `,
 });
 
@@ -475,7 +475,7 @@ BorderColors.parameters = {
 export const Icon: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
   template: `
-    <v-container class="pa-4 d-flex flex-column ga-4" >
+    <u-container class="pa-4 d-flex flex-column ga-4" >
       <u-alert color="#2A3B4D" density="compact" icon="mdi-firework" theme="dark">
         Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Vivamus quis mi. Quisque
         ut nisi. Maecenas malesuada.
@@ -491,7 +491,7 @@ export const Icon: StoryFn<ComponentArgs> = () => ({
         feugiat a, tellus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien,
         a accumsan nisi mauris ac eros. Curabitur at lacus ac velit ornare lobortis.
       </u-alert>
-    </v-container>
+    </u-container>
   `,
 });
 
@@ -523,26 +523,26 @@ Icon.parameters = {
 export const Outlined: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
   template: `
-    <v-container class="pa-4 d-flex flex-column ga-4" >
-      <v-alert color="purple" variant="outlined">
+    <u-container class="pa-4 d-flex flex-column ga-4" >
+      <u-alert color="purple" variant="outlined">
         <template v-slot:title> Outlined Alert </template>
         Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis
         nunc et lorem. Duis vel nibh at velit scelerisque suscipit. Praesent blandit laoreet nibh.
         Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor
         sagittis lacus. Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
         venenatis ante odio sit amet eros.
-      </v-alert>
+      </u-alert>
 
-      <v-alert type="success" variant="outlined">
+      <u-alert type="success" variant="outlined">
         Praesent venenatis metus at tortor pulvinar varius. Aenean commodo ligula eget dolor. Praesent
         ac massa at ligula laoreet iaculis. Vestibulum ullamcorper mauris at ligula.
-      </v-alert>
+      </u-alert>
 
-      <v-alert border="top" type="warning" variant="outlined" prominent>
+      <u-alert border="top" type="warning" variant="outlined" prominent>
         Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Suspendisse non nisl
         sit amet velit hendrerit rutrum. Nullam vel sem. Pellentesque dapibus hendrerit tortor.
-      </v-alert>
-    </v-container>
+      </u-alert>
+    </u-container>
   `,
 });
 
@@ -550,24 +550,24 @@ Outlined.parameters = {
   docs: {
     source: {
       code: `
-        <v-alert color="purple" variant="outlined">
+        <u-alert color="purple" variant="outlined">
           <template v-slot:title> Outlined Alert </template>
           Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis
           nunc et lorem. Duis vel nibh at velit scelerisque suscipit. Praesent blandit laoreet nibh.
           Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor
           sagittis lacus. Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
           venenatis ante odio sit amet eros.
-        </v-alert>
+        </u-alert>
 
-        <v-alert type="success" variant="outlined">
+        <u-alert type="success" variant="outlined">
           Praesent venenatis metus at tortor pulvinar varius. Aenean commodo ligula eget dolor. Praesent
           ac massa at ligula laoreet iaculis. Vestibulum ullamcorper mauris at ligula.
-        </v-alert>
+        </u-alert>
 
-        <v-alert border="top" type="warning" variant="outlined" prominent>
+        <u-alert border="top" type="warning" variant="outlined" prominent>
           Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Suspendisse non nisl
           sit amet velit hendrerit rutrum. Nullam vel sem. Pellentesque dapibus hendrerit tortor.
-        </v-alert>
+        </u-alert>
       `,
     },
   },
