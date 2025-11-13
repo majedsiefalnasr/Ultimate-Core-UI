@@ -1,1 +1,58 @@
-// UField styles
+// making padding 0 for help text
+.v-text-field .v-input__details {
+  padding-inline-start: 0;
+}
+
+// Placeholder
+.v-input {
+  .v-field {
+    // Placeholder transition
+    input,
+    .v-field__input {
+      &::placeholder {
+        transition: transform 0.2s ease-out;
+      }
+    }
+
+    &.v-field--focused {
+      input,
+      .v-field__input {
+        &::placeholder {
+          transform: translateX(4px) !important;
+
+          [dir='rtl'] & {
+            transform: translateX(-4px) !important;
+          }
+        }
+      }
+    }
+  }
+
+  // padding for different density
+  &.v-input--density-default {
+    .v-field {
+      .v-field__input {
+        --v-field-padding-start: 16px;
+        --v-field-padding-end: 16px;
+      }
+    }
+  }
+
+  &.v-input--density-comfortable {
+    .v-field {
+      .v-field__input {
+        --v-field-padding-start: 14px;
+        --v-field-padding-end: 14px;
+      }
+    }
+  }
+
+  &.v-input--density-compact {
+    .v-field {
+      .v-field__input {
+        --v-field-padding-start: 12px;
+        --v-field-padding-end: 12px;
+      }
+    }
+  }
+}

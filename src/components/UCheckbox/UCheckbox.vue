@@ -31,8 +31,6 @@
       id: id && id.trim() !== '' ? id : generatedId,
     };
   });
-
-  console.log('UCheckbox component initialized with ID:', computedAttrs.value.id);
 </script>
 
 <template>
