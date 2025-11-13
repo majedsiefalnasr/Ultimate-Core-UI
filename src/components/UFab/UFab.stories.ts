@@ -129,6 +129,17 @@ const meta: Meta<ComponentArgs> = {
       description:
         'Floating action buttons can be attached to material to signify a promoted action in your application. The default size will be used in most cases, whereas the small variant can be used to maintain continuity with similar sized elements.',
     },
+    api: {
+      data: [
+        {
+          element: {
+            title: 'v-fab',
+            link: 'https://vuetifyjs.com/en/api/v-fab/',
+          },
+          description: 'Primary component',
+        },
+      ],
+    },
   },
   argTypes: {
     color: {
