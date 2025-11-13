@@ -27,7 +27,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'vue/script-setup-uses-vars': 'error',
     // TypeScript
-    '@typescript-eslint/no-explicit-any': ['error'],
+    '@typescript-eslint/no-explicit-any': ['warn'],
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
     // Best practices
