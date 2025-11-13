@@ -6,8 +6,7 @@ import 'vuetify/styles'
 import { Template } from './DocsTemplate'
 
 // Import the Ultimate Core UI library with all themes and configurations
-import { UContainer } from '../src/components/UGrid'
-import { UThemeProvider } from '../src/components/UThemeProvider'
+import { ULayout, UMain, USheet, UThemeProvider } from '../src/components'
 import { createUltimateCoreUI } from '../src/plugins/createUltimateCoreUI'
 
 // Create Ultimate Core UI instance with default themes
@@ -16,29 +15,55 @@ const ultimateCoreUI = createUltimateCoreUI({})
 setup(app => app.use(ultimateCoreUI))
 
 // Theme switcher decorator
-const withVuetifyTheme: Decorator = (story, context) => {
-  const theme = useTheme()
-  
-  // Watch for theme changes from the toolbar
-  watch(
-    () => context.globals.theme,
-    (newTheme) => {
-      if (newTheme && theme.global.name.value !== newTheme) {
-        theme.change(newTheme)
+const withVuetifyTheme: Decorator = (story, context) => ({
+  setup() {
+    const theme = useTheme()
+
+    // Watch for theme changes from the toolbar
+    watch(
+      () => context.globals.theme,
+      (newTheme) => {
+        if (newTheme && theme.global.name.value !== newTheme) {
+          // Prefer Vuetify API if available, otherwise set directly
+          if (typeof theme.change === 'function') theme.change(newTheme)
+          else theme.global.name.value = newTheme
+        }
+      },
+      { immediate: true }
+    )
+
+    // Wrap story with nested structure
+    return () => h(
+      UThemeProvider,
+      { theme: theme.global.name.value, withBackground: true },
+      {
+        default: () => h(
+          ULayout,
+          {},
+          {
+            default: () => h(
+              UMain,
+              {},
+              {
+                default: () => h(
+                  USheet,
+                  { style: { minHeight: '300px' }, class: 'd-flex align-center justify-center pa-10' },
+                  {
+                    default: () => h(
+                      'div',
+                      { class: 'flex-fill w-100' },
+                      [h(story(), context.args)]
+                    )
+                  }
+                )
+              }
+            )
+          }
+        )
       }
-    },
-    { immediate: true }
-  )
-  
-  // Wrap story: UContainer > UThemeProvider > story content
-  return () => h(
-    UThemeProvider, 
-    { class: 'pa-10', theme: theme.global.name.value, withBackground: true }, 
-    {
-      default: () => h(story(), context.args)
-    }
-  )
-}
+    )
+  },
+})
 
 export const parameters = {
   docs: {page: Template},
