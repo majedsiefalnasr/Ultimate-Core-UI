@@ -15,6 +15,7 @@ export default defineConfig({
         'components',
         'index.ts'
       ),
+      '@ultimate/core-ui/avatars': path.resolve(__dirname, '..', 'src', 'avatars', 'index.ts'),
       // Use built ESM bundle from the library's dist so the playground is isolated
       '@ultimate/core-ui': path.resolve(__dirname, '..', 'dist', 'ultimate-core-ui.es.js'),
     },
