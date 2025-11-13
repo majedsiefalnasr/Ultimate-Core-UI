@@ -82,39 +82,7 @@ const libraryDefaults: Partial<VuetifyOptions> = {
   defaults: {
     global: {
       ripple: false,
-      elevation: 'none',
-    },
-    VBtn: {
-      rounded: 'md',
-    },
-    VTextField: {
-      variant: 'outlined',
-      color: 'primary',
-      density: 'comfortable',
-      // showDetails: 'auto' // uncomment if preferred
-    },
-    VTextarea: {
-      variant: 'outlined',
-      color: 'primary',
-      density: 'comfortable',
-    },
-    VSelect: {
-      variant: 'outlined',
-      color: 'primary',
-      density: 'comfortable',
-    },
-    VCard: {
-      rounded: 'lg',
-    },
-    VAlert: {
-      variant: 'tonal',
-      density: 'comfortable',
-    },
-    VChip: {
-      rounded: 'lg',
-    },
-    VDialog: {
-      // Use rounded dialogs by default; surfaces still inherit theme colors
+      variants: 'flat',
       rounded: 'lg',
     },
   },
