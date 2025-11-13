@@ -71,6 +71,14 @@ const meta: Meta<ComponentArgs> = {
         },
       ],
     },
+    anatomy: {
+      data: [
+        {
+          part: 'Part name',
+          description: 'Description of this part of the component',
+        },
+      ],
+    },
   },
   argTypes: {
     // Define all important props here
@@ -147,6 +155,9 @@ const meta: Meta<ComponentArgs> = {
     api: {
       /* ... */
     }, // ✅ Required
+    anatomy: {
+      /* ... */
+    }, // ✅ Optional
   },
   argTypes: {
     /* ... */
@@ -160,6 +171,7 @@ const meta: Meta<ComponentArgs> = {
 - `Vuetify` - Vuetify component reference
 - `Primary` - Default usage description
 - `api` - API element references
+- `anatomy` - Component anatomy (if applicable)
 
 ### 2. **Story Pattern (CRITICAL)**
 
@@ -510,6 +522,19 @@ const meta: Meta<ComponentArgs> = {
             link: '/api/file-input',
           },
           description: 'Complete API documentation for the file input component.',
+        },
+      ],
+    },
+    anatomy: {
+      data: [
+        {
+          part: 'Input Field',
+          description:
+            'The main input area where users can click to select files or drag and drop them.',
+        },
+        {
+          part: 'Chips',
+          description: 'Displays selected files as chips when the chips prop is enabled.',
         },
       ],
     },
