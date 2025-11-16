@@ -69,6 +69,14 @@ const meta: Meta<ComponentArgs> = {
       description:
         'u-hover is a renderless component that uses the default slot to provide scoped access to its internal model; as well as mouse event listeners to modify it. To explicitly control the internal state, use the model-value property.',
     },
+    api: {
+      data: [
+        {
+          element: { title: 'v-hover', link: 'https://vuetifyjs.com/en/api/v-hover/' },
+          description: 'Primary Component',
+        },
+      ],
+    },
   },
   argTypes: {
     closeDelay: {

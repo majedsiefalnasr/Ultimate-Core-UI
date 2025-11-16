@@ -53,6 +53,14 @@ const meta: Meta<ComponentArgs> = {
       description:
         'Icons come in two themes (light and dark), and five different sizes (x-small, small, default, large, and x-large).',
     },
+    api: {
+      data: [
+        {
+          element: { title: 'v-icon', link: 'https://vuetifyjs.com/en/api/v-icon/' },
+          description: 'Primary Component',
+        },
+      ],
+    },
   },
   argTypes: {
     color: {
