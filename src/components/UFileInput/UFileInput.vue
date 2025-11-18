@@ -18,8 +18,10 @@
    * <UFileInput variant="solo" label="Upload File" v-model="file" />
    */
   // Import Vuetify components
-  import { computed, useAttrs, useId } from 'vue';
+  import { computed, useAttrs } from 'vue';
   import { VFileInput, VLabel } from 'vuetify/components';
+
+  import { useUniqueId } from '../../composables/useUniqueId';
   import './UFileInput.scss';
 
   // Component options
@@ -32,7 +34,7 @@
   const attrs = useAttrs();
 
   // Generate unique ID for SSR-safe label association
-  const generatedId = useId();
+  const generatedId = useUniqueId();
 
   // Computed property for variant - determines rendering mode
   const variant = computed(() => attrs.variant as string | undefined);

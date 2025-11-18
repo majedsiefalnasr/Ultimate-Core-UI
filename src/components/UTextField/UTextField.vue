@@ -18,8 +18,10 @@
    * <UTextField variant="solo" label="Enter Name" v-model="name" />
    */
   // Import Vuetify components
-  import { computed, useAttrs, useId } from 'vue';
+  import { computed, useAttrs } from 'vue';
   import { VLabel, VTextField } from 'vuetify/components';
+
+  import { useUniqueId } from '../../composables/useUniqueId';
   import './UTextField.scss';
 
   // Component options
@@ -32,7 +34,7 @@
   const attrs = useAttrs();
 
   // Generate unique ID for SSR-safe label association
-  const generatedId = useId();
+  const generatedId = useUniqueId();
 
   // Computed property for variant - determines rendering mode
   const variant = computed(() => attrs.variant as string | undefined);

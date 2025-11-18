@@ -3,6 +3,7 @@ import type { App, Component } from 'vue';
 // Re-export everything from the components barrel so consumers can import
 // individual components or use the plugin.
 export * from './components';
+export * from './composables';
 
 import * as components from './components';
 

@@ -5,8 +5,10 @@
    * @component
    * @extends VSwitch
    */
-  import { computed, useAttrs, useId } from 'vue';
+  import { computed, useAttrs } from 'vue';
   import { VSwitch } from 'vuetify/components';
+
+  import { useUniqueId } from '../../composables/useUniqueId';
   import './USwitch.scss';
 
   // Component options
@@ -19,7 +21,7 @@
   const attrs = useAttrs();
 
   // Generate unique ID if not provided
-  const generatedId = useId();
+  const generatedId = useUniqueId();
 
   // Compute final attributes with ID fallback
   const computedAttrs = computed(() => {
