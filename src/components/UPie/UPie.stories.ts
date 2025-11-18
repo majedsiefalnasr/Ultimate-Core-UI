@@ -298,27 +298,23 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
-export const Default: StoryFn<ComponentArgs> = () => ({
+export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UPie },
   setup() {
-    const items = [
-      { key: 1, title: 'Yes', value: 45 },
-      { key: 2, title: 'No', value: 40 },
-      { key: 3, title: 'Maybe', value: 15 },
-    ];
-
-    return { items };
+    return { args };
   },
-  template: `
-    <u-pie 
-      title="Basic pie"
-      :palette="['#048BA8', '#99C24D', '#F18F01']"
-      :items="items"
-    />
-  `,
+  template: `<u-pie v-bind="args"/>`,
 });
 
-Default.args = {} as ComponentArgs;
+Default.args = {
+  title: 'Basic pie',
+  palette: ['#048BA8', '#99C24D', '#F18F01'],
+  items: [
+    { key: 1, title: 'Yes', value: 45 },
+    { key: 2, title: 'No', value: 40 },
+    { key: 3, title: 'Maybe', value: 15 },
+  ],
+} as ComponentArgs;
 
 /**
  * Charts are more like drawings then regular HTML elements and their size needs to be controlled externally.
