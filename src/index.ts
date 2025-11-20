@@ -1,5 +1,8 @@
 import type { App, Component } from 'vue';
 
+// Ensure library global styles are included when consumers import the package
+import './styles/index.scss';
+
 // Re-export everything from the components barrel so consumers can import
 // individual components or use the plugin.
 export * from './components';

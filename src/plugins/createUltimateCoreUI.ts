@@ -1,5 +1,7 @@
 import type { App, Component, Plugin } from 'vue';
 import { createVuetify } from 'vuetify';
+// Ensure library global styles are included when the plugin is used
+import '../styles/index.scss';
 
 import * as uComponents from '../components';
 
