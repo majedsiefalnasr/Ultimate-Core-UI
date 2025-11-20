@@ -105,6 +105,41 @@ Default.parameters = {
 };
 
 /**
+ * Density: demonstrate compact, comfortable and default densities
+ */
+export const Density: StoryFn<ComponentArgs> = () => ({
+  components: { USelect },
+  setup() {
+    const items = ['Foo', 'Bar', 'Fizz', 'Buzz'];
+    return { items };
+  },
+  template: `
+  <div>
+    <u-select :items="items" density="compact" label="Compact" class="ma-2" />
+    <u-select :items="items" density="comfortable" label="Comfortable" class="ma-2" />
+    <u-select :items="items" label="Default" class="ma-2" />
+  </div>
+  `,
+});
+
+Density.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>
+  <u-select :items="items" density="compact" label="Compact" />
+  <u-select :items="items" density="comfortable" label="Comfortable" />
+  <u-select :items="items" label="Default" />
+</template>
+<script setup>
+  const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+</script>
+      `,
+    },
+  },
+};
+
+/**
  * Multiple: allow selecting multiple values
  */
 export const Multiple: StoryFn<ComponentArgs> = () => ({
