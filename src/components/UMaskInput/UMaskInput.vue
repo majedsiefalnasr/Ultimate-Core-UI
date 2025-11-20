@@ -109,7 +109,7 @@
   <div v-else class="v-input" :style="containerStyle">
     <v-label v-if="label" :for="elementId" class="mb-1 text-body-2" :text="label" />
 
-    <v-mask-input v-bind="inputAttrs" :id="elementId" label="" variant="outlined" density="compact">
+    <v-mask-input v-bind="inputAttrs" :id="elementId" label="" variant="outlined">
       <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
         <slot :name="name" v-bind="slotData || {}" />
       </template>
