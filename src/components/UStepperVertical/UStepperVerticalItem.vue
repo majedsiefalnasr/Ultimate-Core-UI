@@ -1,19 +1,19 @@
 <script setup lang="ts">
   /**
-   * Extended UStepperVertical component built on Vuetify's VStepperVertical.
-   * Inherits all VStepperVertical props, slots, and emits.
+   * Extended UStepperVerticalItem component built on Vuetify's VStepperVerticalItem.
+   * Inherits all VStepperVerticalItem props, slots, and emits.
    * Configured for vertical layout.
    *
    * @component
-   * @extends VStepperVertical
+   * @extends VStepperVerticalItem
    */
-  // Import Vuetify's VStepperVertical component (Base component)
-  import { VStepperVertical } from 'vuetify/labs/VStepperVertical';
+  // Import Vuetify's VStepperVerticalItem component (Base component)
+  import { VStepperVerticalItem } from 'vuetify/labs/VStepperVertical';
   // Import local styles
   import './UStepperVertical.scss';
 
   defineOptions({
-    name: 'UStepperVertical',
+    name: 'UStepperVerticalItem',
     inheritAttrs: false,
   });
 
@@ -24,11 +24,11 @@
 </script>
 
 <template>
-  <v-stepper-vertical v-bind="$attrs">
+  <v-stepper-vertical-item v-bind="$attrs">
     <template v-for="(_, name) in $slots" :key="name" #[name]="slotData">
       <slot :name="name" v-bind="slotData || {}" />
     </template>
-  </v-stepper-vertical>
+  </v-stepper-vertical-item>
 </template>
 
 <style scoped lang="scss"></style>
