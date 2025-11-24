@@ -5,14 +5,20 @@
 .v-input--density-default .v-field--no-label {
   --v-field-input-padding-bottom: 10px;
   --v-field-input-padding-top: 10px;
+  --v-field-padding-bottom: 10px;
+  --v-field-padding-top: -6px;
 }
 
 .v-input--density-comfortable .v-field--no-label {
   --v-field-input-padding-bottom: 8px;
   --v-field-input-padding-top: 8px;
+  --v-field-padding-bottom: 8px;
+  --v-field-padding-top: -4px;
 }
 
 .v-input--density-compact .v-field--no-label {
   --v-field-input-padding-bottom: 2px;
   --v-field-input-padding-top: 2px;
+  --v-field-padding-bottom: 2px;
+  --v-field-padding-top: -6px;
 }
