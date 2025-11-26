@@ -204,6 +204,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBadge, UBtn },
   setup() {
@@ -222,271 +223,170 @@ Default.args = {
 } as ComponentArgs;
 
 // Dot Story
+const dotStoryTemplate = `
+  <u-toolbar color="grey-lighten-3" title="Application">
+    <u-btn stacked>
+      <u-badge
+        color="error"
+        dot
+      >
+        <u-icon icon="hugeicons:news"></u-icon>
+      </u-badge>
+
+      News
+    </u-btn>
+
+    <u-btn stacked>
+      <u-badge
+        color="error"
+        dot
+      >
+        <u-icon icon="hugeicons:blogger"></u-icon>
+      </u-badge>
+
+      Blog
+    </u-btn>
+
+    <u-btn
+      variant="tonal"
+      stacked
+    >
+      <u-icon icon="hugeicons:door-02"></u-icon>
+
+      Login
+    </u-btn>
+  </u-toolbar>
+`;
+
+/**
+ * The dot property removes badge’s content and reduces its overall size. This is useful
+ * when you need to draw a user’s attention subtly.
+ */
 export const Dot: StoryFn<ComponentArgs> = () => ({
   components: { UBadge, UBtn, UIcon, UToolbar },
-  template: `
-    <u-toolbar color="grey-lighten-3" title="Application">
-      <u-btn stacked>
-        <u-badge
-          color="error"
-          dot
-        >
-          <u-icon icon="hugeicons:news"></u-icon>
-        </u-badge>
-
-        News
-      </u-btn>
-
-      <u-btn stacked>
-        <u-badge
-          color="error"
-          dot
-        >
-          <u-icon icon="hugeicons:blogger"></u-icon>
-        </u-badge>
-
-        Blog
-      </u-btn>
-
-      <u-btn
-        variant="tonal"
-        stacked
-      >
-        <u-icon icon="hugeicons:door-02"></u-icon>
-
-        Login
-      </u-btn>
-    </u-toolbar>
-  `,
+  template: dotStoryTemplate,
 });
 
 Dot.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <u-toolbar color="grey-lighten-3" title="Application">
-            <u-btn stacked>
-              <u-badge
-                color="error"
-                dot
-              >
-                <u-icon icon="hugeicons:news"></u-icon>
-              </u-badge>
-
-              News
-            </u-btn>
-
-            <u-btn stacked>
-              <u-badge
-                color="error"
-                dot
-              >
-                <u-icon icon="hugeicons:blogger"></u-icon>
-              </u-badge>
-
-              Blog
-            </u-btn>
-
-            <u-btn
-              variant="tonal"
-              stacked
-            >
-              <u-icon icon="hugeicons:door-02"></u-icon>
-
-              Login
-            </u-btn>
-          </u-toolbar>
-        </template>
-      `,
+      code: `<template>${dotStoryTemplate}</template>`,
     },
   },
 };
 
 // Inline Story
+const inlineStoryTemplate = `
+  <u-list
+    class="mx-auto"
+    max-width="256"
+    border
+  >
+    <u-list-item
+      prepend-icon="hugeicons:inbox"
+      title="Inbox"
+      link
+    >
+      <template v-slot:append>
+        <u-badge
+          color="error"
+          content="6"
+          inline
+        ></u-badge>
+      </template>
+    </u-list-item>
+
+    <u-list-item
+      prepend-icon="hugeicons:sent-02"
+      title="Sent Mail"
+      link
+    ></u-list-item>
+
+    <u-list-item
+      prepend-icon="hugeicons:delete-02"
+      title="Trash"
+      link
+    >
+      <template v-slot:append>
+        <u-badge
+          color="info"
+          content="12"
+          inline
+        ></u-badge>
+      </template>
+    </u-list-item>
+
+    <u-list-item
+      prepend-icon="hugeicons:alert-circle"
+      title="Spam"
+      link
+    ></u-list-item>
+  </u-list>
+`;
+
+/**
+ * Inline badges can be placed anywhere with content and can render without a default slot.
+ */
 export const Inline: StoryFn<ComponentArgs> = () => ({
   components: { UBadge, UList, UListItem },
-  template: `
-    <u-list
-      class="mx-auto"
-      max-width="256"
-      border
-    >
-      <u-list-item
-        prepend-icon="hugeicons:inbox"
-        title="Inbox"
-        link
-      >
-        <template v-slot:append>
-          <u-badge
-            color="error"
-            content="6"
-            inline
-          ></u-badge>
-        </template>
-      </u-list-item>
-
-      <u-list-item
-        prepend-icon="hugeicons:sent-02"
-        title="Sent Mail"
-        link
-      ></u-list-item>
-
-      <u-list-item
-        prepend-icon="hugeicons:delete-02"
-        title="Trash"
-        link
-      >
-        <template v-slot:append>
-          <u-badge
-            color="info"
-            content="12"
-            inline
-          ></u-badge>
-        </template>
-      </u-list-item>
-
-      <u-list-item
-        prepend-icon="hugeicons:alert-circle"
-        title="Spam"
-        link
-      ></u-list-item>
-    </u-list>
-  `,
+  template: inlineStoryTemplate,
 });
 
 Inline.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <u-list
-            class="mx-auto"
-            max-width="256"
-            border
-          >
-            <u-list-item
-              prepend-icon="hugeicons:inbox"
-              title="Inbox"
-              link
-            >
-              <template v-slot:append>
-                <u-badge
-                  color="error"
-                  content="6"
-                  inline
-                ></u-badge>
-              </template>
-            </u-list-item>
-
-            <u-list-item
-              prepend-icon="hugeicons:sent-02"
-              title="Sent Mail"
-              link
-            ></u-list-item>
-
-            <u-list-item
-              prepend-icon="hugeicons:delete-02"
-              title="Trash"
-              link
-            >
-              <template v-slot:append>
-                <u-badge
-                  color="info"
-                  content="12"
-                  inline
-                ></u-badge>
-              </template>
-            </u-list-item>
-
-            <u-list-item
-              prepend-icon="hugeicons:alert-circle"
-              title="Spam"
-              link
-            ></u-list-item>
-          </u-list>
-        </template>
-      `,
+      code: `<template>${inlineStoryTemplate}</template>`,
     },
   },
 };
 
 // Content Story
+const contentStoryTemplate = `
+  <u-toolbar color="blue-grey-darken-3">
+    <u-spacer></u-spacer>
+
+    <u-btn class="text-none" stacked>
+      <u-badge color="success" dot>
+        <u-icon>hugeicons:home-01</u-icon>
+      </u-badge>
+    </u-btn>
+
+    <u-btn class="text-none" stacked>
+      <u-icon>hugeicons:user-group</u-icon>
+    </u-btn>
+
+    <u-btn class="text-none" stacked>
+      <u-badge color="error" content="9+">
+        <u-icon>hugeicons:store-01</u-icon>
+      </u-badge>
+    </u-btn>
+
+    <u-btn class="text-none" stacked>
+      <u-badge color="error" content="2">
+        <u-icon>hugeicons:notification-01</u-icon>
+      </u-badge>
+    </u-btn>
+
+    <u-btn class="text-none" stacked>
+      <u-icon>hugeicons:menu-02</u-icon>
+    </u-btn>
+
+    <u-spacer></u-spacer>
+  </u-toolbar>
+`;
+
+/**
+ * For simple text, use the content property to display a value on the badge.
+ */
 export const Content: StoryFn<ComponentArgs> = () => ({
   components: { UBadge, UBtn, UIcon, USpacer, UToolbar },
-  template: `
-    <u-toolbar color="blue-grey-darken-3">
-      <u-spacer></u-spacer>
-
-      <u-btn class="text-none" stacked>
-        <u-badge color="success" dot>
-          <u-icon>hugeicons:home-01</u-icon>
-        </u-badge>
-      </u-btn>
-
-      <u-btn class="text-none" stacked>
-        <u-icon>hugeicons:user-group</u-icon>
-      </u-btn>
-
-      <u-btn class="text-none" stacked>
-        <u-badge color="error" content="9+">
-          <u-icon>hugeicons:store-01</u-icon>
-        </u-badge>
-      </u-btn>
-
-      <u-btn class="text-none" stacked>
-        <u-badge color="error" content="2">
-          <u-icon>hugeicons:notification-01</u-icon>
-        </u-badge>
-      </u-btn>
-
-      <u-btn class="text-none" stacked>
-        <u-icon>hugeicons:menu-02</u-icon>
-      </u-btn>
-
-      <u-spacer></u-spacer>
-    </u-toolbar>
-  `,
+  template: contentStoryTemplate,
 });
 
 Content.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <u-toolbar color="blue-grey-darken-3">
-            <u-spacer></u-spacer>
-
-            <u-btn class="text-none" stacked>
-              <u-badge color="success" dot>
-                <u-icon>hugeicons:home-01</u-icon>
-              </u-badge>
-            </u-btn>
-
-            <u-btn class="text-none" stacked>
-              <u-icon>hugeicons:user-group</u-icon>
-            </u-btn>
-
-            <u-btn class="text-none" stacked>
-              <u-badge color="error" content="9+">
-                <u-icon>hugeicons:store-01</u-icon>
-              </u-badge>
-            </u-btn>
-
-            <u-btn class="text-none" stacked>
-              <u-badge color="error" content="2">
-                <u-icon>hugeicons:notification-01</u-icon>
-              </u-badge>
-            </u-btn>
-
-            <u-btn class="text-none" stacked>
-              <u-icon>hugeicons:menu-02</u-icon>
-            </u-btn>
-
-            <u-spacer></u-spacer>
-          </u-toolbar>
-        </template>
-      `,
+      code: `<template>${contentStoryTemplate}</template>`,
     },
   },
 };
