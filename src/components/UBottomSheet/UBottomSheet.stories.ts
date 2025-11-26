@@ -99,9 +99,12 @@ const meta: Meta<ComponentArgs> = {
       link: 'https://vuetifyjs.com/en/components/bottom-sheets/',
     },
     anatomy: {
-      description:
-        'The recommended components to use inside of a v-bottom-sheet are: v-card, v-list, v-sheet',
-      Image: '/images/stories/ubottomsheet.anatomy.png',
+      description: `The recommended components to use inside of a v-bottom-sheet are:
+
+- v-card
+- v-list
+- v-sheet`,
+      Image: '/images/stories/UBottomSheet.anatomy.png',
       data: [
         {
           element: '1. Container',
@@ -288,6 +291,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBottomSheet, UBtn, UCard },
   setup() {
@@ -314,166 +318,146 @@ Default.args = {
 } as ComponentArgs;
 
 // Inset Story
+const toggleStoryTemplate = `
+  <div class="text-center pa-8">
+    <u-btn
+      class="ma-auto"
+      size="x-large"
+      text="Click Me"
+      @click="sheet = !sheet"
+    ></u-btn>
+
+    <u-bottom-sheet v-model="sheet" inset>
+      <u-card class="text-center" height="200">
+        <u-card-text>
+          <u-btn
+            text="Close"
+            variant="text"
+            @click="sheet = !sheet"
+          ></u-btn>
+
+          <br>
+          <br>
+
+          <div>
+            This is a bottom sheet that is using the inset prop
+          </div>
+        </u-card-text>
+      </u-card>
+    </u-bottom-sheet>
+  </div>
+`;
+
+/**
+ * With the inset prop, reduce the maximum width of the content area on desktop to 70%.
+ * This can be further reduced manually using the width prop.
+ */
 export const Inset: StoryFn<ComponentArgs> = () => ({
   components: { UBottomSheet, UBtn, UCard, UCardText },
   setup() {
     const sheet = shallowRef(false);
     return { sheet };
   },
-  template: `
-    <div class="text-center pa-8">
-      <u-btn
-        class="ma-auto"
-        size="x-large"
-        text="Click Me"
-        @click="sheet = !sheet"
-      ></u-btn>
-
-      <u-bottom-sheet v-model="sheet" inset>
-        <u-card class="text-center" height="200">
-          <u-card-text>
-            <u-btn
-              text="Close"
-              variant="text"
-              @click="sheet = !sheet"
-            ></u-btn>
-
-            <br>
-            <br>
-
-            <div>
-              This is a bottom sheet that is using the inset prop
-            </div>
-          </u-card-text>
-        </u-card>
-      </u-bottom-sheet>
-    </div>
-  `,
+  template: toggleStoryTemplate,
 });
 
 Inset.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <div class="text-center pa-8">
-            <u-btn
-              class="ma-auto"
-              size="x-large"
-              text="Click Me"
-              @click="sheet = !sheet"
-            ></u-btn>
+<template>${toggleStoryTemplate}</template>
 
-            <u-bottom-sheet v-model="sheet" inset>
-              <u-card class="text-center" height="200">
-                <u-card-text>
-                  <u-btn
-                    text="Close"
-                    variant="text"
-                    @click="sheet = !sheet"
-                  ></u-btn>
-
-                  <br>
-                  <br>
-
-                  <div>
-                    This is a bottom sheet that is using the inset prop
-                  </div>
-                </u-card-text>
-              </u-card>
-            </u-bottom-sheet>
-          </div>
-        </template>
-
-        <script setup>
-          import { shallowRef } from 'vue'
-
-          const sheet = shallowRef(false)
-        </script>
+<script setup>
+  import { shallowRef } from 'vue'
+  
+  const sheet = shallowRef(false)
+</script>
       `,
     },
   },
 };
 
 // Music Player Story
+const musicPlayerStoryTemplate = `
+  <u-bottom-sheet inset>
+    <template v-slot:activator="{ props: activatorProps }">
+      <div class="text-center pa-8">
+        <u-btn
+          v-bind="activatorProps"
+          color="red"
+          size="x-large"
+          text="Click Me"
+        ></u-btn>
+      </div>
+    </template>
+
+    <u-sheet>
+      <u-progress-linear model-value="50"></u-progress-linear>
+
+      <u-list>
+        <u-list-item subtitle="Fitz & The Trantrums" title="The Walker">
+          <template v-slot:append>
+            <div class="d-flex ga-1">
+              <u-btn icon="hugeicons:backward-02" variant="text"></u-btn>
+
+              <u-btn icon="hugeicons:pause" variant="text"></u-btn>
+
+              <u-btn icon="hugeicons:forward-02" variant="text"></u-btn>
+            </div>
+          </template>
+        </u-list-item>
+      </u-list>
+    </u-sheet>
+  </u-bottom-sheet>
+`;
+
+/**
+ * Using a inset bottom sheet, you can make practical components such as this simple music player.
+ */
 export const MusicPlayer: StoryFn<ComponentArgs> = () => ({
   components: { UBottomSheet, UBtn, UList, UListItem, UProgressLinear, USheet },
-  template: `
-    <u-bottom-sheet inset>
-      <template v-slot:activator="{ props: activatorProps }">
-        <div class="text-center pa-8">
-          <u-btn
-            v-bind="activatorProps"
-            color="red"
-            size="x-large"
-            text="Click Me"
-          ></u-btn>
-        </div>
-      </template>
-
-      <u-sheet>
-        <u-progress-linear model-value="50"></u-progress-linear>
-
-        <u-list>
-          <u-list-item subtitle="Fitz & The Trantrums" title="The Walker">
-            <template v-slot:append>
-              <div class="d-flex ga-1">
-                <u-btn icon="hugeicons:backward-02" variant="text"></u-btn>
-
-                <u-btn icon="hugeicons:pause" variant="text"></u-btn>
-
-                <u-btn icon="hugeicons:forward-02" variant="text"></u-btn>
-              </div>
-            </template>
-          </u-list-item>
-        </u-list>
-      </u-sheet>
-    </u-bottom-sheet>
-  `,
+  template: musicPlayerStoryTemplate,
 });
 
 MusicPlayer.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <u-bottom-sheet inset>
-            <template v-slot:activator="{ props: activatorProps }">
-              <div class="text-center pa-8">
-                <u-btn
-                  v-bind="activatorProps"
-                  color="red"
-                  size="x-large"
-                  text="Click Me"
-                ></u-btn>
-              </div>
-            </template>
-
-            <u-sheet>
-              <u-progress-linear model-value="50"></u-progress-linear>
-
-              <u-list>
-                <u-list-item subtitle="Fitz & The Trantrums" title="The Walker">
-                  <template v-slot:append>
-                    <div class="d-flex ga-1">
-                      <u-btn icon="hugeicons:backward-02" variant="text"></u-btn>
-
-                      <u-btn icon="hugeicons:pause" variant="text"></u-btn>
-
-                      <u-btn icon="hugeicons:forward-02" variant="text"></u-btn>
-                    </div>
-                  </template>
-                </u-list-item>
-              </u-list>
-            </u-sheet>
-          </u-bottom-sheet>
-        </template>
-      `,
+      code: `<template>${musicPlayerStoryTemplate}</template>`,
     },
   },
 };
 
 // Open In List Story
+const openInListStoryTemplate = `
+  <u-bottom-sheet v-model="sheet">
+    <template v-slot:activator="{ props: activatorProps }">
+      <div class="text-center pa-8">
+        <u-btn
+          v-bind="activatorProps"
+          color="purple"
+          size="x-large"
+          text="Click Me"
+        ></u-btn>
+      </div>
+    </template>
+
+    <u-list>
+      <u-list-subheader title="Open in"></u-list-subheader>
+
+      <u-list-item
+        v-for="tile in tiles"
+        :key="tile.title"
+        :prepend-avatar="\`https://cdn.vuetifyjs.com/images/bottom-sheets/\${tile.img}\`"
+        :title="tile.title"
+        @click="sheet = false"
+      ></u-list-item>
+    </u-list>
+  </u-bottom-sheet>
+`;
+
+/**
+ * By combining a functional list into a bottom sheet, you can create a simple ‘open in’ component.
+ */
 export const OpenInList: StoryFn<ComponentArgs> = () => ({
   components: { UBottomSheet, UBtn, UList, UListItem, UListSubheader },
   setup() {
@@ -487,77 +471,27 @@ export const OpenInList: StoryFn<ComponentArgs> = () => ({
     ];
     return { sheet, tiles };
   },
-  template: `
-    <u-bottom-sheet v-model="sheet">
-      <template v-slot:activator="{ props: activatorProps }">
-        <div class="text-center pa-8">
-          <u-btn
-            v-bind="activatorProps"
-            color="purple"
-            size="x-large"
-            text="Click Me"
-          ></u-btn>
-        </div>
-      </template>
-
-      <u-list>
-        <u-list-subheader title="Open in"></u-list-subheader>
-
-        <u-list-item
-          v-for="tile in tiles"
-          :key="tile.title"
-          :prepend-avatar="\`https://cdn.vuetifyjs.com/images/bottom-sheets/\${tile.img}\`"
-          :title="tile.title"
-          @click="sheet = false"
-        ></u-list-item>
-      </u-list>
-    </u-bottom-sheet>
-  `,
+  template: openInListStoryTemplate,
 });
 
 OpenInList.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-bottom-sheet v-model="sheet">
-            <template v-slot:activator="{ props: activatorProps }">
-              <div class="text-center pa-8">
-                <u-btn
-                  v-bind="activatorProps"
-                  color="purple"
-                  size="x-large"
-                  text="Click Me"
-                ></u-btn>
-              </div>
-            </template>
+<template>${openInListStoryTemplate}</template>
 
-            <u-list>
-              <u-list-subheader title="Open in"></u-list-subheader>
-
-              <u-list-item
-                v-for="tile in tiles"
-                :key="tile.title"
-                :prepend-avatar="\`https://cdn.vuetifyjs.com/images/bottom-sheets/\${tile.img}\`"
-                :title="tile.title"
-                @click="sheet = false"
-              ></u-list-item>
-            </u-list>
-          </u-bottom-sheet>
-        </template>
-
-        <script setup>
-          import { shallowRef } from 'vue'
-
-          const sheet = shallowRef(false)
-          const tiles = [
-            { img: 'keep.png', title: 'Keep' },
-            { img: 'inbox.png', title: 'Inbox' },
-            { img: 'hangouts.png', title: 'Hangouts' },
-            { img: 'messenger.png', title: 'Messenger' },
-            { img: 'google.png', title: 'Google+' },
-          ]
-        </script>
+<script setup>
+  import { shallowRef } from 'vue'
+  
+  const sheet = shallowRef(false)
+  const tiles = [
+    { img: 'keep.png', title: 'Keep' },
+    { img: 'inbox.png', title: 'Inbox' },
+    { img: 'hangouts.png', title: 'Hangouts' },
+    { img: 'messenger.png', title: 'Messenger' },
+    { img: 'google.png', title: 'Google+' },
+  ]
+</script>
       `,
     },
   },
