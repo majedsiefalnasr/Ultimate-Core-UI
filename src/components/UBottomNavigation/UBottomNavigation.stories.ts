@@ -58,12 +58,16 @@ const meta: Meta<ComponentArgs> = {
           return `
             <u-bottom-navigation${attrsString}>
               <u-btn value="recent">
-                <u-icon>mdi-history</u-icon>
+                <u-icon>hugeicons:time-schedule</u-icon>
                 <span>Recent</span>
               </u-btn>
               <u-btn value="favorites">
-                <u-icon>mdi-heart</u-icon>
+                <u-icon>hugeicons:favourite</u-icon>
                 <span>Favorites</span>
+              </u-btn>
+              <u-btn value="nearby">
+                <u-icon>hugeicons:map-pinpoint-01</u-icon>
+                <span>Nearby</span>
               </u-btn>
             </u-bottom-navigation>`;
         },
@@ -275,17 +279,17 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
     <u-layout style="overflow: hidden; height: 56px;">
       <u-bottom-navigation v-bind="args">
         <u-btn value="recent">
-          <u-icon>mdi-history</u-icon>
+          <u-icon>hugeicons:time-schedule</u-icon>
           <span>Recent</span>
         </u-btn>
 
         <u-btn value="favorites">
-          <u-icon>mdi-heart</u-icon>
+          <u-icon>hugeicons:favourite</u-icon>
           <span>Favorites</span>
         </u-btn>
 
         <u-btn value="nearby">
-          <u-icon>mdi-map-marker</u-icon>
+          <u-icon>hugeicons:map-pinpoint-01</u-icon>
           <span>Nearby</span>
         </u-btn>
       </u-bottom-navigation>
@@ -312,17 +316,17 @@ export const Color: StoryFn<ComponentArgs> = () => ({
         active
       >
         <u-btn>
-          <u-icon>mdi-history</u-icon>
+          <u-icon>hugeicons:time-schedule</u-icon>
           Recents
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-heart</u-icon>
+          <u-icon>hugeicons:favourite</u-icon>
           Favorites
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-map-marker</u-icon>
+          <u-icon>hugeicons:map-pinpoint-01</u-icon>
           <span>Nearby</span>
         </u-btn>
       </u-bottom-navigation>
@@ -342,17 +346,17 @@ Color.parameters = {
               active
             >
               <u-btn>
-                <u-icon>mdi-history</u-icon>
+                <u-icon>hugeicons:time-schedule</u-icon>
                 Recents
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-heart</u-icon>
+                <u-icon>hugeicons:favourite</u-icon>
                 Favorites
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-map-marker</u-icon>
+                <u-icon>hugeicons:map-pinpoint-01</u-icon>
                 <span>Nearby</span>
               </u-btn>
             </u-bottom-navigation>
@@ -384,17 +388,17 @@ export const Grow: StoryFn<ComponentArgs> = () => ({
         grow
       >
         <u-btn>
-          <u-icon>mdi-history</u-icon>
+          <u-icon>hugeicons:time-schedule</u-icon>
           Recents
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-heart</u-icon>
+          <u-icon>hugeicons:favourite</u-icon>
           Favorites
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-map-marker</u-icon>
+          <u-icon>hugeicons:map-pinpoint-01</u-icon>
           Nearby
         </u-btn>
       </u-bottom-navigation>
@@ -414,17 +418,17 @@ Grow.parameters = {
               grow
             >
               <u-btn>
-                <u-icon>mdi-history</u-icon>
+                <u-icon>hugeicons:time-schedule</u-icon>
                 Recents
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-heart</u-icon>
+                <u-icon>hugeicons:favourite</u-icon>
                 Favorites
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-map-marker</u-icon>
+                <u-icon>hugeicons:map-pinpoint-01</u-icon>
                 Nearby
               </u-btn>
             </u-bottom-navigation>
@@ -456,17 +460,17 @@ export const Horizontal: StoryFn<ComponentArgs> = () => ({
         horizontal
       >
         <u-btn>
-          <u-icon>mdi-history</u-icon>
+          <u-icon>hugeicons:time-schedule</u-icon>
           Recents
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-heart</u-icon>
+          <u-icon>hugeicons:favourite</u-icon>
           Favorites
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-map-marker</u-icon>
+          <u-icon>hugeicons:map-pinpoint-01</u-icon>
           Nearby
         </u-btn>
       </u-bottom-navigation>
@@ -486,17 +490,17 @@ Horizontal.parameters = {
               horizontal
             >
               <u-btn>
-                <u-icon>mdi-history</u-icon>
+                <u-icon>hugeicons:time-schedule</u-icon>
                 Recents
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-heart</u-icon>
+                <u-icon>hugeicons:favourite</u-icon>
                 Favorites
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-map-marker</u-icon>
+                <u-icon>hugeicons:map-pinpoint-01</u-icon>
                 Nearby
               </u-btn>
             </u-bottom-navigation>
@@ -542,22 +546,22 @@ export const Shift: StoryFn<ComponentArgs> = () => ({
         mode="shift"
       >
         <u-btn>
-          <u-icon>mdi-television-play</u-icon>
+          <u-icon>hugeicons:video-02</u-icon>
           <span>Video</span>
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-music-note</u-icon>
+          <u-icon>hugeicons:music-note-03</u-icon>
           <span>Music</span>
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-book</u-icon>
+          <u-icon>hugeicons:bookmark-03</u-icon>
           <span>Book</span>
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-image</u-icon>
+          <u-icon>hugeicons:image-01</u-icon>
           <span>Image</span>
         </u-btn>
       </u-bottom-navigation>
@@ -577,22 +581,22 @@ Shift.parameters = {
               mode="shift"
             >
               <u-btn>
-                <u-icon>mdi-television-play</u-icon>
+                <u-icon>hugeicons:video-02</u-icon>
                 <span>Video</span>
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-music-note</u-icon>
+                <u-icon>hugeicons:music-note-03</u-icon>
                 <span>Music</span>
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-book</u-icon>
+                <u-icon>hugeicons:bookmark-03</u-icon>
                 <span>Book</span>
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-image</u-icon>
+                <u-icon>hugeicons:image-01</u-icon>
                 <span>Image</span>
               </u-btn>
             </u-bottom-navigation>
@@ -642,17 +646,17 @@ export const Toggle: StoryFn<ComponentArgs> = () => ({
         color="indigo"
       >
         <u-btn>
-          <u-icon>mdi-history</u-icon>
+          <u-icon>hugeicons:time-schedule</u-icon>
           Recents
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-heart</u-icon>
+          <u-icon>hugeicons:favourite</u-icon>
           Favorites
         </u-btn>
 
         <u-btn>
-          <u-icon>mdi-map-marker</u-icon>
+          <u-icon>hugeicons:map-pinpoint-01</u-icon>
           Nearby
         </u-btn>
       </u-bottom-navigation>
@@ -681,17 +685,17 @@ Toggle.parameters = {
               color="indigo"
             >
               <u-btn>
-                <u-icon>mdi-history</u-icon>
+                <u-icon>hugeicons:time-schedule</u-icon>
                 Recents
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-heart</u-icon>
+                <u-icon>hugeicons:favourite</u-icon>
                 Favorites
               </u-btn>
 
               <u-btn>
-                <u-icon>mdi-map-marker</u-icon>
+                <u-icon>hugeicons:map-pinpoint-01</u-icon>
                 Nearby
               </u-btn>
             </u-bottom-navigation>

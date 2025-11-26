@@ -47,7 +47,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-badge${attrsString}><u-btn icon="mdi-bell"></u-btn></u-badge>`;
+          return `<u-badge${attrsString}><u-btn icon="hugeicons:notification-01"></u-btn></u-badge>`;
         },
       },
     },
@@ -211,7 +211,7 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
   },
   template: `
     <u-badge v-bind="args">
-      <u-btn icon="mdi-bell"></u-btn>
+      <u-btn icon="hugeicons:notification-01"></u-btn>
     </u-badge>
   `,
 });
@@ -231,7 +231,7 @@ export const Dot: StoryFn<ComponentArgs> = () => ({
           color="error"
           dot
         >
-          <u-icon icon="mdi-newspaper-variant-outline"></u-icon>
+          <u-icon icon="hugeicons:news"></u-icon>
         </u-badge>
 
         News
@@ -242,7 +242,7 @@ export const Dot: StoryFn<ComponentArgs> = () => ({
           color="error"
           dot
         >
-          <u-icon icon="mdi-post"></u-icon>
+          <u-icon icon="hugeicons:blogger"></u-icon>
         </u-badge>
 
         Blog
@@ -252,7 +252,7 @@ export const Dot: StoryFn<ComponentArgs> = () => ({
         variant="tonal"
         stacked
       >
-        <u-icon icon="mdi-login"></u-icon>
+        <u-icon icon="hugeicons:door-02"></u-icon>
 
         Login
       </u-btn>
@@ -271,7 +271,7 @@ Dot.parameters = {
                 color="error"
                 dot
               >
-                <u-icon icon="mdi-newspaper-variant-outline"></u-icon>
+                <u-icon icon="hugeicons:news"></u-icon>
               </u-badge>
 
               News
@@ -282,7 +282,7 @@ Dot.parameters = {
                 color="error"
                 dot
               >
-                <u-icon icon="mdi-post"></u-icon>
+                <u-icon icon="hugeicons:blogger"></u-icon>
               </u-badge>
 
               Blog
@@ -292,7 +292,7 @@ Dot.parameters = {
               variant="tonal"
               stacked
             >
-              <u-icon icon="mdi-login"></u-icon>
+              <u-icon icon="hugeicons:door-02"></u-icon>
 
               Login
             </u-btn>
@@ -313,7 +313,7 @@ export const Inline: StoryFn<ComponentArgs> = () => ({
       border
     >
       <u-list-item
-        prepend-icon="mdi-inbox-arrow-down"
+        prepend-icon="hugeicons:inbox"
         title="Inbox"
         link
       >
@@ -327,13 +327,13 @@ export const Inline: StoryFn<ComponentArgs> = () => ({
       </u-list-item>
 
       <u-list-item
-        prepend-icon="mdi-send"
+        prepend-icon="hugeicons:sent-02"
         title="Sent Mail"
         link
       ></u-list-item>
 
       <u-list-item
-        prepend-icon="mdi-delete"
+        prepend-icon="hugeicons:delete-02"
         title="Trash"
         link
       >
@@ -347,7 +347,7 @@ export const Inline: StoryFn<ComponentArgs> = () => ({
       </u-list-item>
 
       <u-list-item
-        prepend-icon="mdi-alert-circle"
+        prepend-icon="hugeicons:alert-circle"
         title="Spam"
         link
       ></u-list-item>
@@ -366,7 +366,7 @@ Inline.parameters = {
             border
           >
             <u-list-item
-              prepend-icon="mdi-inbox-arrow-down"
+              prepend-icon="hugeicons:inbox"
               title="Inbox"
               link
             >
@@ -380,13 +380,13 @@ Inline.parameters = {
             </u-list-item>
 
             <u-list-item
-              prepend-icon="mdi-send"
+              prepend-icon="hugeicons:sent-02"
               title="Sent Mail"
               link
             ></u-list-item>
 
             <u-list-item
-              prepend-icon="mdi-delete"
+              prepend-icon="hugeicons:delete-02"
               title="Trash"
               link
             >
@@ -400,7 +400,7 @@ Inline.parameters = {
             </u-list-item>
 
             <u-list-item
-              prepend-icon="mdi-alert-circle"
+              prepend-icon="hugeicons:alert-circle"
               title="Spam"
               link
             ></u-list-item>
@@ -420,28 +420,28 @@ export const Content: StoryFn<ComponentArgs> = () => ({
 
       <u-btn class="text-none" stacked>
         <u-badge color="success" dot>
-          <u-icon>mdi-home-outline</u-icon>
+          <u-icon>hugeicons:home-01</u-icon>
         </u-badge>
       </u-btn>
 
       <u-btn class="text-none" stacked>
-        <u-icon>mdi-account-multiple-outline</u-icon>
+        <u-icon>hugeicons:user-group</u-icon>
       </u-btn>
 
       <u-btn class="text-none" stacked>
         <u-badge color="error" content="9+">
-          <u-icon>mdi-store-outline</u-icon>
+          <u-icon>hugeicons:store-01</u-icon>
         </u-badge>
       </u-btn>
 
       <u-btn class="text-none" stacked>
         <u-badge color="error" content="2">
-          <u-icon>mdi-bell-outline</u-icon>
+          <u-icon>hugeicons:notification-01</u-icon>
         </u-badge>
       </u-btn>
 
       <u-btn class="text-none" stacked>
-        <u-icon>mdi-menu</u-icon>
+        <u-icon>hugeicons:menu-02</u-icon>
       </u-btn>
 
       <u-spacer></u-spacer>
@@ -459,28 +459,28 @@ Content.parameters = {
 
             <u-btn class="text-none" stacked>
               <u-badge color="success" dot>
-                <u-icon>mdi-home-outline</u-icon>
+                <u-icon>hugeicons:home-01</u-icon>
               </u-badge>
             </u-btn>
 
             <u-btn class="text-none" stacked>
-              <u-icon>mdi-account-multiple-outline</u-icon>
+              <u-icon>hugeicons:user-group</u-icon>
             </u-btn>
 
             <u-btn class="text-none" stacked>
               <u-badge color="error" content="9+">
-                <u-icon>mdi-store-outline</u-icon>
+                <u-icon>hugeicons:store-01</u-icon>
               </u-badge>
             </u-btn>
 
             <u-btn class="text-none" stacked>
               <u-badge color="error" content="2">
-                <u-icon>mdi-bell-outline</u-icon>
+                <u-icon>hugeicons:notification-01</u-icon>
               </u-badge>
             </u-btn>
 
             <u-btn class="text-none" stacked>
-              <u-icon>mdi-menu</u-icon>
+              <u-icon>hugeicons:menu-02</u-icon>
             </u-btn>
 
             <u-spacer></u-spacer>

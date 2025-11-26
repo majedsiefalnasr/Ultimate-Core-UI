@@ -250,16 +250,16 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
   template: `
     <u-btn-toggle v-model="toggle" v-bind="args">
       <u-btn>
-        <u-icon>mdi-format-align-left</u-icon>
+        <u-icon>hugeicons:text-align-justify-left</u-icon>
       </u-btn>
       <u-btn>
-        <u-icon>mdi-format-align-center</u-icon>
+        <u-icon>hugeicons:text-align-center</u-icon>
       </u-btn>
       <u-btn>
-        <u-icon>mdi-format-align-right</u-icon>
+        <u-icon>hugeicons:text-align-justify-right</u-icon>
       </u-btn>
       <u-btn>
-        <u-icon>mdi-format-align-justify</u-icon>
+        <u-icon>hugeicons:text-align-justify-center</u-icon>
       </u-btn>
     </u-btn-toggle>
   `,
@@ -272,16 +272,16 @@ Default.parameters = {
     source: {
       code: `<u-btn-toggle v-model="toggle">
   <u-btn>
-    <u-icon>mdi-format-align-left</u-icon>
+    <u-icon>hugeicons:text-align-justify-left</u-icon>
   </u-btn>
   <u-btn>
-    <u-icon>mdi-format-align-center</u-icon>
+    <u-icon>hugeicons:text-align-center</u-icon>
   </u-btn>
   <u-btn>
-    <u-icon>mdi-format-align-right</u-icon>
+    <u-icon>hugeicons:text-align-justify-right</u-icon>
   </u-btn>
   <u-btn>
-    <u-icon>mdi-format-align-justify</u-icon>
+    <u-icon>hugeicons:text-align-justify-center</u-icon>
   </u-btn>
 </u-btn-toggle>`,
     },
@@ -297,10 +297,10 @@ export const Divided: StoryFn<ComponentArgs> = () => ({
   template: `
     <div class="d-flex align-center flex-column pa-6">
       <u-btn-toggle v-model="toggle" border divided>
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-toggle>
     </div>
   `,
@@ -312,10 +312,10 @@ Divided.parameters = {
       code: `<template>
   <div class="d-flex align-center flex-column pa-6">
     <u-btn-toggle v-model="toggle" border divided>
-      <u-btn icon="mdi-format-align-left"></u-btn>
-      <u-btn icon="mdi-format-align-center"></u-btn>
-      <u-btn icon="mdi-format-align-right"></u-btn>
-      <u-btn icon="mdi-format-align-justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
   </div>
 </template>
@@ -339,34 +339,34 @@ export const Variant: StoryFn<ComponentArgs> = () => ({
     <div class="d-flex align-center flex-column pa-6">
       <div class="text-subtitle-2">Default</div>
       <u-btn-toggle v-model="toggle" color="primary">
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-toggle>
 
       <div class="mt-6 text-subtitle-2">Text</div>
       <u-btn-toggle v-model="toggle" color="primary" variant="text">
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-toggle>
 
       <div class="mt-6 text-subtitle-2">Plain</div>
       <u-btn-toggle v-model="toggle" color="primary" variant="plain">
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-toggle>
 
       <div class="mt-6 text-subtitle-2">Outlined</div>
       <u-btn-toggle v-model="toggle" color="primary" variant="outlined">
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-toggle>
     </div>
   `,
@@ -379,34 +379,34 @@ Variant.parameters = {
   <div class="d-flex align-center flex-column pa-6">
     <div class="text-subtitle-2">Default</div>
     <u-btn-toggle v-model="toggle" color="primary">
-      <u-btn icon="mdi-format-align-left"></u-btn>
-      <u-btn icon="mdi-format-align-center"></u-btn>
-      <u-btn icon="mdi-format-align-right"></u-btn>
-      <u-btn icon="mdi-format-align-justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
 
     <div class="mt-6 text-subtitle-2">Text</div>
     <u-btn-toggle v-model="toggle" color="primary" variant="text">
-      <u-btn icon="mdi-format-align-left"></u-btn>
-      <u-btn icon="mdi-format-align-center"></u-btn>
-      <u-btn icon="mdi-format-align-right"></u-btn>
-      <u-btn icon="mdi-format-align-justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
 
     <div class="mt-6 text-subtitle-2">Plain</div>
     <u-btn-toggle v-model="toggle" color="primary" variant="plain">
-      <u-btn icon="mdi-format-align-left"></u-btn>
-      <u-btn icon="mdi-format-align-center"></u-btn>
-      <u-btn icon="mdi-format-align-right"></u-btn>
-      <u-btn icon="mdi-format-align-justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
 
     <div class="mt-6 text-subtitle-2">Outlined</div>
     <u-btn-toggle v-model="toggle" color="primary" variant="outlined">
-      <u-btn icon="mdi-format-align-left"></u-btn>
-      <u-btn icon="mdi-format-align-center"></u-btn>
-      <u-btn icon="mdi-format-align-right"></u-btn>
-      <u-btn icon="mdi-format-align-justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
   </div>
 </template>
@@ -429,10 +429,10 @@ export const Mandatory: StoryFn<ComponentArgs> = () => ({
   template: `
     <div class="d-flex flex-column align-center pa-6">
       <u-btn-toggle v-model="toggle" color="primary" border mandatory>
-        <u-btn icon="mdi-format-align-left" value="left"></u-btn>
-        <u-btn icon="mdi-format-align-center" value="center"></u-btn>
-        <u-btn icon="mdi-format-align-right" value="right"></u-btn>
-        <u-btn icon="mdi-format-align-justify" value="justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center" value="center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right" value="right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center" value="justify"></u-btn>
       </u-btn-toggle>
       <pre class="pt-2">{{ toggle }}</pre>
     </div>
@@ -445,10 +445,10 @@ Mandatory.parameters = {
       code: `<template>
   <div class="d-flex flex-column align-center pa-6">
     <u-btn-toggle v-model="toggle" color="primary" border mandatory>
-      <u-btn icon="mdi-format-align-left" value="left"></u-btn>
-      <u-btn icon="mdi-format-align-center" value="center"></u-btn>
-      <u-btn icon="mdi-format-align-right" value="right"></u-btn>
-      <u-btn icon="mdi-format-align-justify" value="justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center" value="center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right" value="right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center" value="justify"></u-btn>
     </u-btn-toggle>
     <pre class="pt-2">{{ toggle }}</pre>
   </div>
@@ -472,10 +472,10 @@ export const Multiple: StoryFn<ComponentArgs> = () => ({
   template: `
     <div class="d-flex flex-column align-center pa-6">
       <u-btn-toggle v-model="toggle" border multiple>
-        <u-btn icon="mdi-format-align-left" value="left"></u-btn>
-        <u-btn icon="mdi-format-align-center" value="center"></u-btn>
-        <u-btn icon="mdi-format-align-right" value="right"></u-btn>
-        <u-btn icon="mdi-format-align-justify" value="justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center" value="center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right" value="right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center" value="justify"></u-btn>
       </u-btn-toggle>
       <pre class="pt-2">{{ toggle }}</pre>
     </div>
@@ -488,10 +488,10 @@ Multiple.parameters = {
       code: `<template>
   <div class="d-flex flex-column align-center pa-6">
     <u-btn-toggle v-model="toggle" border multiple>
-      <u-btn icon="mdi-format-align-left" value="left"></u-btn>
-      <u-btn icon="mdi-format-align-center" value="center"></u-btn>
-      <u-btn icon="mdi-format-align-right" value="right"></u-btn>
-      <u-btn icon="mdi-format-align-justify" value="justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center" value="center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right" value="right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center" value="justify"></u-btn>
     </u-btn-toggle>
     <pre class="pt-2">{{ toggle }}</pre>
   </div>
@@ -511,17 +511,17 @@ export const Rounded: StoryFn<ComponentArgs> = () => ({
   template: `
     <div class="d-flex justify-space-around pa-6">
       <u-btn-toggle rounded="0" border>
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-toggle>
 
       <u-btn-toggle rounded="xl" border>
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-toggle>
     </div>
   `,
@@ -533,17 +533,17 @@ Rounded.parameters = {
       code: `<template>
   <div class="d-flex justify-space-around pa-6">
     <u-btn-toggle rounded="0" border>
-      <u-btn icon="mdi-format-align-left"></u-btn>
-      <u-btn icon="mdi-format-align-center"></u-btn>
-      <u-btn icon="mdi-format-align-right"></u-btn>
-      <u-btn icon="mdi-format-align-justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
 
     <u-btn-toggle rounded="xl" border>
-      <u-btn icon="mdi-format-align-left"></u-btn>
-      <u-btn icon="mdi-format-align-center"></u-btn>
-      <u-btn icon="mdi-format-align-right"></u-btn>
-      <u-btn icon="mdi-format-align-justify"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+      <u-btn icon="hugeicons:text-align-center"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+      <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
   </div>
 </template>`,
@@ -566,17 +566,17 @@ export const WYSIWYG: StoryFn<ComponentArgs> = () => ({
       <div class="d-flex justify-space-between pa-4 pb-0">
         <u-btn-toggle v-model="formatting" variant="outlined" divided multiple>
           <u-btn>
-            <u-icon icon="mdi-format-italic"></u-icon>
+            <u-icon icon="hugeicons:text-italic"></u-icon>
           </u-btn>
           <u-btn>
-            <u-icon icon="mdi-format-bold"></u-icon>
+            <u-icon icon="hugeicons:text-bold"></u-icon>
           </u-btn>
           <u-btn>
-            <u-icon icon="mdi-format-underline"></u-icon>
+            <u-icon icon="hugeicons:text-underline"></u-icon>
           </u-btn>
           <u-btn>
             <div class="d-flex align-center flex-column justify-center">
-              <u-icon icon="mdi-format-color-text"></u-icon>
+              <u-icon icon="hugeicons:text-color"></u-icon>
               <u-sheet color="purple" height="4" width="26" tile></u-sheet>
             </div>
           </u-btn>
@@ -584,13 +584,13 @@ export const WYSIWYG: StoryFn<ComponentArgs> = () => ({
 
         <u-btn-toggle v-model="alignment" variant="outlined" divided>
           <u-btn>
-            <u-icon icon="mdi-format-align-center"></u-icon>
+            <u-icon icon="hugeicons:text-align-center"></u-icon>
           </u-btn>
           <u-btn>
-            <u-icon icon="mdi-format-align-left"></u-icon>
+            <u-icon icon="hugeicons:text-align-left"></u-icon>
           </u-btn>
           <u-btn>
-            <u-icon icon="mdi-format-align-right"></u-icon>
+            <u-icon icon="hugeicons:text-align-right"></u-icon>
           </u-btn>
         </u-btn-toggle>
       </div>
@@ -610,17 +610,17 @@ WYSIWYG.parameters = {
     <div class="d-flex justify-space-between pa-4 pb-0">
       <u-btn-toggle v-model="formatting" variant="outlined" divided multiple>
         <u-btn>
-          <u-icon icon="mdi-format-italic"></u-icon>
+          <u-icon icon="hugeicons:text-italic"></u-icon>
         </u-btn>
         <u-btn>
-          <u-icon icon="mdi-format-bold"></u-icon>
+          <u-icon icon="hugeicons:text-bold"></u-icon>
         </u-btn>
         <u-btn>
-          <u-icon icon="mdi-format-underline"></u-icon>
+          <u-icon icon="hugeicons:text-underline"></u-icon>
         </u-btn>
         <u-btn>
           <div class="d-flex align-center flex-column justify-center">
-            <u-icon icon="mdi-format-color-text"></u-icon>
+            <u-icon icon="hugeicons:text-color"></u-icon>
             <u-sheet color="purple" height="4" width="26" tile></u-sheet>
           </div>
         </u-btn>
@@ -628,13 +628,13 @@ WYSIWYG.parameters = {
 
       <u-btn-toggle v-model="alignment" variant="outlined" divided>
         <u-btn>
-          <u-icon icon="mdi-format-align-center"></u-icon>
+          <u-icon icon="hugeicons:text-align-center"></u-icon>
         </u-btn>
         <u-btn>
-          <u-icon icon="mdi-format-align-left"></u-icon>
+          <u-icon icon="hugeicons:text-align-left"></u-icon>
         </u-btn>
         <u-btn>
-          <u-icon icon="mdi-format-align-right"></u-icon>
+          <u-icon icon="hugeicons:text-align-right"></u-icon>
         </u-btn>
       </u-btn-toggle>
     </div>

@@ -309,7 +309,7 @@ export const CustomDelimiters: StoryFn<ComponentArgs> = () => ({
       <u-carousel
         :continuous="false"
         :show-arrows="false"
-        delimiter-icon="mdi-square"
+        delimiter-icon="hugeicons:square"
         height="300"
         hide-delimiter-background
       >
@@ -333,7 +333,7 @@ CustomDelimiters.parameters = {
     <u-carousel
       :continuous="false"
       :show-arrows="false"
-      delimiter-icon="mdi-square"
+      delimiter-icon="hugeicons:square"
       height="300"
       hide-delimiter-background
     >
@@ -667,13 +667,13 @@ export const Model: StoryFn<ComponentArgs> = () => ({
     <div>
       <div class="d-flex justify-space-around align-center py-4">
         <u-btn
-          icon="mdi-minus"
+          icon="hugeicons:minus-sign"
           variant="text"
           @click="model = Math.max(model - 1, 0)"
         ></u-btn>
         {{ model }}
         <u-btn
-          icon="mdi-plus"
+          icon="hugeicons:plus-sign"
           variant="text"
           @click="model = Math.min(model + 1, 4)"
         ></u-btn>
@@ -698,13 +698,13 @@ Model.parameters = {
   <div>
     <div class="d-flex justify-space-around align-center py-4">
       <u-btn
-        icon="mdi-minus"
+        icon="hugeicons:minus-sign"
         variant="text"
         @click="model = Math.max(model - 1, 0)"
       ></u-btn>
       {{ model }}
       <u-btn
-        icon="mdi-plus"
+        icon="hugeicons:plus-sign"
         variant="text"
         @click="model = Math.min(model + 1, 4)"
       ></u-btn>

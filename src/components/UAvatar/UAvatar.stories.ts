@@ -245,7 +245,7 @@ export const Tile: StoryFn<ComponentArgs> = () => ({
         color="blue-darken-2"
         rounded="0"
       >
-        <u-icon icon="mdi-alarm"></u-icon>
+        <u-icon icon="hugeicons:alarm-clock"></u-icon>
       </u-avatar>
     </div>
   `,
@@ -261,7 +261,7 @@ Tile.parameters = {
               color="blue-darken-2"
               rounded="0"
             >
-              <u-icon icon="mdi-alarm"></u-icon>
+              <u-icon icon="hugeicons:alarm-clock"></u-icon>
             </u-avatar>
           </div>
         </template>

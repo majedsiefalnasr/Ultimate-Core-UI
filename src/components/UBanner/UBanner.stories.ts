@@ -241,7 +241,7 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {
   color: 'primary',
-  icon: 'mdi-information',
+  icon: 'hugeicons:information-circle',
   lines: 'one',
   text: 'This is a banner message with important information.',
 } as ComponentArgs;
@@ -254,7 +254,7 @@ export const Lines: StoryFn<ComponentArgs> = () => ({
       <u-banner
         class="my-4"
         color="deep-purple-accent-4"
-        icon="mdi-lock"
+        icon="hugeicons:lock-password"
         lines="one"
       >
         <u-banner-text>
@@ -269,7 +269,7 @@ export const Lines: StoryFn<ComponentArgs> = () => ({
       <u-banner
         class="my-4"
         color="error"
-        icon="mdi-weather-hurricane"
+        icon="hugeicons:waiter"
         lines="two"
       >
         <u-banner-text>
@@ -284,7 +284,7 @@ export const Lines: StoryFn<ComponentArgs> = () => ({
       <u-banner
         class="my-4"
         color="warning"
-        icon="$warning"
+        icon="hugeicons:alert-02"
         lines="three"
       >
         <u-banner-text>
@@ -308,7 +308,7 @@ Lines.parameters = {
             <u-banner
               class="my-4"
               color="deep-purple-accent-4"
-              icon="mdi-lock"
+              icon="hugeicons:lock-password"
               lines="one"
             >
               <u-banner-text>
@@ -323,7 +323,7 @@ Lines.parameters = {
             <u-banner
               class="my-4"
               color="error"
-              icon="mdi-weather-hurricane"
+              icon="hugeicons:waiter"
               lines="two"
             >
               <u-banner-text>
@@ -338,7 +338,7 @@ Lines.parameters = {
             <u-banner
               class="my-4"
               color="warning"
-              icon="$warning"
+              icon="hugeicons:alert-02"
               lines="three"
             >
               <u-banner-text>
@@ -493,7 +493,7 @@ export const Actions: StoryFn<ComponentArgs> = () => ({
   template: `
     <u-banner
       color="warning"
-      icon="mdi-wifi-strength-alert-outline"
+      icon="hugeicons:wifi-error-01"
       lines="one"
     >
       <template v-slot:text>
@@ -520,7 +520,7 @@ Actions.parameters = {
         <template>
           <u-banner
             color="warning"
-            icon="mdi-wifi-strength-alert-outline"
+            icon="hugeicons:wifi-error-01"
             lines="one"
           >
             <template v-slot:text>
@@ -549,7 +549,7 @@ export const Icon: StoryFn<ComponentArgs> = () => ({
   template: `
     <u-banner
       color="pink-darken-1"
-      icon="mdi-account-box"
+      icon="hugeicons:user-account"
       lines="two"
     >
       <template v-slot:prepend>
@@ -574,7 +574,7 @@ Icon.parameters = {
         <template>
           <u-banner
             color="pink-darken-1"
-            icon="mdi-account-box"
+            icon="hugeicons:user-account"
             lines="two"
           >
             <template v-slot:prepend>
@@ -606,7 +606,7 @@ export const Prepend: StoryFn<ComponentArgs> = () => ({
       <template v-slot:prepend>
         <u-avatar
           color="deep-purple-accent-4"
-          icon="mdi-account-filter"
+          icon="hugeicons:user-id-verification"
         ></u-avatar>
       </template>
 
@@ -635,7 +635,7 @@ Prepend.parameters = {
             <template v-slot:prepend>
               <u-avatar
                 color="deep-purple-accent-4"
-                icon="mdi-account-filter"
+                icon="hugeicons:user-id-verification"
               ></u-avatar>
             </template>
 

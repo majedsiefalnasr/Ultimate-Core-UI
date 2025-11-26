@@ -40,7 +40,7 @@ const meta: Meta<ComponentArgs> = {
     docs: {
       description: {
         component:
-          'The UAlert component is used to convey important information to the user through the use of contextual types, icons, and colors. This component provides a wrapper around v-alert with additional functionality.',
+          'The u-alert component is used to convey important information to the user through the use of contextual types, icons, and colors. This component provides a wrapper around v-alert with additional functionality.',
       },
       import: `import { UAlert } from '@ultimate/core-ui/components'`,
       source: {
@@ -59,7 +59,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<UAlert${attrsString}></UAlert>`;
+          return `<u-alert${attrsString}></u-alert>`;
         },
       },
     },
@@ -71,13 +71,13 @@ const meta: Meta<ComponentArgs> = {
     },
     Primary: {
       description:
-        "An alert is a v-sheet that specializes in getting the user's attention. While similar to v-banner in functionality, UAlert is typically inline with content and used multiple times throughout an application.",
+        "An alert is a u-sheet that specializes in getting the user's attention. While similar to u-banner in functionality, u-alert is typically inline with content and used multiple times throughout an application.",
     },
     anatomy: {
       description: `
-The recommended placement of elements inside of v-alert is:
-- Place a v-icon on the far left
-- Place v-alert-title to the right of the contextual icon
+The recommended placement of elements inside of u-alert is:
+- Place a u-icon on the far left
+- Place u-alert-title to the right of the contextual icon
 - Place textual content below the title
 - Place closing actions to the far right`,
       Image: '/images/stories/UAlert.anatomy.png',
@@ -366,7 +366,7 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
   setup() {
     return { args };
   },
-  template: '<UAlert v-bind="args"></UAlert>',
+  template: '<u-alert v-bind="args" />',
 });
 
 Default.args = {
@@ -377,17 +377,21 @@ Default.args = {
   variant: 'tonal',
 } as ComponentArgs;
 
-// Variants Story
+/**
+ * Variants
+ *
+ * Displays different variants of the UAlert component.
+ */
 export const Variants: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
   template: `
     <u-container class="pa-4 d-flex flex-column ga-4" >
-      <UAlert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
-      <UAlert title="Flat Alert" text="This is a flat alert" variant="flat" />
-      <UAlert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
-      <UAlert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
-      <UAlert title="Text Alert" text="This is a text alert" variant="text" />
-      <UAlert title="Plain Alert" text="This is a plain alert" variant="plain" />
+      <u-alert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
+      <u-alert title="Flat Alert" text="This is a flat alert" variant="flat" />
+      <u-alert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
+      <u-alert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
+      <u-alert title="Text Alert" text="This is a text alert" variant="text" />
+      <u-alert title="Plain Alert" text="This is a plain alert" variant="plain" />
     </u-container>
   `,
 });
@@ -396,12 +400,12 @@ Variants.parameters = {
   docs: {
     source: {
       code: `
-        <UAlert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
-        <UAlert title="Flat Alert" text="This is a flat alert" variant="flat" />
-        <UAlert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
-        <UAlert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
-        <UAlert title="Text Alert" text="This is a text alert" variant="text" />
-        <UAlert title="Plain Alert" text="This is a plain alert" variant="plain" />
+        <u-alert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
+        <u-alert title="Flat Alert" text="This is a flat alert" variant="flat" />
+        <u-alert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
+        <u-alert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
+        <u-alert title="Text Alert" text="This is a text alert" variant="text" />
+        <u-alert title="Plain Alert" text="This is a plain alert" variant="plain" />
       `,
     },
   },
@@ -476,17 +480,17 @@ export const Icon: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
   template: `
     <u-container class="pa-4 d-flex flex-column ga-4" >
-      <u-alert color="#2A3B4D" density="compact" icon="mdi-firework" theme="dark">
+      <u-alert color="#2A3B4D" density="compact" icon="hugeicons:abacus" theme="dark">
         Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Vivamus quis mi. Quisque
         ut nisi. Maecenas malesuada.
       </u-alert>
 
-      <u-alert color="#C51162" icon="mdi-material-design" theme="dark" border>
+      <u-alert color="#C51162" icon="hugeicons:material-and-texture" theme="dark" border>
         Phasellus blandit leo ut odio. Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut,
         faucibus non, euismod id, nulla. In ut quam vitae odio lacinia tincidunt.
       </u-alert>
 
-      <u-alert color="primary" icon="$vuetify" theme="dark" prominent>
+      <u-alert color="primary" icon="hugeicons:danger" theme="dark" prominent>
         Praesent congue erat at massa. Nullam vel sem. Aliquam lorem ante, dapibus in, viverra quis,
         feugiat a, tellus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien,
         a accumsan nisi mauris ac eros. Curabitur at lacus ac velit ornare lobortis.
@@ -499,17 +503,17 @@ Icon.parameters = {
   docs: {
     source: {
       code: `
-        <u-alert color="#2A3B4D" density="compact" icon="mdi-firework" theme="dark">
+        <u-alert color="#2A3B4D" density="compact" icon="hugeicons:abacus" theme="dark">
           Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Vivamus quis mi. Quisque
           ut nisi. Maecenas malesuada.
         </u-alert>
 
-        <u-alert color="#C51162" icon="mdi-material-design" theme="dark" border>
+        <u-alert color="#C51162" icon="hugeicons:material-and-texture" theme="dark" border>
           Phasellus blandit leo ut odio. Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut,
           faucibus non, euismod id, nulla. In ut quam vitae odio lacinia tincidunt.
         </u-alert>
 
-        <u-alert color="primary" icon="$vuetify" theme="dark" prominent>
+        <u-alert color="primary" icon="hugeicons:danger" theme="dark" prominent>
           Praesent congue erat at massa. Nullam vel sem. Aliquam lorem ante, dapibus in, viverra quis,
           feugiat a, tellus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien,
           a accumsan nisi mauris ac eros. Curabitur at lacus ac velit ornare lobortis.

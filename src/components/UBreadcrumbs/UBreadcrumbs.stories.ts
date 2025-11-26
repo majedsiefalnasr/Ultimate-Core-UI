@@ -277,7 +277,7 @@ export const Prepend: StoryFn<ComponentArgs> = () => ({
   template: `
     <u-breadcrumbs :items="items">
       <template v-slot:prepend>
-        <u-icon icon="mdi-home" size="small"></u-icon>
+        <u-icon icon="hugeicons:home-01" size="small"></u-icon>
       </template>
     </u-breadcrumbs>
   `,
@@ -290,7 +290,7 @@ Prepend.parameters = {
         <template>
           <u-breadcrumbs :items="items">
             <template v-slot:prepend>
-              <u-icon icon="mdi-home" size="small"></u-icon>
+              <u-icon icon="hugeicons:home-01" size="small"></u-icon>
             </template>
           </u-breadcrumbs>
         </template>
@@ -346,13 +346,13 @@ export const Dividers: StoryFn<ComponentArgs> = () => ({
     <div>
       <u-breadcrumbs :items="items">
         <template v-slot:divider>
-          <u-icon icon="mdi-forward"></u-icon>
+          <u-icon icon="hugeicons:arrow-right-double"></u-icon>
         </template>
       </u-breadcrumbs>
 
       <u-breadcrumbs :items="items">
         <template v-slot:divider>
-          <u-icon icon="mdi-chevron-right"></u-icon>
+          <u-icon icon="hugeicons:arrow-right-01"></u-icon>
         </template>
       </u-breadcrumbs>
     </div>
@@ -367,13 +367,13 @@ Dividers.parameters = {
           <div>
             <u-breadcrumbs :items="items">
               <template v-slot:divider>
-                <u-icon icon="mdi-forward"></u-icon>
+                <u-icon icon="hugeicons:arrow-right-double"></u-icon>
               </template>
             </u-breadcrumbs>
 
             <u-breadcrumbs :items="items">
               <template v-slot:divider>
-                <u-icon icon="mdi-chevron-right"></u-icon>
+                <u-icon icon="hugeicons:arrow-right-01"></u-icon>
               </template>
             </u-breadcrumbs>
           </div>

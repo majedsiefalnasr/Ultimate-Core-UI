@@ -1017,7 +1017,7 @@ export const AdvancedCustomOptions: StoryFn<ComponentArgs> = () => ({
             <template v-slot:append>
               <u-btn
                 :color="editingItem !== item.raw ? 'primary' : 'success'"
-                :icon="editingItem !== item.raw ? 'mdi-pencil' : 'mdi-check'"
+                :icon="editingItem !== item.raw ? 'hugeicons:edit-03' : 'hugeicons:tick-02'"
                 size="small"
                 variant="text"
                 @click.stop.prevent="edit(item.raw)"
@@ -1025,7 +1025,7 @@ export const AdvancedCustomOptions: StoryFn<ComponentArgs> = () => ({
               <u-btn
                 v-if="editingItem !== item.raw"
                 color="error"
-                icon="mdi-trash-can"
+                icon="hugeicons:delete-02"
                 size="small"
                 variant="text"
                 @click.stop.prevent="removeItem(item.raw)"
@@ -1113,7 +1113,7 @@ AdvancedCustomOptions.parameters = {
           <template v-slot:append>
             <u-btn
               :color="editingItem !== item.raw ? 'primary' : 'success'"
-              :icon="editingItem !== item.raw ? 'mdi-pencil' : 'mdi-check'"
+              :icon="editingItem !== item.raw ? 'hugeicons:edit-03' : 'hugeicons:tick-02'"
               size="small"
               variant="text"
               @click.stop.prevent="edit(item.raw)"
@@ -1121,7 +1121,7 @@ AdvancedCustomOptions.parameters = {
             <u-btn
               v-if="editingItem !== item.raw"
               color="error"
-              icon="mdi-trash-can"
+              icon="hugeicons:delete-02"
               size="small"
               variant="text"
               @click.stop.prevent="removeItem(item.raw)"

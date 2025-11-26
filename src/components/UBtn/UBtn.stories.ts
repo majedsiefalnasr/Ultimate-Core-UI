@@ -496,7 +496,7 @@ export const Rounded = () => ({
       <u-btn rounded="lg">lg</u-btn>
       <u-btn rounded="xl">xl</u-btn>
       <u-btn rounded="pill">pill</u-btn>
-      <u-btn rounded="circle" icon="mdi-heart"></u-btn>
+      <u-btn rounded="circle" icon="hugeicons:favourite"></u-btn>
     </div>
   `,
 });
@@ -513,7 +513,7 @@ Rounded.parameters = {
             <u-btn rounded="lg">lg</u-btn>
             <u-btn rounded="xl">xl</u-btn>
             <u-btn rounded="pill">pill</u-btn>
-            <u-btn rounded="circle" icon="mdi-heart"></u-btn>
+            <u-btn rounded="circle" icon="hugeicons:favourite"></u-btn>
           </div>
         </template>
       `,
@@ -633,37 +633,37 @@ export const Icon = () => ({
     <u-container>
       <u-row align="center" justify="center">
         <u-col cols="auto">
-          <u-btn density="compact" icon="mdi-plus"></u-btn>
+          <u-btn density="compact" icon="hugeicons:plus-sign"></u-btn>
         </u-col>
 
         <u-col cols="auto">
-          <u-btn density="comfortable" icon="mdi-tag"></u-btn>
+          <u-btn density="comfortable" icon="hugeicons:tag-01"></u-btn>
         </u-col>
 
         <u-col cols="auto">
-          <u-btn density="default" icon="mdi-open-in-new"></u-btn>
+          <u-btn density="default" icon="hugeicons:link-circle"></u-btn>
         </u-col>
       </u-row>
 
       <u-row align="center" justify="center">
         <u-col cols="auto">
-          <u-btn icon="mdi-account" size="x-small"></u-btn>
+          <u-btn icon="hugeicons:user-03" size="x-small"></u-btn>
         </u-col>
 
         <u-col cols="auto">
-          <u-btn icon="mdi-plus" size="small"></u-btn>
+          <u-btn icon="hugeicons:plus-sign" size="small"></u-btn>
         </u-col>
 
         <u-col cols="auto">
-          <u-btn icon="mdi-tag"></u-btn>
+          <u-btn icon="hugeicons:tag-01"></u-btn>
         </u-col>
 
         <u-col cols="auto">
-          <u-btn icon="mdi-open-in-new" size="large"></u-btn>
+          <u-btn icon="hugeicons:link-circle" size="large"></u-btn>
         </u-col>
 
         <u-col cols="auto">
-          <u-btn icon="mdi-calendar" size="x-large"></u-btn>
+          <u-btn icon="hugeicons:calendar-01" size="x-large"></u-btn>
         </u-col>
       </u-row>
     </u-container>
@@ -676,16 +676,16 @@ Icon.parameters = {
         <template>
           <u-container>
             <u-row align="center" justify="center">
-              <u-col cols="auto"><u-btn density="compact" icon="mdi-plus" /></u-col>
-              <u-col cols="auto"><u-btn density="comfortable" icon="mdi-tag" /></u-col>
-              <u-col cols="auto"><u-btn density="default" icon="mdi-open-in-new" /></u-col>
+              <u-col cols="auto"><u-btn density="compact" icon="hugeicons:plus-sign" /></u-col>
+              <u-col cols="auto"><u-btn density="comfortable" icon="hugeicons:tag-01" /></u-col>
+              <u-col cols="auto"><u-btn density="default" icon="hugeicons:link-circle" /></u-col>
             </u-row>
             <u-row align="center" justify="center">
-              <u-col cols="auto"><u-btn icon="mdi-account" size="x-small" /></u-col>
-              <u-col cols="auto"><u-btn icon="mdi-plus" size="small" /></u-col>
-              <u-col cols="auto"><u-btn icon="mdi-tag" /></u-col>
-              <u-col cols="auto"><u-btn icon="mdi-open-in-new" size="large" /></u-col>
-              <u-col cols="auto"><u-btn icon="mdi-calendar" size="x-large" /></u-col>
+              <u-col cols="auto"><u-btn icon="hugeicons:user-03" size="x-small" /></u-col>
+              <u-col cols="auto"><u-btn icon="hugeicons:plus-sign" size="small" /></u-col>
+              <u-col cols="auto"><u-btn icon="hugeicons:tag-01" /></u-col>
+              <u-col cols="auto"><u-btn icon="hugeicons:link-circle" size="large" /></u-col>
+              <u-col cols="auto"><u-btn icon="hugeicons:calendar-01" size="x-large" /></u-col>
             </u-row>
           </u-container>
         </template>
@@ -756,8 +756,8 @@ export const IconColor = () => ({
   template: `
     <div class="text-center">
       <u-btn
-        append-icon="mdi-account-circle"
-        prepend-icon="mdi-check-circle"
+        append-icon="hugeicons:user-circle"
+        prepend-icon="hugeicons:checkmark-circle-02"
       >
         <template v-slot:prepend>
           <u-icon color="success"></u-icon>
@@ -778,7 +778,7 @@ IconColor.parameters = {
       code: `
         <template>
           <div class="text-center">
-            <u-btn append-icon="mdi-account-circle" prepend-icon="mdi-check-circle">
+            <u-btn append-icon="hugeicons:user-circle" prepend-icon="hugeicons:checkmark-circle-02">
               <template #prepend><u-icon color="success" /></template>
               Button
               <template #append><u-icon color="warning" /></template>
@@ -903,12 +903,12 @@ export const InsideOfBars = () => ({
   template: `
     <u-toolbar>
       <template v-slot:prepend>
-        <u-btn icon="mdi-arrow-left"></u-btn>
+        <u-btn icon="hugeicons:arrow-left-02"></u-btn>
       </template>
 
-      <u-btn class="ms-5" icon="mdi-archive-plus-outline"></u-btn>
-      <u-btn icon="mdi-alert-circle-outline"></u-btn>
-      <u-btn icon="mdi-delete-outline"></u-btn>
+      <u-btn class="ms-5" icon="hugeicons:archive"></u-btn>
+      <u-btn icon="hugeicons:alert-02"></u-btn>
+      <u-btn icon="hugeicons:delete-02"></u-btn>
 
       <template v-if="$vuetify.display.smAndUp">
         <u-divider
@@ -918,9 +918,9 @@ export const InsideOfBars = () => ({
           vertical
         ></u-divider>
 
-        <u-btn icon="mdi-folder-outline"></u-btn>
-        <u-btn icon="mdi-tag-outline"></u-btn>
-        <u-btn icon="mdi-dots-vertical"></u-btn>
+        <u-btn icon="hugeicons:folder-01"></u-btn>
+        <u-btn icon="hugeicons:tag-01"></u-btn>
+        <u-btn icon="hugeicons:more-vertical"></u-btn>
       </template>
     </u-toolbar>
   `,
@@ -931,15 +931,15 @@ InsideOfBars.parameters = {
       code: `
         <template>
           <u-toolbar>
-            <template #prepend><u-btn icon="mdi-arrow-left" /></template>
-            <u-btn class="ms-5" icon="mdi-archive-plus-outline" />
-            <u-btn icon="mdi-alert-circle-outline" />
-            <u-btn icon="mdi-delete-outline" />
+            <template #prepend><u-btn icon="hugeicons:arrow-left-02" /></template>
+            <u-btn class="ms-5" icon="hugeicons:archive" />
+            <u-btn icon="hugeicons:alert-02" />
+            <u-btn icon="hugeicons:delete-02" />
             <template v-if="$vuetify.display.smAndUp">
               <u-divider class="mx-3 align-self-center" length="24" thickness="2" vertical />
-              <u-btn icon="mdi-folder-outline" />
-              <u-btn icon="mdi-tag-outline" />
-              <u-btn icon="mdi-dots-vertical" />
+              <u-btn icon="hugeicons:folder-01" />
+              <u-btn icon="hugeicons:tag-01" />
+              <u-btn icon="hugeicons:more-vertical" />
             </template>
           </u-toolbar>
         </template>
@@ -976,7 +976,7 @@ export const DiscordEvent = () => ({
           <template v-slot:prepend>
             <u-card-title>
               <u-icon
-                icon="mdi-calendar"
+                icon="hugeicons:calendar-01"
                 start
               ></u-icon>
 
@@ -1015,7 +1015,7 @@ export const DiscordEvent = () => ({
           <u-card-title class="text-body-2 d-flex align-center">
             <u-icon
               color="#949cf7"
-              icon="mdi-calendar"
+              icon="hugeicons:calendar-01"
               start
             ></u-icon>
 
@@ -1031,7 +1031,7 @@ export const DiscordEvent = () => ({
             <u-chip
               class="ms-2 text-medium-emphasis"
               color="grey-darken-4"
-              prepend-icon="mdi-account-multiple"
+              prepend-icon="hugeicons:user-group"
               size="small"
               text="81"
               variant="flat"
@@ -1052,13 +1052,13 @@ export const DiscordEvent = () => ({
         <div class="pa-4 d-flex align-center">
           <u-icon
             color="disabled"
-            icon="mdi-broadcast"
+            icon="hugeicons:wifi-circle"
             start
           ></u-icon>
 
           <u-icon
             color="#949cf7"
-            icon="mdi-video-vintage"
+            icon="hugeicons:video-02"
             size="x-small"
           ></u-icon>
 
@@ -1069,14 +1069,14 @@ export const DiscordEvent = () => ({
           <u-spacer></u-spacer>
 
           <u-btn
-            icon="mdi-dots-horizontal"
+            icon="hugeicons:more-horizontal"
             variant="text"
           ></u-btn>
 
           <u-btn
             class="me-2 text-none"
             color="#4f545c"
-            prepend-icon="mdi-export-variant"
+            prepend-icon="hugeicons:folder-export"
             variant="flat"
           >
             Share
@@ -1084,7 +1084,7 @@ export const DiscordEvent = () => ({
 
           <u-btn
             class="text-none"
-            prepend-icon="mdi-check"
+            prepend-icon="hugeicons:checkmark-circle-04"
             variant="text"
             border
           >
@@ -1105,7 +1105,7 @@ DiscordEvent.parameters = {
               <u-card-item>
                 <template #prepend>
                   <u-card-title>
-                    <u-icon icon="mdi-calendar" start />
+                    <u-icon icon="hugeicons:calendar-01" start />
                     1 Event
                   </u-card-title>
                 </template>
@@ -1119,11 +1119,11 @@ DiscordEvent.parameters = {
             <u-card class="ma-4" color="#2f3136" rounded="lg" variant="flat">
               <u-card-item>
                 <u-card-title class="text-body-2 d-flex align-center">
-                  <u-icon color="#949cf7" icon="mdi-calendar" start />
+                  <u-icon color="#949cf7" icon="hugeicons:calendar-01" start />
                   <span class="text-medium-emphasis font-weight-bold">1 Fri Dec 16th - 9:00 PM</span>
                   <u-spacer />
                   <u-avatar image="https://cdn.vuetifyjs.com/images/john-smirk.png" size="x-small" />
-                  <u-chip class="ms-2 text-medium-emphasis" color="grey-darken-4" prepend-icon="mdi-account-multiple" size="small" text="81" variant="flat" />
+                  <u-chip class="ms-2 text-medium-emphasis" color="grey-darken-4" prepend-icon="hugeicons:user-group" size="small" text="81" variant="flat" />
                 </u-card-title>
                 <div class="py-2">
                   <div class="text-h6">Live Q&A</div>
@@ -1132,13 +1132,13 @@ DiscordEvent.parameters = {
               </u-card-item>
               <u-divider />
               <div class="pa-4 d-flex align-center">
-                <u-icon color="disabled" icon="mdi-broadcast" start />
-                <u-icon color="#949cf7" icon="mdi-video-vintage" size="x-small" />
+                <u-icon color="disabled" icon="hugeicons:wifi-circle" start />
+                <u-icon color="#949cf7" icon="hugeicons:video-02" size="x-small" />
                 <span class="text-caption text-medium-emphasis ms-1 font-weight-light">streaming</span>
                 <u-spacer />
-                <u-btn icon="mdi-dots-horizontal" variant="text" />
-                <u-btn class="me-2 text-none" color="#4f545c" prepend-icon="mdi-export-variant" variant="flat">Share</u-btn>
-                <u-btn class="text-none" prepend-icon="mdi-check" variant="text" border>Interested</u-btn>
+                <u-btn icon="hugeicons:more-horizontal" variant="text" />
+                <u-btn class="me-2 text-none" color="#4f545c" prepend-icon="hugeicons:folder-export" variant="flat">Share</u-btn>
+                <u-btn class="text-none" prepend-icon="hugeicons:checkmark-circle-04" variant="text" border>Interested</u-btn>
               </div>
             </u-card>
           </u-card>
@@ -1153,7 +1153,14 @@ export const SurveyGroup = () => ({
   components: { UBtn, UCard, UItemGroup, UItem },
   setup() {
     const model = ref<number | null>(null);
-    return { model };
+    const icons = [
+      'hugeicons:one-square',
+      'hugeicons:two-square',
+      'hugeicons:three-square',
+      'hugeicons:four-square',
+      'hugeicons:five-square',
+    ];
+    return { model, icons };
   },
   template: `
     <u-card
@@ -1186,7 +1193,7 @@ export const SurveyGroup = () => ({
           <template v-slot:default="{ toggle }">
             <u-btn
               :active="model != null && model + 1 >= n"
-              :icon="'mdi-numeric-' + n"
+              :icon="icons[n - 1]"
               height="40"
               variant="text"
               width="40"
@@ -1213,7 +1220,7 @@ SurveyGroup.parameters = {
             <u-item-group v-model="model" class="d-flex justify-sm-space-between px-6 pt-2 pb-6">
               <u-item v-for="n in 5" :key="n">
                 <template #default="{ toggle }">
-                  <u-btn :active="model != null && model + 1 >= n" :icon="'mdi-numeric-' + n" height="40" variant="text" width="40" border @click="toggle" />
+                  <u-btn :active="model != null && model + 1 >= n" :icon="icons[n - 1]" + n" height="40" variant="text" width="40" border @click="toggle" />
                 </template>
               </u-item>
             </u-item-group>
@@ -1222,6 +1229,7 @@ SurveyGroup.parameters = {
         <script setup>
           import { ref } from 'vue'
           const model = ref(null)
+          const icons = ['hugeicons:one-square', 'hugeicons:two-square', 'hugeicons:three-square', 'hugeicons:four-square', 'hugeicons:five-square']
         </script>
       `,
     },
@@ -1355,7 +1363,7 @@ export const DialogAction = () => ({
             <u-icon
               class="mb-6"
               color="success"
-              icon="mdi-check-circle-outline"
+              icon="hugeicons:checkmark-circle-02"
               size="128"
             ></u-icon>
 
@@ -1395,7 +1403,7 @@ DialogAction.parameters = {
                 <template #append><u-btn icon="$close" variant="text" @click="dialog = false" /></template>
                 <u-divider />
                 <div class="py-12 text-center">
-                  <u-icon class="mb-6" color="success" icon="mdi-check-circle-outline" size="128" />
+                  <u-icon class="mb-6" color="success" icon="hugeicons:checkmark-circle-02" size="128" />
                   <div class="text-h4 font-weight-bold">This receipt was sent</div>
                 </div>
                 <u-divider />
@@ -1610,7 +1618,7 @@ export const ReadonlyButtons = () => ({
             key="subscribed"
             class="text-success text-caption"
           >
-            <u-icon icon="mdi-medal" size="1em"></u-icon>
+            <u-icon icon="hugeicons:medal-02" size="1em"></u-icon>
             $2.99 /month
           </div>
 
@@ -1630,7 +1638,7 @@ export const ReadonlyButtons = () => ({
             :key="'subscribe-' + isSubscriber"
             :border="'thin ' + (isSubscriber ? 'error' : 'success')"
             :color="isSubscriber ? 'error' : 'success'"
-            :prepend-icon="isSubscriber ? 'mdi-close' : 'mdi-email'"
+            :prepend-icon="isSubscriber ? 'hugeicons:cancel-01' : 'hugeicons:mail-02'"
             :slim="isSubscriber"
             :text="isSubscriber ? 'Cancel' : 'Subscribe'"
             :variant="isSubscriber ? 'plain' : 'tonal'"
@@ -1644,7 +1652,7 @@ export const ReadonlyButtons = () => ({
           <u-btn
             :key="'info-' + isSubscriber"
             :color="isSubscriber ? 'success' : 'primary'"
-            :prepend-icon="isSubscriber ? 'mdi-check' : 'mdi-open-in-new'"
+            :prepend-icon="isSubscriber ? 'hugeicons:tick-02' : 'hugeicons:link-circle'"
             :readonly="isSubscriber"
             :text="isSubscriber ? 'Subscribed' : 'More Info'"
             class="text-none"
@@ -1666,17 +1674,17 @@ ReadonlyButtons.parameters = {
             <u-list-item-subtitle :opacity="isSubscriber ? .8 : undefined">
               <u-fade-transition mode="out-in">
                 <div v-if="isSubscriber" key="subscribed" class="text-success text-caption">
-                  <u-icon icon="mdi-medal" size="1em" /> $2.99 /month
+                  <u-icon icon="hugeicons:medal-02" size="1em" /> $2.99 /month
                 </div>
                 <div v-else key="not-subscribed" class="text-caption">Support Vuetify by becoming a Subscriber</div>
               </u-fade-transition>
             </u-list-item-subtitle>
             <template #append>
               <u-fade-transition mode="out-in">
-                <u-btn :key="'subscribe-' + isSubscriber" :border="'thin ' + (isSubscriber ? 'error' : 'success')" :color="isSubscriber ? 'error' : 'success'" :prepend-icon="isSubscriber ? 'mdi-close' : 'mdi-email'" :slim="isSubscriber" :text="isSubscriber ? 'Cancel' : 'Subscribe'" :variant="isSubscriber ? 'plain' : 'tonal'" class="me-2 text-none" size="small" @click="isSubscriber = !isSubscriber" />
+                <u-btn :key="'subscribe-' + isSubscriber" :border="'thin ' + (isSubscriber ? 'error' : 'success')" :color="isSubscriber ? 'error' : 'success'" :prepend-icon="isSubscriber ? 'hugeicons:cancel-01' : 'hugeicons:mail-02'" :slim="isSubscriber" :text="isSubscriber ? 'Cancel' : 'Subscribe'" :variant="isSubscriber ? 'plain' : 'tonal'" class="me-2 text-none" size="small" @click="isSubscriber = !isSubscriber" />
               </u-fade-transition>
               <u-fade-transition mode="out-in">
-                <u-btn :key="'info-' + isSubscriber" :color="isSubscriber ? 'success' : 'primary'" :prepend-icon="isSubscriber ? 'mdi-check' : 'mdi-open-in-new'" :readonly="isSubscriber" :text="isSubscriber ? 'Subscribed' : 'More Info'" class="text-none" size="small" variant="flat" />
+                <u-btn :key="'info-' + isSubscriber" :color="isSubscriber ? 'success' : 'primary'" :prepend-icon="isSubscriber ? 'hugeicons:tick-02' : 'hugeicons:link-circle'" :readonly="isSubscriber" :text="isSubscriber ? 'Subscribed' : 'More Info'" class="text-none" size="small" variant="flat" />
               </u-fade-transition>
             </template>
           </u-list-item>
@@ -1699,10 +1707,10 @@ export const ButtonGroups = () => ({
         variant="outlined"
         divided
       >
-        <u-btn icon="mdi-format-align-left"></u-btn>
-        <u-btn icon="mdi-format-align-center"></u-btn>
-        <u-btn icon="mdi-format-align-right"></u-btn>
-        <u-btn icon="mdi-format-align-justify"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+        <u-btn icon="hugeicons:text-align-center"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
       </u-btn-group>
     </div>
   `,
@@ -1714,10 +1722,10 @@ ButtonGroups.parameters = {
         <template>
           <div class="d-flex align-center flex-column pa-6">
             <u-btn-group variant="outlined" divided>
-              <u-btn icon="mdi-format-align-left" />
-              <u-btn icon="mdi-format-align-center" />
-              <u-btn icon="mdi-format-align-right" />
-              <u-btn icon="mdi-format-align-justify" />
+            <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
+            <u-btn icon="hugeicons:text-align-center"></u-btn>
+            <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
+            <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
             </u-btn-group>
           </div>
         </template>
@@ -1739,7 +1747,7 @@ export const ToolbarsAndAppBars = () => ({
 
       <u-divider class="mx-2" vertical></u-divider>
 
-      <u-btn icon="mdi-dots-vertical"></u-btn>
+      <u-btn icon="hugeicons:more-vertical"></u-btn>
     </u-toolbar>
   `,
 });
@@ -1754,7 +1762,7 @@ ToolbarsAndAppBars.parameters = {
               <u-btn>Resources</u-btn>
             </u-toolbar-items>
             <u-divider class="mx-2" vertical />
-            <u-btn icon="mdi-dots-vertical" />
+            <u-btn icon="hugeicons:more-vertical"></u-btn>
           </u-toolbar>
         </template>
       `,

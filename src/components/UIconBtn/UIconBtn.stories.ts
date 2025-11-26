@@ -676,7 +676,7 @@ export const VideoControls: StoryFn<ComponentArgs> = (args) => ({
 
         <u-icon-btn
           height="48"
-          icon="mdi-dots-vertical"
+          icon="hugeicons:more-vertical"
           rounded="xl"
           variant="tonal"
         >
@@ -865,7 +865,7 @@ VideoControls.parameters = {
 
         <u-icon-btn
           height="48"
-          icon="mdi-dots-vertical"
+          icon="hugeicons:more-vertical"
           rounded="xl"
           variant="tonal"
         >

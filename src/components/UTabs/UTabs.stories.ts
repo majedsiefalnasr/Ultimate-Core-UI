@@ -1102,7 +1102,15 @@ export const Spaced: StoryFn<ComponentArgs> = (args) => ({
 
     const example2 = ['Profile', 'Settings', 'Security', 'Compliance', 'Statistics'];
 
-    return { args, example1, example2 };
+    const numbers = [
+      'hugeicons:one-square',
+      'hugeicons:two-square',
+      'hugeicons:three-square',
+      'hugeicons:four-square',
+      'hugeicons:five-square',
+    ];
+
+    return { args, example1, example2, numbers };
   },
   template: `
     <u-container max-width="800">
@@ -1113,7 +1121,7 @@ export const Spaced: StoryFn<ComponentArgs> = (args) => ({
 
         <u-col cols="12" sm="auto">
           <u-tabs direction="vertical" slider-color="primary" spaced="start" v-bind="args">
-            <u-tab v-for="(tab, i) in example2" :key="tab" :prepend-icon="'mdi-numeric-' + (i + 1) + '-box'" :text="tab" spaced="start" width="200"></u-tab>
+            <u-tab v-for="(tab, i) in example2" :key="tab" :prepend-icon="numbers[i]" :text="tab" spaced="start" width="200"></u-tab>
           </u-tabs>
         </u-col>
       </u-row>
@@ -1147,7 +1155,7 @@ Spaced.parameters = {
           <u-tab
             v-for="(tab, i) in example2"
             :key="tab"
-            :prepend-icon="\`mdi-numeric-\${i + 1}-box\`"
+            :prepend-icon="numbers[i]"
             :text="tab"
             spaced="start"
             width="200"
@@ -1165,6 +1173,8 @@ Spaced.parameters = {
     { text: 'Recent', appendIcon: 'hugeicons:clock-05', width: 250 },
     { text: 'Backups', appendIcon: 'hugeicons:cloud-upload', width: 250 },
   ]
+
+  const numbers = ['hugeicons:one-square', 'hugeicons:two-square', 'hugeicons:three-square', 'hugeicons:four-square', 'hugeicons:five-square'];
 
   const example2 = [
     'Profile',

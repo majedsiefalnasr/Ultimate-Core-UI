@@ -749,11 +749,11 @@ export const Href: StoryFn<ComponentArgs> = () => ({
   components: { UCard },
   template: `
     <u-card
-      append-icon="mdi-open-in-new"
+      append-icon="hugeicons:link-circle"
       class="mx-auto"
       href="https://github.com/vuetifyjs/vuetify/"
       max-width="344"
-      prepend-icon="mdi-github"
+      prepend-icon="hugeicons:github"
       rel="noopener"
       subtitle="Check out the official repository"
       target="_blank"
@@ -767,11 +767,11 @@ Href.parameters = {
     source: {
       code: `<template>
   <u-card
-    append-icon="mdi-open-in-new"
+    append-icon="hugeicons:link-circle"
     class="mx-auto"
     href="https://github.com/vuetifyjs/vuetify/"
     max-width="344"
-    prepend-icon="mdi-github"
+    prepend-icon="hugeicons:github"
     rel="noopener"
     subtitle="Check out the official repository"
     target="_blank"
@@ -855,7 +855,7 @@ export const Image: StoryFn<ComponentArgs> = () => ({
     >
       <template v-slot:actions>
         <u-btn
-          append-icon="mdi-chevron-right"
+          append-icon="hugeicons:arrow-right-01"
           color="red-lighten-2"
           text="Book Activity"
           variant="outlined"
@@ -880,7 +880,7 @@ Image.parameters = {
   >
     <template v-slot:actions>
       <u-btn
-        append-icon="mdi-chevron-right"
+        append-icon="hugeicons:arrow-right-01"
         color="red-lighten-2"
         text="Book Activity"
         variant="outlined"

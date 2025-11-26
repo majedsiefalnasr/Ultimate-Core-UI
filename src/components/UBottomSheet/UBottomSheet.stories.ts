@@ -418,11 +418,11 @@ export const MusicPlayer: StoryFn<ComponentArgs> = () => ({
           <u-list-item subtitle="Fitz & The Trantrums" title="The Walker">
             <template v-slot:append>
               <div class="d-flex ga-1">
-                <u-btn icon="mdi-rewind" variant="text"></u-btn>
+                <u-btn icon="hugeicons:backward-02" variant="text"></u-btn>
 
-                <u-btn icon="mdi-pause" variant="text"></u-btn>
+                <u-btn icon="hugeicons:pause" variant="text"></u-btn>
 
-                <u-btn icon="mdi-fast-forward" variant="text"></u-btn>
+                <u-btn icon="hugeicons:forward-02" variant="text"></u-btn>
               </div>
             </template>
           </u-list-item>
@@ -456,11 +456,11 @@ MusicPlayer.parameters = {
                 <u-list-item subtitle="Fitz & The Trantrums" title="The Walker">
                   <template v-slot:append>
                     <div class="d-flex ga-1">
-                      <u-btn icon="mdi-rewind" variant="text"></u-btn>
+                      <u-btn icon="hugeicons:backward-02" variant="text"></u-btn>
 
-                      <u-btn icon="mdi-pause" variant="text"></u-btn>
+                      <u-btn icon="hugeicons:pause" variant="text"></u-btn>
 
-                      <u-btn icon="mdi-fast-forward" variant="text"></u-btn>
+                      <u-btn icon="hugeicons:forward-02" variant="text"></u-btn>
                     </div>
                   </template>
                 </u-list-item>

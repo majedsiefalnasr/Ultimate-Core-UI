@@ -161,7 +161,7 @@ export const Theme: StoryFn<ComponentArgs> = () => ({
           <u-spacer></u-spacer>
 
           <u-btn
-            :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+            :prepend-icon="theme === 'light' ? 'hugeicons:sun-03' : 'hugeicons:moon-02'"
             text="Toggle Theme"
             slim
             @click="onClick"
@@ -189,7 +189,7 @@ Theme.parameters = {
                 <u-spacer></u-spacer>
 
                 <u-btn
-                  :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+                  :prepend-icon="theme === 'light' ? 'hugeicons:sun-03' : 'hugeicons:moon-02'"
                   text="Toggle Theme"
                   slim
                   @click="onClick"

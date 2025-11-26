@@ -131,7 +131,7 @@ const meta: Meta<ComponentArgs> = {
     appendIcon: {
       control: 'text',
       description:
-        'Creates a v-icon component after default content in the append slot. Icon name (Material Design Icons) to append, e.g. append-icon="mdi-close"',
+        'Creates a v-icon component after default content in the append slot. Icon name (Material Design Icons) to append, e.g. append-icon="hugeicons:cancel-01"',
       table: { type: { summary: 'string' }, defaultValue: { summary: 'undefined' } },
     },
     baseColor: {
@@ -246,7 +246,7 @@ const meta: Meta<ComponentArgs> = {
     prependIcon: {
       control: 'text',
       description:
-        'Creates a v-icon component in the prepend slot before default content. Icon name (Material Design Icons) to prepend, e.g. prepend-icon="mdi-account-circle"',
+        'Creates a v-icon component in the prepend slot before default content. Icon name (Material Design Icons) to prepend, e.g. prepend-icon="hugeicons:user-circle"',
       table: { type: { summary: 'string' }, defaultValue: { summary: 'undefined' } },
     },
     replace: {
@@ -756,7 +756,7 @@ export const Label: StoryFn<ComponentArgs> = () => ({
         color="pink"
         label
       >
-        <u-icon icon="mdi-label" start></u-icon>
+        <u-icon icon="hugeicons:label" start></u-icon>
         Tags
       </u-chip>
 
@@ -765,7 +765,7 @@ export const Label: StoryFn<ComponentArgs> = () => ({
         color="primary"
         label
       >
-        <u-icon icon="mdi-account-circle-outline" start></u-icon>
+        <u-icon icon="hugeicons:user-circle" start></u-icon>
         John Leider
       </u-chip>
 
@@ -775,7 +775,7 @@ export const Label: StoryFn<ComponentArgs> = () => ({
         closable
         label
       >
-        <u-icon icon="mdi-twitter" start></u-icon>
+        <u-icon icon="hugeicons:twitter" start></u-icon>
         New Tweets
       </u-chip>
     </div>
@@ -802,7 +802,7 @@ Label.parameters = {
       color="pink"
       label
     >
-      <u-icon icon="mdi-label" start></u-icon>
+      <u-icon icon="hugeicons:label" start></u-icon>
       Tags
     </u-chip>
 
@@ -811,7 +811,7 @@ Label.parameters = {
       color="primary"
       label
     >
-      <u-icon icon="mdi-account-circle-outline" start></u-icon>
+      <u-icon icon="hugeicons:user-circle" start></u-icon>
       John Leider
     </u-chip>
 
@@ -821,7 +821,7 @@ Label.parameters = {
       closable
       label
     >
-      <u-icon icon="mdi-twitter" start></u-icon>
+      <u-icon icon="hugeicons:twitter" start></u-icon>
       New Tweets
     </u-chip>
   </div>
@@ -867,7 +867,7 @@ export const Outlined: StoryFn<ComponentArgs> = () => ({
         color="success"
         variant="outlined"
       >
-        <u-icon icon="mdi-server-plus" start></u-icon>
+        <u-icon icon="hugeicons:server-stack-01" start></u-icon>
         Server Status
       </u-chip>
 
@@ -877,7 +877,7 @@ export const Outlined: StoryFn<ComponentArgs> = () => ({
         variant="outlined"
       >
         User Account
-        <u-icon icon="mdi-account-outline" end></u-icon>
+        <u-icon icon="hugeicons:user-circle" end></u-icon>
       </u-chip>
     </div>
   `,
@@ -896,7 +896,7 @@ Outlined.parameters = {
       color="success"
       variant="outlined"
     >
-      <u-icon icon="mdi-server-plus" start></u-icon>
+      <u-icon icon="hugeicons:server-stack-01" start></u-icon>
       Server Status
     </u-chip>
 
@@ -906,7 +906,7 @@ Outlined.parameters = {
       variant="outlined"
     >
       User Account
-      <u-icon icon="mdi-account-outline" end></u-icon>
+      <u-icon icon="hugeicons:user-circle" end></u-icon>
     </u-chip>
   </div>
 </template>`,
@@ -921,13 +921,13 @@ export const Icon: StoryFn<ComponentArgs> = () => ({
       <u-chip
         class="ma-2"
         color="indigo"
-        prepend-icon="mdi-account-circle"
+        prepend-icon="hugeicons:user-circle"
       >
         Mike
       </u-chip>
 
       <u-chip
-        append-icon="mdi-star"
+        append-icon="hugeicons:star"
         class="ma-2"
         color="orange"
       >
@@ -935,7 +935,7 @@ export const Icon: StoryFn<ComponentArgs> = () => ({
       </u-chip>
 
       <u-chip
-        append-icon="mdi-cake-variant"
+        append-icon="hugeicons:birthday-cake"
         class="ma-2"
         color="primary"
       >
@@ -960,7 +960,7 @@ export const Icon: StoryFn<ComponentArgs> = () => ({
         :model-value="true"
         class="ma-2"
         color="teal"
-        prepend-icon="mdi-checkbox-marked-circle"
+        prepend-icon="hugeicons:checkmark-circle-02"
         closable
       >
         Confirmed
@@ -969,9 +969,9 @@ export const Icon: StoryFn<ComponentArgs> = () => ({
       <u-chip
         :model-value="true"
         class="ma-2"
-        close-icon="mdi-delete"
+        close-icon="hugeicons:delete-02"
         color="teal"
-        prepend-icon="mdi-checkbox-marked-circle"
+        prepend-icon="hugeicons:checkmark-circle-02"
         closable
       >
         Confirmed
@@ -991,13 +991,13 @@ Icon.parameters = {
     <u-chip
       class="ma-2"
       color="indigo"
-      prepend-icon="mdi-account-circle"
+      prepend-icon="hugeicons:user-circle"
     >
       Mike
     </u-chip>
 
     <u-chip
-      append-icon="mdi-star"
+      append-icon="hugeicons:star"
       class="ma-2"
       color="orange"
     >
@@ -1005,7 +1005,7 @@ Icon.parameters = {
     </u-chip>
 
     <u-chip
-      append-icon="mdi-cake-variant"
+      append-icon="hugeicons:birthday-cake"
       class="ma-2"
       color="primary"
     >
@@ -1030,7 +1030,7 @@ Icon.parameters = {
       :model-value="true"
       class="ma-2"
       color="teal"
-      prepend-icon="mdi-checkbox-marked-circle"
+      prepend-icon="hugeicons:checkmark-circle-02"
       closable
     >
       Confirmed
@@ -1039,9 +1039,9 @@ Icon.parameters = {
     <u-chip
       :model-value="true"
       class="ma-2"
-      close-icon="mdi-delete"
+      close-icon="hugeicons:delete-02"
       color="teal"
-      prepend-icon="mdi-checkbox-marked-circle"
+      prepend-icon="hugeicons:checkmark-circle-02"
       closable
     >
       Confirmed
@@ -1064,7 +1064,7 @@ export const InSelects: StoryFn<ComponentArgs> = () => ({
       v-model="chips"
       :items="items"
       label="Your favorite hobbies"
-      prepend-icon="mdi-filter-variant"
+      prepend-icon="hugeicons:filter-horizontal"
       variant="solo"
       chips
       clearable
@@ -1092,7 +1092,7 @@ InSelects.parameters = {
     v-model="chips"
     :items="items"
     label="Your favorite hobbies"
-    prepend-icon="mdi-filter-variant"
+    prepend-icon="hugeicons:filter-horizontal"
     variant="solo"
     chips
     clearable

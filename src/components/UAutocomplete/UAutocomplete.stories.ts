@@ -462,7 +462,7 @@ export const Filter: StoryFn<ComponentArgs> = () => ({
       max-width="500"
     >
       <u-toolbar color="purple" flat>
-        <u-btn icon="mdi-account"></u-btn>
+        <u-btn icon="hugeicons:user-03"></u-btn>
 
         <template #title>
           <span class="font-weight-light">User Profile</span>
@@ -472,8 +472,8 @@ export const Filter: StoryFn<ComponentArgs> = () => ({
           icon
           @click="isEditing = !isEditing"
         >
-          <u-icon v-if="isEditing">mdi-close</u-icon>
-          <u-icon v-else>mdi-pencil</u-icon>
+          <u-icon v-if="isEditing">hugeicons:cancel-01</u-icon>
+          <u-icon v-else>hugeicons:edit-02</u-icon>
         </u-btn>
       </u-toolbar>
 
@@ -532,7 +532,7 @@ Filter.parameters = {
             max-width="500"
           >
             <u-toolbar color="purple" flat>
-              <u-btn icon="mdi-account"></u-btn>
+              <u-btn icon="hugeicons:user-03"></u-btn>
 
               <template #title>
                 <span class="font-weight-light">User Profile</span>
@@ -542,8 +542,8 @@ Filter.parameters = {
                 icon
                 @click="isEditing = !isEditing"
               >
-                <u-icon v-if="isEditing">mdi-close</u-icon>
-                <u-icon v-else>mdi-pencil</u-icon>
+                <u-icon v-if="isEditing">hugeicons:cancel-01</u-icon>
+                <u-icon v-else>hugeicons:edit-02</u-icon>
               </u-btn>
             </u-toolbar>
 
