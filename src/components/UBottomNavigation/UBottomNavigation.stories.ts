@@ -81,7 +81,7 @@ const meta: Meta<ComponentArgs> = {
     },
     Primary: {
       description:
-        'While v-bottom-navigation is meant to be used with vue-router, you can also programmatically control the active state of the buttons by using the value property. A button is given a default value of its index with v-bottom-navigation.',
+        'While u-bottom-navigation is meant to be used with vue-router, you can also programmatically control the active state of the buttons by using the value property. A button is given a default value of its index with u-bottom-navigation.',
     },
     api: {
       data: [
@@ -270,6 +270,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBottomNavigation, UBtn, UIcon, ULayout },
   setup() {
@@ -302,222 +303,205 @@ Default.args = {
 } as ComponentArgs;
 
 // Color Story
+const colorStoryTemplate = `
+  <u-layout style="overflow: hidden; height: 56px;">
+    <u-bottom-navigation
+      v-model="value"
+      color="primary"
+      active
+    >
+      <u-btn>
+        <u-icon>hugeicons:time-schedule</u-icon>
+        Recent
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:favourite</u-icon>
+        Favorites
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:map-pinpoint-01</u-icon>
+        <span>Nearby</span>
+      </u-btn>
+    </u-bottom-navigation>
+  </u-layout>
+`;
+
+/**
+ * The color prop applies a color to the background of the bottom navigation.
+ * We recommend using the light and dark props to properly contrast text color.
+ */
 export const Color: StoryFn<ComponentArgs> = () => ({
   components: { UBottomNavigation, UBtn, UIcon, ULayout },
   setup() {
     const value = ref(0);
     return { value };
   },
-  template: `
-    <u-layout style="overflow: hidden; height: 56px;">
-      <u-bottom-navigation
-        v-model="value"
-        color="primary"
-        active
-      >
-        <u-btn>
-          <u-icon>hugeicons:time-schedule</u-icon>
-          Recents
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:favourite</u-icon>
-          Favorites
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:map-pinpoint-01</u-icon>
-          <span>Nearby</span>
-        </u-btn>
-      </u-bottom-navigation>
-    </u-layout>
-  `,
+  template: colorStoryTemplate,
 });
 
 Color.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-layout style="overflow: hidden; height: 56px;">
-            <u-bottom-navigation
-              v-model="value"
-              color="primary"
-              active
-            >
-              <u-btn>
-                <u-icon>hugeicons:time-schedule</u-icon>
-                Recents
-              </u-btn>
+<template>${colorStoryTemplate}</template>
 
-              <u-btn>
-                <u-icon>hugeicons:favourite</u-icon>
-                Favorites
-              </u-btn>
-
-              <u-btn>
-                <u-icon>hugeicons:map-pinpoint-01</u-icon>
-                <span>Nearby</span>
-              </u-btn>
-            </u-bottom-navigation>
-          </u-layout>
-        </template>
-
-        <script setup>
-          import { ref } from 'vue'
-
-          const value = ref(0)
-        </script>
+<script setup>
+  import { ref } from 'vue'
+  
+  const value = ref(0)
+</script>
       `,
     },
   },
 };
 
 // Grow Story
+const growStoryTemplate = `
+  <u-layout style="overflow: hidden; height: 56px;">
+    <u-bottom-navigation
+      v-model="value"
+      color="teal"
+      grow
+    >
+      <u-btn>
+        <u-icon>hugeicons:time-schedule</u-icon>
+        Recents
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:favourite</u-icon>
+        Favorites
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:map-pinpoint-01</u-icon>
+        Nearby
+      </u-btn>
+    </u-bottom-navigation>
+  </u-layout>
+`;
+
+/**
+ * Using the grow property forces u-btn components to fill all available space. Buttons have
+ * a maximum width of 168px per the Bottom Navigation MD specification.
+ */
 export const Grow: StoryFn<ComponentArgs> = () => ({
   components: { UBottomNavigation, UBtn, UIcon, ULayout },
   setup() {
     const value = ref(1);
     return { value };
   },
-  template: `
-    <u-layout style="overflow: hidden; height: 56px;">
-      <u-bottom-navigation
-        v-model="value"
-        color="teal"
-        grow
-      >
-        <u-btn>
-          <u-icon>hugeicons:time-schedule</u-icon>
-          Recents
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:favourite</u-icon>
-          Favorites
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:map-pinpoint-01</u-icon>
-          Nearby
-        </u-btn>
-      </u-bottom-navigation>
-    </u-layout>
-  `,
+  template: growStoryTemplate,
 });
 
 Grow.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-layout style="overflow: hidden; height: 56px;">
-            <u-bottom-navigation
-              v-model="value"
-              color="teal"
-              grow
-            >
-              <u-btn>
-                <u-icon>hugeicons:time-schedule</u-icon>
-                Recents
-              </u-btn>
+<template>${growStoryTemplate}</template>
 
-              <u-btn>
-                <u-icon>hugeicons:favourite</u-icon>
-                Favorites
-              </u-btn>
+<script setup>
+  import { ref } from 'vue'
 
-              <u-btn>
-                <u-icon>hugeicons:map-pinpoint-01</u-icon>
-                Nearby
-              </u-btn>
-            </u-bottom-navigation>
-          </u-layout>
-        </template>
-
-        <script setup>
-          import { ref } from 'vue'
-
-          const value = ref(1)
-        </script>
+  const value = ref(1)
+</script>
       `,
     },
   },
 };
 
 // Horizontal Story
+const horizontalStoryTemplate = `
+  <u-layout style="overflow: hidden; height: 56px;">
+    <u-bottom-navigation
+      v-model="value"
+      color="primary"
+      horizontal
+    >
+      <u-btn>
+        <u-icon>hugeicons:time-schedule</u-icon>
+        Recent
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:favourite</u-icon>
+        Favorites
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:map-pinpoint-01</u-icon>
+        Nearby
+      </u-btn>
+    </u-bottom-navigation>
+  </u-layout>
+`;
+
+/**
+ * Adjust the style of buttons and icons by using the horizontal prop. This positions
+ * button text inline with the provided v-icon
+ */
 export const Horizontal: StoryFn<ComponentArgs> = () => ({
   components: { UBottomNavigation, UBtn, UIcon, ULayout },
   setup() {
     const value = ref(1);
     return { value };
   },
-  template: `
-    <u-layout style="overflow: hidden; height: 56px;">
-      <u-bottom-navigation
-        v-model="value"
-        color="primary"
-        horizontal
-      >
-        <u-btn>
-          <u-icon>hugeicons:time-schedule</u-icon>
-          Recents
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:favourite</u-icon>
-          Favorites
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:map-pinpoint-01</u-icon>
-          Nearby
-        </u-btn>
-      </u-bottom-navigation>
-    </u-layout>
-  `,
+  template: horizontalStoryTemplate,
 });
 
 Horizontal.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-layout style="overflow: hidden; height: 56px;">
-            <u-bottom-navigation
-              v-model="value"
-              color="primary"
-              horizontal
-            >
-              <u-btn>
-                <u-icon>hugeicons:time-schedule</u-icon>
-                Recents
-              </u-btn>
+<template>${horizontalStoryTemplate}</template>
 
-              <u-btn>
-                <u-icon>hugeicons:favourite</u-icon>
-                Favorites
-              </u-btn>
+<script setup>
+   import { ref } from 'vue'
 
-              <u-btn>
-                <u-icon>hugeicons:map-pinpoint-01</u-icon>
-                Nearby
-              </u-btn>
-            </u-bottom-navigation>
-          </u-layout>
-        </template>
-
-        <script setup>
-          import { ref } from 'vue'
-
-          const value = ref(1)
-        </script>
+    const value = ref(1)
+</script>
       `,
     },
   },
 };
 
 // Shift Story
+const shiftStoryTemplate = `
+  <u-layout style="overflow: hidden; height: 56px;">
+    <u-bottom-navigation
+      v-model="value"
+      :bg-color="color"
+      mode="shift"
+    >
+      <u-btn>
+        <u-icon>hugeicons:video-02</u-icon>
+        <span>Video</span>
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:music-note-03</u-icon>
+        <span>Music</span>
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:bookmark-03</u-icon>
+        <span>Book</span>
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:image-01</u-icon>
+        <span>Image</span>
+      </u-btn>
+    </u-bottom-navigation>
+  </u-layout>
+`;
+
+/**
+ * The shift prop hides button text when not active. This provides an alternative visual style to
+ * the u-bottom-navigation component.
+ */
 export const Shift: StoryFn<ComponentArgs> = () => ({
   components: { UBottomNavigation, UBtn, UIcon, ULayout },
   setup() {
@@ -538,175 +522,92 @@ export const Shift: StoryFn<ComponentArgs> = () => ({
     });
     return { value, color };
   },
-  template: `
-    <u-layout style="overflow: hidden; height: 56px;">
-      <u-bottom-navigation
-        v-model="value"
-        :bg-color="color"
-        mode="shift"
-      >
-        <u-btn>
-          <u-icon>hugeicons:video-02</u-icon>
-          <span>Video</span>
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:music-note-03</u-icon>
-          <span>Music</span>
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:bookmark-03</u-icon>
-          <span>Book</span>
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:image-01</u-icon>
-          <span>Image</span>
-        </u-btn>
-      </u-bottom-navigation>
-    </u-layout>
-  `,
+  template: shiftStoryTemplate,
 });
 
 Shift.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-layout style="overflow: hidden; height: 56px;">
-            <u-bottom-navigation
-              v-model="value"
-              :bg-color="color"
-              mode="shift"
-            >
-              <u-btn>
-                <u-icon>hugeicons:video-02</u-icon>
-                <span>Video</span>
-              </u-btn>
+<template>${shiftStoryTemplate}</template>
 
-              <u-btn>
-                <u-icon>hugeicons:music-note-03</u-icon>
-                <span>Music</span>
-              </u-btn>
+<script setup>
+  import { computed, ref } from 'vue'
 
-              <u-btn>
-                <u-icon>hugeicons:bookmark-03</u-icon>
-                <span>Book</span>
-              </u-btn>
-
-              <u-btn>
-                <u-icon>hugeicons:image-01</u-icon>
-                <span>Image</span>
-              </u-btn>
-            </u-bottom-navigation>
-          </u-layout>
-        </template>
-
-        <script setup>
-          import { computed, ref } from 'vue'
-
-          const value = ref(1)
-          const color = computed(() => {
-            switch (value.value) {
-              case 0: return 'blue-grey'
-              case 1: return 'teal'
-              case 2: return 'brown'
-              case 3: return 'indigo'
-              default: return 'blue-grey'
-            }
-          })
-        </script>
+  const value = ref(1)
+  const color = computed(() => {
+    switch (value.value) {
+      case 0: return 'blue-grey'
+      case 1: return 'teal'
+      case 2: return 'brown'
+      case 3: return 'indigo'
+      default: return 'blue-grey'
+    }
+  })
+</script>
       `,
     },
   },
 };
 
 // Toggle Story
+const toggleStoryTemplate = `
+  <u-layout class="border rounded" style="overflow: hidden; height: 128px;">
+    <div class="mx-auto my-4">
+      <u-btn
+        color="deep-purple"
+        variant="outlined"
+        @click="active = !active"
+      >
+        Toggle Navigation
+      </u-btn>
+    </div>
+
+    <u-bottom-navigation
+      :active="active"
+      color="indigo"
+    >
+      <u-btn>
+        <u-icon>hugeicons:time-schedule</u-icon>
+        Recents
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:favourite</u-icon>
+        Favorites
+      </u-btn>
+
+      <u-btn>
+        <u-icon>hugeicons:map-pinpoint-01</u-icon>
+        Nearby
+      </u-btn>
+    </u-bottom-navigation>
+  </u-layout>
+`;
+
+/**
+ * Since u-bottom-navigation supports v-model, use the active prop to control the display state.
+ */
 export const Toggle: StoryFn<ComponentArgs> = () => ({
   components: { UBottomNavigation, UBtn, UIcon, ULayout },
   setup() {
     const active = ref(true);
     return { active };
   },
-  template: `
-    <u-layout class="border rounded" style="overflow: hidden; height: 128px;">
-      <div class="mx-auto my-4">
-        <u-btn
-          color="deep-purple"
-          variant="outlined"
-          @click="active = !active"
-        >
-          Toggle Navigation
-        </u-btn>
-      </div>
-
-      <u-bottom-navigation
-        :active="active"
-        color="indigo"
-      >
-        <u-btn>
-          <u-icon>hugeicons:time-schedule</u-icon>
-          Recents
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:favourite</u-icon>
-          Favorites
-        </u-btn>
-
-        <u-btn>
-          <u-icon>hugeicons:map-pinpoint-01</u-icon>
-          Nearby
-        </u-btn>
-      </u-bottom-navigation>
-    </u-layout>
-  `,
+  template: toggleStoryTemplate,
 });
 
 Toggle.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-layout class="border rounded" style="height: 128px;">
-            <div class="mx-auto my-4">
-              <u-btn
-                color="deep-purple"
-                variant="outlined"
-                @click="active = !active"
-              >
-                Toggle Navigation
-              </u-btn>
-            </div>
+<template>${toggleStoryTemplate}</template>
 
-            <u-bottom-navigation
-              :active="active"
-              color="indigo"
-            >
-              <u-btn>
-                <u-icon>hugeicons:time-schedule</u-icon>
-                Recents
-              </u-btn>
-
-              <u-btn>
-                <u-icon>hugeicons:favourite</u-icon>
-                Favorites
-              </u-btn>
-
-              <u-btn>
-                <u-icon>hugeicons:map-pinpoint-01</u-icon>
-                Nearby
-              </u-btn>
-            </u-bottom-navigation>
-          </u-layout>
-        </template>
-
-        <script setup>
-          import { ref } from 'vue'
-
-          const active = ref(true)
-        </script>
+<script setup>
+  import { ref } from 'vue'
+  
+  const active = ref(true)
+</script>
       `,
     },
   },
