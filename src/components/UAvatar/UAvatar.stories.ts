@@ -43,7 +43,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<UAvatar${attrsString}></UAvatar>`;
+          return `<u-avatar${attrsString}></u-avatar>`;
         },
       },
     },
@@ -59,12 +59,12 @@ const meta: Meta<ComponentArgs> = {
     anatomy: {
       title: 'Anatomy',
       description:
-        'The recommended placement of elements inside of v-avatar is: Place a v-img or v-icon component within the default slot, or place textual content within the default slot.',
+        'The recommended placement of elements inside of u-avatar is: Place a u-img or u-icon component within the default slot, or place textual content within the default slot.',
       Image: '/images/stories/UAvatar.anatomy.png',
       data: [
         {
           element: '1. Container',
-          description: 'The Avatar container that typically holds a v-icon or v-img component',
+          description: 'The Avatar container that typically holds a u-icon or u-img component',
         },
       ],
     },
@@ -179,12 +179,13 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UAvatar },
   setup() {
     return { args };
   },
-  template: '<UAvatar v-bind="args"></UAvatar>',
+  template: '<u-avatar v-bind="args"></u-avatar>',
 });
 
 Default.args = {
@@ -193,79 +194,62 @@ Default.args = {
 } as ComponentArgs;
 
 // Size Story
+const sizeStoryTemplate = `
+  <div class="d-flex align-center justify-space-around">
+    <u-avatar color="primary" size="x-small">
+      32
+    </u-avatar>
+
+    <u-avatar color="secondary">
+      48
+    </u-avatar>
+
+    <u-avatar color="info" size="x-large">
+      64
+    </u-avatar>
+  </div>
+`;
+
+/**
+ * The size prop allows you to change the height and width of the avatar.
+ */
 export const Size: StoryFn<ComponentArgs> = () => ({
   components: { UAvatar },
-  template: `
-    <div class="d-flex align-center justify-space-around">
-      <u-avatar color="primary" size="x-small">
-        32
-      </u-avatar>
-
-      <u-avatar color="secondary">
-        48
-      </u-avatar>
-
-      <u-avatar color="info" size="x-large">
-        64
-      </u-avatar>
-    </div>
-  `,
+  template: sizeStoryTemplate,
 });
 
 Size.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <div class="d-flex align-center justify-space-around">
-            <u-avatar color="primary" size="x-small">
-              32
-            </u-avatar>
-
-            <u-avatar color="secondary">
-              48
-            </u-avatar>
-
-            <u-avatar color="info" size="x-large">
-              64
-            </u-avatar>
-          </div>
-        </template>
-      `,
+      code: `<template>${sizeStoryTemplate}</template>`,
     },
   },
 };
 
 // Tile Story
+const tileStoryTemplate = `
+  <div class="text-center">
+    <u-avatar
+      color="blue-darken-2"
+      rounded="0"
+    >
+      <u-icon icon="hugeicons:alarm-clock"></u-icon>
+    </u-avatar>
+  </div>
+`;
+
+/**
+ * The rounded prop can be used to remove the border radius from u-avatar leaving you with a simple square avatar.
+ */
 export const Tile: StoryFn<ComponentArgs> = () => ({
   components: { UAvatar, UIcon },
-  template: `
-    <div class="text-center">
-      <u-avatar
-        color="blue-darken-2"
-        rounded="0"
-      >
-        <u-icon icon="hugeicons:alarm-clock"></u-icon>
-      </u-avatar>
-    </div>
-  `,
+  template: tileStoryTemplate,
 });
 
 Tile.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <div class="text-center">
-            <u-avatar
-              color="blue-darken-2"
-              rounded="0"
-            >
-              <u-icon icon="hugeicons:alarm-clock"></u-icon>
-            </u-avatar>
-          </div>
-        </template>
-      `,
+      code: `<template>${tileStoryTemplate}</template>`,
     },
   },
 };
