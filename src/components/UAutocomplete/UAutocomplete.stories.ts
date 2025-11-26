@@ -78,7 +78,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<UAutocomplete${attrsString}></UAutocomplete>`;
+          return `<u-autocomplete${attrsString}></u-autocomplete>`;
         },
       },
     },
@@ -311,7 +311,7 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
   setup() {
     return { args };
   },
-  template: '<UAutocomplete v-bind="args"></UAutocomplete>',
+  template: '<u-autocomplete v-bind="args"></u-autocomplete>',
 });
 
 Default.args = {
@@ -322,6 +322,43 @@ Default.args = {
 } as ComponentArgs;
 
 // Density Story
+const densityStoryTemplate = `
+  <u-card>
+    <u-container fluid>
+      <u-row>
+        <u-col cols="12">
+          <u-autocomplete
+            v-model="values"
+            :items="items"
+            label="Default"
+          ></u-autocomplete>
+        </u-col>
+
+        <u-col cols="12">
+          <u-autocomplete
+            v-model="values"
+            :items="items"
+            density="comfortable"
+            label="Comfortable"
+          ></u-autocomplete>
+        </u-col>
+
+        <u-col cols="12">
+          <u-autocomplete
+            v-model="values"
+            :items="items"
+            density="compact"
+            label="Compact"
+          ></u-autocomplete>
+        </u-col>
+      </u-row>
+    </u-container>
+  </u-card>
+`;
+
+/**
+ * You can use density prop to adjust vertical spacing within the component.
+ */
 export const Density: StoryFn<ComponentArgs> = () => ({
   components: { UAutocomplete, UCard, UContainer, URow, UCol },
   setup() {
@@ -330,91 +367,96 @@ export const Density: StoryFn<ComponentArgs> = () => ({
 
     return { items, values };
   },
-  template: `
-    <u-card>
-      <u-container fluid>
-        <u-row>
-          <u-col cols="12">
-            <u-autocomplete
-              v-model="values"
-              :items="items"
-              label="Default"
-            ></u-autocomplete>
-          </u-col>
-
-          <u-col cols="12">
-            <u-autocomplete
-              v-model="values"
-              :items="items"
-              density="comfortable"
-              label="Comfortable"
-            ></u-autocomplete>
-          </u-col>
-
-          <u-col cols="12">
-            <u-autocomplete
-              v-model="values"
-              :items="items"
-              density="compact"
-              label="Compact"
-            ></u-autocomplete>
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-card>
-  `,
+  template: densityStoryTemplate,
 });
 
 Density.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-card>
-            <u-container fluid>
-              <u-row>
-                <u-col cols="12">
-                  <u-autocomplete
-                    v-model="values"
-                    :items="items"
-                    label="Default"
-                  ></u-autocomplete>
-                </u-col>
+<template>${densityStoryTemplate}</template>
 
-                <u-col cols="12">
-                  <u-autocomplete
-                    v-model="values"
-                    :items="items"
-                    density="comfortable"
-                    label="Comfortable"
-                  ></u-autocomplete>
-                </u-col>
-
-                <u-col cols="12">
-                  <u-autocomplete
-                    v-model="values"
-                    :items="items"
-                    density="compact"
-                    label="Compact"
-                  ></u-autocomplete>
-                </u-col>
-              </u-row>
-            </u-container>
-          </u-card>
-        </template>
-
-        <script setup>
-          import { ref } from 'vue'
-
-          const items = ['foo', 'bar', 'fizz', 'buzz']
-          const values = ref('foo')
-        </script>
+<script setup>
+  import { ref } from 'vue'
+  
+  const items = ['foo', 'bar', 'fizz', 'buzz']
+  const values = ref('foo')
+</script>
       `,
     },
   },
 };
 
 // Filter Story
+const filterStoryTemplate = `
+  <u-card
+    class="mx-auto"
+    color="purple-lighten-1"
+    max-width="500"
+  >
+    <u-toolbar color="purple" flat>
+      <u-btn icon="hugeicons:user-03"></u-btn>
+
+      <template #title>
+        <span class="font-weight-light">User Profile</span>
+      </template>
+
+      <u-btn
+        icon
+        @click="isEditing = !isEditing"
+      >
+        <u-icon v-if="isEditing">hugeicons:cancel-01</u-icon>
+        <u-icon v-else>hugeicons:edit-02</u-icon>
+      </u-btn>
+    </u-toolbar>
+
+    <u-card-text>
+      <u-text-field
+        :disabled="!isEditing"
+        base-color="white"
+        label="Name"
+      ></u-text-field>
+
+      <u-autocomplete
+        :custom-filter="customFilter"
+        :disabled="!isEditing"
+        :items="states"
+        base-color="white"
+        item-title="name"
+        item-value="abbr"
+        label="State"
+      ></u-autocomplete>
+    </u-card-text>
+
+    <u-divider></u-divider>
+
+    <u-card-actions>
+      <u-spacer></u-spacer>
+
+      <u-btn
+        :disabled="!isEditing"
+        @click="save"
+      >
+        Save
+      </u-btn>
+    </u-card-actions>
+
+    <u-snackbar
+      v-model="hasSaved"
+      :timeout="2000"
+      location="bottom left"
+      position="absolute"
+      attach
+    >
+      Your profile has been updated
+    </u-snackbar>
+  </u-card>
+`;
+
+/**
+ * The custom-filter prop can be used to filter each individual item with custom logic.
+ * In this example we filter items by name.
+ */
 export const Filter: StoryFn<ComponentArgs> = () => ({
   components: {
     UAutocomplete,
@@ -455,173 +497,64 @@ export const Filter: StoryFn<ComponentArgs> = () => ({
 
     return { states, hasSaved, isEditing, customFilter, save };
   },
-  template: `
-    <u-card
-      class="mx-auto"
-      color="purple-lighten-1"
-      max-width="500"
-    >
-      <u-toolbar color="purple" flat>
-        <u-btn icon="hugeicons:user-03"></u-btn>
-
-        <template #title>
-          <span class="font-weight-light">User Profile</span>
-        </template>
-
-        <u-btn
-          icon
-          @click="isEditing = !isEditing"
-        >
-          <u-icon v-if="isEditing">hugeicons:cancel-01</u-icon>
-          <u-icon v-else>hugeicons:edit-02</u-icon>
-        </u-btn>
-      </u-toolbar>
-
-      <u-card-text>
-        <u-text-field
-          :disabled="!isEditing"
-          base-color="white"
-          label="Name"
-        ></u-text-field>
-
-        <u-autocomplete
-          :custom-filter="customFilter"
-          :disabled="!isEditing"
-          :items="states"
-          base-color="white"
-          item-title="name"
-          item-value="abbr"
-          label="State"
-        ></u-autocomplete>
-      </u-card-text>
-
-      <u-divider></u-divider>
-
-      <u-card-actions>
-        <u-spacer></u-spacer>
-
-        <u-btn
-          :disabled="!isEditing"
-          @click="save"
-        >
-          Save
-        </u-btn>
-      </u-card-actions>
-
-      <u-snackbar
-        v-model="hasSaved"
-        :timeout="2000"
-        location="bottom left"
-        position="absolute"
-        attach
-      >
-        Your profile has been updated
-      </u-snackbar>
-    </u-card>
-  `,
+  template: filterStoryTemplate,
 });
 
 Filter.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-card
-            class="mx-auto"
-            color="purple-lighten-1"
-            max-width="500"
-          >
-            <u-toolbar color="purple" flat>
-              <u-btn icon="hugeicons:user-03"></u-btn>
+<template>${filterStoryTemplate}</template>
 
-              <template #title>
-                <span class="font-weight-light">User Profile</span>
-              </template>
+<script setup>
+  import { ref } from 'vue'
 
-              <u-btn
-                icon
-                @click="isEditing = !isEditing"
-              >
-                <u-icon v-if="isEditing">hugeicons:cancel-01</u-icon>
-                <u-icon v-else>hugeicons:edit-02</u-icon>
-              </u-btn>
-            </u-toolbar>
+  const states = [
+    { name: 'Florida', abbr: 'FL', id: 1 },
+    { name: 'Georgia', abbr: 'GA', id: 2 },
+    { name: 'Nebraska', abbr: 'NE', id: 3 },
+    { name: 'California', abbr: 'CA', id: 4 },
+    { name: 'New York', abbr: 'NY', id: 5 },
+  ]
 
-            <u-card-text>
-              <u-text-field
-                :disabled="!isEditing"
-                base-color="white"
-                label="Name"
-              ></u-text-field>
+  const hasSaved = ref(false)
+  const isEditing = ref(false)
+  
+  function customFilter (itemTitle, queryText, item) {
+    const textOne = item.raw.name.toLowerCase()
+    const textTwo = item.raw.abbr.toLowerCase()
+    const searchText = queryText.toLowerCase()
+    return textOne.indexOf(searchText) > -1 || textTwo.indexOf(searchText) > -1
+  }
 
-              <u-autocomplete
-                :custom-filter="customFilter"
-                :disabled="!isEditing"
-                :items="states"
-                base-color="white"
-                item-title="name"
-                item-value="abbr"
-                label="State"
-              ></u-autocomplete>
-            </u-card-text>
-
-            <u-divider></u-divider>
-
-            <u-card-actions>
-              <u-spacer></u-spacer>
-
-              <u-btn
-                :disabled="!isEditing"
-                @click="save"
-              >
-                Save
-              </u-btn>
-            </u-card-actions>
-
-            <u-snackbar
-              v-model="hasSaved"
-              :timeout="2000"
-              location="bottom left"
-              position="absolute"
-              attach
-            >
-              Your profile has been updated
-            </u-snackbar>
-          </u-card>
-        </template>
-
-        <script setup>
-          import { ref } from 'vue'
-
-          const states = [
-            { name: 'Florida', abbr: 'FL', id: 1 },
-            { name: 'Georgia', abbr: 'GA', id: 2 },
-            { name: 'Nebraska', abbr: 'NE', id: 3 },
-            { name: 'California', abbr: 'CA', id: 4 },
-            { name: 'New York', abbr: 'NY', id: 5 },
-          ]
-
-          const hasSaved = ref(false)
-          const isEditing = ref(false)
-
-          function customFilter (itemTitle, queryText, item) {
-            const textOne = item.raw.name.toLowerCase()
-            const textTwo = item.raw.abbr.toLowerCase()
-            const searchText = queryText.toLowerCase()
-            return textOne.indexOf(searchText) > -1 || textTwo.indexOf(searchText) > -1
-          }
-
-          function save () {
-            isEditing.value = !isEditing.value
-            hasSaved.value = true
-          }
-        </script>
+  function save () {
+    isEditing.value = !isEditing.value
+    hasSaved.value = true
+  }
+</script>
       `,
     },
   },
 };
 
 // Filter Keys Story
+const filterKeysStoryTemplate = `
+  <u-container fluid>
+    <u-autocomplete
+      :filter-keys="['title', 'raw.abbr']"
+      :items="states"
+      item-title="name"
+      label="State"
+    ></u-autocomplete>
+  </u-container>
+`;
+
+/**
+ * When user is typing in the field to narrow the list of options, the input text is matched against
+ * the title. With filter-keys you can specify which properties should be used instead. Properties of
+ * original objects passed to items need to be accessed via the raw.* path, as filter-keys index the
+ * root level of InternalItem.
+ */
 export const FilterKeys: StoryFn<ComponentArgs> = () => ({
   components: { UAutocomplete, UContainer },
   setup() {
@@ -635,48 +568,73 @@ export const FilterKeys: StoryFn<ComponentArgs> = () => ({
 
     return { states };
   },
-  template: `
-    <u-container fluid>
-      <u-autocomplete
-        :filter-keys="['title', 'raw.abbr']"
-        :items="states"
-        item-title="name"
-        label="State"
-      ></u-autocomplete>
-    </u-container>
-  `,
+  template: filterKeysStoryTemplate,
 });
 
 FilterKeys.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-container fluid>
-            <u-autocomplete
-              :filter-keys="['title', 'raw.abbr']"
-              :items="states"
-              item-title="name"
-              label="State"
-            ></u-autocomplete>
-          </u-container>
-        </template>
+<template>${filterKeysStoryTemplate}</template>
 
-        <script setup>
-          const states = [
-            { name: 'Florida', abbr: 'FL' },
-            { name: 'Georgia', abbr: 'GA' },
-            { name: 'Nebraska', abbr: 'NE' },
-            { name: 'California', abbr: 'CA' },
-            { name: 'New York', abbr: 'NY' },
-          ]
-        </script>
+<script setup>
+  const states = [
+    { name: 'Florida', abbr: 'FL' },
+    { name: 'Georgia', abbr: 'GA' },
+    { name: 'Nebraska', abbr: 'NE' },
+    { name: 'California', abbr: 'CA' },
+    { name: 'New York', abbr: 'NY' },
+  ]
+</script>
       `,
     },
   },
 };
 
 // Subheaders and Dividers Story
+const subheadersAndDividersStoryTemplate = `
+<u-container>
+  <u-autocomplete 
+    :items="items" 
+    label="Special items like in VList" 
+    chips 
+    multiple
+  ></u-autocomplete>
+
+  <u-autocomplete 
+    :items="items" 
+    label="I have custom divider" 
+    chips 
+    multiple
+  >
+    <template v-slot:divider="{ props }">
+      <div class="d-flex ga-4 align-center">
+        <u-divider></u-divider>
+        {{ props.text }}
+        <u-divider></u-divider>
+      </div>
+    </template>
+  </u-autocomplete>
+
+  <u-autocomplete 
+    :items="items" 
+    label="I have custom subheader" 
+    chips 
+    multiple
+  >
+    <template v-slot:subheader="{ props }">
+      <u-list-subheader class="font-weight-bold bg-primary">
+        {{ props.title }}
+      </u-list-subheader>
+    </template>
+  </u-autocomplete>
+</u-container>
+`;
+
+/**
+ * The items prop recognizes special type of divider and subheader. Those items will be
+ * excluded when using filter and can be further customized with dedicated slots.
+ */
 export const SubheadersAndDividers: StoryFn<ComponentArgs> = () => ({
   components: {
     UAutocomplete,
@@ -700,103 +658,29 @@ export const SubheadersAndDividers: StoryFn<ComponentArgs> = () => ({
 
     return { items };
   },
-  template: `
-    <u-container>
-      <u-autocomplete 
-        :items="items" 
-        label="Special items like in VList" 
-        chips 
-        multiple
-      ></u-autocomplete>
-
-      <u-autocomplete 
-        :items="items" 
-        label="I have custom divider" 
-        chips 
-        multiple
-      >
-        <template v-slot:divider="{ props }">
-          <div class="d-flex ga-4 align-center">
-            <u-divider></u-divider>
-            {{ props.text }}
-            <u-divider></u-divider>
-          </div>
-        </template>
-      </u-autocomplete>
-
-      <u-autocomplete 
-        :items="items" 
-        label="I have custom subheader" 
-        chips 
-        multiple
-      >
-        <template v-slot:subheader="{ props }">
-          <u-list-subheader class="font-weight-bold bg-primary">
-            {{ props.title }}
-          </u-list-subheader>
-        </template>
-      </u-autocomplete>
-    </u-container>
-  `,
+  template: subheadersAndDividersStoryTemplate,
 });
 
 SubheadersAndDividers.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-container>
-            <u-autocomplete 
-              :items="items" 
-              label="Special items like in VList" 
-              chips 
-              multiple
-            ></u-autocomplete>
+<template>${subheadersAndDividersStoryTemplate}</template>
 
-            <u-autocomplete 
-              :items="items" 
-              label="I have custom divider" 
-              chips 
-              multiple
-            >
-              <template v-slot:divider="{ props }">
-                <div class="d-flex ga-4 align-center">
-                  <u-divider></u-divider>
-                  {{ props.text }}
-                  <u-divider></u-divider>
-                </div>
-              </template>
-            </u-autocomplete>
-
-            <u-autocomplete 
-              :items="items" 
-              label="I have custom subheader" 
-              chips 
-              multiple
-            >
-              <template v-slot:subheader="{ props }">
-                <u-list-subheader class="font-weight-bold bg-primary">
-                  {{ props.title }}
-                </u-list-subheader>
-              </template>
-            </u-autocomplete>
-          </u-container>
-        </template>
-
-        <script setup>
-          const items = [
-            { type: 'subheader', title: 'Group 1' },
-            { title: 'Item 1.1', value: 11 },
-            { title: 'Item 1.2', value: 12 },
-            { title: 'Item 1.3', value: 13 },
-            { title: 'Item 1.4', value: 14 },
-            { type: 'divider', text: 'or' },
-            { type: 'subheader', title: 'Group 2' },
-            { title: 'Item 2.1', value: 21 },
-            { title: 'Item 2.2', value: 22 },
-            { title: 'Item 2.3', value: 23 },
-          ]
-        </script>
+<script setup>
+  const items = [
+    { type: 'subheader', title: 'Group 1' },
+    { title: 'Item 1.1', value: 11 },
+    { title: 'Item 1.2', value: 12 },
+    { title: 'Item 1.3', value: 13 },
+    { title: 'Item 1.4', value: 14 },
+    { type: 'divider', text: 'or' },
+    { type: 'subheader', title: 'Group 2' },
+    { title: 'Item 2.1', value: 21 },
+    { title: 'Item 2.2', value: 22 },
+    { title: 'Item 2.3', value: 23 },
+  ]
+</script>
       `,
     },
   },
