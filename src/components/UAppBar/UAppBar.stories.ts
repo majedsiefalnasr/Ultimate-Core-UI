@@ -1,6 +1,22 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 
-import { UApp, UAppBar, UAppBarNavIcon, UAppBarTitle, UResponsive } from '../index';
+import {
+  UApp,
+  UAppBar,
+  UAppBarNavIcon,
+  UAppBarTitle,
+  UBtn,
+  UCard,
+  UCol,
+  UContainer,
+  UIcon,
+  UImg,
+  ULayout,
+  UMain,
+  UResponsive,
+  URow,
+  USheet,
+} from '../index';
 
 interface ComponentArgs {
   absolute?: boolean;
@@ -374,3 +390,220 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 Default.args = {
   // Default args go here
 } as ComponentArgs;
+
+// Scroll behavior Story
+const scrollBehaviorStoryTemplate = `
+  <u-layout class="overflow-visible" style="height: 300px;">
+    <u-app-bar>
+      <template v-slot:prepend>
+        <u-app-bar-nav-icon></u-app-bar-nav-icon>
+      </template>
+
+      <u-app-bar-title>Application Bar</u-app-bar-title>
+
+      <template v-slot:append>
+        <u-btn icon="hugeicons:favourite"></u-btn>
+
+        <u-btn icon="hugeicons:search-01"></u-btn>
+
+        <u-btn icon="hugeicons:more-vertical"></u-btn>
+      </template>
+    </u-app-bar>
+
+    <u-main style="height: 750px;"></u-main>
+  </u-layout>
+`;
+
+/**
+ * Available values:
+ *
+ * - hide: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
+ * - fully-hide: The entire app bar will hide as the user scrolls down.
+ * - collapse: Shrink horizontally to a small bar in one corner.
+ * - elevate: Add a drop shadow to the app bar when scrolling. Ignores scroll-threshold, will always be applied with any amount of scrolling.
+ * - fade-image: Fade out the image as the user scrolls down.
+ * - inverted: Has no effect on its own, but will reverse the behavior when combined with any other option.
+ * The scroll-threshold prop is used to determine how far the user must scroll down (in pixels) before the behavior is applied.
+ *
+ * A scroll listener is added to window by default, but can be changed to a custom element using the scroll-target prop.
+ */
+export const ScrollBehavior: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UAppBar,
+    UAppBarNavIcon,
+    UAppBarTitle,
+    UBtn,
+    ULayout,
+    UMain,
+    UContainer,
+    URow,
+    UCol,
+    USheet,
+  },
+  setup() {},
+  template: scrollBehaviorStoryTemplate,
+});
+
+ScrollBehavior.parameters = {
+  docs: {
+    source: {
+      code: `<template>${scrollBehaviorStoryTemplate}</template>`,
+    },
+  },
+};
+
+// Density Story
+const densityStoryTemplate = `
+  <u-card
+    class="mx-auto"
+    max-width="448"
+  >
+    <u-layout>
+      <u-app-bar
+        color="primary"
+        density="compact"
+      >
+        <template v-slot:prepend>
+          <u-app-bar-nav-icon></u-app-bar-nav-icon>
+        </template>
+
+        <u-app-bar-title>Photos</u-app-bar-title>
+
+        <template v-slot:append>
+          <u-btn icon="hugeicons:more-vertical"></u-btn>
+        </template>
+      </u-app-bar>
+
+      <u-main>
+        <u-container fluid>
+          <u-row dense>
+            <u-col
+              v-for="n in 8"
+              :key="n"
+              cols="3"
+            >
+              <u-sheet
+                color="surface-variant-alt"
+                height="96"
+              ></u-sheet>
+            </u-col>
+          </u-row>
+        </u-container>
+      </u-main>
+    </u-layout>
+  </u-card>
+`;
+
+/**
+ * You can make app-bar dense. A dense app bar has lower height than regular one.
+ */
+export const Density: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UAppBar,
+    UCard,
+    ULayout,
+    UAppBarNavIcon,
+    UAppBarTitle,
+    UBtn,
+    UMain,
+    UContainer,
+    URow,
+    UCol,
+    USheet,
+  },
+  setup() {},
+  template: densityStoryTemplate,
+});
+
+Density.parameters = {
+  docs: {
+    source: {
+      code: `<template>${densityStoryTemplate}</template>`,
+    },
+  },
+};
+
+// Image Story
+const imageStoryTemplate = `
+  <u-card class="mx-auto" color="grey-lighten-3" max-width="448">
+    <u-layout>
+      <u-app-bar
+        color="teal-darken-4"
+        image="https://picsum.photos/1920/1080?random"
+      >
+        <template v-slot:image>
+          <u-img
+            gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.8)"
+          ></u-img>
+        </template>
+
+        <template v-slot:prepend>
+          <u-app-bar-nav-icon></u-app-bar-nav-icon>
+        </template>
+
+        <u-app-bar-title>Title</u-app-bar-title>
+
+        <u-btn icon>
+          <u-icon>hugeicons:search-01</u-icon>
+        </u-btn>
+
+        <u-btn icon>
+          <u-icon>hugeicons:favourite</u-icon>
+        </u-btn>
+
+        <u-btn icon>
+          <u-icon>hugeicons:more-vertical</u-icon>
+        </u-btn>
+      </u-app-bar>
+
+      <u-main>
+        <u-container fluid>
+          <u-row dense>
+            <u-col
+              v-for="n in 4"
+              :key="n"
+              cols="12"
+            >
+              <u-card
+                :subtitle="\`Subtitle for Content \${n}\`"
+                :title="\`Content \${n}\`"
+                text="Lorem ipsum dolor sit amet consectetur, adipisicing elit.?"
+              ></u-card>
+            </u-col>
+          </u-row>
+        </u-container>
+      </u-main>
+    </u-layout>
+  </u-card>
+`;
+
+/**
+ * v-app-bar can contain background images. You can set source via the image prop.
+ * If you need to customize the v-img properties, the app-bar provides you with an image slot.
+ */
+export const Image: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UAppBar,
+    UCard,
+    ULayout,
+    UAppBarNavIcon,
+    UAppBarTitle,
+    UBtn,
+    UIcon,
+    UImg,
+    UMain,
+    UContainer,
+    URow,
+    UCol,
+  },
+  setup() {},
+  template: imageStoryTemplate,
+});
+
+Image.parameters = {
+  docs: {
+    source: {
+      code: `<template>${imageStoryTemplate}</template>`,
+    },
+  },
+};
