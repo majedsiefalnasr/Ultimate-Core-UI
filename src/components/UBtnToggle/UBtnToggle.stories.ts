@@ -50,7 +50,22 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-btn-toggle${attrsString}></u-btn-toggle>`;
+          return `<div class="text-center">
+  <u-btn-toggle${attrsString} v-model="toggle">
+    <u-btn>
+      <u-icon>hugeicons:text-align-justify-left</u-icon>
+    </u-btn>
+    <u-btn>
+      <u-icon>hugeicons:text-align-center</u-icon>
+    </u-btn>
+    <u-btn>
+      <u-icon>hugeicons:text-align-justify-right</u-icon>
+    </u-btn>
+    <u-btn>
+      <u-icon>hugeicons:text-align-justify-center</u-icon>
+    </u-btn>
+  </u-btn-toggle>
+</div>`;
         },
       },
     },
@@ -64,22 +79,19 @@ const meta: Meta<ComponentArgs> = {
       description:
         'Toggle buttons allow you to create a styled group of buttons that can be selected or toggled under a single v-model.',
     },
-    anatomy: {
-      title: 'Anatomy',
-      description: 'The u-btn-toggle component consists of three main components working together.',
-      Image: '/images/stories/UBtnToggle.anatomy.png',
+    api: {
       data: [
         {
-          element: '1. v-btn-toggle',
-          description: 'Primary component that manages the toggle state',
+          element: { title: 'v-btn-toggle', link: 'https://vuetifyjs.com/en/api/v-btn-toggle/' },
+          description: 'Primary Component',
         },
         {
-          element: '2. v-btn',
+          element: { title: 'v-btn', link: 'https://vuetifyjs.com/en/api/v-btn/' },
           description: 'Sub-component used for modifying the v-btn-toggle state',
         },
         {
-          element: '3. v-btn-group',
-          description: 'A stateless version of v-btn-toggle',
+          element: { title: 'v-btn-group', link: 'https://vuetifyjs.com/en/api/v-btn-group/' },
+          description: '	A stateless version of v-btn-toggle',
         },
       ],
     },
@@ -241,6 +253,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBtnToggle, UBtn, UIcon },
   setup() {
@@ -248,68 +261,29 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
     return { args, toggle };
   },
   template: `
-    <u-btn-toggle v-model="toggle" v-bind="args">
-      <u-btn>
-        <u-icon>hugeicons:text-align-justify-left</u-icon>
-      </u-btn>
-      <u-btn>
-        <u-icon>hugeicons:text-align-center</u-icon>
-      </u-btn>
-      <u-btn>
-        <u-icon>hugeicons:text-align-justify-right</u-icon>
-      </u-btn>
-      <u-btn>
-        <u-icon>hugeicons:text-align-justify-center</u-icon>
-      </u-btn>
-    </u-btn-toggle>
-  `,
-});
-
-Default.args = {} as ComponentArgs;
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<u-btn-toggle v-model="toggle">
-  <u-btn>
-    <u-icon>hugeicons:text-align-justify-left</u-icon>
-  </u-btn>
-  <u-btn>
-    <u-icon>hugeicons:text-align-center</u-icon>
-  </u-btn>
-  <u-btn>
-    <u-icon>hugeicons:text-align-justify-right</u-icon>
-  </u-btn>
-  <u-btn>
-    <u-icon>hugeicons:text-align-justify-center</u-icon>
-  </u-btn>
-</u-btn-toggle>`,
-    },
-  },
-};
-
-export const Divided: StoryFn<ComponentArgs> = () => ({
-  components: { UBtnToggle, UBtn },
-  setup() {
-    const toggle = ref(null);
-    return { toggle };
-  },
-  template: `
-    <div class="d-flex align-center flex-column pa-6">
-      <u-btn-toggle v-model="toggle" border divided>
-        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
+    <div class="text-center">
+      <u-btn-toggle v-model="toggle" v-bind="args">
+        <u-btn>
+          <u-icon>hugeicons:text-align-justify-left</u-icon>
+        </u-btn>
+        <u-btn>
+          <u-icon>hugeicons:text-align-center</u-icon>
+        </u-btn>
+        <u-btn>
+          <u-icon>hugeicons:text-align-justify-right</u-icon>
+        </u-btn>
+        <u-btn>
+          <u-icon>hugeicons:text-align-justify-center</u-icon>
+        </u-btn>
       </u-btn-toggle>
     </div>
   `,
 });
 
-Divided.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+Default.args = {} as ComponentArgs;
+
+// Divided story
+const dividedTemplate = `
   <div class="d-flex align-center flex-column pa-6">
     <u-btn-toggle v-model="toggle" border divided>
       <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
@@ -318,64 +292,37 @@ Divided.parameters = {
       <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
   </div>
-</template>
+  `;
 
-<script setup>
-import { ref } from 'vue'
-
-const toggle = ref(null)
-</script>`,
-    },
-  },
-};
-
-export const Variant: StoryFn<ComponentArgs> = () => ({
+/**
+ * You can add a visual divider between buttons with the divided prop.
+ */
+export const Divided: StoryFn<ComponentArgs> = () => ({
   components: { UBtnToggle, UBtn },
   setup() {
     const toggle = ref(null);
     return { toggle };
   },
-  template: `
-    <div class="d-flex align-center flex-column pa-6">
-      <div class="text-subtitle-2">Default</div>
-      <u-btn-toggle v-model="toggle" color="primary">
-        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
-      </u-btn-toggle>
-
-      <div class="mt-6 text-subtitle-2">Text</div>
-      <u-btn-toggle v-model="toggle" color="primary" variant="text">
-        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
-      </u-btn-toggle>
-
-      <div class="mt-6 text-subtitle-2">Plain</div>
-      <u-btn-toggle v-model="toggle" color="primary" variant="plain">
-        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
-      </u-btn-toggle>
-
-      <div class="mt-6 text-subtitle-2">Outlined</div>
-      <u-btn-toggle v-model="toggle" color="primary" variant="outlined">
-        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
-      </u-btn-toggle>
-    </div>
-  `,
+  template: dividedTemplate,
 });
 
-Variant.parameters = {
+Divided.parameters = {
   docs: {
     source: {
-      code: `<template>
+      code: `
+<template>${dividedTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const toggle = ref(null)
+</script>`,
+    },
+  },
+};
+
+// Variant story
+const variantTemplate = `
   <div class="d-flex align-center flex-column pa-6">
     <div class="text-subtitle-2">Default</div>
     <u-btn-toggle v-model="toggle" color="primary">
@@ -409,40 +356,37 @@ Variant.parameters = {
       <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
   </div>
-</template>
+  `;
+
+/**
+ * You can switch the button variant by using variant prop on v-btn-toggle.
+ */
+export const Variant: StoryFn<ComponentArgs> = () => ({
+  components: { UBtnToggle, UBtn },
+  setup() {
+    const toggle = ref(null);
+    return { toggle };
+  },
+  template: variantTemplate,
+});
+
+Variant.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${variantTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const toggle = ref(null)
+  const toggle = ref(null)
 </script>`,
     },
   },
 };
 
-export const Mandatory: StoryFn<ComponentArgs> = () => ({
-  components: { UBtnToggle, UBtn },
-  setup() {
-    const toggle = ref(undefined);
-    return { toggle };
-  },
-  template: `
-    <div class="d-flex flex-column align-center pa-6">
-      <u-btn-toggle v-model="toggle" color="primary" border mandatory>
-        <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center" value="center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right" value="right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center" value="justify"></u-btn>
-      </u-btn-toggle>
-      <pre class="pt-2">{{ toggle }}</pre>
-    </div>
-  `,
-});
-
-Mandatory.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Mandatory story
+const mandatoryTemplate = `
   <div class="d-flex flex-column align-center pa-6">
     <u-btn-toggle v-model="toggle" color="primary" border mandatory>
       <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
@@ -452,40 +396,37 @@ Mandatory.parameters = {
     </u-btn-toggle>
     <pre class="pt-2">{{ toggle }}</pre>
   </div>
-</template>
+  `;
+
+/**
+ * A u-btn-toggle with the mandatory prop will always have a value.
+ */
+export const Mandatory: StoryFn<ComponentArgs> = () => ({
+  components: { UBtnToggle, UBtn },
+  setup() {
+    const toggle = ref(undefined);
+    return { toggle };
+  },
+  template: mandatoryTemplate,
+});
+
+Mandatory.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${mandatoryTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const toggle = ref()
+  const toggle = ref()
 </script>`,
     },
   },
 };
 
-export const Multiple: StoryFn<ComponentArgs> = () => ({
-  components: { UBtnToggle, UBtn },
-  setup() {
-    const toggle = ref([]);
-    return { toggle };
-  },
-  template: `
-    <div class="d-flex flex-column align-center pa-6">
-      <u-btn-toggle v-model="toggle" border multiple>
-        <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center" value="center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right" value="right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center" value="justify"></u-btn>
-      </u-btn-toggle>
-      <pre class="pt-2">{{ toggle }}</pre>
-    </div>
-  `,
-});
-
-Multiple.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Multiple story
+const multipleTemplate = `
   <div class="d-flex flex-column align-center pa-6">
     <u-btn-toggle v-model="toggle" border multiple>
       <u-btn icon="hugeicons:text-align-justify-left" value="left"></u-btn>
@@ -495,42 +436,37 @@ Multiple.parameters = {
     </u-btn-toggle>
     <pre class="pt-2">{{ toggle }}</pre>
   </div>
-</template>
+  `;
+
+/**
+ * A u-btn-toggle with the multiple prop will allow a user to select multiple return values as an array.
+ */
+export const Multiple: StoryFn<ComponentArgs> = () => ({
+  components: { UBtnToggle, UBtn },
+  setup() {
+    const toggle = ref([]);
+    return { toggle };
+  },
+  template: multipleTemplate,
+});
+
+Multiple.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${multipleTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const toggle = ref([])
+  const toggle = ref([])
 </script>`,
     },
   },
 };
 
-export const Rounded: StoryFn<ComponentArgs> = () => ({
-  components: { UBtnToggle, UBtn },
-  template: `
-    <div class="d-flex justify-space-around pa-6">
-      <u-btn-toggle rounded="0" border>
-        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
-      </u-btn-toggle>
-
-      <u-btn-toggle rounded="xl" border>
-        <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
-        <u-btn icon="hugeicons:text-align-center"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-right"></u-btn>
-        <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
-      </u-btn-toggle>
-    </div>
-  `,
-});
-
-Rounded.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Rounded story
+const roundedTemplate = `
   <div class="d-flex justify-space-around pa-6">
     <u-btn-toggle rounded="0" border>
       <u-btn icon="hugeicons:text-align-justify-left"></u-btn>
@@ -546,66 +482,26 @@ Rounded.parameters = {
       <u-btn icon="hugeicons:text-align-justify-center"></u-btn>
     </u-btn-toggle>
   </div>
-</template>`,
+  `;
+
+/**
+ * You can control the border radius with the rounded prop.
+ */
+export const Rounded: StoryFn<ComponentArgs> = () => ({
+  components: { UBtnToggle, UBtn },
+  template: roundedTemplate,
+});
+
+Rounded.parameters = {
+  docs: {
+    source: {
+      code: `<template>${roundedTemplate}</template>`,
     },
   },
 };
 
-export const WYSIWYG: StoryFn<ComponentArgs> = () => ({
-  components: { UBtnToggle, UBtn, UCard, UIcon, USheet, UTextarea },
-  setup() {
-    const alignment = ref(1);
-    const formatting = ref([]);
-    const value = ref(
-      'Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or'
-    );
-    return { alignment, formatting, value };
-  },
-  template: `
-    <u-card class="mx-auto" max-width="600">
-      <div class="d-flex justify-space-between pa-4 pb-0">
-        <u-btn-toggle v-model="formatting" variant="outlined" divided multiple>
-          <u-btn>
-            <u-icon icon="hugeicons:text-italic"></u-icon>
-          </u-btn>
-          <u-btn>
-            <u-icon icon="hugeicons:text-bold"></u-icon>
-          </u-btn>
-          <u-btn>
-            <u-icon icon="hugeicons:text-underline"></u-icon>
-          </u-btn>
-          <u-btn>
-            <div class="d-flex align-center flex-column justify-center">
-              <u-icon icon="hugeicons:text-color"></u-icon>
-              <u-sheet color="purple" height="4" width="26" tile></u-sheet>
-            </div>
-          </u-btn>
-        </u-btn-toggle>
-
-        <u-btn-toggle v-model="alignment" variant="outlined" divided>
-          <u-btn>
-            <u-icon icon="hugeicons:text-align-center"></u-icon>
-          </u-btn>
-          <u-btn>
-            <u-icon icon="hugeicons:text-align-left"></u-icon>
-          </u-btn>
-          <u-btn>
-            <u-icon icon="hugeicons:text-align-right"></u-icon>
-          </u-btn>
-        </u-btn-toggle>
-      </div>
-
-      <u-sheet class="pa-4 text-center">
-        <u-textarea v-model="value" rows="2" variant="outlined" auto-grow hide-details></u-textarea>
-      </u-sheet>
-    </u-card>
-  `,
-});
-
-WYSIWYG.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// WYSIWYG story
+const wysiwygTemplate = `
   <u-card class="mx-auto" max-width="600">
     <div class="d-flex justify-space-between pa-4 pb-0">
       <u-btn-toggle v-model="formatting" variant="outlined" divided multiple>
@@ -643,14 +539,36 @@ WYSIWYG.parameters = {
       <u-textarea v-model="value" rows="2" variant="outlined" auto-grow hide-details></u-textarea>
     </u-sheet>
   </u-card>
-</template>
+  `;
+
+/**
+ * Group similar actions and design your own WYSIWYG component.
+ */
+export const WYSIWYG: StoryFn<ComponentArgs> = () => ({
+  components: { UBtnToggle, UBtn, UCard, UIcon, USheet, UTextarea },
+  setup() {
+    const alignment = ref(1);
+    const formatting = ref([]);
+    const value = ref(
+      'Toggle button requirements.\n\nHave at least three toggle buttons in a group\nLabel buttons with text, an icon, or'
+    );
+    return { alignment, formatting, value };
+  },
+  template: wysiwygTemplate,
+});
+
+WYSIWYG.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${wysiwygTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const alignment = ref(1)
-const formatting = ref([])
-const value = ref('Toggle button requirements.\\n\\nHave at least three toggle buttons in a group\\nLabel buttons with text, an icon, or')
+  const alignment = ref(1)
+  const formatting = ref([])
+  const value = ref('Toggle button requirements.\\n\\nHave at least three toggle buttons in a group\\nLabel buttons with text, an icon, or')
 </script>`,
     },
   },
