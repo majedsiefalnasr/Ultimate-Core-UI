@@ -103,6 +103,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: {
     UApp,
@@ -143,6 +144,35 @@ Default.args = {
 } as ComponentArgs;
 
 // Theme Story
+/**
+ * The u-app component makes it easy to enable one of your application defined themes. By default,
+ * Vuetify comes with 2 themes, light and dark. Each one is a collection of various colors used to
+ * style each individual component. Because u-app acts as an interface for theme functionality, you
+ * have the ability to change it dynamically within your template.
+ */
+const themeStoryTemplate = `
+  <u-responsive class="border rounded" max-height="300">
+    <u-app :theme="theme">
+      <u-app-bar class="px-3">
+        <u-spacer></u-spacer>
+
+        <u-btn
+          :prepend-icon="theme === 'light' ? 'hugeicons:sun-03' : 'hugeicons:moon-02'"
+          text="Toggle Theme"
+          slim
+          @click="onClick"
+        ></u-btn>
+      </u-app-bar>
+
+      <u-main>
+        <u-container>
+          <h1>Main Content</h1>
+        </u-container>
+      </u-main>
+    </u-app>
+  </u-responsive>
+`;
+
 export const Theme: StoryFn<ComponentArgs> = () => ({
   components: { UApp, UResponsive, UAppBar, UBtn, USpacer, UMain, UContainer },
   setup() {
@@ -154,56 +184,14 @@ export const Theme: StoryFn<ComponentArgs> = () => ({
 
     return { theme, onClick };
   },
-  template: `
-    <u-responsive class="border rounded" max-height="300">
-      <u-app :theme="theme">
-        <u-app-bar class="px-3">
-          <u-spacer></u-spacer>
-
-          <u-btn
-            :prepend-icon="theme === 'light' ? 'hugeicons:sun-03' : 'hugeicons:moon-02'"
-            text="Toggle Theme"
-            slim
-            @click="onClick"
-          ></u-btn>
-        </u-app-bar>
-
-        <u-main>
-          <u-container>
-            <h1>Main Content</h1>
-          </u-container>
-        </u-main>
-      </u-app>
-    </u-responsive>
-  `,
+  template: themeStoryTemplate,
 });
 
 Theme.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-responsive class="border rounded" max-height="300">
-            <u-app :theme="theme">
-              <u-app-bar class="px-3">
-                <u-spacer></u-spacer>
-
-                <u-btn
-                  :prepend-icon="theme === 'light' ? 'hugeicons:sun-03' : 'hugeicons:moon-02'"
-                  text="Toggle Theme"
-                  slim
-                  @click="onClick"
-                ></u-btn>
-              </u-app-bar>
-
-              <u-main>
-                <u-container>
-                  <h1>Main Content</h1>
-                </u-container>
-              </u-main>
-            </u-app>
-          </u-responsive>
-        </template>
+        <template>${themeStoryTemplate}</template>
 
         <script setup>
           import { ref } from 'vue'
