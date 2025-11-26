@@ -59,7 +59,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-alert${attrsString}></u-alert>`;
+          return `<u-alert${attrsString} />`;
         },
       },
     },
@@ -360,7 +360,7 @@ The recommended placement of elements inside of u-alert is:
 
 export default meta;
 
-// Primary Story
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UAlert },
   setup() {
@@ -377,202 +377,157 @@ Default.args = {
   variant: 'tonal',
 } as ComponentArgs;
 
+// Variants Story
+const variantsStoryTemplate = `
+  <u-container class="pa-4 d-flex flex-column ga-4" >
+    <u-alert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
+    <u-alert title="Flat Alert" text="This is a flat alert" variant="flat" />
+    <u-alert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
+    <u-alert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
+    <u-alert title="Text Alert" text="This is a text alert" variant="text" />
+    <u-alert title="Plain Alert" text="This is a plain alert" variant="plain" />
+  </u-container>
+`;
+
 /**
- * Variants
- *
- * Displays different variants of the UAlert component.
+ * The u-alert has 6 style variants, elevated, flat, tonal, outlined, text, and plain. By default,
+ * the u-alert component is flat; which means that it has a solid background and no box-shadow (elevation).
  */
 export const Variants: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
-  template: `
-    <u-container class="pa-4 d-flex flex-column ga-4" >
-      <u-alert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
-      <u-alert title="Flat Alert" text="This is a flat alert" variant="flat" />
-      <u-alert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
-      <u-alert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
-      <u-alert title="Text Alert" text="This is a text alert" variant="text" />
-      <u-alert title="Plain Alert" text="This is a plain alert" variant="plain" />
-    </u-container>
-  `,
+  template: variantsStoryTemplate,
 });
 
 Variants.parameters = {
   docs: {
     source: {
-      code: `
-        <u-alert title="Elevated Alert" text="This is an elevated alert" variant="elevated" />
-        <u-alert title="Flat Alert" text="This is a flat alert" variant="flat" />
-        <u-alert title="Tonal Alert" text="This is a tonal alert" variant="tonal" />
-        <u-alert title="Outlined Alert" text="This is an outlined alert" variant="outlined" />
-        <u-alert title="Text Alert" text="This is a text alert" variant="text" />
-        <u-alert title="Plain Alert" text="This is a plain alert" variant="plain" />
-      `,
+      code: `<template>${variantsStoryTemplate}</template>`,
     },
   },
 };
 
-// Border color Story
+// Border Colors Story
+const borderColorsStoryTemplate = `
+  <u-container class="pa-4 d-flex flex-column ga-4" >
+    <u-alert border="start" border-color="deep-purple accent-4" elevation="2">
+      Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut velit. Nulla facilisi..
+      Morbi mollis tellus ac sapien. Fusce vel dui. Praesent ut ligula non mi varius sagittis. Vivamus
+      consectetuer hendrerit lacus. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec,
+      nisi.
+    </u-alert>
+
+    <u-alert border="top" border-color="success" elevation="2">
+      Vestibulum ullamcorper mauris at ligula. Nam pretium turpis et arcu. Ut varius tincidunt libero.
+      Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Morbi nec metus.
+    </u-alert>
+
+    <u-alert border="bottom" border-color="warning" elevation="2">
+      Sed in libero ut nibh placerat accumsan. Phasellus leo dolor, tempus non, auctor et, hendrerit
+      quis, nisi. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Sed consequat, leo
+      eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec elit
+      libero, sodales nec, volutpat a, suscipit non, turpis.
+    </u-alert>
+
+    <u-alert border="end" border-color="error" elevation="2">
+      Fusce commodo aliquam arcu. Pellentesque posuere. Phasellus tempus. Donec posuere vulputate
+      arcu.
+    </u-alert>
+  </u-container>
+`;
+
+/**
+ * The border-color prop removes the alert background in order to accent the border prop. If a type is set,
+ * it will use the type’s default color. If no color or type is set, the color will default to the inverted
+ * color of the applied theme (black for light and white/gray for dark).
+ */
 export const BorderColors: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
-  template: `
-    <u-container class="pa-4 d-flex flex-column ga-4" >
-      <u-alert border="start" border-color="deep-purple accent-4" elevation="2">
-        Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut velit. Nulla facilisi..
-        Morbi mollis tellus ac sapien. Fusce vel dui. Praesent ut ligula non mi varius sagittis. Vivamus
-        consectetuer hendrerit lacus. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec,
-        nisi.
-      </u-alert>
-
-      <u-alert border="top" border-color="success" elevation="2">
-        Vestibulum ullamcorper mauris at ligula. Nam pretium turpis et arcu. Ut varius tincidunt libero.
-        Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Morbi nec metus.
-      </u-alert>
-
-      <u-alert border="bottom" border-color="warning" elevation="2">
-        Sed in libero ut nibh placerat accumsan. Phasellus leo dolor, tempus non, auctor et, hendrerit
-        quis, nisi. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Sed consequat, leo
-        eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec elit
-        libero, sodales nec, volutpat a, suscipit non, turpis.
-      </u-alert>
-
-      <u-alert border="end" border-color="error" elevation="2">
-        Fusce commodo aliquam arcu. Pellentesque posuere. Phasellus tempus. Donec posuere vulputate
-        arcu.
-      </u-alert>
-    </u-container>
-  `,
+  template: borderColorsStoryTemplate,
 });
 
 BorderColors.parameters = {
   docs: {
     source: {
-      code: `
-        <u-alert border="start" border-color="deep-purple accent-4" elevation="2">
-          Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut velit. Nulla facilisi..
-          Morbi mollis tellus ac sapien. Fusce vel dui. Praesent ut ligula non mi varius sagittis. Vivamus
-          consectetuer hendrerit lacus. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec,
-          nisi.
-        </u-alert>
-
-        <u-alert border="top" border-color="success" elevation="2">
-          Vestibulum ullamcorper mauris at ligula. Nam pretium turpis et arcu. Ut varius tincidunt libero.
-          Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Morbi nec metus.
-        </u-alert>
-
-        <u-alert border="bottom" border-color="warning" elevation="2">
-          Sed in libero ut nibh placerat accumsan. Phasellus leo dolor, tempus non, auctor et, hendrerit
-          quis, nisi. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Sed consequat, leo
-          eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec elit
-          libero, sodales nec, volutpat a, suscipit non, turpis.
-        </u-alert>
-
-        <u-alert border="end" border-color="error" elevation="2">
-          Fusce commodo aliquam arcu. Pellentesque posuere. Phasellus tempus. Donec posuere vulputate
-          arcu.
-        </u-alert>
-      `,
+      code: `<template>${borderColorsStoryTemplate}</template>`,
     },
   },
 };
 
 // Icon Story
+const iconStoryTemplate = `
+  <u-container class="pa-4 d-flex flex-column ga-4" >
+    <u-alert color="#2A3B4D" density="compact" icon="hugeicons:abacus" theme="dark">
+      Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Vivamus quis mi. Quisque
+      ut nisi. Maecenas malesuada.
+    </u-alert>
+
+    <u-alert color="#C51162" icon="hugeicons:material-and-texture" theme="dark" border>
+      Phasellus blandit leo ut odio. Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut,
+      faucibus non, euismod id, nulla. In ut quam vitae odio lacinia tincidunt.
+    </u-alert>
+
+    <u-alert color="primary" icon="hugeicons:danger" theme="dark" prominent>
+      Praesent congue erat at massa. Nullam vel sem. Aliquam lorem ante, dapibus in, viverra quis,
+      feugiat a, tellus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien,
+      a accumsan nisi mauris ac eros. Curabitur at lacus ac velit ornare lobortis.
+    </u-alert>
+  </u-container>
+`;
+
+/**
+ * The icon prop allows you to add an icon to the beginning of the alert component. If a type is provided,
+ * this will override the default type icon. Additionally, setting the icon prop to false will remove the icon altogether.
+ */
 export const Icon: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
-  template: `
-    <u-container class="pa-4 d-flex flex-column ga-4" >
-      <u-alert color="#2A3B4D" density="compact" icon="hugeicons:abacus" theme="dark">
-        Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Vivamus quis mi. Quisque
-        ut nisi. Maecenas malesuada.
-      </u-alert>
-
-      <u-alert color="#C51162" icon="hugeicons:material-and-texture" theme="dark" border>
-        Phasellus blandit leo ut odio. Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut,
-        faucibus non, euismod id, nulla. In ut quam vitae odio lacinia tincidunt.
-      </u-alert>
-
-      <u-alert color="primary" icon="hugeicons:danger" theme="dark" prominent>
-        Praesent congue erat at massa. Nullam vel sem. Aliquam lorem ante, dapibus in, viverra quis,
-        feugiat a, tellus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien,
-        a accumsan nisi mauris ac eros. Curabitur at lacus ac velit ornare lobortis.
-      </u-alert>
-    </u-container>
-  `,
+  template: iconStoryTemplate,
 });
 
 Icon.parameters = {
   docs: {
     source: {
-      code: `
-        <u-alert color="#2A3B4D" density="compact" icon="hugeicons:abacus" theme="dark">
-          Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Vivamus quis mi. Quisque
-          ut nisi. Maecenas malesuada.
-        </u-alert>
-
-        <u-alert color="#C51162" icon="hugeicons:material-and-texture" theme="dark" border>
-          Phasellus blandit leo ut odio. Morbi mattis ullamcorper velit. Donec orci lectus, aliquam ut,
-          faucibus non, euismod id, nulla. In ut quam vitae odio lacinia tincidunt.
-        </u-alert>
-
-        <u-alert color="primary" icon="hugeicons:danger" theme="dark" prominent>
-          Praesent congue erat at massa. Nullam vel sem. Aliquam lorem ante, dapibus in, viverra quis,
-          feugiat a, tellus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien,
-          a accumsan nisi mauris ac eros. Curabitur at lacus ac velit ornare lobortis.
-        </u-alert>
-      `,
+      code: `<template>${iconStoryTemplate}</template>`,
     },
   },
 };
 
 // Outlined Story
+const outlinedStoryTemplate = `
+  <u-container class="pa-4 d-flex flex-column ga-4" >
+    <u-alert color="purple" variant="outlined">
+      <template v-slot:title> Outlined Alert </template>
+      Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis
+      nunc et lorem. Duis vel nibh at velit scelerisque suscipit. Praesent blandit laoreet nibh.
+      Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor
+      sagittis lacus. Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
+      venenatis ante odio sit amet eros.
+    </u-alert>
+
+    <u-alert type="success" variant="outlined">
+      Praesent venenatis metus at tortor pulvinar varius. Aenean commodo ligula eget dolor. Praesent
+      ac massa at ligula laoreet iaculis. Vestibulum ullamcorper mauris at ligula.
+    </u-alert>
+
+    <u-alert border="top" type="warning" variant="outlined" prominent>
+      Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Suspendisse non nisl
+      sit amet velit hendrerit rutrum. Nullam vel sem. Pellentesque dapibus hendrerit tortor.
+    </u-alert>
+  </u-container>
+`;
+
+/**
+ * The outlined prop inverts the style of an alert, inheriting the currently applied color, applying it
+ * to the text and border, and making its background transparent.
+ */
 export const Outlined: StoryFn<ComponentArgs> = () => ({
   components: { UAlert },
-  template: `
-    <u-container class="pa-4 d-flex flex-column ga-4" >
-      <u-alert color="purple" variant="outlined">
-        <template v-slot:title> Outlined Alert </template>
-        Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis
-        nunc et lorem. Duis vel nibh at velit scelerisque suscipit. Praesent blandit laoreet nibh.
-        Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor
-        sagittis lacus. Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
-        venenatis ante odio sit amet eros.
-      </u-alert>
-
-      <u-alert type="success" variant="outlined">
-        Praesent venenatis metus at tortor pulvinar varius. Aenean commodo ligula eget dolor. Praesent
-        ac massa at ligula laoreet iaculis. Vestibulum ullamcorper mauris at ligula.
-      </u-alert>
-
-      <u-alert border="top" type="warning" variant="outlined" prominent>
-        Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Suspendisse non nisl
-        sit amet velit hendrerit rutrum. Nullam vel sem. Pellentesque dapibus hendrerit tortor.
-      </u-alert>
-    </u-container>
-  `,
+  template: outlinedStoryTemplate,
 });
 
 Outlined.parameters = {
   docs: {
     source: {
-      code: `
-        <u-alert color="purple" variant="outlined">
-          <template v-slot:title> Outlined Alert </template>
-          Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis
-          nunc et lorem. Duis vel nibh at velit scelerisque suscipit. Praesent blandit laoreet nibh.
-          Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor
-          sagittis lacus. Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
-          venenatis ante odio sit amet eros.
-        </u-alert>
-
-        <u-alert type="success" variant="outlined">
-          Praesent venenatis metus at tortor pulvinar varius. Aenean commodo ligula eget dolor. Praesent
-          ac massa at ligula laoreet iaculis. Vestibulum ullamcorper mauris at ligula.
-        </u-alert>
-
-        <u-alert border="top" type="warning" variant="outlined" prominent>
-          Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Suspendisse non nisl
-          sit amet velit hendrerit rutrum. Nullam vel sem. Pellentesque dapibus hendrerit tortor.
-        </u-alert>
-      `,
+      code: `<template>${outlinedStoryTemplate}</template>`,
     },
   },
 };
