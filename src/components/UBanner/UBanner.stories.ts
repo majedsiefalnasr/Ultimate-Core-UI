@@ -85,13 +85,16 @@ const meta: Meta<ComponentArgs> = {
     },
     anatomy: {
       title: 'Anatomy',
-      description:
-        'The recommended placement of elements inside of v-banner is: Place a v-banner-avatar or v-banner-icon on the far left, Place v-banner-text to the right of any visual content, Place v-banner-actions to the far right of textual content, offset bottom.',
+      description: `The recommended placement of elements inside of u-banner is:
+
+- Place a u-banner-avatar or u-banner-icon on the far left
+- Place u-banner-text to the right of any visual content
+- Place u-banner-actions to the far right of textual content, offset bottom`,
       Image: '/images/stories/UBanner.anatomy.png',
       data: [
         {
           element: '1. Container',
-          description: 'The Banner container holds all v-banner components',
+          description: 'The Banner container holds all u-banner components',
         },
         {
           element: '2. Avatar / Icon (optional)',
@@ -103,7 +106,7 @@ const meta: Meta<ComponentArgs> = {
         },
         {
           element: '4. Actions (optional)',
-          description: 'A content area that typically contains one or more v-btn components',
+          description: 'A content area that typically contains one or more u-btn components',
         },
       ],
     },
@@ -225,6 +228,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBanner, UBannerText, UBtn },
   setup() {
@@ -247,116 +251,124 @@ Default.args = {
 } as ComponentArgs;
 
 // Lines Story
+const linesStoryTemplate = `
+  <div>
+    <u-banner
+      class="my-4"
+      color="deep-purple-accent-4"
+      icon="hugeicons:lock-password"
+      lines="one"
+    >
+      <u-banner-text>
+        Banner with one line of text.
+      </u-banner-text>
+
+      <template v-slot:actions>
+        <u-btn>Action</u-btn>
+      </template>
+    </u-banner>
+
+    <u-banner
+      class="my-4"
+      color="error"
+      icon="hugeicons:waiter"
+      lines="two"
+    >
+      <u-banner-text>
+        Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
+      </u-banner-text>
+
+      <template v-slot:actions>
+        <u-btn>Action</u-btn>
+      </template>
+    </u-banner>
+
+    <u-banner
+      class="my-4"
+      color="warning"
+      icon="hugeicons:alert-02"
+      lines="three"
+    >
+      <u-banner-text>
+        Banner with three lines of text. One or two lines is preferable. Three lines should be considered the absolute maximum length on desktop in order to keep messages short and actionable.
+      </u-banner-text>
+
+      <template v-slot:actions>
+        <u-btn>Action</u-btn>
+      </template>
+    </u-banner>
+  </div>
+`;
+/**
+ * The prop lines can be used to specify how the displayed text should be handled based on its length.
+ */
 export const Lines: StoryFn<ComponentArgs> = () => ({
   components: { UBanner, UBannerText, UBtn },
-  template: `
-    <div>
-      <u-banner
-        class="my-4"
-        color="deep-purple-accent-4"
-        icon="hugeicons:lock-password"
-        lines="one"
-      >
-        <u-banner-text>
-          Banner with one line of text.
-        </u-banner-text>
-
-        <template v-slot:actions>
-          <u-btn>Action</u-btn>
-        </template>
-      </u-banner>
-
-      <u-banner
-        class="my-4"
-        color="error"
-        icon="hugeicons:waiter"
-        lines="two"
-      >
-        <u-banner-text>
-          Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
-        </u-banner-text>
-
-        <template v-slot:actions>
-          <u-btn>Action</u-btn>
-        </template>
-      </u-banner>
-
-      <u-banner
-        class="my-4"
-        color="warning"
-        icon="hugeicons:alert-02"
-        lines="three"
-      >
-        <u-banner-text>
-          Banner with three lines of text. One or two lines is preferable. Three lines should be considered the absolute maximum length on desktop in order to keep messages short and actionable.
-        </u-banner-text>
-
-        <template v-slot:actions>
-          <u-btn>Action</u-btn>
-        </template>
-      </u-banner>
-    </div>
-  `,
+  template: linesStoryTemplate,
 });
 
 Lines.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <div>
-            <u-banner
-              class="my-4"
-              color="deep-purple-accent-4"
-              icon="hugeicons:lock-password"
-              lines="one"
-            >
-              <u-banner-text>
-                Banner with one line of text.
-              </u-banner-text>
-
-              <template v-slot:actions>
-                <u-btn>Action</u-btn>
-              </template>
-            </u-banner>
-
-            <u-banner
-              class="my-4"
-              color="error"
-              icon="hugeicons:waiter"
-              lines="two"
-            >
-              <u-banner-text>
-                Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
-              </u-banner-text>
-
-              <template v-slot:actions>
-                <u-btn>Action</u-btn>
-              </template>
-            </u-banner>
-
-            <u-banner
-              class="my-4"
-              color="warning"
-              icon="hugeicons:alert-02"
-              lines="three"
-            >
-              <u-banner-text>
-                Banner with three lines of text. One or two lines is preferable. Three lines should be considered the absolute maximum length on desktop in order to keep messages short and actionable.
-              </u-banner-text>
-
-              <template v-slot:actions>
-                <u-btn>Action</u-btn>
-              </template>
-            </u-banner>
-          </div>
-        </template>
-      `,
+      code: `<template>${linesStoryTemplate}</template>`,
     },
   },
 };
 
 // Sticky Story
+const stickyStoryTemplate = `
+  <u-card
+    class="overflow-auto mx-auto"
+    max-height="300"
+    width="448"
+  >
+    <u-toolbar color="primary">
+      <template #title>My Document</template>
+
+      <template v-slot:append>
+        <u-switch
+          v-model="sticky"
+          color="secondary"
+          label="Sticky Banner"
+          hide-details
+        ></u-switch>
+      </template>
+    </u-toolbar>
+
+    <u-banner
+      :sticky="sticky"
+      lines="one"
+    >
+      <template v-slot:text>
+        We can't save your edits while you are in offline mode.
+      </template>
+
+      <template v-slot:actions>
+        <u-btn color="deep-purple-accent-4">
+          Go Online
+        </u-btn>
+      </template>
+    </u-banner>
+
+    <u-card-text class="bg-grey-lighten-4">
+      <u-sheet
+        class="mx-auto"
+        height="300"
+      ></u-sheet>
+    </u-card-text>
+
+    <u-footer
+      class="justify-center"
+      color="primary"
+    >
+      End of Content
+    </u-footer>
+  </u-card>
+`;
+
+/**
+ * You can optionally turn on the sticky prop to ensure that the content is pinned to the top of the screen.
+ */
 export const Sticky: StoryFn<ComponentArgs> = () => ({
   components: {
     UBanner,
@@ -372,285 +384,137 @@ export const Sticky: StoryFn<ComponentArgs> = () => ({
     const sticky = ref(false);
     return { sticky };
   },
-  template: `
-    <u-card
-      class="overflow-auto mx-auto"
-      max-height="300"
-      width="448"
-    >
-      <u-toolbar color="primary">
-        <template #title>My Document</template>
-
-        <template v-slot:append>
-          <u-switch
-            v-model="sticky"
-            color="secondary"
-            label="Sticky Banner"
-            hide-details
-          ></u-switch>
-        </template>
-      </u-toolbar>
-
-      <u-banner
-        :sticky="sticky"
-        lines="one"
-      >
-        <template v-slot:text>
-          We can't save your edits while you are in offline mode.
-        </template>
-
-        <template v-slot:actions>
-          <u-btn color="deep-purple-accent-4">
-            Go Online
-          </u-btn>
-        </template>
-      </u-banner>
-
-      <u-card-text class="bg-grey-lighten-4">
-        <u-sheet
-          class="mx-auto"
-          height="300"
-        ></u-sheet>
-      </u-card-text>
-
-      <u-footer
-        class="justify-center"
-        color="primary"
-      >
-        End of Content
-      </u-footer>
-    </u-card>
-  `,
+  template: stickyStoryTemplate,
 });
 
 Sticky.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-card
-            class="overflow-auto mx-auto"
-            max-height="300"
-            width="448"
-          >
-            <u-toolbar color="primary">
-              <template #title>My Document</template>
+<template>${stickyStoryTemplate}</template>
 
-              <template v-slot:append>
-                <u-switch
-                  v-model="sticky"
-                  color="secondary"
-                  label="Sticky Banner"
-                  hide-details
-                ></u-switch>
-              </template>
-            </u-toolbar>
+<script setup>
+  import { ref } from 'vue'
 
-            <u-banner
-              :sticky="sticky"
-              lines="one"
-            >
-              <template v-slot:text>
-                We can't save your edits while you are in offline mode.
-              </template>
-
-              <template v-slot:actions>
-                <u-btn color="deep-purple-accent-4">
-                  Go Online
-                </u-btn>
-              </template>
-            </u-banner>
-
-            <u-card-text class="bg-grey-lighten-4">
-              <u-sheet
-                class="mx-auto"
-                height="300"
-              ></u-sheet>
-            </u-card-text>
-
-            <u-footer
-              class="justify-center"
-              color="primary"
-            >
-              End of Content
-            </u-footer>
-          </u-card>
-        </template>
-
-        <script setup>
-          import { ref } from 'vue'
-
-          const sticky = ref(false)
-        </script>
+  const sticky = ref(false)
+</script>
       `,
     },
   },
 };
 
 // Actions Story
+const actionsStoryTemplate = `
+  <u-banner
+    color="warning"
+    icon="hugeicons:wifi-error-01"
+    lines="one"
+  >
+    <template v-slot:text>
+      No Internet connection
+    </template>
+
+    <template v-slot:actions>
+      <u-btn>
+        Dismiss
+      </u-btn>
+
+      <u-btn>
+        Retry
+      </u-btn>
+    </template>
+  </u-banner>
+`;
+
+/**
+ * Banners may have one or two text buttons that don’t stand out that much.
+ */
 export const Actions: StoryFn<ComponentArgs> = () => ({
   components: { UBanner, UBtn },
-  template: `
-    <u-banner
-      color="warning"
-      icon="hugeicons:wifi-error-01"
-      lines="one"
-    >
-      <template v-slot:text>
-        No Internet connection
-      </template>
-
-      <template v-slot:actions>
-        <u-btn>
-          Dismiss
-        </u-btn>
-
-        <u-btn>
-          Retry
-        </u-btn>
-      </template>
-    </u-banner>
-  `,
+  template: actionsStoryTemplate,
 });
 
 Actions.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <u-banner
-            color="warning"
-            icon="hugeicons:wifi-error-01"
-            lines="one"
-          >
-            <template v-slot:text>
-              No Internet connection
-            </template>
-
-            <template v-slot:actions>
-              <u-btn>
-                Dismiss
-              </u-btn>
-
-              <u-btn>
-                Retry
-              </u-btn>
-            </template>
-          </u-banner>
-        </template>
-      `,
+      code: `<template>${actionsStoryTemplate}</template>`,
     },
   },
 };
 
 // Icon Story
+const iconStoryTemplate = `
+  <u-banner
+    color="pink-darken-1"
+    icon="hugeicons:user-account"
+    lines="two"
+  >
+    <template v-slot:prepend>
+      <u-avatar></u-avatar>
+    </template>
+
+    <u-banner-text>
+      Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
+    </u-banner-text>
+
+    <u-banner-actions>
+      <u-btn>Action Button</u-btn>
+    </u-banner-actions>
+  </u-banner>
+`;
+/**
+ * The icon slot allows you to explicitly control the content and functionality within it.
+ */
 export const Icon: StoryFn<ComponentArgs> = () => ({
   components: { UAvatar, UBanner, UBannerActions, UBannerText, UBtn },
-  template: `
-    <u-banner
-      color="pink-darken-1"
-      icon="hugeicons:user-account"
-      lines="two"
-    >
-      <template v-slot:prepend>
-        <u-avatar></u-avatar>
-      </template>
-
-      <u-banner-text>
-        Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
-      </u-banner-text>
-
-      <u-banner-actions>
-        <u-btn>Action Button</u-btn>
-      </u-banner-actions>
-    </u-banner>
-  `,
+  template: iconStoryTemplate,
 });
 
 Icon.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <u-banner
-            color="pink-darken-1"
-            icon="hugeicons:user-account"
-            lines="two"
-          >
-            <template v-slot:prepend>
-              <u-avatar></u-avatar>
-            </template>
-
-            <u-banner-text>
-              Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
-            </u-banner-text>
-
-            <u-banner-actions>
-              <u-btn>Action Button</u-btn>
-            </u-banner-actions>
-          </u-banner>
-        </template>
-      `,
+      code: `<template>${iconStoryTemplate}</template>`,
     },
   },
 };
 
 // Prepend Story
+const prependStoryTemplate = `
+  <u-banner
+    color="deep-purple-accent-4"
+    lines="two"
+  >
+    <template v-slot:prepend>
+      <u-avatar
+        color="deep-purple-accent-4"
+        icon="hugeicons:user-id-verification"
+      ></u-avatar>
+    </template>
+
+    <u-banner-text>
+      Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
+    </u-banner-text>
+
+    <u-banner-actions>
+      <u-btn>Action</u-btn>
+
+      <u-btn>Action</u-btn>
+    </u-banner-actions>
+  </u-banner>
+`;
+/**
+ * The prepend slot allows you to explicitly control the content and functionality within it.
+ * Icons also help to emphasize a banner’s message.
+ */
 export const Prepend: StoryFn<ComponentArgs> = () => ({
   components: { UAvatar, UBanner, UBannerActions, UBannerText, UBtn },
-  template: `
-    <u-banner
-      color="deep-purple-accent-4"
-      lines="two"
-    >
-      <template v-slot:prepend>
-        <u-avatar
-          color="deep-purple-accent-4"
-          icon="hugeicons:user-id-verification"
-        ></u-avatar>
-      </template>
-
-      <u-banner-text>
-        Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
-      </u-banner-text>
-
-      <u-banner-actions>
-        <u-btn>Action</u-btn>
-
-        <u-btn>Action</u-btn>
-      </u-banner-actions>
-    </u-banner>
-  `,
+  template: prependStoryTemplate,
 });
 
 Prepend.parameters = {
   docs: {
     source: {
-      code: `
-        <template>
-          <u-banner
-            color="deep-purple-accent-4"
-            lines="two"
-          >
-            <template v-slot:prepend>
-              <u-avatar
-                color="deep-purple-accent-4"
-                icon="hugeicons:user-id-verification"
-              ></u-avatar>
-            </template>
-
-            <u-banner-text>
-              Banner with two lines of text. If the text is too long to fit on two lines then an ellipsis will be used to hide the remaining content. So this next line will be hidden.
-            </u-banner-text>
-
-            <u-banner-actions>
-              <u-btn>Action</u-btn>
-
-              <u-btn>Action</u-btn>
-            </u-banner-actions>
-          </u-banner>
-        </template>
-      `,
+      code: `<template>${prependStoryTemplate}</template>`,
     },
   },
 };
