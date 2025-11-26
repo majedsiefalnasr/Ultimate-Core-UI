@@ -159,6 +159,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UBreadcrumbs },
   setup() {
@@ -172,6 +173,23 @@ Default.args = {
 } as ComponentArgs;
 
 // Divider Story
+const dividerStoryTemplate = `
+  <div>
+    <u-breadcrumbs
+      :items="items"
+      divider="-"
+    ></u-breadcrumbs>
+
+    <u-breadcrumbs
+      :items="items"
+      divider="."
+    ></u-breadcrumbs>
+  </div>
+`;
+
+/**
+ * Breadcrumbs separator can be set using divider property.
+ */
 export const Divider: StoryFn<ComponentArgs> = () => ({
   components: { UBreadcrumbs },
   setup() {
@@ -194,64 +212,51 @@ export const Divider: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <div>
-      <u-breadcrumbs
-        :items="items"
-        divider="-"
-      ></u-breadcrumbs>
-
-      <u-breadcrumbs
-        :items="items"
-        divider="."
-      ></u-breadcrumbs>
-    </div>
-  `,
+  template: dividerStoryTemplate,
 });
 
 Divider.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <div>
-            <u-breadcrumbs
-              :items="items"
-              divider="-"
-            ></u-breadcrumbs>
+<template>${dividerStoryTemplate}</template>
 
-            <u-breadcrumbs
-              :items="items"
-              divider="."
-            ></u-breadcrumbs>
-          </div>
-        </template>
-
-        <script setup>
-          const items = [
-            {
-              title: 'Dashboard',
-              disabled: false,
-              href: 'breadcrumbs_dashboard',
-            },
-            {
-              title: 'Link 1',
-              disabled: false,
-              href: 'breadcrumbs_link_1',
-            },
-            {
-              title: 'Link 2',
-              disabled: true,
-              href: 'breadcrumbs_link_2',
-            },
-          ]
-        </script>
+<script setup>
+  const items = [
+    {
+      title: 'Dashboard',
+      disabled: false,
+      href: 'breadcrumbs_dashboard',
+    },
+    {
+      title: 'Link 1',
+      disabled: false,
+      href: 'breadcrumbs_link_1',
+    },
+    {
+      title: 'Link 2',
+      disabled: true,
+      href: 'breadcrumbs_link_2',
+    },
+  ]
+</script>
       `,
     },
   },
 };
 
 // Prepend Story
+const prependStoryTemplate = `
+  <u-breadcrumbs :items="items">
+    <template v-slot:prepend>
+      <u-icon icon="hugeicons:home-01" size="small"></u-icon>
+    </template>
+  </u-breadcrumbs>
+`;
+
+/**
+ * Prepend content with the prepend slot.
+ */
 export const Prepend: StoryFn<ComponentArgs> = () => ({
   components: { UBreadcrumbs, UIcon },
   setup() {
@@ -274,52 +279,59 @@ export const Prepend: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <u-breadcrumbs :items="items">
-      <template v-slot:prepend>
-        <u-icon icon="hugeicons:home-01" size="small"></u-icon>
-      </template>
-    </u-breadcrumbs>
-  `,
+  template: prependStoryTemplate,
 });
 
 Prepend.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-breadcrumbs :items="items">
-            <template v-slot:prepend>
-              <u-icon icon="hugeicons:home-01" size="small"></u-icon>
-            </template>
-          </u-breadcrumbs>
-        </template>
+<template>${prependStoryTemplate}</template>
 
-        <script setup>
-          const items = [
-            {
-              title: 'Dashboard',
-              disabled: false,
-              href: 'breadcrumbs_dashboard',
-            },
-            {
-              title: 'Link 1',
-              disabled: false,
-              href: 'breadcrumbs_link_1',
-            },
-            {
-              title: 'Link 2',
-              disabled: true,
-              href: 'breadcrumbs_link_2',
-            },
-          ]
-        </script>
+<script setup>
+  const items = [
+    {
+      title: 'Dashboard',
+      disabled: false,
+      href: 'breadcrumbs_dashboard',
+    },
+    {
+      title: 'Link 1',
+      disabled: false,
+      href: 'breadcrumbs_link_1',
+    },
+    {
+      title: 'Link 2',
+      disabled: true,
+      href: 'breadcrumbs_link_2',
+    },
+  ]
+</script>
       `,
     },
   },
 };
 
 // Dividers Story (Icon Dividers)
+const dividersStoryTemplate = `
+  <div>
+    <u-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <u-icon icon="hugeicons:arrow-right-double"></u-icon>
+      </template>
+    </u-breadcrumbs>
+
+    <u-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <u-icon icon="hugeicons:arrow-right-01"></u-icon>
+      </template>
+    </u-breadcrumbs>
+  </div>
+`;
+
+/**
+ * To customize the divider, use the divider slot.
+ */
 export const Dividers: StoryFn<ComponentArgs> = () => ({
   components: { UBreadcrumbs, UIcon },
   setup() {
@@ -342,68 +354,51 @@ export const Dividers: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <div>
-      <u-breadcrumbs :items="items">
-        <template v-slot:divider>
-          <u-icon icon="hugeicons:arrow-right-double"></u-icon>
-        </template>
-      </u-breadcrumbs>
-
-      <u-breadcrumbs :items="items">
-        <template v-slot:divider>
-          <u-icon icon="hugeicons:arrow-right-01"></u-icon>
-        </template>
-      </u-breadcrumbs>
-    </div>
-  `,
+  template: dividersStoryTemplate,
 });
 
 Dividers.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <div>
-            <u-breadcrumbs :items="items">
-              <template v-slot:divider>
-                <u-icon icon="hugeicons:arrow-right-double"></u-icon>
-              </template>
-            </u-breadcrumbs>
+<template>${dividersStoryTemplate}</template>
 
-            <u-breadcrumbs :items="items">
-              <template v-slot:divider>
-                <u-icon icon="hugeicons:arrow-right-01"></u-icon>
-              </template>
-            </u-breadcrumbs>
-          </div>
-        </template>
-
-        <script setup>
-          const items = [
-            {
-              title: 'Dashboard',
-              disabled: false,
-              href: 'breadcrumbs_dashboard',
-            },
-            {
-              title: 'Link 1',
-              disabled: false,
-              href: 'breadcrumbs_link_1',
-            },
-            {
-              title: 'Link 2',
-              disabled: true,
-              href: 'breadcrumbs_link_2',
-            },
-          ]
-        </script>
+<script setup>
+  const items = [
+    {
+      title: 'Dashboard',
+      disabled: false,
+      href: 'breadcrumbs_dashboard',
+    },
+    {
+      title: 'Link 1',
+      disabled: false,
+      href: 'breadcrumbs_link_1',
+    },
+    {
+      title: 'Link 2',
+      disabled: true,
+      href: 'breadcrumbs_link_2',
+    },
+  ]
+</script>
       `,
     },
   },
 };
 
 // Title Story
+const titleStoryTemplate = `
+<u-breadcrumbs :items="items">
+  <template v-slot:title="{ item }">
+    {{ item.title.toUpperCase() }}
+  </template>
+</u-breadcrumbs>
+`;
+
+/**
+ * You can use the title slot to customize each breadcrumb title.
+ */
 export const Title: StoryFn<ComponentArgs> = () => ({
   components: { UBreadcrumbs },
   setup() {
@@ -426,46 +421,34 @@ export const Title: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <u-breadcrumbs :items="items">
-      <template v-slot:title="{ item }">
-        {{ item.title.toUpperCase() }}
-      </template>
-    </u-breadcrumbs>
-  `,
+  template: titleStoryTemplate,
 });
 
 Title.parameters = {
   docs: {
     source: {
       code: `
-        <template>
-          <u-breadcrumbs :items="items">
-            <template v-slot:title="{ item }">
-              {{ item.title.toUpperCase() }}
-            </template>
-          </u-breadcrumbs>
-        </template>
+<template>${titleStoryTemplate}</template>
 
-        <script setup>
-          const items = [
-            {
-              title: 'Dashboard',
-              disabled: false,
-              href: 'breadcrumbs_dashboard',
-            },
-            {
-              title: 'Link 1',
-              disabled: false,
-              href: 'breadcrumbs_link_1',
-            },
-            {
-              title: 'Link 2',
-              disabled: true,
-              href: 'breadcrumbs_link_2',
-            },
-          ]
-        </script>
+<script setup>
+  const items = [
+    {
+      title: 'Dashboard',
+      disabled: false,
+      href: 'breadcrumbs_dashboard',
+    },
+    {
+      title: 'Link 1',
+      disabled: false,
+      href: 'breadcrumbs_link_1',
+    },
+    {
+      title: 'Link 2',
+      disabled: true,
+      href: 'breadcrumbs_link_2',
+    },
+  ]
+</script>
       `,
     },
   },
