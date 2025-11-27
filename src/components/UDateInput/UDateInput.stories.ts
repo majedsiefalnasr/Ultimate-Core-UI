@@ -237,25 +237,21 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UDateInput },
   setup() {
     return { args };
   },
-  template: '<u-date-input v-bind="args"></u-date-input>',
+  template: `<u-date-input v-bind="args"></u-date-input>`,
 });
 
 Default.args = {
   label: 'Date input',
 } as ComponentArgs;
 
-export const Model: StoryFn<ComponentArgs> = () => ({
-  components: { UDateInput },
-  setup() {
-    const model = shallowRef(null);
-    return { model };
-  },
-  template: `
+// Model Story
+const modelTemplate = `
     <div class="d-flex justify-center">
       <u-date-input
         v-model="model"
@@ -263,25 +259,24 @@ export const Model: StoryFn<ComponentArgs> = () => ({
         max-width="368"
       ></u-date-input>
     </div>
-  `,
+`;
+
+/**
+ * The default model value is a Date object, but is displayed as formatted text in the input.
+ */
+export const Model: StoryFn<ComponentArgs> = () => ({
+  components: { UDateInput },
+  setup() {
+    const model = shallowRef(null);
+    return { model };
+  },
+  template: modelTemplate,
 });
 
 Model.parameters = {
   docs: {
-    description: {
-      story:
-        'The default model value is a Date object, but is displayed as formatted text in the input.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-center">
-    <u-date-input
-      v-model="model"
-      label="Select a date"
-      max-width="368"
-    ></u-date-input>
-  </div>
-</template>
+      code: `<template>${modelTemplate}</template>
 
 <script setup lang="ts">
 import { shallowRef } from 'vue';
@@ -292,13 +287,8 @@ const model = shallowRef(null);
   },
 };
 
-export const Multiple: StoryFn<ComponentArgs> = () => ({
-  components: { UDateInput },
-  setup() {
-    const model = shallowRef(null);
-    return { model };
-  },
-  template: `
+// Multiple Story
+const multipleTemplate = `
     <div class="d-flex justify-center">
       <u-date-input
         v-model="model"
@@ -307,25 +297,24 @@ export const Multiple: StoryFn<ComponentArgs> = () => ({
         multiple
       ></u-date-input>
     </div>
-  `,
+`;
+
+/**
+ * Using the multiple prop, the default model value is an empty array.
+ */
+export const Multiple: StoryFn<ComponentArgs> = () => ({
+  components: { UDateInput },
+  setup() {
+    const model = shallowRef(null);
+    return { model };
+  },
+  template: multipleTemplate,
 });
 
 Multiple.parameters = {
   docs: {
-    description: {
-      story: 'Using the multiple prop, the default model value is an empty array.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-center">
-    <u-date-input
-      v-model="model"
-      label="Select day(s)"
-      max-width="368"
-      multiple
-    ></u-date-input>
-  </div>
-</template>
+      code: `<template>${multipleTemplate}</template>
 
 <script setup lang="ts">
 import { shallowRef } from 'vue';
@@ -336,13 +325,8 @@ const model = shallowRef(null);
   },
 };
 
-export const Range: StoryFn<ComponentArgs> = () => ({
-  components: { UDateInput },
-  setup() {
-    const model = shallowRef(null);
-    return { model };
-  },
-  template: `
+// Range Story
+const rangeTemplate = `
     <div class="d-flex justify-center">
       <u-date-input
         v-model="model"
@@ -351,26 +335,24 @@ export const Range: StoryFn<ComponentArgs> = () => ({
         multiple="range"
       ></u-date-input>
     </div>
-  `,
+`;
+
+/**
+ * Using the multiple prop with a value of range, select 2 dates to select them and all the dates between them.
+ */
+export const Range: StoryFn<ComponentArgs> = () => ({
+  components: { UDateInput },
+  setup() {
+    const model = shallowRef(null);
+    return { model };
+  },
+  template: rangeTemplate,
 });
 
 Range.parameters = {
   docs: {
-    description: {
-      story:
-        'Using the multiple prop with a value of range, select 2 dates to select them and all the dates between them.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-center">
-    <u-date-input
-      v-model="model"
-      label="Select range"
-      max-width="368"
-      multiple="range"
-    ></u-date-input>
-  </div>
-</template>
+      code: `<template>${rangeTemplate}</template>
 
 <script setup lang="ts">
 import { shallowRef } from 'vue';
@@ -381,12 +363,8 @@ const model = shallowRef(null);
   },
 };
 
-export const CalendarIcon: StoryFn<ComponentArgs> = () => ({
-  components: { UDateInput, URow, UCol },
-  setup() {
-    return {};
-  },
-  template: `
+// Calendar Icon Story
+const calendarIconTemplate = `
     <u-row dense>
       <u-col cols="12" md="6">
         <u-date-input
@@ -405,36 +383,23 @@ export const CalendarIcon: StoryFn<ComponentArgs> = () => ({
         ></u-date-input>
       </u-col>
     </u-row>
-  `,
+`;
+
+/**
+ * You can move the calendar icon within the input or entirely by utilizing the prepend-icon and prepend-inner-icon properties.
+ */
+export const CalendarIcon: StoryFn<ComponentArgs> = () => ({
+  components: { UDateInput, URow, UCol },
+  setup() {
+    return {};
+  },
+  template: calendarIconTemplate,
 });
 
 CalendarIcon.parameters = {
   docs: {
-    description: {
-      story:
-        'You can move the calendar icon within the input or entirely by utilizing the prepend-icon and prepend-inner-icon properties.',
-    },
     source: {
-      code: `<template>
-  <u-row dense>
-    <u-col cols="12" md="6">
-      <u-date-input
-        label="Select a date"
-        prepend-icon=""
-        prepend-inner-icon="hugeicons:calendar-01"
-        variant="solo"
-      ></u-date-input>
-    </u-col>
-
-    <u-col cols="12" md="6">
-      <u-date-input
-        label="Select a date"
-        prepend-icon=""
-        variant="solo"
-      ></u-date-input>
-    </u-col>
-  </u-row>
-</template>`,
+      code: `<template>${calendarIconTemplate}</template>`,
     },
   },
 };
