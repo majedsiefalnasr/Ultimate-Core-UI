@@ -47,7 +47,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-data-table :items="items"${attrsString}></u-data-table>`;
+          return `<u-data-table${attrsString}></u-data-table>`;
         },
       },
     },
@@ -200,73 +200,34 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UDataTable },
   setup() {
     return { args };
   },
-  template: '<u-data-table v-bind="args"></u-data-table>',
+  template: `<u-data-table v-bind="args"></u-data-table>`,
 });
 
-Default.args = {
-  items: [
-    {
-      name: 'African Elephant',
-      species: 'Loxodonta africana',
-      diet: 'Herbivore',
-      habitat: 'Savanna, Forests',
-    },
-    {
-      name: 'Giant Panda',
-      species: 'Ailuropoda melanoleuca',
-      diet: 'Herbivore',
-      habitat: 'Temperate Forests',
-    },
-    {
-      name: 'Bengal Tiger',
-      species: 'Panthera tigris tigris',
-      diet: 'Carnivore',
-      habitat: 'Grasslands, Forests',
-    },
-    {
-      name: 'Blue Whale',
-      species: 'Balaenoptera musculus',
-      diet: 'Carnivore',
-      habitat: 'Ocean',
-    },
-    {
-      name: 'Mountain Gorilla',
-      species: 'Gorilla beringei beringei',
-      diet: 'Herbivore',
-      habitat: 'Mountain Forests',
-    },
-    {
-      name: 'Komodo Dragon',
-      species: 'Varanus komodoensis',
-      diet: 'Carnivore',
-      habitat: 'Grasslands, Forests',
-    },
-    {
-      name: 'Green Iguana',
-      species: 'Iguana iguana',
-      diet: 'Herbivore',
-      habitat: 'Trees',
-    },
-    {
-      name: 'Blue Poison Dart Frog',
-      species: 'Dendrobates tinctorius',
-      diet: 'Carnivore',
-      habitat: 'Tropical Rainforests',
-    },
-  ],
-} as ComponentArgs;
+// Density story
+const densityTemplate = `
+  <u-data-table
+    :headers="headers"
+    :items="plants"
+    density="compact"
+    item-key="name"
+  ></u-data-table>
+`;
 
+/**
+ * Using the density prop you are able to give your data tables an alternate style.
+ */
 export const Density: StoryFn<ComponentArgs> = (args) => ({
   components: { UDataTable },
   setup() {
     return { args };
   },
-  template: '<u-data-table v-bind="args"></u-data-table>',
+  template: densityTemplate,
 });
 
 Density.args = {
@@ -325,19 +286,8 @@ Density.args = {
 
 Density.parameters = {
   docs: {
-    description: {
-      story:
-        'Using the density prop you can adjust the vertical height of table rows. Options include default, comfortable, and compact.',
-    },
     source: {
-      code: `<template>
-  <u-data-table
-    :headers="headers"
-    :items="plants"
-    density="compact"
-    item-key="name"
-  ></u-data-table>
-</template>
+      code: `<template>${densityTemplate}</template>
 
 <script setup lang="ts">
 const headers = [
@@ -357,75 +307,145 @@ const plants = [
     },
   },
 };
-
-export const HideDefaultHeaderAndFooter: StoryFn<ComponentArgs> = (args) => ({
-  components: { UDataTable },
-  setup() {
-    return { args };
-  },
-  template: '<u-data-table v-bind="args"></u-data-table>',
-});
-
-HideDefaultHeaderAndFooter.args = {
-  headers: [
-    { title: 'Dessert(100g serving)', align: 'start', key: 'name' },
-    { title: 'Calories', align: 'end', key: 'calories' },
-    { title: 'Fat(g)', align: 'end', key: 'fat' },
-    { title: 'Carbs(g)', align: 'end', key: 'carbs' },
-    { title: 'Protein(g)', align: 'end', key: 'protein' },
-    { title: 'Iron(%)', align: 'end', key: 'iron' },
-  ],
-  items: [
-    { name: 'Frozen Yogurt', calories: 159, fat: 6, carbs: 24, protein: 4, iron: '1%' },
-    { name: 'Ice cream sandwich', calories: 237, fat: 9, carbs: 37, protein: 4.3, iron: '1%' },
-    { name: 'Eclair', calories: 262, fat: 16, carbs: 23, protein: 6, iron: '7%' },
-    { name: 'Cupcake', calories: 305, fat: 3.7, carbs: 67, protein: 4.3, iron: '8%' },
-    { name: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 3.9, iron: '16%' },
-    { name: 'Jelly bean', calories: 375, fat: 0, carbs: 94, protein: 0, iron: '0%' },
-    { name: 'Lollipop', calories: 392, fat: 0.2, carbs: 98, protein: 0, iron: '2%' },
-    { name: 'Honeycomb', calories: 408, fat: 3.2, carbs: 87, protein: 6.5, iron: '45%' },
-    { name: 'Donut', calories: 452, fat: 25, carbs: 51, protein: 4.9, iron: '22%' },
-    { name: 'KitKat', calories: 518, fat: 26, carbs: 65, protein: 7, iron: '6%' },
-  ],
-  hideDefaultHeader: true,
-  hideDefaultFooter: true,
-} as ComponentArgs;
-
-HideDefaultHeaderAndFooter.parameters = {
-  docs: {
-    description: {
-      story:
-        'You can apply the hide-default-header and hide-default-footer props to remove the default header and footer respectively.',
-    },
-    source: {
-      code: `<template>
+// Hide Default Header and Footer story
+const hideDefaultHeaderAndFooterTemplate = `
   <u-data-table
     :headers="headers"
     :items="desserts"
     hide-default-footer
     hide-default-header
   ></u-data-table>
-</template>
+`;
 
-<script setup lang="ts">
-const headers = [
-  { title: 'Dessert(100g serving)', align: 'start', key: 'name' },
-  { title: 'Calories', align: 'end', key: 'calories' },
-  { title: 'Fat(g)', align: 'end', key: 'fat' },
-  { title: 'Carbs(g)', align: 'end', key: 'carbs' },
-  { title: 'Protein(g)', align: 'end', key: 'protein' },
-  { title: 'Iron(%)', align: 'end', key: 'iron' },
-];
+/**
+ * You can apply the hide-default-header and hide-default-footer props to remove the default header and footer respectively.
+ */
+export const HideDefaultHeaderAndFooter: StoryFn<ComponentArgs> = (args) => ({
+  components: { UDataTable },
+  setup() {
+    return { args };
+  },
+  template: hideDefaultHeaderAndFooterTemplate,
+});
 
-const desserts = [
-  { name: 'Frozen Yogurt', calories: 159, fat: 6, carbs: 24, protein: 4, iron: '1%' },
-  // ... more items
-];
+HideDefaultHeaderAndFooter.parameters = {
+  docs: {
+    source: {
+      code: `<template>${hideDefaultHeaderAndFooterTemplate}</template>
+
+<script setup>
+  const headers = [
+    {
+      title: 'Dessert(100g serving)',
+      align: 'start',
+      key: 'name',
+    },
+    { title: 'Calories', align: 'end', key: 'calories' },
+    { title: 'Fat(g)', align: 'end', key: 'fat' },
+    { title: 'Carbs(g)', align: 'end', key: 'carbs' },
+    { title: 'Protein(g)', align: 'end', key: 'protein' },
+    { title: 'Iron(%)', align: 'end', key: 'iron' },
+  ]
+  const desserts = [
+    {
+      name: 'Frozen Yogurt',
+      calories: 159,
+      fat: 6,
+      carbs: 24,
+      protein: 4,
+      iron: '1%',
+    },
+    {
+      name: 'Ice cream sandwich',
+      calories: 237,
+      fat: 9,
+      carbs: 37,
+      protein: 4.3,
+      iron: '1%',
+    },
+    {
+      name: 'Eclair',
+      calories: 262,
+      fat: 16,
+      carbs: 23,
+      protein: 6,
+      iron: '7%',
+    },
+    {
+      name: 'Cupcake',
+      calories: 305,
+      fat: 3.7,
+      carbs: 67,
+      protein: 4.3,
+      iron: '8%',
+    },
+    {
+      name: 'Gingerbread',
+      calories: 356,
+      fat: 16,
+      carbs: 49,
+      protein: 3.9,
+      iron: '16%',
+    },
+    {
+      name: 'Jelly bean',
+      calories: 375,
+      fat: 0,
+      carbs: 94,
+      protein: 0,
+      iron: '0%',
+    },
+    {
+      name: 'Lollipop',
+      calories: 392,
+      fat: 0.2,
+      carbs: 98,
+      protein: 0,
+      iron: '2%',
+    },
+    {
+      name: 'Honeycomb',
+      calories: 408,
+      fat: 3.2,
+      carbs: 87,
+      protein: 6.5,
+      iron: '45%',
+    },
+    {
+      name: 'Donut',
+      calories: 452,
+      fat: 25,
+      carbs: 51,
+      protein: 4.9,
+      iron: '22%',
+    },
+    {
+      name: 'KitKat',
+      calories: 518,
+      fat: 26,
+      carbs: 65,
+      protein: 7,
+      iron: '6%',
+    },
+  ]
 </script>`,
     },
   },
 };
 
+// Selection story
+const selectionTemplate = `
+    <u-data-table
+      v-model="selected"
+      :items="items"
+      item-value="name"
+      show-select
+    ></u-data-table>
+`;
+
+/**
+ * The show-select prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.
+ */
 export const Selection: StoryFn<ComponentArgs> = () => ({
   components: { UDataTable },
   setup() {
@@ -445,14 +465,7 @@ export const Selection: StoryFn<ComponentArgs> = () => ({
 
     return { selected, items };
   },
-  template: `
-    <u-data-table
-      v-model="selected"
-      :items="items"
-      item-value="name"
-      show-select
-    ></u-data-table>
-  `,
+  template: selectionTemplate,
 });
 
 Selection.parameters = {
@@ -462,14 +475,7 @@ Selection.parameters = {
         'The show-select prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.',
     },
     source: {
-      code: `<template>
-  <u-data-table
-    v-model="selected"
-    :items="items"
-    item-value="name"
-    show-select
-  ></u-data-table>
-</template>
+      code: `<template>${selectionTemplate}</template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -486,6 +492,21 @@ const items = [
   },
 };
 
+// Simple Checkbox story
+const simpleCheckboxTemplate = `
+    <u-data-table :items="consoles" hide-default-footer>
+      <template v-slot:item.exclusive="{ item }">
+        <u-checkbox-btn
+          v-model="item.exclusive"
+          :ripple="false"
+        ></u-checkbox-btn>
+      </template>
+    </u-data-table>
+`;
+
+/**
+ * When wanting to use a checkbox component inside of a slot template in your data tables, use the u-checkbox-btn component rather than the u-checkbox component.
+ */
 export const SimpleCheckbox: StoryFn<ComponentArgs> = () => ({
   components: { UDataTable, UCheckboxBtn },
   setup() {
@@ -518,16 +539,7 @@ export const SimpleCheckbox: StoryFn<ComponentArgs> = () => ({
 
     return { consoles };
   },
-  template: `
-    <u-data-table :items="consoles" hide-default-footer>
-      <template v-slot:item.exclusive="{ item }">
-        <u-checkbox-btn
-          v-model="item.exclusive"
-          :ripple="false"
-        ></u-checkbox-btn>
-      </template>
-    </u-data-table>
-  `,
+  template: simpleCheckboxTemplate,
 });
 
 SimpleCheckbox.parameters = {
@@ -537,16 +549,7 @@ SimpleCheckbox.parameters = {
         'When wanting to use a checkbox component inside of a slot template in your data tables, use the v-checkbox-btn component rather than the v-checkbox component.',
     },
     source: {
-      code: `<template>
-  <u-data-table :items="consoles" hide-default-footer>
-    <template v-slot:item.exclusive="{ item }">
-      <u-checkbox-btn
-        v-model="item.exclusive"
-        :ripple="false"
-      ></u-checkbox-btn>
-    </template>
-  </u-data-table>
-</template>
+      code: `<template>${simpleCheckboxTemplate}</template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -562,6 +565,20 @@ const consoles = ref([
   },
 };
 
+// Group By story
+const groupByTemplate = `
+    <u-data-table
+      :group-by="groupBy"
+      :headers="headers"
+      :items="desserts"
+      :sort-by="sortBy"
+      item-value="name"
+    ></u-data-table>
+`;
+
+/**
+ * The group-by prop makes it possible to group rows by one or more attributes.
+ */
 export const GroupBy: StoryFn<ComponentArgs> = () => ({
   components: { UDataTable },
   setup() {
@@ -592,33 +609,13 @@ export const GroupBy: StoryFn<ComponentArgs> = () => ({
 
     return { sortBy, groupBy, headers, desserts };
   },
-  template: `
-    <u-data-table
-      :group-by="groupBy"
-      :headers="headers"
-      :items="desserts"
-      :sort-by="sortBy"
-      item-value="name"
-    ></u-data-table>
-  `,
+  template: groupByTemplate,
 });
 
 GroupBy.parameters = {
   docs: {
-    description: {
-      story:
-        'The group-by prop makes it possible to group rows by one or more attributes. This example groups desserts by category and status.',
-    },
     source: {
-      code: `<template>
-  <u-data-table
-    :group-by="groupBy"
-    :headers="headers"
-    :items="desserts"
-    :sort-by="sortBy"
-    item-value="name"
-  ></u-data-table>
-</template>
+      code: `<template>${groupByTemplate}</template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
