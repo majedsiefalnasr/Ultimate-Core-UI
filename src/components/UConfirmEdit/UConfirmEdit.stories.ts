@@ -14,21 +14,12 @@ import {
 } from '../index';
 
 interface ComponentArgs {
-  // Core props
   modelValue?: unknown;
-
-  // Text customization
   cancelText?: string;
   okText?: string;
-
-  // Styling
   color?: string;
-
-  // State
   disabled?: boolean | ('cancel' | 'save')[];
   hideActions?: boolean;
-
-  // Story-specific
   content?: string;
 }
 
@@ -58,7 +49,35 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-confirm-edit${attrsString}></u-confirm-edit>`;
+          return `<template>
+  <u-confirm-edit${attrsString} v-model="model">
+    <template v-slot:default="{ model: proxyModel, actions }">
+      <u-card
+        class="mx-auto"
+        max-width="320"
+        title="Update Field"
+      >
+        <template v-slot:text>
+          <u-text-field
+            v-model="proxyModel.value"
+            messages="Modify my value"
+          ></u-text-field>
+        </template>
+
+        <template v-slot:actions>
+          <u-spacer></u-spacer>
+
+          <component :is="actions"></component>
+        </template>
+      </u-card>
+    </template>
+  </u-confirm-edit>
+</template>
+<script setup lang="ts">
+import { shallowRef } from 'vue';
+
+const model = shallowRef('Egg plant');
+</script>`;
         },
       },
     },
@@ -85,14 +104,11 @@ const meta: Meta<ComponentArgs> = {
     },
   },
   argTypes: {
-    // Core props
     modelValue: {
       control: 'text',
       description: 'Represents the committed v-model value',
       table: { type: { summary: 'unknown' }, defaultValue: { summary: 'undefined' } },
     },
-
-    // Text customization
     cancelText: {
       control: 'text',
       description: 'Text for the cancel button',
@@ -106,15 +122,11 @@ const meta: Meta<ComponentArgs> = {
       description: 'Text for the ok button',
       table: { type: { summary: 'string' }, defaultValue: { summary: '$vuetify.confirmEdit.ok' } },
     },
-
-    // Styling
     color: {
       control: 'color',
       description: 'Applies specified color to the control - supports utility colors or css color.',
       table: { type: { summary: 'string' }, defaultValue: { summary: 'undefined' } },
     },
-
-    // State
     disabled: {
       control: 'object',
       description:
@@ -135,6 +147,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = () => ({
   components: { UCard, UConfirmEdit, USpacer, UTextField },
   setup() {
@@ -169,50 +182,8 @@ export const Default: StoryFn<ComponentArgs> = () => ({
 
 Default.args = {} as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-confirm-edit v-model="model">
-    <template v-slot:default="{ model: proxyModel, actions }">
-      <u-card
-        class="mx-auto"
-        max-width="320"
-        title="Update Field"
-      >
-        <template v-slot:text>
-          <u-text-field
-            v-model="proxyModel.value"
-            messages="Modify my value"
-          ></u-text-field>
-        </template>
-
-        <template v-slot:actions>
-          <u-spacer></u-spacer>
-
-          <component :is="actions"></component>
-        </template>
-      </u-card>
-    </template>
-  </u-confirm-edit>
-</template>
-
-<script setup lang="ts">
-import { shallowRef } from 'vue';
-
-const model = shallowRef('Egg plant');
-</script>`,
-    },
-  },
-};
-
-export const Pickers: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UConfirmEdit, UDatePicker },
-  setup() {
-    const date = shallowRef();
-    return { date };
-  },
-  template: `
+// Pickers story
+const pickersTemplate = `
     <u-card
       class="mx-auto"
       max-width="328"
@@ -229,35 +200,25 @@ export const Pickers: StoryFn<ComponentArgs> = () => ({
         </template>
       </u-confirm-edit>
     </u-card>
-  `,
+  `;
+
+/**
+ * It's easy to integrate pickers into the v-confirm-edit component. This allows you to provide a more user-friendly experience when selecting dates, times, or colors.
+ */
+export const Pickers: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UConfirmEdit, UDatePicker },
+  setup() {
+    const date = shallowRef();
+    return { date };
+  },
+  template: pickersTemplate,
 });
 
 Pickers.parameters = {
   docs: {
-    description: {
-      story:
-        "It's easy to integrate pickers into the v-confirm-edit component. This allows you to provide a more user-friendly experience when selecting dates, times, or colors.",
-    },
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    max-width="328"
-    rounded="lg"
-    border
-  >
-    <u-confirm-edit v-model="date">
-      <template v-slot:default="{ model: proxyModel, actions }">
-        <u-date-picker v-model="proxyModel.value">
-          <template v-slot:actions>
-            <component :is="actions"></component>
-          </template>
-        </u-date-picker>
-      </template>
-    </u-confirm-edit>
-  </u-card>
-</template>
-
+      code: `
+<template>${pickersTemplate}</template>
 <script setup lang="ts">
 import { shallowRef } from 'vue';
 
@@ -267,27 +228,8 @@ const date = shallowRef();
   },
 };
 
-export const DisableActions: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UBtnToggle, UCard, UConfirmEdit, UDivider, USheet, USpacer, UTextField },
-  setup() {
-    const disabled = ref<boolean | ('cancel' | 'save')[] | undefined>([]);
-    const value = shallowRef('My Beach Vacation');
-
-    function onClick(action: 'cancel' | 'save') {
-      if (!Array.isArray(disabled.value)) {
-        disabled.value = [];
-      }
-
-      if (disabled.value.includes(action)) {
-        disabled.value = disabled.value.filter((item) => item !== action);
-      } else {
-        disabled.value.push(action);
-      }
-    }
-
-    return { disabled, value, onClick };
-  },
-  template: `
+// Disable Actions story
+const disableActionsTemplate = `
     <div>
       <div class="d-flex justify-center">
         <u-btn-toggle
@@ -361,92 +303,39 @@ export const DisableActions: StoryFn<ComponentArgs> = () => ({
         </u-confirm-edit>
       </u-sheet>
     </div>
-  `,
+  `;
+
+/**
+ * You can control the disabled state of action buttons using disabled prop by either passing an array to disable targeted actions or a boolean value to disable all actions. If the disabled prop is not provided, the component will use internal logic to determine the disabled state.
+ */
+export const DisableActions: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UBtnToggle, UCard, UConfirmEdit, UDivider, USheet, USpacer, UTextField },
+  setup() {
+    const disabled = ref<boolean | ('cancel' | 'save')[] | undefined>([]);
+    const value = shallowRef('My Beach Vacation');
+
+    function onClick(action: 'cancel' | 'save') {
+      if (!Array.isArray(disabled.value)) {
+        disabled.value = [];
+      }
+
+      if (disabled.value.includes(action)) {
+        disabled.value = disabled.value.filter((item) => item !== action);
+      } else {
+        disabled.value.push(action);
+      }
+    }
+
+    return { disabled, value, onClick };
+  },
+  template: disableActionsTemplate,
 });
 
 DisableActions.parameters = {
   docs: {
-    description: {
-      story:
-        'You can control the disabled state of action buttons using disabled prop by either passing an array to disable targeted actions or a boolean value to disable all actions. If the disabled prop is not provided, the component will use internal logic to determine the disabled state.',
-    },
     source: {
-      code: `<template>
-  <div>
-    <div class="d-flex justify-center">
-      <u-btn-toggle
-        density="comfortable"
-        rounded="lg"
-        border
-        divided
-      >
-        <u-btn
-          :active="Array.isArray(disabled) && disabled?.includes('cancel')"
-          text="Toggle cancel"
-          @click="onClick('cancel')"
-        ></u-btn>
-
-        <u-btn
-          :active="Array.isArray(disabled) && disabled?.includes('save')"
-          text="Toggle save"
-          @click="onClick('save')"
-        ></u-btn>
-
-        <u-btn
-          :active="typeof disabled === 'boolean'"
-          text="Toggle Boolean"
-          @click="disabled = !disabled"
-        ></u-btn>
-
-        <u-btn
-          :active="disabled === undefined"
-          text="Default"
-          @click="disabled = undefined"
-        ></u-btn>
-      </u-btn-toggle>
-    </div>
-
-    <div class="d-flex justify-center align-center py-4 ga-2">
-      <strong>Disabled:</strong>
-      <span
-        class="bg-surface-light rounded rounded-md pa-1"
-        size="small"
-        v-text="disabled === undefined ? 'undefined' : disabled"
-      ></span>
-    </div>
-
-    <u-sheet
-      class="pa-4"
-      color="surface-light"
-      rounded="lg"
-    >
-      <u-confirm-edit
-        v-slot="{ model: proxyModel, actions }"
-        v-model="value"
-        :disabled="disabled"
-      >
-        <u-card class="mx-auto" max-width="400" rounded="lg" title="Update Field">
-          <template v-slot:text>
-            <u-text-field
-              v-model="proxyModel.value"
-              label="Name"
-              variant="outlined"
-            ></u-text-field>
-          </template>
-
-          <u-divider></u-divider>
-
-          <template v-slot:actions>
-            <u-spacer></u-spacer>
-
-            <component :is="actions"></component>
-          </template>
-        </u-card>
-      </u-confirm-edit>
-    </u-sheet>
-  </div>
-</template>
-
+      code: `
+<template>${disableActionsTemplate}</template>
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue';
 
