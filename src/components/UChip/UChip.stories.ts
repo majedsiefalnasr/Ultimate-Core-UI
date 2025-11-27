@@ -337,12 +337,13 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UChip },
   setup() {
     return { args };
   },
-  template: '<u-chip v-bind="args"></u-chip>',
+  template: '<div class="text-center"><u-chip v-bind="args"></u-chip></div>',
 });
 
 Default.args = {
@@ -350,42 +351,8 @@ Default.args = {
   color: 'primary',
 } as ComponentArgs;
 
-export const Closable: StoryFn<ComponentArgs> = () => ({
-  components: { UChip, UBtn },
-  setup() {
-    const chip = ref(true);
-    return { chip };
-  },
-  template: `
-    <div class="text-center">
-      <u-chip
-        v-if="chip"
-        class="ma-2"
-        closable
-        @click:close="chip = false"
-      >
-        Closable
-      </u-chip>
-
-      <u-btn
-        v-if="!chip"
-        color="primary"
-        @click="chip = true"
-      >
-        Reset Chip
-      </u-btn>
-    </div>
-  `,
-});
-
-Closable.parameters = {
-  docs: {
-    description: {
-      story:
-        'Closable chips can be controlled with a v-model. You can also listen to the click:close event if you want to know when a chip has been closed.',
-    },
-    source: {
-      code: `<template>
+// Closable Story
+const closableTemplate = `
   <div class="text-center">
     <u-chip
       v-if="chip"
@@ -404,7 +371,27 @@ Closable.parameters = {
       Reset Chip
     </u-btn>
   </div>
-</template>
+`;
+
+/**
+ * Closable chips can be controlled with a v-model. You can also listen to the
+ * click:close event if you want to know when a chip has been closed.
+ */
+export const Closable: StoryFn<ComponentArgs> = () => ({
+  components: { UChip, UBtn },
+  setup() {
+    const chip = ref(true);
+    return { chip };
+  },
+  template: closableTemplate,
+});
+
+Closable.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${closableTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -414,132 +401,72 @@ Closable.parameters = {
   },
 };
 
+// Colors Story
+const colorsTemplate = `
+  <div>
+    <div class="d-flex justify-center ga-2">
+      <u-chip>
+        Default
+      </u-chip>
+
+      <u-chip color="primary">
+        Primary
+      </u-chip>
+
+      <u-chip color="secondary">
+        Secondary
+      </u-chip>
+
+      <u-chip color="red">
+        Red
+      </u-chip>
+
+      <u-chip color="green">
+        Green
+      </u-chip>
+    </div>
+    <div class="d-flex justify-center ga-2 mt-2">
+      <u-chip variant="flat">
+        Default flat
+      </u-chip>
+
+      <u-chip color="primary" variant="flat">
+        Primary flat
+      </u-chip>
+
+      <u-chip color="secondary" variant="flat">
+        Secondary flat
+      </u-chip>
+
+      <u-chip color="red" variant="flat">
+        Red flat
+      </u-chip>
+
+      <u-chip color="green" variant="flat">
+        Green flat
+      </u-chip>
+    </div>
+  </div>
+`;
+
+/**
+ * Any color from the Material Design palette can be used to change a chips color.
+ */
 export const Colors: StoryFn<ComponentArgs> = () => ({
   components: { UChip },
-  template: `
-    <div>
-      <div class="d-flex justify-center ga-2">
-        <u-chip>
-          Default
-        </u-chip>
-
-        <u-chip color="primary">
-          Primary
-        </u-chip>
-
-        <u-chip color="secondary">
-          Secondary
-        </u-chip>
-
-        <u-chip color="red">
-          Red
-        </u-chip>
-
-        <u-chip color="green">
-          Green
-        </u-chip>
-      </div>
-      <div class="d-flex justify-center ga-2 mt-2">
-        <u-chip variant="flat">
-          Default flat
-        </u-chip>
-
-        <u-chip color="primary" variant="flat">
-          Primary flat
-        </u-chip>
-
-        <u-chip color="secondary" variant="flat">
-          Secondary flat
-        </u-chip>
-
-        <u-chip color="red" variant="flat">
-          Red flat
-        </u-chip>
-
-        <u-chip color="green" variant="flat">
-          Green flat
-        </u-chip>
-      </div>
-    </div>
-  `,
+  template: colorsTemplate,
 });
 
 Colors.parameters = {
   docs: {
-    description: {
-      story: 'Any color from the Material Design palette can be used to change a chips color.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-center ga-2">
-    <u-chip>
-      Default
-    </u-chip>
-
-    <u-chip color="primary">
-      Primary
-    </u-chip>
-
-    <u-chip color="secondary">
-      Secondary
-    </u-chip>
-
-    <u-chip color="red">
-      Red
-    </u-chip>
-
-    <u-chip color="green">
-      Green
-    </u-chip>
-  </div>
-  <div class="d-flex justify-center ga-2 mt-2">
-    <u-chip variant="flat">
-      Default flat
-    </u-chip>
-
-    <u-chip color="primary" variant="flat">
-      Primary flat
-    </u-chip>
-
-    <u-chip color="secondary" variant="flat">
-      Secondary flat
-    </u-chip>
-
-    <u-chip color="red" variant="flat">
-      Red flat
-    </u-chip>
-
-    <u-chip color="green" variant="flat">
-      Green flat
-    </u-chip>
-  </div>
-</template>`,
+      code: `<template>${colorsTemplate}</template>`,
     },
   },
 };
 
-export const Variants: StoryFn<ComponentArgs> = () => ({
-  components: { UChip },
-  template: `
-    <div class="d-flex justify-center ga-2 flex-wrap">
-      <u-chip variant="elevated">Elevated</u-chip>
-      <u-chip variant="flat">Flat</u-chip>
-      <u-chip variant="tonal">Tonal</u-chip>
-      <u-chip variant="outlined">Outlined</u-chip>
-      <u-chip variant="text">Text</u-chip>
-      <u-chip variant="plain">Plain</u-chip>
-    </div>
-  `,
-});
-
-Variants.parameters = {
-  docs: {
-    description: {
-      story:
-        'The variant prop gives you easy access to several different button styles. Available variants are: elevated, flat, tonal (default), outlined, text, and plain.',
-    },
-    source: {
-      code: `<template>
+// Variants Story
+const variantsTemplate = `
   <div class="d-flex justify-center ga-2 flex-wrap">
     <u-chip variant="elevated">Elevated</u-chip>
     <u-chip variant="flat">Flat</u-chip>
@@ -548,247 +475,144 @@ Variants.parameters = {
     <u-chip variant="text">Text</u-chip>
     <u-chip variant="plain">Plain</u-chip>
   </div>
-</template>`,
+`;
+
+/**
+ * The variant prop gives you easy access to several different button styles.
+ * Available variants are: elevated, flat, tonal (default), outlined, text, and plain.
+ */
+export const Variants: StoryFn<ComponentArgs> = () => ({
+  components: { UChip },
+  template: variantsTemplate,
+});
+
+Variants.parameters = {
+  docs: {
+    source: {
+      code: `<template>${variantsTemplate}</template>`,
     },
   },
 };
 
+// Size and Density Story
+const sizeAndDensityTemplate = `
+  <div>
+    <div class="d-flex justify-center align-center ga-2">
+      <u-label style="width: 100px">default</u-label>
+
+      <u-chip size="x-small">
+        x-small
+      </u-chip>
+
+      <u-chip size="small">
+        small
+      </u-chip>
+
+      <u-chip>
+        default
+      </u-chip>
+
+      <u-chip size="large">
+        large
+      </u-chip>
+
+      <u-chip size="x-large">
+        x-large
+      </u-chip>
+    </div>
+    <div class="d-flex justify-center align-center ga-2 mt-2">
+      <u-label style="width: 100px">comfortable</u-label>
+
+      <u-chip density="comfortable" size="x-small">
+        x-small
+      </u-chip>
+
+      <u-chip density="comfortable" size="small">
+        small
+      </u-chip>
+
+      <u-chip density="comfortable">
+        default
+      </u-chip>
+
+      <u-chip density="comfortable" size="large">
+        large
+      </u-chip>
+
+      <u-chip density="comfortable" size="x-large">
+        x-large
+      </u-chip>
+    </div>
+    <div class="d-flex justify-center align-center ga-2 mt-2">
+      <u-label style="width: 100px">compact</u-label>
+
+      <u-chip density="compact" size="x-small">
+        x-small
+      </u-chip>
+
+      <u-chip density="compact" size="small">
+        small
+      </u-chip>
+
+      <u-chip density="compact">
+        default
+      </u-chip>
+
+      <u-chip density="compact" size="large">
+        large
+      </u-chip>
+
+      <u-chip density="compact" size="x-large">
+        x-large
+      </u-chip>
+    </div>
+  </div>
+`;
+
+/**
+ * Chips can have various sizes from x-small to x-large. density is used to
+ * adjust the vertical spacing without affecting width or font size.
+ */
 export const SizeAndDensity: StoryFn<ComponentArgs> = () => ({
   components: { UChip, ULabel },
-  template: `
-    <div>
-      <div class="d-flex justify-center align-center ga-2">
-        <u-label style="width: 100px">default</u-label>
-
-        <u-chip size="x-small">
-          x-small
-        </u-chip>
-
-        <u-chip size="small">
-          small
-        </u-chip>
-
-        <u-chip>
-          default
-        </u-chip>
-
-        <u-chip size="large">
-          large
-        </u-chip>
-
-        <u-chip size="x-large">
-          x-large
-        </u-chip>
-      </div>
-      <div class="d-flex justify-center align-center ga-2 mt-2">
-        <u-label style="width: 100px">comfortable</u-label>
-
-        <u-chip density="comfortable" size="x-small">
-          x-small
-        </u-chip>
-
-        <u-chip density="comfortable" size="small">
-          small
-        </u-chip>
-
-        <u-chip density="comfortable">
-          default
-        </u-chip>
-
-        <u-chip density="comfortable" size="large">
-          large
-        </u-chip>
-
-        <u-chip density="comfortable" size="x-large">
-          x-large
-        </u-chip>
-      </div>
-      <div class="d-flex justify-center align-center ga-2 mt-2">
-        <u-label style="width: 100px">compact</u-label>
-
-        <u-chip density="compact" size="x-small">
-          x-small
-        </u-chip>
-
-        <u-chip density="compact" size="small">
-          small
-        </u-chip>
-
-        <u-chip density="compact">
-          default
-        </u-chip>
-
-        <u-chip density="compact" size="large">
-          large
-        </u-chip>
-
-        <u-chip density="compact" size="x-large">
-          x-large
-        </u-chip>
-      </div>
-    </div>
-  `,
+  template: sizeAndDensityTemplate,
 });
 
 SizeAndDensity.parameters = {
   docs: {
-    description: {
-      story:
-        'Chips can have various sizes from x-small to x-large. density is used to adjust the vertical spacing without affecting width or font size.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-center align-center ga-2">
-    <u-label style="width: 100px">default</u-label>
-
-    <u-chip size="x-small">
-      x-small
-    </u-chip>
-
-    <u-chip size="small">
-      small
-    </u-chip>
-
-    <u-chip>
-      default
-    </u-chip>
-
-    <u-chip size="large">
-      large
-    </u-chip>
-
-    <u-chip size="x-large">
-      x-large
-    </u-chip>
-  </div>
-  <div class="d-flex justify-center align-center ga-2 mt-2">
-    <u-label style="width: 100px">comfortable</u-label>
-
-    <u-chip density="comfortable" size="x-small">
-      x-small
-    </u-chip>
-
-    <u-chip density="comfortable" size="small">
-      small
-    </u-chip>
-
-    <u-chip density="comfortable">
-      default
-    </u-chip>
-
-    <u-chip density="comfortable" size="large">
-      large
-    </u-chip>
-
-    <u-chip density="comfortable" size="x-large">
-      x-large
-    </u-chip>
-  </div>
-  <div class="d-flex justify-center align-center ga-2 mt-2">
-    <u-label style="width: 100px">compact</u-label>
-
-    <u-chip density="compact" size="x-small">
-      x-small
-    </u-chip>
-
-    <u-chip density="compact" size="small">
-      small
-    </u-chip>
-
-    <u-chip density="compact">
-      default
-    </u-chip>
-
-    <u-chip density="compact" size="large">
-      large
-    </u-chip>
-
-    <u-chip density="compact" size="x-large">
-      x-large
-    </u-chip>
-  </div>
-</template>`,
+      code: `<template>${sizeAndDensityTemplate}</template>`,
     },
   },
 };
 
-export const Draggable: StoryFn<ComponentArgs> = () => ({
-  components: { UChip },
-  template: `
-    <div class="text-center">
-      <u-chip draggable>
-        Default
-      </u-chip>
-    </div>
-  `,
-});
-
-Draggable.parameters = {
-  docs: {
-    description: {
-      story: 'draggable u-chip component can be dragged by mouse.',
-    },
-    source: {
-      code: `<template>
+// Draggable Story
+const draggableTemplate = `
   <div class="text-center">
     <u-chip draggable>
       Default
     </u-chip>
   </div>
-</template>`,
+`;
+
+/**
+ * Draggable u-chip component can be dragged by mouse.
+ */
+export const Draggable: StoryFn<ComponentArgs> = () => ({
+  components: { UChip },
+  template: draggableTemplate,
+});
+
+Draggable.parameters = {
+  docs: {
+    source: {
+      code: `<template>${draggableTemplate}</template>`,
     },
   },
 };
 
-export const Label: StoryFn<ComponentArgs> = () => ({
-  components: { UChip, UIcon },
-  template: `
-    <div class="text-center">
-      <u-chip
-        class="ma-2"
-        label
-      >
-        Label
-      </u-chip>
-
-      <u-chip
-        class="ma-2"
-        color="pink"
-        label
-      >
-        <u-icon icon="hugeicons:label" start></u-icon>
-        Tags
-      </u-chip>
-
-      <u-chip
-        class="ma-2"
-        color="primary"
-        label
-      >
-        <u-icon icon="hugeicons:user-circle" start></u-icon>
-        John Leider
-      </u-chip>
-
-      <u-chip
-        class="ma-2"
-        color="cyan"
-        closable
-        label
-      >
-        <u-icon icon="hugeicons:twitter" start></u-icon>
-        New Tweets
-      </u-chip>
-    </div>
-  `,
-});
-
-Label.parameters = {
-  docs: {
-    description: {
-      story: 'Label chips use the v-card border-radius.',
-    },
-    source: {
-      code: `<template>
+// Label Story
+const labelTemplate = `
   <div class="text-center">
     <u-chip
       class="ma-2"
@@ -825,71 +649,51 @@ Label.parameters = {
       New Tweets
     </u-chip>
   </div>
-</template>`,
+`;
+
+/**
+ * Label chips use the v-card border-radius.
+ */
+export const Label: StoryFn<ComponentArgs> = () => ({
+  components: { UChip, UIcon },
+  template: labelTemplate,
+});
+
+Label.parameters = {
+  docs: {
+    source: {
+      code: `<template>${labelTemplate}</template>`,
     },
   },
 };
 
-export const NoRipple: StoryFn<ComponentArgs> = () => ({
-  components: { UChip },
-  template: `
-    <div class="text-center">
-      <u-chip :ripple="false" link>
-        Default
-      </u-chip>
-    </div>
-  `,
-});
-
-NoRipple.parameters = {
-  docs: {
-    description: {
-      story: 'u-chip can be rendered without ripple if ripple prop is set to false.',
-    },
-    source: {
-      code: `<template>
+// No Ripple Story
+const noRippleTemplate = `
   <div class="text-center">
     <u-chip :ripple="false" link>
       Default
     </u-chip>
   </div>
-</template>`,
+`;
+
+/**
+ * u-chip can be rendered without ripple if ripple prop is set to false.
+ */
+export const NoRipple: StoryFn<ComponentArgs> = () => ({
+  components: { UChip },
+  template: noRippleTemplate,
+});
+
+NoRipple.parameters = {
+  docs: {
+    source: {
+      code: `<template>${noRippleTemplate}</template>`,
     },
   },
 };
 
-export const Outlined: StoryFn<ComponentArgs> = () => ({
-  components: { UChip, UIcon },
-  template: `
-    <div class="text-center">
-      <u-chip
-        class="ma-2"
-        color="success"
-        variant="outlined"
-      >
-        <u-icon icon="hugeicons:server-stack-01" start></u-icon>
-        Server Status
-      </u-chip>
-
-      <u-chip
-        class="ma-2"
-        color="primary"
-        variant="outlined"
-      >
-        User Account
-        <u-icon icon="hugeicons:user-circle" end></u-icon>
-      </u-chip>
-    </div>
-  `,
-});
-
-Outlined.parameters = {
-  docs: {
-    description: {
-      story: 'Outlined chips inherit their border color from the current text color.',
-    },
-    source: {
-      code: `<template>
+// Outlined Story
+const outlinedTemplate = `
   <div class="text-center">
     <u-chip
       class="ma-2"
@@ -909,84 +713,26 @@ Outlined.parameters = {
       <u-icon icon="hugeicons:user-circle" end></u-icon>
     </u-chip>
   </div>
-</template>`,
+`;
+
+/**
+ * Outlined chips inherit their border color from the current text color.
+ */
+export const Outlined: StoryFn<ComponentArgs> = () => ({
+  components: { UChip, UIcon },
+  template: outlinedTemplate,
+});
+
+Outlined.parameters = {
+  docs: {
+    source: {
+      code: `<template>${outlinedTemplate}</template>`,
     },
   },
 };
 
-export const Icon: StoryFn<ComponentArgs> = () => ({
-  components: { UChip, UAvatar },
-  template: `
-    <div class="text-center">
-      <u-chip
-        class="ma-2"
-        color="indigo"
-        prepend-icon="hugeicons:user-circle"
-      >
-        Mike
-      </u-chip>
-
-      <u-chip
-        append-icon="hugeicons:star"
-        class="ma-2"
-        color="orange"
-      >
-        Premium
-      </u-chip>
-
-      <u-chip
-        append-icon="hugeicons:birthday-cake"
-        class="ma-2"
-        color="primary"
-      >
-        1 Year
-      </u-chip>
-
-      <u-chip
-        class="ma-2"
-        color="green"
-      >
-        <template v-slot:prepend>
-          <u-avatar
-            class="green-darken-4"
-          >
-            1
-          </u-avatar>
-        </template>
-        Years
-      </u-chip>
-
-      <u-chip
-        :model-value="true"
-        class="ma-2"
-        color="teal"
-        prepend-icon="hugeicons:checkmark-circle-02"
-        closable
-      >
-        Confirmed
-      </u-chip>
-
-      <u-chip
-        :model-value="true"
-        class="ma-2"
-        close-icon="hugeicons:delete-02"
-        color="teal"
-        prepend-icon="hugeicons:checkmark-circle-02"
-        closable
-      >
-        Confirmed
-      </u-chip>
-    </div>
-  `,
-});
-
-Icon.parameters = {
-  docs: {
-    description: {
-      story: 'Chips can use text or any icon available in the Material Icons font library.',
-    },
-    source: {
-      code: `<template>
+// Icon Story
+const iconTemplate = `
   <div class="text-center">
     <u-chip
       class="ma-2"
@@ -1047,47 +793,26 @@ Icon.parameters = {
       Confirmed
     </u-chip>
   </div>
-</template>`,
+`;
+
+/**
+ * Chips can use text or any icon available in the Material Icons font library.
+ */
+export const Icon: StoryFn<ComponentArgs> = () => ({
+  components: { UChip, UAvatar },
+  template: iconTemplate,
+});
+
+Icon.parameters = {
+  docs: {
+    source: {
+      code: `<template>${iconTemplate}</template>`,
     },
   },
 };
 
-export const InSelects: StoryFn<ComponentArgs> = () => ({
-  components: { UCombobox, UChip },
-  setup() {
-    const items = ['Streaming', 'Eating'];
-    const chips = ref(['Programming', 'Playing video games', 'Watching movies', 'Sleeping']);
-    return { items, chips };
-  },
-  template: `
-    <u-combobox
-      v-model="chips"
-      :items="items"
-      label="Your favorite hobbies"
-      prepend-icon="hugeicons:filter-horizontal"
-      variant="solo"
-      chips
-      clearable
-      closable-chips
-      multiple
-    >
-      <template v-slot:chip="{ props, item }">
-        <u-chip v-bind="props">
-          <strong>{{ item.raw }}</strong>&nbsp;
-          <span>(interest)</span>
-        </u-chip>
-      </template>
-    </u-combobox>
-  `,
-});
-
-InSelects.parameters = {
-  docs: {
-    description: {
-      story: 'Selects can use chips to display the selected data. Try adding your own tags below.',
-    },
-    source: {
-      code: `<template>
+// In Selects Story
+const inSelectsTemplate = `
   <u-combobox
     v-model="chips"
     :items="items"
@@ -1106,7 +831,26 @@ InSelects.parameters = {
       </u-chip>
     </template>
   </u-combobox>
-</template>
+`;
+
+/**
+ * Selects can use chips to display the selected data. Try adding your own tags below.
+ */
+export const InSelects: StoryFn<ComponentArgs> = () => ({
+  components: { UCombobox, UChip },
+  setup() {
+    const items = ['Streaming', 'Eating'];
+    const chips = ref(['Programming', 'Playing video games', 'Watching movies', 'Sleeping']);
+    return { items, chips };
+  },
+  template: inSelectsTemplate,
+});
+
+InSelects.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${inSelectsTemplate}</template>
 <script setup>
   import { ref } from 'vue'
 
