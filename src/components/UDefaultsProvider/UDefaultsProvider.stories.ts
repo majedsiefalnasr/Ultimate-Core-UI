@@ -1,8 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import { UBtn } from '../UBtn';
-import { UCard } from '../UCard';
+import { UBtn, UCard, UContainer } from '../index';
 
 import { UDefaultsProvider } from './index';
 
@@ -57,7 +56,7 @@ const meta: Meta<ComponentArgs> = {
     },
     Primary: {
       description:
-        'The v-defaults-provider component is used to provide default props to components within its scope. It hooks into the Global configuration feature and makes it easy to assign multiple properties at once or scope out all incoming changes to any children.',
+        'The u-defaults-provider component is used to provide default props to components within its scope. It hooks into the Global configuration feature and makes it easy to assign multiple properties at once or scope out all incoming changes to any children.',
     },
     api: {
       data: [
@@ -121,22 +120,38 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UDefaultsProvider, UBtn },
   setup() {
     return { args };
   },
   template: `
-    <u-defaults-provider v-bind="args">
-      <u-btn>Button</u-btn>
-    </u-defaults-provider>
+    <div class="text-center">
+      <u-defaults-provider v-bind="args">
+        <u-btn>Button</u-btn>
+      </u-defaults-provider>
+    </div>
   `,
 });
 
 Default.args = {} as ComponentArgs;
 
+// Defaults Story
+const defaultsTemplate = `
+    <u-container>
+      <u-card class="ma-10" subtitle="Subtitle" title="Title"></u-card>
+      <u-defaults-provider :defaults="defaults">
+        <u-card class="ma-10" subtitle="Subtitle" title="Title"></u-card>
+      </u-defaults-provider>
+    </u-container>
+  `;
+
+/**
+ * The u-defaults-provider expects a prop defaults which looks the same as the defaults object that you can pass to createVuetify when creating your application.
+ */
 export const Defaults: StoryFn<ComponentArgs> = () => ({
-  components: { UDefaultsProvider, UCard },
+  components: { UDefaultsProvider, UCard, UContainer },
   setup() {
     const defaults = ref({
       global: {
@@ -149,32 +164,14 @@ export const Defaults: StoryFn<ComponentArgs> = () => ({
 
     return { defaults };
   },
-  template: `
-    <u-container>
-      <u-card class="ma-10" subtitle="Subtitle" title="Title"></u-card>
-      <u-defaults-provider :defaults="defaults">
-        <u-card class="ma-10" subtitle="Subtitle" title="Title"></u-card>
-      </u-defaults-provider>
-    </u-container>
-  `,
+  template: defaultsTemplate,
 });
 
 Defaults.parameters = {
   docs: {
-    description: {
-      story:
-        'The v-defaults-provider expects a prop defaults which looks the same as the defaults object that you can pass to createVuetify when creating your application.',
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-card class="ma-10" subtitle="Subtitle" title="Title"></u-card>
-    <u-defaults-provider :defaults="defaults">
-      <u-card class="ma-10" subtitle="Subtitle" title="Title"></u-card>
-    </u-defaults-provider>
-  </u-container>
-</template>
-
+      code: `
+<template>${defaultsTemplate}</template>
 <script setup lang="ts">
 import { ref } from 'vue';
 
