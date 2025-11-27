@@ -70,7 +70,21 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<UCarousel${attrsString}></UCarousel>`;
+          return `
+<u-carousel${attrsString}>
+  <u-carousel-item
+    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+    cover
+  ></u-carousel-item>
+  <u-carousel-item
+    src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
+    cover
+  ></u-carousel-item>
+  <u-carousel-item
+    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+    cover
+  ></u-carousel-item>
+</u-carousel>`;
         },
       },
     },
@@ -251,6 +265,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UCarousel, UCarouselItem },
   setup() {
@@ -276,59 +291,8 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<u-carousel>
-  <u-carousel-item
-    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-    cover
-  ></u-carousel-item>
-  <u-carousel-item
-    src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
-    cover
-  ></u-carousel-item>
-  <u-carousel-item
-    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-    cover
-  ></u-carousel-item>
-</u-carousel>`,
-    },
-  },
-};
-
-export const CustomDelimiters: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCarousel, UCarouselItem, USheet },
-  setup() {
-    const colors = ['green', 'secondary', 'yellow darken-4', 'red lighten-2', 'orange darken-1'];
-    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
-    return { colors, slides };
-  },
-  template: `
-    <u-card class="mx-auto" elevation="24" max-width="444">
-      <u-carousel
-        :continuous="false"
-        :show-arrows="false"
-        delimiter-icon="hugeicons:square"
-        height="300"
-        hide-delimiter-background
-      >
-        <u-carousel-item v-for="(slide, i) in slides" :key="i">
-          <u-sheet :color="colors[i]" height="100%" tile>
-            <div class="d-flex fill-height justify-center align-center">
-              <div class="text-h2">{{ slide }} Slide</div>
-            </div>
-          </u-sheet>
-        </u-carousel-item>
-      </u-carousel>
-    </u-card>
-  `,
-});
-
-CustomDelimiters.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Additional stories
+const customDelimitersStory = `
   <u-card class="mx-auto" elevation="24" max-width="444">
     <u-carousel
       :continuous="false"
@@ -346,53 +310,45 @@ CustomDelimiters.parameters = {
       </u-carousel-item>
     </u-carousel>
   </u-card>
-</template>
+`;
+
+/**
+ * Use any available icon as your carousel’s slide delimiter.
+ */
+export const CustomDelimiters: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCarousel, UCarouselItem, USheet },
+  setup() {
+    const colors = ['green', 'secondary', 'yellow darken-4', 'red lighten-2', 'orange darken-1'];
+    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+    return { colors, slides };
+  },
+  template: customDelimitersStory,
+});
+
+CustomDelimiters.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${customDelimitersStory}</template>
 
 <script setup>
-const colors = ['green', 'secondary', 'yellow darken-4', 'red lighten-2', 'orange darken-1']
-const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
+  const colors = ['green', 'secondary', 'yellow darken-4', 'red lighten-2', 'orange darken-1']
+  const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
 </script>`,
     },
   },
 };
 
-export const CustomTransition: StoryFn<ComponentArgs> = () => ({
-  components: { UCarousel, UCarouselItem, UCode, UContainer },
-  setup() {
-    const items = [
-      'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-      'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-      'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-      'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-    ];
-    return { items };
-  },
-  template: `
-    <u-container max-width="600">
-      <div class="mb-1 mt-6">
-        <u-code class="bg-purple-darken-2">default, slower</u-code>
-      </div>
-      <u-carousel height="200" transition-duration="600">
-        <u-carousel-item v-for="(src, i) in items" :key="i" :src="src" cover></u-carousel-item>
-      </u-carousel>
-
-      <div class="mb-1 mt-6">
-        <u-code class="bg-purple-darken-2">crossfade</u-code>
-      </div>
-      <u-carousel height="200" transition-duration="700" crossfade>
-        <u-carousel-item v-for="(src, i) in items" :key="i" :src="src" cover></u-carousel-item>
-      </u-carousel>
-    </u-container>
-  `,
-});
-
-CustomTransition.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-container max-width="600">
+//
+import './customTransition.story.scss';
+// Custom Transition Story
+const customTransitionStory = `
+  <u-container max-width="600" class="customTransitionStory">
     <div class="mb-1 mt-6">
       <u-code class="bg-purple-darken-2">default, slower</u-code>
+    </div>
+    <div class="my-1 reduced-motion-info">
+      <u-code class="bg-red">duration change suppressed - prefers-reduced-motion: reduce</u-code>
     </div>
     <u-carousel height="200" transition-duration="600">
       <u-carousel-item v-for="(src, i) in items" :key="i" :src="src" cover></u-carousel-item>
@@ -404,45 +360,102 @@ CustomTransition.parameters = {
     <u-carousel height="200" transition-duration="700" crossfade>
       <u-carousel-item v-for="(src, i) in items" :key="i" :src="src" cover></u-carousel-item>
     </u-carousel>
+    
+    <div class="mb-1 mt-6">
+      <u-code class="bg-purple-darken-2">cross-scale (custom)</u-code>
+    </div>
+    <div class="my-1 reduced-motion-info">
+      <u-code class="bg-red">scale suppressed - prefers-reduced-motion: reduce</u-code>
+    </div>
+    <u-carousel height="200">
+      <u-carousel-item
+        v-for="(src, i) in items"
+        :key="i"
+        :src="src"
+        reverse-transition="cross-scale"
+        transition="cross-scale"
+        cover
+      ></u-carousel-item>
+    </u-carousel>
   </u-container>
-</template>
+`;
+
+/**
+ * The u-carousel-item component can have its transition/reverse-transition changed.
+ */
+export const CustomTransition: StoryFn<ComponentArgs> = () => ({
+  components: { UCarousel, UCarouselItem, UCode, UContainer },
+  setup() {
+    const items = [
+      'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+      'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+      'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+      'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+    ];
+    return { items };
+  },
+  template: customTransitionStory,
+});
+
+CustomTransition.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${customTransitionStory}</template>
 
 <script setup>
-const items = [
-  'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-  'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-  'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-  'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-]
-</script>`,
+  const items = [
+    'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+    'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+    'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+    'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+  ]
+</script>
+
+<style>
+  .cross-scale-enter-active,
+  .cross-scale-leave-active {
+    transition: .5s cubic-bezier(0.25, 0.8, 0.5, 1);
+    transition-property: opacity, transform;
+  }
+
+  .cross-scale-leave-from,
+  .cross-scale-leave-to {
+    position: absolute !important;
+    top: 0;
+    width: 100%;
+  }
+
+  .cross-scale-enter-from,
+  .cross-scale-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cross-scale-enter-from,
+    .cross-scale-leave-to {
+      transform: none;
+    }
+  }
+</style>
+
+<style scoped>
+  .reduced-motion-info {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reduced-motion-info {
+      display: block;
+    }
+  }
+</style>`,
     },
   },
 };
 
-export const Cycle: StoryFn<ComponentArgs> = () => ({
-  components: { UCarousel, UCarouselItem, USheet },
-  setup() {
-    const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4'];
-    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
-    return { colors, slides };
-  },
-  template: `
-    <u-carousel height="400" show-arrows="hover" cycle hide-delimiter-background>
-      <u-carousel-item v-for="(slide, i) in slides" :key="i">
-        <u-sheet :color="colors[i]" height="100%">
-          <div class="d-flex fill-height justify-center align-center">
-            <div class="text-h2">{{ slide }} Slide</div>
-          </div>
-        </u-sheet>
-      </u-carousel-item>
-    </u-carousel>
-  `,
-});
-
-Cycle.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Cycle Story
+const cycleStory = `
   <u-carousel height="400" show-arrows="hover" cycle hide-delimiter-background>
     <u-carousel-item v-for="(slide, i) in slides" :key="i">
       <u-sheet :color="colors[i]" height="100%">
@@ -452,16 +465,51 @@ Cycle.parameters = {
       </u-sheet>
     </u-carousel-item>
   </u-carousel>
-</template>
+`;
+
+/**
+ * With the cycle prop you can have your slides automatically transition to the next available every 6s (default).
+ */
+export const Cycle: StoryFn<ComponentArgs> = () => ({
+  components: { UCarousel, UCarouselItem, USheet },
+  setup() {
+    const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4'];
+    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+    return { colors, slides };
+  },
+  template: cycleStory,
+});
+
+Cycle.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${cycleStory}</template>
 
 <script setup>
-const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4']
-const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
+  const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4']
+  const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
 </script>`,
     },
   },
 };
 
+// Hide Controls Story
+const hideControlsStory = `
+  <u-carousel :show-arrows="false">
+    <u-carousel-item
+      v-for="(item, i) in items"
+      :key="i"
+      :src="item.src"
+      cover
+    ></u-carousel-item>
+  </u-carousel>
+  `;
+
+/**
+ * You can hide the carousel navigation controls with :show-arrows="false".
+ * Or you can make them only appear on hover with show-arrows="hover".
+ */
 export const HideControls: StoryFn<ComponentArgs> = () => ({
   components: { UCarousel, UCarouselItem },
   setup() {
@@ -473,74 +521,29 @@ export const HideControls: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <u-carousel :show-arrows="false">
-      <u-carousel-item
-        v-for="(item, i) in items"
-        :key="i"
-        :src="item.src"
-        cover
-      ></u-carousel-item>
-    </u-carousel>
-  `,
+  template: hideControlsStory,
 });
 
 HideControls.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-carousel :show-arrows="false">
-    <u-carousel-item
-      v-for="(item, i) in items"
-      :key="i"
-      :src="item.src"
-      cover
-    ></u-carousel-item>
-  </u-carousel>
-</template>
+      code: `
+<template>${hideControlsStory}</template>
 
 <script setup>
-const items = [
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg' },
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg' },
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg' },
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg' },
-]
+  const items = [
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg' },
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg' },
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg' },
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg' },
+  ]
 </script>`,
     },
   },
 };
 
-export const CustomizedArrows: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UCarousel, UCarouselItem, USheet },
-  setup() {
-    const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4'];
-    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
-    return { colors, slides };
-  },
-  template: `
-    <u-carousel height="400" hide-delimiter-background show-arrows>
-      <template v-slot:prev="{ props }">
-        <u-btn color="success" variant="elevated" @click="props.onClick">Previous slide</u-btn>
-      </template>
-      <template v-slot:next="{ props }">
-        <u-btn color="info" variant="elevated" @click="props.onClick">Next slide</u-btn>
-      </template>
-      <u-carousel-item v-for="(slide, i) in slides" :key="i">
-        <u-sheet :color="colors[i]" height="100%">
-          <div class="d-flex fill-height justify-center align-center">
-            <div class="text-h2">{{ slide }} Slide</div>
-          </div>
-        </u-sheet>
-      </u-carousel-item>
-    </u-carousel>
-  `,
-});
-
-CustomizedArrows.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Customized Arrows Story
+const customizedArrowsStory = `
   <u-carousel height="400" hide-delimiter-background show-arrows>
     <template v-slot:prev="{ props }">
       <u-btn color="success" variant="elevated" @click="props.onClick">Previous slide</u-btn>
@@ -556,16 +559,50 @@ CustomizedArrows.parameters = {
       </u-sheet>
     </u-carousel-item>
   </u-carousel>
-</template>
+`;
+
+/**
+ * Arrows can be customized by using prev and next slots.
+ */
+export const CustomizedArrows: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCarousel, UCarouselItem, USheet },
+  setup() {
+    const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4'];
+    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+    return { colors, slides };
+  },
+  template: customizedArrowsStory,
+});
+
+CustomizedArrows.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${customizedArrowsStory}</template>
 
 <script setup>
-const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4']
-const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
+  const colors = ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4']
+  const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
 </script>`,
     },
   },
 };
 
+// Hide Delimiters Story
+const hideDelimitersStory = `
+  <u-carousel hide-delimiters>
+    <u-carousel-item
+      v-for="(item, i) in items"
+      :key="i"
+      :src="item.src"
+      cover
+    ></u-carousel-item>
+  </u-carousel>
+`;
+
+/**
+ * You can hide the bottom controls with hide-delimiters prop.
+ */
 export const HideDelimiters: StoryFn<ComponentArgs> = () => ({
   components: { UCarousel, UCarouselItem },
   setup() {
@@ -577,67 +614,29 @@ export const HideDelimiters: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <u-carousel hide-delimiters>
-      <u-carousel-item
-        v-for="(item, i) in items"
-        :key="i"
-        :src="item.src"
-        cover
-      ></u-carousel-item>
-    </u-carousel>
-  `,
+  template: hideDelimitersStory,
 });
 
 HideDelimiters.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-carousel hide-delimiters>
-    <u-carousel-item
-      v-for="(item, i) in items"
-      :key="i"
-      :src="item.src"
-      cover
-    ></u-carousel-item>
-  </u-carousel>
-</template>
+      code: `
+<template>${hideDelimitersStory}</template>
 
 <script setup>
-const items = [
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg' },
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg' },
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg' },
-  { src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg' },
-]
+  const items = [
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg' },
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg' },
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg' },
+    { src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg' },
+  ]
 </script>`,
     },
   },
 };
 
-export const Progress: StoryFn<ComponentArgs> = () => ({
-  components: { UCarousel, UCarouselItem, USheet },
-  setup() {
-    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
-    return { slides };
-  },
-  template: `
-    <u-carousel height="400" progress="primary" hide-delimiters>
-      <u-carousel-item v-for="(slide, i) in slides" :key="i">
-        <u-sheet height="100%">
-          <div class="d-flex fill-height justify-center align-center">
-            <div class="text-h2">{{ slide }} Slide</div>
-          </div>
-        </u-sheet>
-      </u-carousel-item>
-    </u-carousel>
-  `,
-});
-
-Progress.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Progress Story
+const progressStory = `
   <u-carousel height="400" progress="primary" hide-delimiters>
     <u-carousel-item v-for="(slide, i) in slides" :key="i">
       <u-sheet height="100%">
@@ -647,54 +646,36 @@ Progress.parameters = {
       </u-sheet>
     </u-carousel-item>
   </u-carousel>
-</template>
+`;
+
+/**
+ * You can show a linear progress bar with the progress prop. It will indicate how
+ * far into the cycle the carousel currently is.
+ */
+export const Progress: StoryFn<ComponentArgs> = () => ({
+  components: { UCarousel, UCarouselItem, USheet },
+  setup() {
+    const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+    return { slides };
+  },
+  template: progressStory,
+});
+
+Progress.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${progressStory}</template>
 
 <script setup>
-const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
+  const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
 </script>`,
     },
   },
 };
 
-export const Model: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UCarousel, UCarouselItem, USheet },
-  setup() {
-    const colors = ['primary', 'secondary', 'yellow darken-2', 'red', 'orange'];
-    const model = ref(0);
-    return { colors, model };
-  },
-  template: `
-    <div>
-      <div class="d-flex justify-space-around align-center py-4">
-        <u-btn
-          icon="hugeicons:minus-sign"
-          variant="text"
-          @click="model = Math.max(model - 1, 0)"
-        ></u-btn>
-        {{ model }}
-        <u-btn
-          icon="hugeicons:plus-sign"
-          variant="text"
-          @click="model = Math.min(model + 1, 4)"
-        ></u-btn>
-      </div>
-      <u-carousel v-model="model">
-        <u-carousel-item v-for="(color, i) in colors" :key="color" :value="i">
-          <u-sheet :color="color" height="100%" tile>
-            <div class="d-flex fill-height justify-center align-center">
-              <div class="text-h2">Slide {{ i + 1 }}</div>
-            </div>
-          </u-sheet>
-        </u-carousel-item>
-      </u-carousel>
-    </div>
-  `,
-});
-
-Model.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Model Story
+const modelStory = `
   <div>
     <div class="d-flex justify-space-around align-center py-4">
       <u-btn
@@ -719,114 +700,39 @@ Model.parameters = {
       </u-carousel-item>
     </u-carousel>
   </div>
-</template>
+  `;
+
+/**
+ * You can control carousel with v-model.
+ */
+export const Model: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCarousel, UCarouselItem, USheet },
+  setup() {
+    const colors = ['primary', 'secondary', 'yellow darken-2', 'red', 'orange'];
+    const model = ref(0);
+    return { colors, model };
+  },
+  template: modelStory,
+});
+
+Model.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${modelStory}</template>
 
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const colors = ['primary', 'secondary', 'yellow darken-2', 'red', 'orange']
-const model = ref(0)
+  const colors = ['primary', 'secondary', 'yellow darken-2', 'red', 'orange']
+  const model = ref(0)
 </script>`,
     },
   },
 };
 
-export const VerticalWithOverlay: StoryFn<ComponentArgs> = () => ({
-  components: {
-    UCarousel,
-    UCarouselItem,
-    UChip,
-    UDefaultsProvider,
-    UListItem,
-    UOverlay,
-    USlideXTransition,
-    USheet,
-  },
-  setup() {
-    const currentIndex = shallowRef(0);
-    const currentItem = toRef(() => items[currentIndex.value]);
-    const items = [
-      {
-        authorName: 'Bettany Nichols',
-        avatarId: 'women/31',
-        subtitle: '31k followers',
-        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-      },
-      {
-        authorName: 'Greg Kovalsky',
-        avatarId: 'men/61',
-        subtitle: '412 followers',
-        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-      },
-      {
-        authorName: 'Emma Kathleen',
-        avatarId: 'women/34',
-        subtitle: '521 followers',
-        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-      },
-      {
-        authorName: 'Anthony McKenzie',
-        avatarId: 'men/78',
-        subtitle: '6k followers',
-        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-      },
-    ];
-    return { currentIndex, currentItem, items };
-  },
-  template: `
-    <u-defaults-provider :defaults="{ VBtn: { variant: 'outlined', color: '#eee' } }">
-      <u-sheet class="overflow-hidden" max-width="700" rounded="xl">
-        <u-carousel
-          v-model="currentIndex"
-          direction="vertical"
-          height="400"
-          progress="red"
-          vertical-arrows="left"
-          vertical-delimiters="right"
-          hide-delimiter-background
-        >
-          <u-carousel-item
-            v-for="(item, i) in items"
-            :key="i"
-            :src="item.src"
-            cover
-          ></u-carousel-item>
-
-          <u-overlay
-            :scrim="false"
-            content-class="w-100 h-100 d-flex flex-column align-center justify-space-between pointer-pass-through py-3"
-            contained
-            model-value
-            no-click-animation
-            persistent
-          >
-            <u-slide-x-transition mode="out-in" appear>
-              <u-sheet :key="currentIndex" rounded="xl">
-                <u-list-item
-                  :prepend-avatar="'https://randomuser.me/api/portraits/' + currentItem.avatarId + '.jpg'"
-                  :subtitle="currentItem.subtitle"
-                  :title="currentItem.authorName"
-                  class="pa-1 pr-6"
-                ></u-list-item>
-              </u-sheet>
-            </u-slide-x-transition>
-            <u-chip
-              :text="currentIndex + 1 + ' / ' + items.length"
-              color="#eee"
-              size="small"
-              variant="flat"
-            ></u-chip>
-          </u-overlay>
-        </u-carousel>
-      </u-sheet>
-    </u-defaults-provider>
-  `,
-});
-
-VerticalWithOverlay.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Vertical with Overlay Story
+const verticalWithOverlayStory = `
   <u-defaults-provider :defaults="{ VBtn: { variant: 'outlined', color: '#eee' } }">
     <u-sheet class="overflow-hidden" max-width="700" rounded="xl">
       <u-carousel
@@ -873,39 +779,93 @@ VerticalWithOverlay.parameters = {
       </u-carousel>
     </u-sheet>
   </u-defaults-provider>
-</template>
+`;
+
+/**
+ * Carousel can be augmented with additional content simply by placing VOverlay next to it.
+ */
+export const VerticalWithOverlay: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UCarousel,
+    UCarouselItem,
+    UChip,
+    UDefaultsProvider,
+    UListItem,
+    UOverlay,
+    USlideXTransition,
+    USheet,
+  },
+  setup() {
+    const currentIndex = shallowRef(0);
+    const currentItem = toRef(() => items[currentIndex.value]);
+    const items = [
+      {
+        authorName: 'Bettany Nichols',
+        avatarId: 'women/31',
+        subtitle: '31k followers',
+        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+      },
+      {
+        authorName: 'Greg Kovalsky',
+        avatarId: 'men/61',
+        subtitle: '412 followers',
+        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+      },
+      {
+        authorName: 'Emma Kathleen',
+        avatarId: 'women/34',
+        subtitle: '521 followers',
+        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+      },
+      {
+        authorName: 'Anthony McKenzie',
+        avatarId: 'men/78',
+        subtitle: '6k followers',
+        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+      },
+    ];
+    return { currentIndex, currentItem, items };
+  },
+  template: verticalWithOverlayStory,
+});
+
+VerticalWithOverlay.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${verticalWithOverlayStory}</template>
 
 <script setup>
-import { shallowRef, toRef } from 'vue'
+  import { shallowRef, toRef } from 'vue'
 
-const currentIndex = shallowRef(0)
-const currentItem = toRef(() => items[currentIndex.value])
-const items = [
-  {
-    authorName: 'Bettany Nichols',
-    avatarId: 'women/31',
-    subtitle: '31k followers',
-    src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-  },
-  {
-    authorName: 'Greg Kovalsky',
-    avatarId: 'men/61',
-    subtitle: '412 followers',
-    src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-  },
-  {
-    authorName: 'Emma Kathleen',
-    avatarId: 'women/34',
-    subtitle: '521 followers',
-    src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-  },
-  {
-    authorName: 'Anthony McKenzie',
-    avatarId: 'men/78',
-    subtitle: '6k followers',
-    src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-  },
-]
+  const currentIndex = shallowRef(0)
+  const currentItem = toRef(() => items[currentIndex.value])
+  const items = [
+    {
+      authorName: 'Bettany Nichols',
+      avatarId: 'women/31',
+      subtitle: '31k followers',
+      src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+    },
+    {
+      authorName: 'Greg Kovalsky',
+      avatarId: 'men/61',
+      subtitle: '412 followers',
+      src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+    },
+    {
+      authorName: 'Emma Kathleen',
+      avatarId: 'women/34',
+      subtitle: '521 followers',
+      src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+    },
+    {
+      authorName: 'Anthony McKenzie',
+      avatarId: 'men/78',
+      subtitle: '6k followers',
+      src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+    },
+  ]
 </script>`,
     },
   },
