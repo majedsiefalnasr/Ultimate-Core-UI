@@ -40,7 +40,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Data & display/Pie Chart',
+  title: 'Components/Data & Display/Pie Chart',
   component: UPie,
   parameters: {
     docs: {

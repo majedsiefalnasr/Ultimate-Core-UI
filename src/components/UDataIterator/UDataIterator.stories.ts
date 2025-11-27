@@ -50,7 +50,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Data & display/Data Iterators',
+  title: 'Components/Data & Display/Data Iterators',
   component: UDataIterator,
   parameters: {
     docs: {

@@ -18,7 +18,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Data & display/Data Tables',
+  title: 'Components/Data & Display/Data Tables',
   component: UDataTable,
   parameters: {
     docs: {

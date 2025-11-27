@@ -33,7 +33,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Data & display/Confirm Edit',
+  title: 'Components/Data & Display/Confirm Edit',
   component: UConfirmEdit,
   parameters: {
     docs: {

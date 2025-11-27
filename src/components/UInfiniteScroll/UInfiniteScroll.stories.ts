@@ -8,7 +8,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Data & display/Infinite Scrolls',
+  title: 'Components/Data & Display/Infinite Scrolls',
   component: UInfiniteScroll,
   parameters: {
     docs: {

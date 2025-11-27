@@ -8,7 +8,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Data & display/Parallax',
+  title: 'Components/Data & Display/Parallax',
   component: UParallax,
   parameters: {
     docs: {

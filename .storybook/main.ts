@@ -11,8 +11,8 @@ const config: StorybookConfig = {
   },
   docs: {
     defaultName: 'Docs', // default name for the docs tab
-    docsMode: false, // whether to render stories in docs tab by default
-    autodocs: true, // automatically generate docs from component metadata
+    docsMode: true, // whether to render stories in docs tab by default
+    autodocs: false, // automatically generate docs from component metadata
   } as any,
 }
 

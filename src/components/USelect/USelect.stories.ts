@@ -23,7 +23,7 @@ interface ComponentArgs {
 }
 
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Forms/Selects',
+  title: 'Components/Form inputs & controls/Selects',
   component: USelect,
   parameters: {
     docs: {

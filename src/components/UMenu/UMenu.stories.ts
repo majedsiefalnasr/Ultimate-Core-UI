@@ -71,7 +71,7 @@ interface ComponentArgs {
  * Storybook meta configuration for UMenu
  */
 const meta: Meta<ComponentArgs> = {
-  title: 'Components/Containment/UMenu',
+  title: 'Components/Containment/Menu',
   component: UMenu,
   parameters: {
     docs: {
