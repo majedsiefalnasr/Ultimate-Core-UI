@@ -491,6 +491,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UCheckbox },
   setup() {
@@ -503,65 +504,8 @@ Default.args = {
   label: 'Checkbox',
 } as ComponentArgs;
 
-export const Colors: StoryFn<ComponentArgs> = (args) => ({
-  components: { UCheckbox, UContainer, URow, UCol },
-  setup() {
-    const ex4 = ref([
-      'red',
-      'indigo',
-      'orange',
-      'primary',
-      'secondary',
-      'success',
-      'info',
-      'warning',
-      'error',
-      'red-darken-3',
-      'indigo-darken-3',
-      'orange-darken-3',
-    ]);
-    return { args, ex4 };
-  },
-  template: `
-    <div>
-      <u-container fluid>
-        <u-row>
-          <u-col cols="12" md="4" sm="4">
-            <u-checkbox v-model="ex4" color="red" label="red" value="red" hide-details></u-checkbox>
-            <u-checkbox v-model="ex4" color="red-darken-3" label="red-darken-3" value="red-darken-3" hide-details></u-checkbox>
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-checkbox v-model="ex4" color="indigo" label="indigo" value="indigo" hide-details></u-checkbox>
-            <u-checkbox v-model="ex4" color="indigo-darken-3" label="indigo-darken-3" value="indigo-darken-3" hide-details></u-checkbox>
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-checkbox v-model="ex4" color="orange" label="orange" value="orange" hide-details></u-checkbox>
-            <u-checkbox v-model="ex4" color="orange-darken-3" label="orange-darken-3" value="orange-darken-3" hide-details></u-checkbox>
-          </u-col>
-        </u-row>
-        <u-row class="mt-12">
-          <u-col cols="12" md="4" sm="4">
-            <u-checkbox v-model="ex4" color="primary" label="primary" value="primary" hide-details></u-checkbox>
-            <u-checkbox v-model="ex4" color="secondary" label="secondary" value="secondary" hide-details></u-checkbox>
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-checkbox v-model="ex4" color="success" label="success" value="success" hide-details></u-checkbox>
-            <u-checkbox v-model="ex4" color="info" label="info" value="info" hide-details></u-checkbox>
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-checkbox v-model="ex4" color="warning" label="warning" value="warning" hide-details></u-checkbox>
-            <u-checkbox v-model="ex4" color="error" label="error" value="error" hide-details></u-checkbox>
-          </u-col>
-        </u-row>
-      </u-container>
-    </div>
-  `,
-});
-
-Colors.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Color Story
+const colorsTemplate = `
   <div>
     <u-container fluid>
       <u-row>
@@ -594,7 +538,38 @@ Colors.parameters = {
       </u-row>
     </u-container>
   </div>
-</template>
+`;
+
+/**
+ *
+ */
+export const Colors: StoryFn<ComponentArgs> = (args) => ({
+  components: { UCheckbox, UContainer, URow, UCol },
+  setup() {
+    const ex4 = ref([
+      'red',
+      'indigo',
+      'orange',
+      'primary',
+      'secondary',
+      'success',
+      'info',
+      'warning',
+      'error',
+      'red-darken-3',
+      'indigo-darken-3',
+      'orange-darken-3',
+    ]);
+    return { args, ex4 };
+  },
+  template: colorsTemplate,
+});
+
+Colors.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${colorsTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -605,53 +580,8 @@ Colors.parameters = {
   },
 };
 
-export const States: StoryFn<ComponentArgs> = (args) => ({
-  components: { UCheckbox, UContainer, URow, UCol },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-container fluid>
-      <u-row>
-        <u-col cols="4">on</u-col>
-        <u-col cols="4">off</u-col>
-        <u-col cols="4">indeterminate</u-col>
-      </u-row>
-      <u-row>
-        <u-col cols="4">
-          <u-checkbox :model-value="true"></u-checkbox>
-        </u-col>
-        <u-col cols="4">
-          <u-checkbox :model-value="false"></u-checkbox>
-        </u-col>
-        <u-col cols="4">
-          <u-checkbox indeterminate></u-checkbox>
-        </u-col>
-      </u-row>
-      <u-row>
-        <u-col cols="4">on disabled</u-col>
-        <u-col cols="4">off disabled</u-col>
-        <u-col cols="4">indeterminate disabled</u-col>
-      </u-row>
-      <u-row>
-        <u-col cols="4">
-          <u-checkbox :model-value="true" disabled></u-checkbox>
-        </u-col>
-        <u-col cols="4">
-          <u-checkbox :model-value="false" disabled></u-checkbox>
-        </u-col>
-        <u-col cols="4">
-          <u-checkbox disabled indeterminate></u-checkbox>
-        </u-col>
-      </u-row>
-    </u-container>
-  `,
-});
-
-States.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// States Story
+const statesTemplate = `
   <u-container fluid>
     <u-row>
       <u-col cols="4">on</u-col>
@@ -686,48 +616,30 @@ States.parameters = {
       </u-col>
     </u-row>
   </u-container>
-</template>`,
+`;
+
+/**
+ *
+ */
+export const States: StoryFn<ComponentArgs> = (args) => ({
+  components: { UCheckbox, UContainer, URow, UCol },
+  setup() {
+    return { args };
+  },
+  template: statesTemplate,
+});
+
+States.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${statesTemplate}</template>`,
     },
   },
 };
 
-export const LabelSlot: StoryFn<ComponentArgs> = (args) => ({
-  components: { UCheckbox, UContainer, UTooltip },
-  setup() {
-    const checkbox = ref(false);
-    return { args, checkbox };
-  },
-  template: `
-    <u-container fluid>
-      <u-checkbox v-model="checkbox">
-        <template #label>
-          <div>
-            I agree that
-            <u-tooltip location="bottom">
-              <template #activator="{ props }">
-                <a
-                  href="https://vuetifyjs.com"
-                  target="_blank"
-                  v-bind="props"
-                  @click.stop
-                >
-                  Vuetify
-                </a>
-              </template>
-              Opens in new window
-            </u-tooltip>
-            is awesome
-          </div>
-        </template>
-      </u-checkbox>
-    </u-container>
-  `,
-});
-
-LabelSlot.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Label Slot Story
+const labelSlotTemplate = `
   <u-container fluid>
     <u-checkbox v-model="checkbox">
       <template #label>
@@ -751,7 +663,25 @@ LabelSlot.parameters = {
       </template>
     </u-checkbox>
   </u-container>
-</template>
+`;
+
+/**
+ *
+ */
+export const LabelSlot: StoryFn<ComponentArgs> = (args) => ({
+  components: { UCheckbox, UContainer, UTooltip },
+  setup() {
+    const checkbox = ref(false);
+    return { args, checkbox };
+  },
+  template: labelSlotTemplate,
+});
+
+LabelSlot.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${labelSlotTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -762,33 +692,8 @@ LabelSlot.parameters = {
   },
 };
 
-export const InlineTextField: StoryFn<ComponentArgs> = (args) => ({
-  components: { UCard, UCardText, UCheckboxBtn, UTextField },
-  setup() {
-    const includeFiles = ref(true);
-    const enabled = ref(false);
-    return { args, includeFiles, enabled };
-  },
-  template: `
-    <u-card>
-      <u-card-text>
-        <div class="d-flex pa-4">
-          <u-checkbox-btn v-model="includeFiles" class="pe-2"></u-checkbox-btn>
-          <u-text-field label="Include files" hide-details></u-text-field>
-        </div>
-        <div class="d-flex pa-4">
-          <u-checkbox-btn v-model="enabled" class="pe-2"></u-checkbox-btn>
-          <u-text-field :disabled="!enabled" label="I only work if you check the box" hide-details></u-text-field>
-        </div>
-      </u-card-text>
-    </u-card>
-  `,
-});
-
-InlineTextField.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Inline TextField Story
+const inlineTextFieldTemplate = `
   <u-card>
     <u-card-text>
       <div class="d-flex pa-4">
@@ -801,7 +706,26 @@ InlineTextField.parameters = {
       </div>
     </u-card-text>
   </u-card>
-</template>
+`;
+
+/**
+ *
+ */
+export const InlineTextField: StoryFn<ComponentArgs> = (args) => ({
+  components: { UCard, UCardText, UCheckboxBtn, UTextField },
+  setup() {
+    const includeFiles = ref(true);
+    const enabled = ref(false);
+    return { args, includeFiles, enabled };
+  },
+  template: inlineTextFieldTemplate,
+});
+
+InlineTextField.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${inlineTextFieldTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -813,31 +737,32 @@ InlineTextField.parameters = {
   },
 };
 
+// Model As Array Story
+const modelAsArrayTemplate = `
+  <u-container fluid>
+    <p>{{ selected }}</p>
+    <u-checkbox v-model="selected" label="John" value="John"></u-checkbox>
+    <u-checkbox v-model="selected" label="Jacob" value="Jacob"></u-checkbox>
+  </u-container>
+`;
+
+/**
+ *
+ */
 export const ModelAsArray: StoryFn<ComponentArgs> = (args) => ({
   components: { UCheckbox, UContainer },
   setup() {
     const selected = ref(['John']);
     return { args, selected };
   },
-  template: `
-    <u-container fluid>
-      <p>{{ selected }}</p>
-      <u-checkbox v-model="selected" label="John" value="John"></u-checkbox>
-      <u-checkbox v-model="selected" label="Jacob" value="Jacob"></u-checkbox>
-    </u-container>
-  `,
+  template: modelAsArrayTemplate,
 });
 
 ModelAsArray.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <p>{{ selected }}</p>
-    <u-checkbox v-model="selected" label="John" value="John"></u-checkbox>
-    <u-checkbox v-model="selected" label="Jacob" value="Jacob"></u-checkbox>
-  </u-container>
-</template>
+      code: `
+<template>${modelAsArrayTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -848,6 +773,17 @@ ModelAsArray.parameters = {
   },
 };
 
+// Model As Boolean Story
+const modelAsBooleanTemplate = `
+  <u-container fluid>
+    <u-checkbox v-model="checkbox1" :label="'Checkbox 1: ' + checkbox1.toString()"></u-checkbox>
+    <u-checkbox v-model="checkbox2" :label="'Checkbox 2: ' + checkbox2.toString()"></u-checkbox>
+  </u-container>
+`;
+
+/**
+ *
+ */
 export const ModelAsBoolean: StoryFn<ComponentArgs> = (args) => ({
   components: { UCheckbox, UContainer },
   setup() {
@@ -855,23 +791,14 @@ export const ModelAsBoolean: StoryFn<ComponentArgs> = (args) => ({
     const checkbox2 = ref(false);
     return { args, checkbox1, checkbox2 };
   },
-  template: `
-    <u-container fluid>
-      <u-checkbox v-model="checkbox1" :label="'Checkbox 1: ' + checkbox1.toString()"></u-checkbox>
-      <u-checkbox v-model="checkbox2" :label="'Checkbox 2: ' + checkbox2.toString()"></u-checkbox>
-    </u-container>
-  `,
+  template: modelAsBooleanTemplate,
 });
 
 ModelAsBoolean.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-checkbox v-model="checkbox1" :label="'Checkbox 1: ' + checkbox1.toString()"></u-checkbox>
-    <u-checkbox v-model="checkbox2" :label="'Checkbox 2: ' + checkbox2.toString()"></u-checkbox>
-  </u-container>
-</template>
+      code: `
+<template>${modelAsBooleanTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
