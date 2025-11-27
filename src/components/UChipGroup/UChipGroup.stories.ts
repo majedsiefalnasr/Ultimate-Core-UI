@@ -250,6 +250,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UChipGroup, UChip },
   setup() {
@@ -268,55 +269,8 @@ Default.args = {
   color: 'primary',
 };
 
-export const Column: StoryFn<ComponentArgs> = () => ({
-  components: { UChipGroup, UChip, USheet, UBtn },
-  setup() {
-    const tags = [
-      'Work',
-      'Home Improvement',
-      'Vacation',
-      'Food',
-      'Drawers',
-      'Shopping',
-      'Art',
-      'Tech',
-      'Creative Writing',
-    ];
-    return { tags };
-  },
-  template: `
-      <u-sheet
-        class="mx-auto"
-        elevation="10"
-        max-width="300"
-        rounded="xl"
-      >
-        <div class="pa-4">
-          <u-chip-group
-            selected-class="text-primary"
-            column
-          >
-            <u-chip
-              v-for="tag in tags"
-              :key="tag"
-            >
-              {{ tag }}
-            </u-chip>
-          </u-chip-group>
-        </div>
-      </u-sheet>
-    `,
-});
-
-Column.parameters = {
-  docs: {
-    description: {
-      story:
-        'The column prop allows chip groups to wrap their chips when they exceed the container width.',
-    },
-    source: {
-      code: `
-<template>
+// Column Story
+const columnTemplate = `
   <u-sheet
     class="mx-auto"
     elevation="10"
@@ -337,76 +291,55 @@ Column.parameters = {
       </u-chip-group>
     </div>
   </u-sheet>
-</template>
+`;
+
+/**
+ * The column prop allows chip groups to wrap their chips when they exceed
+ * the container width.
+ */
+export const Column: StoryFn<ComponentArgs> = () => ({
+  components: { UChipGroup, UChip, USheet, UBtn },
+  setup() {
+    const tags = [
+      'Work',
+      'Home Improvement',
+      'Vacation',
+      'Food',
+      'Drawers',
+      'Shopping',
+      'Art',
+      'Tech',
+      'Creative Writing',
+    ];
+    return { tags };
+  },
+  template: columnTemplate,
+});
+
+Column.parameters = {
+  docs: {
+    source: {
+      code: `<template>${columnTemplate}</template>
 
 <script setup lang="ts">
-  const tags = [
-    'Work',
-    'Home Improvement',
-    'Vacation',
-    'Food',
-    'Drawers',
-    'Shopping',
-    'Art',
-    'Tech',
-    'Creative Writing',
-  ]
+const tags = [
+  'Work',
+  'Home Improvement',
+  'Vacation',
+  'Food',
+  'Drawers',
+  'Shopping',
+  'Art',
+  'Tech',
+  'Creative Writing',
+]
 </script>`,
     },
   },
 };
 
-export const FilterResults: StoryFn<ComponentArgs> = () => ({
-  components: { UChipGroup, UChip, UCard, UCardText },
-  setup() {
-    const amenities = shallowRef([1, 4]);
-    const neighborhoods = shallowRef([2]);
-
-    return { amenities, neighborhoods };
-  },
-  template: `
-      <u-card>
-        <u-card-text>
-          <h2 class="text-h6 mb-2">Amenities</h2>
-          <u-chip-group
-            v-model="amenities"
-            column
-            multiple
-          >
-            <u-chip filter variant="outlined">Elevator</u-chip>
-            <u-chip filter variant="outlined">Washer / Dryer</u-chip>
-            <u-chip filter variant="outlined">Fireplace</u-chip>
-            <u-chip filter variant="outlined">Wheelchair access</u-chip>
-            <u-chip filter variant="outlined">Dogs ok</u-chip>
-            <u-chip filter variant="outlined">Cats ok</u-chip>
-          </u-chip-group>
-
-          <h2 class="text-h6 mb-2">Neighborhoods</h2>
-          <u-chip-group
-            v-model="neighborhoods"
-            column
-            multiple
-          >
-            <u-chip filter variant="outlined">Snowy Rock Place</u-chip>
-            <u-chip filter variant="outlined">Honeylane Circle</u-chip>
-            <u-chip filter variant="outlined">Donna Drive</u-chip>
-            <u-chip filter variant="outlined">Elaine Street</u-chip>
-            <u-chip filter variant="outlined">Court Street</u-chip>
-            <u-chip filter variant="outlined">Kennedy Park</u-chip>
-          </u-chip-group>
-        </u-card-text>
-      </u-card>
-    `,
-});
-
-FilterResults.parameters = {
-  docs: {
-    description: {
-      story:
-        'Easily create chip groups that provide additional feedback with the filter prop. This creates an alternative visual style that communicates to the user that the chip is selected.',
-    },
-    source: {
-      code: `<template>
+// Filter Results Story
+const filterResultsTemplate = `
   <u-card>
     <u-card-text>
       <h2 class="text-h6 mb-2">Amenities</h2>
@@ -438,18 +371,58 @@ FilterResults.parameters = {
       </u-chip-group>
     </u-card-text>
   </u-card>
-</template>
+`;
+
+/**
+ * Easily create chip groups that provide additional feedback with the filter prop.
+ * This creates an alternative visual style that communicates to the user that the
+ * chip is selected.
+ */
+export const FilterResults: StoryFn<ComponentArgs> = () => ({
+  components: { UChipGroup, UChip, UCard, UCardText },
+  setup() {
+    const amenities = shallowRef([1, 4]);
+    const neighborhoods = shallowRef([2]);
+
+    return { amenities, neighborhoods };
+  },
+  template: filterResultsTemplate,
+});
+
+FilterResults.parameters = {
+  docs: {
+    source: {
+      code: `<template>${filterResultsTemplate}</template>
 
 <script setup lang="ts">
-  import { shallowRef } from 'vue'
+import { shallowRef } from 'vue'
 
-  const amenities = shallowRef([1, 4])
-  const neighborhoods = shallowRef([2])
+const amenities = shallowRef([1, 4])
+const neighborhoods = shallowRef([2])
 </script>`,
     },
   },
 };
 
+// Mandatory Story
+const mandatoryTemplate = `
+  <u-sheet class="py-4 px-1">
+    <u-chip-group
+      selected-class="text-primary"
+      mandatory
+    >
+      <u-chip
+        v-for="tag in tags"
+        :key="tag"
+        :text="tag"
+      ></u-chip>
+    </u-chip-group>
+  </u-sheet>
+`;
+
+/**
+ * The mandatory prop forces at least 1 item to always be selected.
+ */
 export const Mandatory: StoryFn<ComponentArgs> = () => ({
   components: { UChipGroup, UChip },
   setup() {
@@ -466,60 +439,50 @@ export const Mandatory: StoryFn<ComponentArgs> = () => ({
     ];
     return { tags };
   },
-  template: `
-      <u-sheet class="py-4 px-1">
-        <u-chip-group
-          selected-class="text-primary"
-          mandatory
-        >
-          <u-chip
-            v-for="tag in tags"
-            :key="tag"
-            :text="tag"
-          ></u-chip>
-        </u-chip-group>
-      </u-sheet>
-    `,
+  template: mandatoryTemplate,
 });
 
 Mandatory.parameters = {
   docs: {
-    description: {
-      story: 'The mandatory prop forces at least 1 item to always be selected.',
-    },
     source: {
-      code: `<template>
-  <u-sheet class="py-4 px-1">
-    <u-chip-group
-      selected-class="text-primary"
-      mandatory
-    >
-      <u-chip
-        v-for="tag in tags"
-        :key="tag"
-        :text="tag"
-      ></u-chip>
-    </u-chip-group>
-  </u-sheet>
-</template>
+      code: `<template>${mandatoryTemplate}</template>
 
 <script setup>
-  const tags = [
-    'Work',
-    'Home Improvement',
-    'Vacation',
-    'Food',
-    'Drawers',
-    'Shopping',
-    'Art',
-    'Tech',
-    'Creative Writing',
-  ]
+const tags = [
+  'Work',
+  'Home Improvement',
+  'Vacation',
+  'Food',
+  'Drawers',
+  'Shopping',
+  'Art',
+  'Tech',
+  'Creative Writing',
+]
 </script>`,
     },
   },
 };
 
+// Multiple Story
+const multipleTemplate = `
+  <v-sheet class="py-4 px-1">
+    <v-chip-group
+      selected-class="text-primary"
+      multiple
+    >
+      <v-chip
+        v-for="tag in tags"
+        :key="tag"
+        :text="tag"
+      ></v-chip>
+    </v-chip-group>
+  </v-sheet>
+`;
+
+/**
+ * The multiple prop allows users to select multiple chips within the chip group.
+ */
 export const Multiple: StoryFn<ComponentArgs> = () => ({
   components: { UChipGroup, UChip },
   setup() {
@@ -536,121 +499,33 @@ export const Multiple: StoryFn<ComponentArgs> = () => ({
     ];
     return { tags };
   },
-  template: `
-      <v-sheet class="py-4 px-1">
-        <v-chip-group
-          selected-class="text-primary"
-          multiple
-        >
-          <v-chip
-            v-for="tag in tags"
-            :key="tag"
-            :text="tag"
-          ></v-chip>
-        </v-chip-group>
-      </v-sheet>
-    `,
+  template: multipleTemplate,
 });
 
 Multiple.parameters = {
   docs: {
-    description: {
-      story: 'The multiple prop allows users to select multiple chips within the chip group.',
-    },
     source: {
-      code: `<template>
-  <v-sheet class="py-4 px-1">
-    <v-chip-group
-      selected-class="text-primary"
-      multiple
-    >
-      <v-chip
-        v-for="tag in tags"
-        :key="tag"
-        :text="tag"
-      ></v-chip>
-    </v-chip-group>
-  </v-sheet>
-</template>
+      code: `<template>${multipleTemplate}</template>
 
 <script setup lang="ts">
-  const tags = [
-    'Work',
-    'Home Improvement',
-    'Vacation',
-    'Food',
-    'Drawers',
-    'Shopping',
-    'Art',
-    'Tech',
-    'Creative Writing',
-  ]
+const tags = [
+  'Work',
+  'Home Improvement',
+  'Vacation',
+  'Food',
+  'Drawers',
+  'Shopping',
+  'Art',
+  'Tech',
+  'Creative Writing',
+]
 </script>`,
     },
   },
 };
 
-export const ProductCard: StoryFn<ComponentArgs> = () => ({
-  components: {
-    UChipGroup,
-    UChip,
-    UCard,
-    UCardTitle,
-    UCardText,
-    UCardActions,
-    UBtn,
-    UToolbar,
-    UToolbarTitle,
-    UDivider,
-    USpacer,
-  },
-  setup() {
-    const sizes = ref(['X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large']);
-    return { sizes };
-  },
-  template: `
-      <u-card class="mx-auto" max-width="500">
-        <u-toolbar color="cyan-darken-1">
-          <u-toolbar-title class="text-h6">Select Size</u-toolbar-title>
-        </u-toolbar>
-
-        <u-card-text>
-          <h2 class="text-h4 mb-2">$12.00</h2>
-          <p class="text-subtitle-1">Inline text</p>
-
-          <u-divider class="my-4" />
-
-          <u-chip-group
-            v-model="sizes"
-            selected-class="text-primary"
-            mandatory
-          >
-            <u-chip>X-Small</u-chip>
-            <u-chip>Small</u-chip>
-            <u-chip>Medium</u-chip>
-            <u-chip>Large</u-chip>
-            <u-chip>X-Large</u-chip>
-            <u-chip>XX-Large</u-chip>
-          </u-chip-group>
-        </u-card-text>
-
-        <u-card-actions>
-          <u-btn color="primary" variant="text">Continue</u-btn>
-          <u-spacer />
-          <u-btn color="grey" variant="text">Cancel</u-btn>
-        </u-card-actions>
-      </u-card>
-    `,
-});
-
-ProductCard.parameters = {
-  docs: {
-    description: {
-      story:
-        'Chip groups can be used to display a collection of interactive chips with additional context like a product selection interface.',
-    },
-    source: {
-      code: `<template>
+// Product Card Story
+const productCardTemplate = `
   <u-card class="mx-auto" max-width="500">
     <u-toolbar color="cyan-darken-1">
       <u-toolbar-title class="text-h6">Select Size</u-toolbar-title>
@@ -682,7 +557,37 @@ ProductCard.parameters = {
       <u-btn color="grey" variant="text">Cancel</u-btn>
     </u-card-actions>
   </u-card>
-</template>
+`;
+
+/**
+ * Chip groups can be used to display a collection of interactive chips with
+ * additional context like a product selection interface.
+ */
+export const ProductCard: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UChipGroup,
+    UChip,
+    UCard,
+    UCardTitle,
+    UCardText,
+    UCardActions,
+    UBtn,
+    UToolbar,
+    UToolbarTitle,
+    UDivider,
+    USpacer,
+  },
+  setup() {
+    const sizes = ref(['X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large']);
+    return { sizes };
+  },
+  template: productCardTemplate,
+});
+
+ProductCard.parameters = {
+  docs: {
+    source: {
+      code: `<template>${productCardTemplate}</template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -693,52 +598,8 @@ const sizes = ref(['X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large']
   },
 };
 
-export const RedditStyleCategories: StoryFn<ComponentArgs> = () => ({
-  components: { UChipGroup, UChip, UResponsive },
-  setup() {
-    const cards = shallowRef([
-      { title: '🎬 Entertainment', color: 'purple' },
-      { title: '🏀 Sports', color: 'orange' },
-      { title: '🎮 Gaming', color: 'blue' },
-      { title: '🤣 Funny', color: 'red' },
-      { title: '❓ Ask Reddit', color: 'cyan' },
-      { title: '💼 Professional', color: 'teal' },
-      { title: '🌍 World News', color: 'indigo' },
-      { title: '🔬 Science', color: 'green' },
-    ]);
-    return { cards };
-  },
-  template: `
-      <u-responsive class="mx-auto" max-width="1200">
-        <u-sheet class="pa-4">
-          <u-chip-group
-            multiple
-            column
-            color="primary"
-          >
-            <u-chip
-              v-for="card in cards"
-              :key="card.title"
-              :color="card.color"
-              filter
-              variant="outlined"
-            >
-              {{ card.title }}
-            </u-chip>
-          </u-chip-group>
-        </u-sheet>
-      </u-responsive>
-    `,
-});
-
-RedditStyleCategories.parameters = {
-  docs: {
-    description: {
-      story:
-        "This example showcases a chip group styled similarly to Reddit's topic selection interface, complete with emojis and responsive design.",
-    },
-    source: {
-      code: `<template>
+// Reddit Style Categories Story
+const redditStyleCategoriesTemplate = `
   <u-responsive class="mx-auto" max-width="1200">
     <u-sheet class="pa-4">
       <u-chip-group
@@ -758,7 +619,34 @@ RedditStyleCategories.parameters = {
       </u-chip-group>
     </u-sheet>
   </u-responsive>
-</template>
+`;
+
+/**
+ * This example showcases a chip group styled similarly to Reddit's topic selection
+ * interface, complete with emojis and responsive design.
+ */
+export const RedditStyleCategories: StoryFn<ComponentArgs> = () => ({
+  components: { UChipGroup, UChip, UResponsive },
+  setup() {
+    const cards = shallowRef([
+      { title: '🎬 Entertainment', color: 'purple' },
+      { title: '🏀 Sports', color: 'orange' },
+      { title: '🎮 Gaming', color: 'blue' },
+      { title: '🤣 Funny', color: 'red' },
+      { title: '❓ Ask Reddit', color: 'cyan' },
+      { title: '💼 Professional', color: 'teal' },
+      { title: '🌍 World News', color: 'indigo' },
+      { title: '🔬 Science', color: 'green' },
+    ]);
+    return { cards };
+  },
+  template: redditStyleCategoriesTemplate,
+});
+
+RedditStyleCategories.parameters = {
+  docs: {
+    source: {
+      code: `<template>${redditStyleCategoriesTemplate}</template>
 
 <script setup lang="ts">
 import { shallowRef } from 'vue';
