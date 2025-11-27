@@ -8,8 +8,6 @@ interface ComponentArgs {
   modelValue?: string | Record<string, unknown>;
   mode?: 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa';
   modes?: ('rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa')[];
-
-  // Display options
   hideCanvas?: boolean;
   hideInputs?: boolean;
   hideSliders?: boolean;
@@ -17,20 +15,12 @@ interface ComponentArgs {
   hideTitle?: boolean;
   hideEyeDropper?: boolean;
   title?: string;
-
-  // Canvas
   canvasHeight?: string | number;
   dotSize?: string | number;
-
-  // Swatches
   showSwatches?: boolean;
   swatches?: unknown[][];
   swatchesMaxHeight?: string | number;
-
-  // Eye dropper
   eyeDropperIcon?: string;
-
-  // Layout
   landscape?: boolean;
   divided?: boolean;
   width?: string | number;
@@ -39,25 +29,17 @@ interface ComponentArgs {
   maxWidth?: string | number;
   minHeight?: string | number;
   minWidth?: string | number;
-
-  // Styling
   bgColor?: string;
   color?: string;
   elevation?: string | number;
   rounded?: string | number | boolean;
   border?: string | number | boolean;
   tile?: boolean;
-
-  // State
   disabled?: boolean;
-
-  // Advanced
   location?: string;
   position?: 'fixed' | 'static' | 'relative' | 'absolute' | 'sticky';
   tag?: string;
   theme?: string;
-
-  // Story-specific
   content?: string;
 }
 
@@ -280,6 +262,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UColorPicker },
   setup() {
@@ -290,14 +273,26 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<u-color-picker></u-color-picker>`,
-    },
-  },
-};
+// CustomizingLook Story Template
+const customizingLookTemplate = `<div class="d-flex justify-space-around">
+  <u-color-picker
+    v-model="c1"
+    hide-canvas
+    hide-sliders
+  ></u-color-picker>
 
+  <u-color-picker
+    v-model="c2"
+    hide-inputs
+    show-swatches
+  ></u-color-picker>
+</div>`;
+
+/**
+ * There are a number of props available to help you customize the component by hiding
+ * or showing the various parts of the picker. You can independently hide the canvas,
+ * the sliders, and the inputs. You can also show a collection of swatches.
+ */
 export const CustomizingLook: StoryFn<ComponentArgs> = () => ({
   components: { UColorPicker },
   setup() {
@@ -305,107 +300,68 @@ export const CustomizingLook: StoryFn<ComponentArgs> = () => ({
     const c2 = ref('#00ff00');
     return { c1, c2 };
   },
-  template: `
-    <div class="d-flex justify-space-around">
-      <u-color-picker
-        v-model="c1"
-        hide-canvas
-        hide-sliders
-      ></u-color-picker>
-
-      <u-color-picker
-        v-model="c2"
-        hide-inputs
-        show-swatches
-      ></u-color-picker>
-    </div>
-  `,
+  template: customizingLookTemplate,
 });
 
 CustomizingLook.parameters = {
   docs: {
-    description: {
-      story:
-        'There are a number of props available to help you customize the component by hiding or showing the various parts of the picker. You can independently hide the canvas, the sliders, and the inputs. You can also show a collection of swatches.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-space-around">
-    <u-color-picker
-      v-model="c1"
-      hide-canvas
-      hide-sliders
-    ></u-color-picker>
-
-    <u-color-picker
-      v-model="c2"
-      hide-inputs
-      show-swatches
-    ></u-color-picker>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const c1 = ref('#ff00ff');
-const c2 = ref('#00ff00');
+      code: `<template>${customizingLookTemplate}</template>
+<script setup>
+import { ref } from 'vue'
+const c1 = ref('#ff00ff')
+const c2 = ref('#00ff00')
 </script>`,
     },
   },
 };
 
+// Elevation Story Template
+const elevationTemplate = `<div class="d-flex justify-space-around">
+  <u-color-picker v-model="picker" elevation="0"></u-color-picker>
+  <u-color-picker v-model="picker" elevation="15"></u-color-picker>
+</div>`;
+
+/**
+ * Adjust the elevation of the u-color-picker component using the elevation or flat prop.
+ * The flat is equivalent to setting elevation to 0.
+ */
 export const Elevation: StoryFn<ComponentArgs> = () => ({
   components: { UColorPicker },
   setup() {
     const picker = ref(null);
     return { picker };
   },
-  template: `
-    <div class="d-flex justify-space-around">
-      <u-color-picker
-        v-model="picker"
-        elevation="0"
-      ></u-color-picker>
-
-      <u-color-picker
-        v-model="picker"
-        elevation="15"
-      ></u-color-picker>
-    </div>
-  `,
+  template: elevationTemplate,
 });
 
 Elevation.parameters = {
   docs: {
-    description: {
-      story:
-        'Adjust the elevation of the u-color-picker component using the elevation or flat prop. The flat is equivalent to setting elevation to 0.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-space-around">
-    <u-color-picker
-      v-model="picker"
-      elevation="0"
-    ></u-color-picker>
-
-    <u-color-picker
-      v-model="picker"
-      elevation="15"
-    ></u-color-picker>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const picker = ref(null);
+      code: `<template>${elevationTemplate}</template>
+<script setup>
+import { ref } from 'vue'
+const picker = ref(null)
 </script>`,
     },
   },
 };
 
+// Mode Story Template
+const modeTemplate = `<div class="d-flex justify-space-around">
+  <u-color-picker v-model="color" :modes="['rgba']"></u-color-picker>
+
+  <div class="d-flex flex-column">
+    <u-color-picker v-model="color" v-model:mode="mode"></u-color-picker>
+    <u-select v-model="mode" :items="modes" style="max-width: 300px"></u-select>
+  </div>
+</div>`;
+
+/**
+ * You can specify which input modes are available to your users with the modes prop.
+ * If you only set a single mode, then the mode toggle will automatically be hidden.
+ * You can also control the current mode with the mode v-model.
+ */
 export const Mode: StoryFn<ComponentArgs> = () => ({
   components: { UColorPicker, USelect },
   setup() {
@@ -414,156 +370,87 @@ export const Mode: StoryFn<ComponentArgs> = () => ({
     const modes = ref(['hsla', 'rgba', 'hexa']);
     return { color, mode, modes };
   },
-  template: `
-    <div class="d-flex justify-space-around">
-      <u-color-picker
-        v-model="color"
-        :modes="['rgba']"
-      ></u-color-picker>
-
-      <div class="d-flex flex-column">
-        <u-color-picker
-          v-model="color"
-          v-model:mode="mode"
-        ></u-color-picker>
-        <u-select
-          v-model="mode"
-          :items="modes"
-          style="max-width: 300px"
-        ></u-select>
-      </div>
-    </div>
-  `,
+  template: modeTemplate,
 });
 
 Mode.parameters = {
   docs: {
-    description: {
-      story:
-        'You can specify which input modes are available to your users with the modes prop. If you only set a single mode, then the mode toggle will automatically be hidden. You can also control the current mode with the mode v-model.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-space-around">
-    <u-color-picker
-      v-model="color"
-      :modes="['rgba']"
-    ></u-color-picker>
-
-    <div class="d-flex flex-column">
-      <u-color-picker
-        v-model="color"
-        v-model:mode="mode"
-      ></u-color-picker>
-      <u-select
-        v-model="mode"
-        :items="modes"
-        style="max-width: 300px"
-      ></u-select>
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const color = ref('#ff00ff');
-const mode = ref('hsla');
-const modes = ref(['hsla', 'rgba', 'hexa']);
+      code: `<template>${modeTemplate}</template>
+<script setup>
+import { ref } from 'vue'
+const color = ref('#ff00ff')
+const mode = ref('hsla')
+const modes = ref(['hsla','rgba','hexa'])
 </script>`,
     },
   },
 };
 
+// Model Story Template
+const modelTemplate = `<u-container>
+  <u-row>
+    <u-col cols="12" md="4">
+      <u-btn class="my-4" block @click="color = null">null</u-btn>
+      <u-btn class="my-4" block @click="color = '#ff00ff'">hex</u-btn>
+      <u-btn class="my-4" block @click="color = '#ff00ffff'">hexa</u-btn>
+      <u-btn class="my-4" block @click="color = { r: 255, g: 0, b: 255, a: 1 }">rgba</u-btn>
+      <u-btn class="my-4" block @click="color = { h: 300, s: 1, l: 0.5, a: 1 }">hsla</u-btn>
+      <u-btn class="my-4" block @click="color = { h: 300, s: 1, v: 1, a: 1 }">hsva</u-btn>
+    </u-col>
+    <u-col class="d-flex justify-center">
+      <u-color-picker v-model="color"></u-color-picker>
+    </u-col>
+    <u-col cols="12" md="4">
+      <u-sheet class="pa-4">
+        <pre>{{ color }}</pre>
+      </u-sheet>
+    </u-col>
+  </u-row>
+</u-container>`;
+
+/**
+ * The u-color-picker uses the v-model prop to control the color displayed.
+ * It supports hex strings such as #FF00FF and #FF00FF00, and objects representing
+ * RGBA, HSLA and HSVA values. The component will try to emit the color in the same
+ * format that was provided. If the value is null or an unsupported format, then the
+ * u-color-picker will default to emitting hex colors.
+ */
 export const Model: StoryFn<ComponentArgs> = () => ({
   components: { UBtn, UColorPicker, UCol, UContainer, URow, USheet },
   setup() {
     const color = ref(null);
     return { color };
   },
-  template: `
-    <u-container>
-      <u-row>
-        <u-col
-          cols="12"
-          md="4"
-        >
-          <u-btn class="my-4" block @click="color = null">null</u-btn>
-          <u-btn class="my-4" block @click="color = '#ff00ff'">hex</u-btn>
-          <u-btn class="my-4" block @click="color = '#ff00ffff'">hexa</u-btn>
-          <u-btn class="my-4" block @click="color = { r: 255, g: 0, b: 255, a: 1 }">rgba</u-btn>
-          <u-btn class="my-4" block @click="color = { h: 300, s: 1, l: 0.5, a: 1 }">hsla</u-btn>
-          <u-btn class="my-4" block @click="color = { h: 300, s: 1, v: 1, a: 1 }">hsva</u-btn>
-        </u-col>
-        <u-col
-          class="d-flex justify-center"
-        >
-          <u-color-picker v-model="color"></u-color-picker>
-        </u-col>
-        <u-col
-          cols="12"
-          md="4"
-        >
-          <u-sheet
-            class="pa-4"
-          >
-            <pre>{{ color }}</pre>
-          </u-sheet>
-        </u-col>
-      </u-row>
-    </u-container>
-  `,
+  template: modelTemplate,
 });
 
 Model.parameters = {
   docs: {
-    description: {
-      story:
-        'The u-color-picker uses the v-model prop to control the color displayed. It supports hex strings such as #FF00FF and #FF00FF00, and objects representing RGBA, HSLA and HSVA values. The component will try to emit the color in the same format that was provided. If the value is null or an unsupported format, then the u-color-picker will default to emitting hex colors.',
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col
-        cols="12"
-        md="4"
-      >
-        <u-btn class="my-4" block @click="color = null">null</u-btn>
-        <u-btn class="my-4" block @click="color = '#ff00ff'">hex</u-btn>
-        <u-btn class="my-4" block @click="color = '#ff00ffff'">hexa</u-btn>
-        <u-btn class="my-4" block @click="color = { r: 255, g: 0, b: 255, a: 1 }">rgba</u-btn>
-        <u-btn class="my-4" block @click="color = { h: 300, s: 1, l: 0.5, a: 1 }">hsla</u-btn>
-        <u-btn class="my-4" block @click="color = { h: 300, s: 1, v: 1, a: 1 }">hsva</u-btn>
-      </u-col>
-      <u-col
-        class="d-flex justify-center"
-      >
-        <u-color-picker v-model="color"></u-color-picker>
-      </u-col>
-      <u-col
-        cols="12"
-        md="4"
-      >
-        <u-sheet
-          class="pa-4"
-        >
-          <pre>{{ color }}</pre>
-        </u-sheet>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const color = ref(null);
+      code: `<template>${modelTemplate}</template>
+<script setup>
+import { ref } from 'vue'
+const color = ref(null)
 </script>`,
     },
   },
 };
 
+// Swatches Story Template
+const swatchesTemplate = `<div class="d-flex justify-space-around">
+  <u-color-picker class="ma-2" swatches-max-height="400px" show-swatches></u-color-picker>
+  <u-color-picker :swatches="swatches" class="ma-2" show-swatches></u-color-picker>
+</div>`;
+
+/**
+ * Using the show-swatches prop you can display an array of color swatches that users
+ * can pick from. It is also possible to customize what colors are shown using the
+ * swatches prop. This prop accepts a two-dimensional array, where the first dimension
+ * defines a column, and second dimension defines the swatches from top to bottom by
+ * providing rgba hex strings. You can also set the max height of the swatches section
+ * with the swatches-max-height prop.
+ */
 export const Swatches: StoryFn<ComponentArgs> = () => ({
   components: { UColorPicker },
   setup() {
@@ -576,52 +463,21 @@ export const Swatches: StoryFn<ComponentArgs> = () => ({
     ];
     return { swatches };
   },
-  template: `
-    <div class="d-flex justify-space-around">
-      <u-color-picker
-        class="ma-2"
-        swatches-max-height="400px"
-        show-swatches
-      ></u-color-picker>
-      <u-color-picker
-        :swatches="swatches"
-        class="ma-2"
-        show-swatches
-      ></u-color-picker>
-    </div>
-  `,
+  template: swatchesTemplate,
 });
 
 Swatches.parameters = {
   docs: {
-    description: {
-      story:
-        'Using the show-swatches prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the swatches prop. This prop accepts a two-dimensional array, where the first dimension defines a column, and second dimension defines the swatches from top to bottom by providing rgba hex strings. You can also set the max height of the swatches section with the swatches-max-height prop.',
-    },
     source: {
-      code: `<template>
-  <div class="d-flex justify-space-around">
-    <u-color-picker
-      class="ma-2"
-      swatches-max-height="400px"
-      show-swatches
-    ></u-color-picker>
-    <u-color-picker
-      :swatches="swatches"
-      class="ma-2"
-      show-swatches
-    ></u-color-picker>
-  </div>
-</template>
-
-<script setup lang="ts">
+      code: `<template>${swatchesTemplate}</template>
+<script setup>
 const swatches = [
   ['#FF0000', '#AA0000', '#550000'],
   ['#FFFF00', '#AAAA00', '#555500'],
   ['#00FF00', '#00AA00', '#005500'],
   ['#00FFFF', '#00AAAA', '#005555'],
   ['#0000FF', '#0000AA', '#000055'],
-];
+]
 </script>`,
     },
   },
