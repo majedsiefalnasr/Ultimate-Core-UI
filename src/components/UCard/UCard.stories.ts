@@ -145,13 +145,13 @@ const meta: Meta<ComponentArgs> = {
     anatomy: {
       title: 'Anatomy',
       description:
-        'The recommended placement of elements inside of v-card is: Place v-card-title, v-card-subtitle or other title text on top; Place v-card-text and other forms of media below the card header; Place v-card-actions after card content',
-      Image: '/images/stories/ucard.anatomy.png',
+        'The recommended placement of elements inside of u-card is: Place u-card-title, u-card-subtitle or other title text on top; Place u-card-text and other forms of media below the card header; Place u-card-actions after card content',
+      Image: '/images/stories/UCard.anatomy.png',
       data: [
         {
           element: '1. Container',
           description:
-            'The Card container holds all v-card components. Composed of 3 major parts: v-card-item, v-card-text, and v-card-actions',
+            'The Card container holds all u-card components. Composed of 3 major parts: u-card-item, u-card-text, and u-card-actions',
         },
         {
           element: '2. Title (optional)',
@@ -391,6 +391,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UCard },
   setup() {
@@ -403,9 +404,8 @@ Default.args = {
   text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!',
 };
 
-export const Basics: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCardItem, UCardTitle, UCardSubtitle, UCardText, URow, UCol },
-  template: `
+// Basic Story
+const basicTemplate = `
     <u-row>
       <u-col cols="12" md="4">
         <u-card
@@ -444,59 +444,27 @@ export const Basics: StoryFn<ComponentArgs> = () => ({
         <div class="text-center text-caption">Using Markup Only</div>
       </u-col>
     </u-row>
-  `,
+  `;
+
+/**
+ * There are three ways you can populate a u-card with content. The first one is by using props,
+ * the second one is by slots, and the third one is by manually using the u-card-* components.
+ */
+export const Basics: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCardItem, UCardTitle, UCardSubtitle, UCardText, URow, UCol },
+  template: basicTemplate,
 });
 
 Basics.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-row>
-    <u-col cols="12" md="4">
-      <u-card
-        subtitle="This is a card subtitle"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!"
-        title="This is a title"
-      ></u-card>
-      <div class="text-center text-caption">Using Props Only</div>
-    </u-col>
-
-    <u-col cols="12" md="4">
-      <u-card>
-        <template v-slot:title>
-          This is a title
-        </template>
-        <template v-slot:subtitle>
-          This is a card subtitle
-        </template>
-        <template v-slot:text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!
-        </template>
-      </u-card>
-      <div class="text-center text-caption">Using Slots Only</div>
-    </u-col>
-
-    <u-col cols="12" md="4">
-      <u-card>
-        <u-card-item>
-          <u-card-title>This is a title</u-card-title>
-          <u-card-subtitle>This is a card subtitle</u-card-subtitle>
-        </u-card-item>
-        <u-card-text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!
-        </u-card-text>
-      </u-card>
-      <div class="text-center text-caption">Using Markup Only</div>
-    </u-col>
-  </u-row>
-</template>`,
+      code: `<template>${basicTemplate}</template>`,
     },
   },
 };
 
-export const Combined: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCardText },
-  template: `
+// Combined Story
+const combinedTemplate = `
     <u-card
       class="mx-auto"
       prepend-icon="$vuetify"
@@ -510,67 +478,27 @@ export const Combined: StoryFn<ComponentArgs> = () => ({
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
       </u-card-text>
     </u-card>
-  `,
+  `;
+
+/***
+ * In some cases it is possible to combine the different options, like the example
+ * below where props, slots and markup have all been used.
+ */
+export const Combined: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCardText },
+  template: combinedTemplate,
 });
 
 Combined.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    prepend-icon="$vuetify"
-    subtitle="The #1 Vue UI Library"
-    width="400"
-  >
-    <template v-slot:title>
-      <span class="font-weight-black">Welcome to Vuetify</span>
-    </template>
-    <u-card-text class="bg-surface-light pt-4">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-    </u-card-text>
-  </u-card>
-</template>`,
+      code: `<template>${combinedTemplate}</template>`,
     },
   },
 };
 
-export const Variants: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UBtn, URow, UCol },
-  setup() {
-    const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'];
-    return { variants };
-  },
-  template: `
-    <u-row dense>
-      <u-col
-        v-for="(variant, i) in variants"
-        :key="i"
-        cols="12"
-        md="4"
-      >
-        <u-card
-          :variant="variant"
-          class="mx-auto"
-          color="surface-variant"
-          max-width="344"
-          subtitle="Greyhound divisely hello coldly fonwderfully"
-          title="Headline"
-        >
-          <template v-slot:actions>
-            <u-btn text="Button"></u-btn>
-          </template>
-        </u-card>
-        <div class="text-center text-caption">{{ variant }}</div>
-      </u-col>
-    </u-row>
-  `,
-});
-
-Variants.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Variant Story
+const variantsTemplate = `
   <u-row dense>
     <u-col
       v-for="(variant, i) in variants"
@@ -593,55 +521,36 @@ Variants.parameters = {
       <div class="text-center text-caption">{{ variant }}</div>
     </u-col>
   </u-row>
-</template>
+`;
+
+/**
+ * The variant prop gives you easy access to several different card styles.
+ * Available variants are: elevated(default), flat, tonal, outlined, text, and plain.
+ */
+export const Variants: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UBtn, URow, UCol },
+  setup() {
+    const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'];
+    return { variants };
+  },
+  template: variantsTemplate,
+});
+
+Variants.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${variantsTemplate}</template>
 
 <script setup>
-const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain']
+  const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain']
 </script>`,
     },
   },
 };
 
-export const Color: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCardItem, UCardActions, UBtn, URow, UCol, URadioGroup, URadio },
-  setup() {
-    const variants = ['elevated', 'flat', 'tonal', 'outlined'];
-    const color = ref('indigo');
-    return { variants, color };
-  },
-  template: `
-    <u-row justify="center">
-      <u-col cols="auto">
-        <u-radio-group v-model="color" hide-details inline>
-          <u-radio color="indigo" label="indigo" value="indigo"></u-radio>
-          <u-radio color="indigo-darken-3" label="indigo-darken-3" value="indigo-darken-3"></u-radio>
-          <u-radio color="primary" label="primary" value="primary"></u-radio>
-          <u-radio color="secondary" label="secondary" value="secondary"></u-radio>
-        </u-radio-group>
-      </u-col>
-
-      <u-col v-for="(variant, i) in variants" :key="i" cols="12" md="6">
-        <u-card :color="color" :variant="variant" class="mx-auto">
-          <u-card-item>
-            <div>
-              <div class="text-overline mb-1">{{ variant }}</div>
-              <div class="text-h6 mb-1">Headline</div>
-              <div class="text-caption">Greyhound divisely hello coldly fonwderfully</div>
-            </div>
-          </u-card-item>
-          <u-card-actions>
-            <u-btn>Button</u-btn>
-          </u-card-actions>
-        </u-card>
-      </u-col>
-    </u-row>
-  `,
-});
-
-Color.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Color Story
+const colorTemplate = `
   <u-row justify="center">
     <u-col cols="auto">
       <u-radio-group v-model="color" hide-details inline>
@@ -667,21 +576,39 @@ Color.parameters = {
       </u-card>
     </u-col>
   </u-row>
-</template>
+`;
+
+/**
+ * Cards can be colored by using any of the builtin colors and contextual names using the color prop.
+ */
+export const Color: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCardItem, UCardActions, UBtn, URow, UCol, URadioGroup, URadio },
+  setup() {
+    const variants = ['elevated', 'flat', 'tonal', 'outlined'];
+    const color = ref('indigo');
+    return { variants, color };
+  },
+  template: colorTemplate,
+});
+
+Color.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${colorTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const variants = ['elevated', 'flat', 'tonal', 'outlined']
-const color = ref('indigo')
+  const variants = ['elevated', 'flat', 'tonal', 'outlined']
+  const color = ref('indigo')
 </script>`,
     },
   },
 };
 
-export const Elevation: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCardItem, UCardTitle, UCardSubtitle, UCardText },
-  template: `
+// Elevation Story
+const elevationTemplate = `
     <u-card class="mx-auto my-8" elevation="16" max-width="344">
       <u-card-item>
         <u-card-title>Card title</u-card-title>
@@ -691,30 +618,26 @@ export const Elevation: StoryFn<ComponentArgs> = () => ({
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </u-card-text>
     </u-card>
-  `,
+  `;
+
+/**
+ * The elevation property provides up to 24 levels of shadow depth. By default, cards rest at 2dp.
+ */
+export const Elevation: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCardItem, UCardTitle, UCardSubtitle, UCardText },
+  template: elevationTemplate,
 });
 
 Elevation.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card class="mx-auto my-8" elevation="16" max-width="344">
-    <u-card-item>
-      <u-card-title>Card title</u-card-title>
-      <u-card-subtitle>Card subtitle secondary text</u-card-subtitle>
-    </u-card-item>
-    <u-card-text>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </u-card-text>
-  </u-card>
-</template>`,
+      code: `<template>${elevationTemplate}</template>`,
     },
   },
 };
 
-export const Hover: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCardItem, UCardTitle, UCardSubtitle, UCardText },
-  template: `
+// Hover Story
+const hoverTemplate = `
     <u-card class="mx-auto" max-width="344" hover>
       <u-card-item>
         <u-card-title>Card title</u-card-title>
@@ -724,30 +647,26 @@ export const Hover: StoryFn<ComponentArgs> = () => ({
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </u-card-text>
     </u-card>
-  `,
+  `;
+
+/**
+ * When using the hover prop, the cards will increase its elevation when the mouse is hovered over them.
+ */
+export const Hover: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCardItem, UCardTitle, UCardSubtitle, UCardText },
+  template: hoverTemplate,
 });
 
 Hover.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card class="mx-auto" max-width="344" hover>
-    <u-card-item>
-      <u-card-title>Card title</u-card-title>
-      <u-card-subtitle>Card subtitle secondary text</u-card-subtitle>
-    </u-card-item>
-    <u-card-text>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </u-card-text>
-  </u-card>
-</template>`,
+      code: `<template>${hoverTemplate}</template>`,
     },
   },
 };
 
-export const Href: StoryFn<ComponentArgs> = () => ({
-  components: { UCard },
-  template: `
+// Href Story
+const hrefTemplate = `
     <u-card
       append-icon="hugeicons:link-circle"
       class="mx-auto"
@@ -759,32 +678,26 @@ export const Href: StoryFn<ComponentArgs> = () => ({
       target="_blank"
       title="Vuetify on GitHub"
     ></u-card>
-  `,
+  `;
+
+/**
+ * The card becomes an anchor with the href prop.
+ */
+export const Href: StoryFn<ComponentArgs> = () => ({
+  components: { UCard },
+  template: hrefTemplate,
 });
 
 Href.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    append-icon="hugeicons:link-circle"
-    class="mx-auto"
-    href="https://github.com/vuetifyjs/vuetify/"
-    max-width="344"
-    prepend-icon="hugeicons:github"
-    rel="noopener"
-    subtitle="Check out the official repository"
-    target="_blank"
-    title="Vuetify on GitHub"
-  ></u-card>
-</template>`,
+      code: `<template>${hrefTemplate}</template>`,
     },
   },
 };
 
-export const Link: StoryFn<ComponentArgs> = () => ({
-  components: { UCard },
-  template: `
+// Link Story
+const linkTemplate = `
     <u-card
       class="mx-auto"
       max-width="344"
@@ -792,28 +705,26 @@ export const Link: StoryFn<ComponentArgs> = () => ({
       title="Hover and click me"
       link
     ></u-card>
-  `,
+  `;
+
+/**
+ * Add the link prop for the same style without adding an anchor.
+ */
+export const Link: StoryFn<ComponentArgs> = () => ({
+  components: { UCard },
+  template: linkTemplate,
 });
 
 Link.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    max-width="344"
-    subtitle="Same looks, no anchor"
-    title="Hover and click me"
-    link
-  ></u-card>
-</template>`,
+      code: `<template>${linkTemplate}</template>`,
     },
   },
 };
 
-export const Disabled: StoryFn<ComponentArgs> = () => ({
-  components: { UCard },
-  template: `
+// Disabled Story
+const disabledTemplate = `
     <u-card
       class="mx-auto"
       max-width="344"
@@ -822,29 +733,26 @@ export const Disabled: StoryFn<ComponentArgs> = () => ({
       disabled
       link
     ></u-card>
-  `,
+  `;
+
+/**
+ * The disabled prop can be added in order to prevent a user from interacting with the card.
+ */
+export const Disabled: StoryFn<ComponentArgs> = () => ({
+  components: { UCard },
+  template: disabledTemplate,
 });
 
 Disabled.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    max-width="344"
-    subtitle="The card stays disabled"
-    title="Disabled card"
-    disabled
-    link
-  ></u-card>
-</template>`,
+      code: `<template>${disabledTemplate}</template>`,
     },
   },
 };
 
-export const Image: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UBtn },
-  template: `
+// Image Story
+const imageTemplate = `
     <u-card
       class="mx-auto"
       color="surface-variant"
@@ -863,32 +771,20 @@ export const Image: StoryFn<ComponentArgs> = () => ({
         ></u-btn>
       </template>
     </u-card>
-  `,
+  `;
+
+/**
+ * Apply a specific background image to the Card.
+ */
+export const Image: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UBtn },
+  template: imageTemplate,
 });
 
 Image.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    color="surface-variant"
-    image="https://cdn.vuetifyjs.com/docs/images/cards/dark-beach.jpg"
-    max-width="340"
-    subtitle="Take a walk down the beach"
-    title="Evening sunset"
-  >
-    <template v-slot:actions>
-      <u-btn
-        append-icon="hugeicons:arrow-right-01"
-        color="red-lighten-2"
-        text="Book Activity"
-        variant="outlined"
-        block
-      ></u-btn>
-    </template>
-  </u-card>
-</template>`,
+      code: `<template>${imageTemplate}</template>`,
     },
   },
 };
