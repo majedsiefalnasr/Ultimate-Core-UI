@@ -18,27 +18,20 @@ import {
 } from '../index';
 
 interface ComponentArgs {
-  // Core props
   label?: string;
   items?: unknown[];
   modelValue?: unknown;
   multiple?: boolean;
-
-  // Item configuration
   itemTitle?: string;
   itemValue?: string;
   itemProps?: string | boolean;
   itemColor?: string;
   itemChildren?: string | boolean;
   itemType?: string;
-
-  // Display options
   chips?: boolean;
   closableChips?: boolean;
   hideSelected?: boolean;
   returnObject?: boolean;
-
-  // Search & filtering
   autoSelectFirst?: boolean | 'exact';
   alwaysFilter?: boolean;
   customFilter?: (value: unknown, query: string, item: unknown) => boolean;
@@ -46,20 +39,14 @@ interface ComponentArgs {
   filterKeys?: string | string[];
   filterMode?: 'every' | 'some' | 'union' | 'intersection';
   noFilter?: boolean;
-
-  // Menu
   menu?: boolean;
   menuIcon?: string;
   menuProps?: unknown;
   hideNoData?: boolean;
   noDataText?: string;
   openOnClear?: boolean;
-
-  // Tags/Chips
   delimiters?: string[];
   clearOnSelect?: boolean;
-
-  // Text field props
   active?: boolean;
   appendIcon?: string;
   autocomplete?: string;
@@ -124,11 +111,7 @@ interface ComponentArgs {
     | 'solo-inverted'
     | 'solo-filled';
   width?: string | number;
-
-  // List props
   listProps?: unknown;
-
-  // Story-specific
   content?: string;
 }
 
@@ -193,7 +176,6 @@ const meta: Meta<ComponentArgs> = {
     },
   },
   argTypes: {
-    // Core props
     label: {
       control: 'text',
       description: 'Sets the text of the v-label or v-field-label component.',
@@ -216,8 +198,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'Changes select to multiple. Accepts array for value.',
       table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
-
-    // Display options
     chips: {
       control: 'boolean',
       description: 'Changes display of selections to chips.',
@@ -239,8 +219,6 @@ const meta: Meta<ComponentArgs> = {
         'Changes the selection behavior to return the object directly rather than the value specified with item-value.',
       table: { type: { summary: 'boolean' }, defaultValue: { summary: 'true' } },
     },
-
-    // Search & filtering
     autoSelectFirst: {
       control: 'select',
       options: [false, true, 'exact'],
@@ -264,8 +242,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'Array of specific keys to filter on the item.',
       table: { type: { summary: 'string | string[]' }, defaultValue: { summary: "['title']" } },
     },
-
-    // Menu
     menu: {
       control: 'boolean',
       description: 'Renders with the menu open by default.',
@@ -291,8 +267,6 @@ const meta: Meta<ComponentArgs> = {
       description: "Open's the menu whenever the clear icon is clicked.",
       table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
-
-    // Tags/Chips
     delimiters: {
       control: 'object',
       description: 'Accepts an array of strings that will trigger a new tag when typing.',
@@ -303,8 +277,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'Reset the search text when a selection is made while using the multiple prop.',
       table: { type: { summary: 'boolean' }, defaultValue: { summary: 'true' } },
     },
-
-    // Common text field props
     variant: {
       control: 'select',
       options: [
@@ -371,6 +343,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UCombobox },
   setup() {
@@ -384,25 +357,8 @@ Default.args = {
   items: ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'],
 } as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<u-combobox
-  label="Combobox"
-  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-></u-combobox>`,
-    },
-  },
-};
-
-export const Density: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCol, UCombobox, UContainer, URow },
-  setup() {
-    const items = ['foo', 'bar', 'fizz', 'buzz'];
-    const value = ref('foo');
-    return { items, value };
-  },
-  template: `
+// Density story
+const densityTemplate = `
     <u-card>
       <u-container fluid>
         <u-row>
@@ -432,47 +388,26 @@ export const Density: StoryFn<ComponentArgs> = () => ({
         </u-row>
       </u-container>
     </u-card>
-  `,
+  `;
+
+/**
+ * You can use density prop to adjust vertical spacing within the component.
+ */
+export const Density: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCol, UCombobox, UContainer, URow },
+  setup() {
+    const items = ['foo', 'bar', 'fizz', 'buzz'];
+    const value = ref('foo');
+    return { items, value };
+  },
+  template: densityTemplate,
 });
 
 Density.parameters = {
   docs: {
-    description: {
-      story: 'You can use density prop to adjust vertical spacing within the component.',
-    },
     source: {
-      code: `<template>
-  <u-card>
-    <u-container fluid>
-      <u-row>
-        <u-col cols="12">
-          <u-combobox
-            v-model="value"
-            :items="items"
-            label="Default"
-          ></u-combobox>
-        </u-col>
-        <u-col cols="12">
-          <u-combobox
-            v-model="value"
-            :items="items"
-            density="comfortable"
-            label="Comfortable"
-          ></u-combobox>
-        </u-col>
-        <u-col cols="12">
-          <u-combobox
-            v-model="value"
-            :items="items"
-            density="compact"
-            label="Compact"
-          ></u-combobox>
-        </u-col>
-      </u-row>
-    </u-container>
-  </u-card>
-</template>
-
+      code: `
+<template>${densityTemplate}</template>
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -483,13 +418,8 @@ const value = ref('foo');
   },
 };
 
-export const Placeholder: StoryFn<ComponentArgs> = () => ({
-  components: { UCombobox, UContainer },
-  setup() {
-    const fruits = ['Apple', 'Grape', 'Banana'];
-    return { fruits };
-  },
-  template: `
+// Placeholder story
+const placeholderTemplate = `
     <u-container>
       <u-combobox
         :items="fruits"
@@ -499,28 +429,25 @@ export const Placeholder: StoryFn<ComponentArgs> = () => ({
         persistent-placeholder
       ></u-combobox>
     </u-container>
-  `,
+  `;
+
+/**
+ * Use the placeholder prop to give users additional context about the expected values in the combobox. The placeholder will only appear when no items are selected.
+ */
+export const Placeholder: StoryFn<ComponentArgs> = () => ({
+  components: { UCombobox, UContainer },
+  setup() {
+    const fruits = ['Apple', 'Grape', 'Banana'];
+    return { fruits };
+  },
+  template: placeholderTemplate,
 });
 
 Placeholder.parameters = {
   docs: {
-    description: {
-      story:
-        'Use the placeholder prop to give users additional context about the expected values in the combobox. The placeholder will only appear when no items are selected.',
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-combobox
-      :items="fruits"
-      label="Fruits"
-      placeholder="Ex: Apple, Grape"
-      multiple
-      persistent-placeholder
-    ></u-combobox>
-  </u-container>
-</template>
-
+      code: `
+<template>${placeholderTemplate}</template>
 <script setup lang="ts">
 const fruits = ['Apple', 'Grape', 'Banana'];
 </script>`,
@@ -528,14 +455,8 @@ const fruits = ['Apple', 'Grape', 'Banana'];
   },
 };
 
-export const MultipleCombobox: StoryFn<ComponentArgs> = () => ({
-  components: { UAvatar, UChip, UCol, UCombobox, UContainer, URow },
-  setup() {
-    const select = ref(['Vuetify', 'Programming']);
-    const items = ['Programming', 'Design', 'Vue', 'Vuetify'];
-    return { select, items };
-  },
-  template: `
+// Multiple Combobox story
+const multipleComboboxTemplate = `
     <u-container fluid>
       <u-row>
         <u-col cols="12">
@@ -593,75 +514,26 @@ export const MultipleCombobox: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * Previously known as tags - user is allowed to enter more than one value.
+ */
+export const MultipleCombobox: StoryFn<ComponentArgs> = () => ({
+  components: { UAvatar, UChip, UCol, UCombobox, UContainer, URow },
+  setup() {
+    const select = ref(['Vuetify', 'Programming']);
+    const items = ['Programming', 'Design', 'Vue', 'Vuetify'];
+    return { select, items };
+  },
+  template: multipleComboboxTemplate,
 });
 
 MultipleCombobox.parameters = {
   docs: {
-    description: {
-      story: 'Previously known as tags - user is allowed to enter more than one value.',
-    },
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-row>
-      <u-col cols="12">
-        <u-combobox
-          v-model="select"
-          :items="items"
-          label="Select a favorite activity or create a new one"
-          multiple
-        ></u-combobox>
-      </u-col>
-      <u-col cols="12">
-        <u-combobox
-          v-model="select"
-          :items="items"
-          label="I use chips"
-          chips
-          multiple
-        ></u-combobox>
-      </u-col>
-      <u-col cols="12">
-        <u-combobox
-          v-model="select"
-          :items="items"
-          label="I use a scoped slot"
-          multiple
-        >
-          <template v-slot:selection="data">
-            <u-chip
-              :key="JSON.stringify(data.item)"
-              v-bind="data.attrs"
-              :disabled="data.disabled"
-              :model-value="data.selected"
-              size="small"
-              @click:close="data.parent.selectItem(data.item)"
-            >
-              <template v-slot:prepend>
-                <u-avatar
-                  class="bg-accent text-uppercase"
-                  start
-                >{{ data.item.title.slice(0, 1) }}</u-avatar>
-              </template>
-              {{ data.item.title }}
-            </u-chip>
-          </template>
-        </u-combobox>
-      </u-col>
-      <u-col cols="12">
-        <u-combobox
-          v-model="select"
-          label="I'm readonly"
-          chips
-          multiple
-          readonly
-        ></u-combobox>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>
-
+      code: `
+<template>${multipleComboboxTemplate}</template>
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -672,22 +544,8 @@ const items = ['Programming', 'Design', 'Vue', 'Vuetify'];
   },
 };
 
-export const NoData: StoryFn<ComponentArgs> = () => ({
-  components: { UCombobox, UContainer, UListItem, UListItemTitle },
-  setup() {
-    const items = ['Gaming', 'Programming', 'Vue', 'Vuetify'];
-    const model = ref(['Vuetify']);
-    const search = ref(null);
-
-    watch(model, (val) => {
-      if (val.length > 5) {
-        nextTick(() => model.value.pop());
-      }
-    });
-
-    return { items, model, search };
-  },
-  template: `
+// No Data story
+const noDataTemplate = `
     <u-container fluid>
       <u-combobox
         v-model="model"
@@ -710,41 +568,34 @@ export const NoData: StoryFn<ComponentArgs> = () => ({
         </template>
       </u-combobox>
     </u-container>
-  `,
+  `;
+
+/**
+ * In this example we utilize a custom no-data slot to provide context to the user when searching / creating items.
+ */
+export const NoData: StoryFn<ComponentArgs> = () => ({
+  components: { UCombobox, UContainer, UListItem, UListItemTitle },
+  setup() {
+    const items = ['Gaming', 'Programming', 'Vue', 'Vuetify'];
+    const model = ref(['Vuetify']);
+    const search = ref(null);
+
+    watch(model, (val) => {
+      if (val.length > 5) {
+        nextTick(() => model.value.pop());
+      }
+    });
+
+    return { items, model, search };
+  },
+  template: noDataTemplate,
 });
 
 NoData.parameters = {
   docs: {
-    description: {
-      story:
-        'In this example we utilize a custom no-data slot to provide context to the user when searching / creating items.',
-    },
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-combobox
-      v-model="model"
-      v-model:search="search"
-      :hide-no-data="false"
-      :items="items"
-      hint="Maximum of 5 tags"
-      label="Add some tags"
-      chips
-      hide-selected
-      multiple
-      persistent-hint
-    >
-      <template v-slot:no-data>
-        <u-list-item>
-          <u-list-item-title>
-            No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
-          </u-list-item-title>
-        </u-list-item>
-      </template>
-    </u-combobox>
-  </u-container>
-</template>
-
+      code: `
+<template>${noDataTemplate}</template>
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue';
 
@@ -762,23 +613,8 @@ watch(model, (val) => {
   },
 };
 
-export const CustomChips: StoryFn<ComponentArgs> = () => ({
-  components: { UChip, UCombobox, UIcon },
-  setup() {
-    const items = [
-      { symbol: '🍎', name: 'Apple' },
-      { symbol: '🍌', name: 'Banana' },
-      { symbol: '🍇', name: 'Grapes' },
-      { symbol: '🍉', name: 'Watermelon' },
-      { symbol: '🍓', name: 'Strawberry' },
-      { symbol: '🥝', name: 'Kiwi' },
-    ];
-    const selected = ref(
-      ['Apple', 'Kiwi', 'Grapes'].map((v) => items.find((item) => item.name === v))
-    );
-    return { items, selected };
-  },
-  template: `
+// Custom Chips story
+const customChipsTemplate = `
     <u-combobox
       v-model="selected"
       :items="items"
@@ -799,42 +635,37 @@ export const CustomChips: StoryFn<ComponentArgs> = () => ({
         </u-chip>
       </template>
     </u-combobox>
-  `,
+  `;
+
+/**
+ * When working with custom chip slots, it's recommended to use v-bind="props" to pass event handler @mousedown.stop. This helps prevent unintentionally opening the dropdown.
+ */
+export const CustomChips: StoryFn<ComponentArgs> = () => ({
+  components: { UChip, UCombobox, UIcon },
+  setup() {
+    const items = [
+      { symbol: '🍎', name: 'Apple' },
+      { symbol: '🍌', name: 'Banana' },
+      { symbol: '🍇', name: 'Grapes' },
+      { symbol: '🍉', name: 'Watermelon' },
+      { symbol: '🍓', name: 'Strawberry' },
+      { symbol: '🥝', name: 'Kiwi' },
+    ];
+    const selected = ref(
+      ['Apple', 'Kiwi', 'Grapes'].map((v) => items.find((item) => item.name === v))
+    );
+    return { items, selected };
+  },
+  template: customChipsTemplate,
 });
 
 CustomChips.parameters = {
   docs: {
-    description: {
-      story:
-        'When working with custom chip slots, it\'s recommended to use v-bind="props" to pass event handler @mousedown.stop. This helps prevent unintentionally opening the dropdown.',
-    },
     source: {
-      code: `<template>
-  <u-combobox
-    v-model="selected"
-    :items="items"
-    item-title="name"
-    item-value="name"
-    chips
-    closable-chips
-    multiple
-  >
-    <template v-slot:chip="{ props, item }">
-      <u-chip v-bind="props" label>
-        <template v-slot:prepend>
-          <div class="me-1">{{ item.raw.symbol }}</div>
-        </template>
-        <template v-slot:close>
-          <u-icon icon="$close" size="14"></u-icon>
-        </template>
-      </u-chip>
-    </template>
-  </u-combobox>
-</template>
-
+      code: `
+<template>${customChipsTemplate}</template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ref, toRef, watch } from 'vue';
 
 const items = [
   { symbol: '🍎', name: 'Apple' },
@@ -852,6 +683,98 @@ const selected = ref(
   },
 };
 
+// Advanced Custom Options story
+const advancedCustomOptionsTemplate = `
+    <u-container fluid>
+      <u-combobox
+        v-model="model"
+        v-model:search="search"
+        :custom-filter="filter"
+        :items="items"
+        label="Search for an option"
+        variant="solo"
+        hide-selected
+        multiple
+      >
+        <template v-slot:selection="{ item, index }">
+          <u-chip
+            v-if="item === Object(item)"
+            :color="item.raw.color + '-lighten-3'"
+            :text="item.title"
+            size="small"
+            variant="flat"
+            closable
+            label
+            @click:close="removeSelection(index)"
+          ></u-chip>
+        </template>
+        <template v-slot:item="{ props, item }">
+          <template v-if="item.raw.header">
+            <u-list-item
+              v-if="alreadySelected"
+              title="Item is already selected"
+            ></u-list-item>
+            <u-list-item v-else-if="search">
+              <span class="mr-3">Create</span>
+              <u-chip
+                :color="colors[nonce] + '-lighten-3'"
+                size="small"
+                variant="flat"
+                label
+              >
+                {{ search }}
+              </u-chip>
+            </u-list-item>
+            <u-list-subheader v-else :title="item.title"></u-list-subheader>
+          </template>
+          <u-list-item v-else @click="props.onClick">
+            <u-text-field
+              v-if="editingItem === item.raw"
+              v-model="editingItem.title"
+              bg-color="transparent"
+              class="mr-3"
+              density="compact"
+              variant="plain"
+              autofocus
+              hide-details
+              @click.stop
+              @keydown.stop
+              @keyup.enter="edit(item.raw)"
+              @mousedown.stop
+            ></u-text-field>
+            <u-chip
+              v-else
+              :color="item.raw.color + '-lighten-3'"
+              :text="item.raw.title"
+              variant="flat"
+              label
+            ></u-chip>
+            <template v-slot:append>
+              <u-btn
+                :color="editingItem !== item.raw ? 'primary' : 'success'"
+                :icon="editingItem !== item.raw ? 'hugeicons:edit-03' : 'hugeicons:tick-02'"
+                size="small"
+                variant="text"
+                @click.stop.prevent="edit(item.raw)"
+              ></u-btn>
+              <u-btn
+                v-if="editingItem !== item.raw"
+                color="error"
+                icon="hugeicons:delete-02"
+                size="small"
+                variant="text"
+                @click.stop.prevent="removeItem(item.raw)"
+              ></u-btn>
+            </template>
+          </u-list-item>
+        </template>
+      </u-combobox>
+    </u-container>
+  `;
+
+/**
+ * The u-combobox improves upon the added functionality from u-select and u-autocomplete. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom filter algorithm, inline list editing and dynamic input items.
+ */
 export const AdvancedCustomOptions: StoryFn<ComponentArgs> = () => ({
   components: { UBtn, UChip, UCombobox, UContainer, UListItem, UListSubheader, UTextField },
   setup() {
@@ -949,191 +872,16 @@ export const AdvancedCustomOptions: StoryFn<ComponentArgs> = () => ({
       removeItem,
     };
   },
-  template: `
-    <u-container fluid>
-      <u-combobox
-        v-model="model"
-        v-model:search="search"
-        :custom-filter="filter"
-        :items="items"
-        label="Search for an option"
-        variant="solo"
-        hide-selected
-        multiple
-      >
-        <template v-slot:selection="{ item, index }">
-          <u-chip
-            v-if="item === Object(item)"
-            :color="item.raw.color + '-lighten-3'"
-            :text="item.title"
-            size="small"
-            variant="flat"
-            closable
-            label
-            @click:close="removeSelection(index)"
-          ></u-chip>
-        </template>
-        <template v-slot:item="{ props, item }">
-          <template v-if="item.raw.header">
-            <u-list-item
-              v-if="alreadySelected"
-              title="Item is already selected"
-            ></u-list-item>
-            <u-list-item v-else-if="search">
-              <span class="mr-3">Create</span>
-              <u-chip
-                :color="colors[nonce] + '-lighten-3'"
-                size="small"
-                variant="flat"
-                label
-              >
-                {{ search }}
-              </u-chip>
-            </u-list-item>
-            <u-list-subheader v-else :title="item.title"></u-list-subheader>
-          </template>
-          <u-list-item v-else @click="props.onClick">
-            <u-text-field
-              v-if="editingItem === item.raw"
-              v-model="editingItem.title"
-              bg-color="transparent"
-              class="mr-3"
-              density="compact"
-              variant="plain"
-              autofocus
-              hide-details
-              @click.stop
-              @keydown.stop
-              @keyup.enter="edit(item.raw)"
-              @mousedown.stop
-            ></u-text-field>
-            <u-chip
-              v-else
-              :color="item.raw.color + '-lighten-3'"
-              :text="item.raw.title"
-              variant="flat"
-              label
-            ></u-chip>
-            <template v-slot:append>
-              <u-btn
-                :color="editingItem !== item.raw ? 'primary' : 'success'"
-                :icon="editingItem !== item.raw ? 'hugeicons:edit-03' : 'hugeicons:tick-02'"
-                size="small"
-                variant="text"
-                @click.stop.prevent="edit(item.raw)"
-              ></u-btn>
-              <u-btn
-                v-if="editingItem !== item.raw"
-                color="error"
-                icon="hugeicons:delete-02"
-                size="small"
-                variant="text"
-                @click.stop.prevent="removeItem(item.raw)"
-              ></u-btn>
-            </template>
-          </u-list-item>
-        </template>
-      </u-combobox>
-    </u-container>
-  `,
+  template: advancedCustomOptionsTemplate,
 });
 
 AdvancedCustomOptions.parameters = {
   docs: {
-    description: {
-      story:
-        'The u-combobox improves upon the added functionality from u-select and u-autocomplete. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom filter algorithm, inline list editing and dynamic input items.',
-    },
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-combobox
-      v-model="model"
-      v-model:search="search"
-      :custom-filter="filter"
-      :items="items"
-      label="Search for an option"
-      variant="solo"
-      hide-selected
-      multiple
-    >
-      <template v-slot:selection="{ item, index }">
-        <u-chip
-          v-if="item === Object(item)"
-          :color="item.raw.color + '-lighten-3'"
-          :text="item.title"
-          size="small"
-          variant="flat"
-          closable
-          label
-          @click:close="removeSelection(index)"
-        ></u-chip>
-      </template>
-      <template v-slot:item="{ props, item }">
-        <template v-if="item.raw.header">
-          <u-list-item
-            v-if="alreadySelected"
-            title="Item is already selected"
-          ></u-list-item>
-          <u-list-item v-else-if="search">
-            <span class="mr-3">Create</span>
-            <u-chip
-              :color="colors[nonce] + '-lighten-3'"
-              size="small"
-              variant="flat"
-              label
-            >
-              {{ search }}
-            </u-chip>
-          </u-list-item>
-          <u-list-subheader v-else :title="item.title"></u-list-subheader>
-        </template>
-        <u-list-item v-else @click="props.onClick">
-          <u-text-field
-            v-if="editingItem === item.raw"
-            v-model="editingItem.title"
-            bg-color="transparent"
-            class="mr-3"
-            density="compact"
-            variant="plain"
-            autofocus
-            hide-details
-            @click.stop
-            @keydown.stop
-            @keyup.enter="edit(item.raw)"
-            @mousedown.stop
-          ></u-text-field>
-          <u-chip
-            v-else
-            :color="item.raw.color + '-lighten-3'"
-            :text="item.raw.title"
-            variant="flat"
-            label
-          ></u-chip>
-          <template v-slot:append>
-            <u-btn
-              :color="editingItem !== item.raw ? 'primary' : 'success'"
-              :icon="editingItem !== item.raw ? 'hugeicons:edit-03' : 'hugeicons:tick-02'"
-              size="small"
-              variant="text"
-              @click.stop.prevent="edit(item.raw)"
-            ></u-btn>
-            <u-btn
-              v-if="editingItem !== item.raw"
-              color="error"
-              icon="hugeicons:delete-02"
-              size="small"
-              variant="text"
-              @click.stop.prevent="removeItem(item.raw)"
-            ></u-btn>
-          </template>
-        </u-list-item>
-      </template>
-    </u-combobox>
-  </u-container>
-</template>
-
+      code: `
+<template>${advancedCustomOptionsTemplate}</template>
 <script setup lang="ts">
+import { ref, toRef, watch } from 'vue';
 
 type ComboboxItem = { title: string; color: string; header?: boolean };
 
