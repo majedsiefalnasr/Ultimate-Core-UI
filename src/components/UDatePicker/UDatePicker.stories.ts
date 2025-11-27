@@ -180,6 +180,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UDatePicker },
   setup() {
@@ -190,18 +191,24 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-export const Elevation: StoryFn<ComponentArgs> = (args) => ({
-  components: { UDatePicker, UContainer, URow },
-  setup() {
-    return { args };
-  },
-  template: `
+// Elevation Story
+const elevationTemplate = `
     <u-container>
       <u-row justify="space-around">
         <u-date-picker v-bind="args"></u-date-picker>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * The u-date-picker component supports elevation up to a maximum value of 24. For more information on elevations, visit the official Material Design elevations page.
+ */
+export const Elevation: StoryFn<ComponentArgs> = (args) => ({
+  components: { UDatePicker, UContainer, URow },
+  setup() {
+    return { args };
+  },
+  template: elevationTemplate,
 });
 
 Elevation.args = {
@@ -210,128 +217,113 @@ Elevation.args = {
 
 Elevation.parameters = {
   docs: {
-    description: {
-      story:
-        'The u-date-picker component supports elevation up to a maximum value of 24. For more information on elevations, visit the official Material Design elevations page.',
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-row justify="space-around">
-      <u-date-picker elevation="24"></u-date-picker>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${elevationTemplate}</template>`,
     },
   },
 };
 
+// Width Story
+const widthTemplate = `
+    <u-container>
+      <u-row justify="center">
+        <u-date-picker width="400"></u-date-picker>
+      </u-row>
+    </u-container>
+  `;
+
+/**
+ * You can specify the picker's width or make it full width.
+ */
 export const Width: StoryFn<ComponentArgs> = (args) => ({
   components: { UDatePicker, UContainer, URow },
   setup() {
     return { args };
   },
-  template: `
-    <u-container>
-      <u-row justify="center">
-        <u-date-picker v-bind="args"></u-date-picker>
-      </u-row>
-    </u-container>
-  `,
+  template: widthTemplate,
 });
-
-Width.args = {
-  width: 400,
-} as ComponentArgs;
 
 Width.parameters = {
   docs: {
-    description: {
-      story: "You can specify the picker's width or make it full width.",
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-row justify="center">
-      <u-date-picker width="400"></u-date-picker>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${widthTemplate}</template>`,
     },
   },
 };
 
+// Show Sibling Months Story
+const showSiblingMonthsTemplate = `
+    <u-container>
+      <u-row justify="space-around">
+        <u-date-picker show-adjacent-months></u-date-picker>
+      </u-row>
+    </u-container>
+  `;
+
+/**
+ * By default days from previous and next months are not visible. They can be displayed using the show-adjacent-months prop.
+ */
 export const ShowSiblingMonths: StoryFn<ComponentArgs> = (args) => ({
   components: { UDatePicker, UContainer, URow },
   setup() {
     return { args };
   },
-  template: `
-    <u-container>
-      <u-row justify="space-around">
-        <u-date-picker v-bind="args"></u-date-picker>
-      </u-row>
-    </u-container>
-  `,
+  template: showSiblingMonthsTemplate,
 });
-
-ShowSiblingMonths.args = {
-  showAdjacentMonths: true,
-} as ComponentArgs;
 
 ShowSiblingMonths.parameters = {
   docs: {
-    description: {
-      story:
-        'By default days from previous and next months are not visible. They can be displayed using the show-adjacent-months prop.',
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-row justify="space-around">
-      <u-date-picker show-adjacent-months></u-date-picker>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${showSiblingMonthsTemplate}</template>`,
     },
   },
 };
 
+// Colors Story
+const colorsTemplate = `
+    <u-container>
+      <u-row justify="space-around">
+        <u-date-picker color="primary"></u-date-picker>
+      </u-row>
+    </u-container>
+  `;
+
+/**
+ * Date picker colors can be set using the color props.
+ */
 export const Colors: StoryFn<ComponentArgs> = (args) => ({
   components: { UDatePicker, UContainer, URow },
   setup() {
     return { args };
   },
-  template: `
-    <u-container>
-      <u-row justify="space-around">
-        <u-date-picker v-bind="args"></u-date-picker>
-      </u-row>
-    </u-container>
-  `,
+  template: colorsTemplate,
 });
-
-Colors.args = {
-  color: 'primary',
-} as ComponentArgs;
 
 Colors.parameters = {
   docs: {
-    description: {
-      story: 'Date picker colors can be set using the color props.',
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-row justify="space-around">
-      <u-date-picker color="primary"></u-date-picker>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${colorsTemplate}</template>`,
     },
   },
 };
 
+// Allowed Dates Story
+const allowedDatesTemplate = `
+    <u-container>
+      <u-row justify="space-around">
+        <u-date-picker
+          v-model="date"
+          :allowed-dates="allowedDates"
+          max="2018-03-20"
+          min="2016-06-15"
+        ></u-date-picker>
+      </u-row>
+    </u-container>
+  `;
+
+/**
+ * Specify allowed dates using objects or functions. When using objects, accepts a date string in the format of YYYY-MM-DD. When using functions, accepts a date object as a parameter and should return a boolean.
+ */
 export const AllowedDates: StoryFn<ComponentArgs> = () => ({
   components: { UDatePicker, UContainer, URow },
   setup() {
@@ -344,40 +336,14 @@ export const AllowedDates: StoryFn<ComponentArgs> = () => ({
 
     return { date, allowedDates };
   },
-  template: `
-    <u-container>
-      <u-row justify="space-around">
-        <u-date-picker
-          v-model="date"
-          :allowed-dates="allowedDates"
-          max="2018-03-20"
-          min="2016-06-15"
-        ></u-date-picker>
-      </u-row>
-    </u-container>
-  `,
+  template: allowedDatesTemplate,
 });
 
 AllowedDates.parameters = {
   docs: {
-    description: {
-      story:
-        'Specify allowed dates using objects or functions. When using objects, accepts a date string in the format of YYYY-MM-DD. When using functions, accepts a date object as a parameter and should return a boolean.',
-    },
     source: {
-      code: `<template>
-  <u-container>
-    <u-row justify="space-around">
-      <u-date-picker
-        v-model="date"
-        :allowed-dates="allowedDates"
-        max="2018-03-20"
-        min="2016-06-15"
-      ></u-date-picker>
-    </u-row>
-  </u-container>
-</template>
-
+      code: `
+<template>${allowedDatesTemplate}</template>
 <script setup lang="ts">
 import { useDate } from 'vuetify';
 import { ref } from 'vue';
