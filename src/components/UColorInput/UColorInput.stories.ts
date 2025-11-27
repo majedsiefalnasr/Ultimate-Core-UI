@@ -3,7 +3,6 @@ import type { Meta, StoryFn } from '@storybook/vue3';
 import { UCol, UColorInput, UContainer, URow } from '../index';
 
 interface ComponentArgs {
-  // Core props
   label?: string;
   modelValue?: string | Record<string, unknown>;
   variant?:
@@ -14,15 +13,11 @@ interface ComponentArgs {
     | 'solo'
     | 'solo-inverted'
     | 'solo-filled';
-
-  // Color input specific
   colorPip?: boolean;
   hidePip?: boolean;
   pipLocation?: 'append' | 'prepend' | 'prepend-inner' | 'append-inner';
   pipVariant?: 'flat' | 'text' | 'elevated' | 'tonal' | 'outlined' | 'plain';
   pipIcon?: string;
-
-  // Color picker
   mode?: 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa';
   modes?: ('rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa')[];
   hideActions?: boolean;
@@ -35,34 +30,15 @@ interface ComponentArgs {
   canvasHeight?: string | number;
   dotSize?: string | number;
   width?: string | number;
-
-  // Eye dropper
   hideEyeDropper?: boolean;
   eyeDropperIcon?: string;
-
-  // Header
   hideHeader?: boolean;
   hideTitle?: boolean;
   title?: string;
-
-  // Text field props
   active?: boolean;
-  appendIcon?: string;
-  appendInnerIcon?: string;
-  prependIcon?: string;
-  prependInnerIcon?: string;
-  autocomplete?: string;
-  autofocus?: boolean;
-  baseColor?: string;
-  bgColor?: string;
   clearable?: boolean;
-  clearIcon?: string;
   color?: string;
-  counter?: string | number | boolean;
-  counterValue?: number | ((value: unknown) => number);
   density?: 'default' | 'comfortable' | 'compact';
-  direction?: 'horizontal' | 'vertical';
-  dirty?: boolean;
   disabled?: boolean;
   divided?: boolean;
   error?: boolean;
@@ -96,8 +72,6 @@ interface ComponentArgs {
   type?: string;
   validateOn?: string;
   validationValue?: unknown;
-
-  // Layout
   elevation?: string | number;
   landscape?: boolean;
   position?: 'fixed' | 'relative' | 'static' | 'absolute' | 'sticky';
@@ -106,8 +80,6 @@ interface ComponentArgs {
   tile?: boolean;
   border?: string | number | boolean;
   centerAffix?: boolean;
-
-  // Story-specific
   content?: string;
 }
 
@@ -170,7 +142,6 @@ const meta: Meta<ComponentArgs> = {
     },
   },
   argTypes: {
-    // Core props
     label: {
       control: 'text',
       description: 'Sets the text of the v-label or v-field-label component.',
@@ -198,8 +169,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'Applies a distinct style to the component.',
       table: { type: { summary: 'string' }, defaultValue: { summary: 'filled' } },
     },
-
-    // Color input specific
     colorPip: {
       control: 'boolean',
       description: 'Synchronize pip color with current value',
@@ -227,8 +196,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'The icon used for pip',
       table: { type: { summary: 'string' }, defaultValue: { summary: '$color' } },
     },
-
-    // Color picker
     mode: {
       control: 'select',
       options: ['rgb', 'rgba', 'hsl', 'hsla', 'hex', 'hexa'],
@@ -275,8 +242,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'Sets the width of the color picker.',
       table: { type: { summary: 'string | number' }, defaultValue: { summary: 'undefined' } },
     },
-
-    // Eye dropper
     hideEyeDropper: {
       control: 'boolean',
       description: 'Hides eyedropper icon.',
@@ -287,8 +252,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'Icon used to trigger EyeDropper API.',
       table: { type: { summary: 'string' }, defaultValue: { summary: '$eyeDropper' } },
     },
-
-    // Header
     hideHeader: {
       control: 'boolean',
       description: 'Hide the picker header.',
@@ -304,8 +267,6 @@ const meta: Meta<ComponentArgs> = {
       description: 'Specify a title text for the component.',
       table: { type: { summary: 'string' }, defaultValue: { summary: 'undefined' } },
     },
-
-    // Common text field props
     active: {
       control: 'boolean',
       description:
@@ -365,6 +326,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UColorInput },
   setup() {
@@ -380,62 +342,13 @@ Default.args = {
 Default.parameters = {
   docs: {
     source: {
-      code: `<u-color-input label="Color input"></u-color-input>`,
+      code: `<template><u-color-input label="Color input"></u-color-input></template>`,
     },
   },
 };
 
-export const PipLocation: StoryFn<ComponentArgs> = () => ({
-  components: { UColorInput, UContainer, URow, UCol },
-  setup() {
-    return {};
-  },
-  template: `
-    <u-container>
-      <u-row>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-          ></u-color-input>
-        </u-col>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            pip-location="prepend-inner"
-          ></u-color-input>
-        </u-col>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            pip-location="append-inner"
-          ></u-color-input>
-        </u-col>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            pip-location="append"
-          ></u-color-input>
-        </u-col>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            label="I need no icon"
-            hide-pip
-          ></u-color-input>
-        </u-col>
-      </u-row>
-    </u-container>
-  `,
-});
-
-PipLocation.parameters = {
-  docs: {
-    description: {
-      story:
-        'You can move the pip icon within the input by utilizing the pip-location or hide it entirely with hide-pip.',
-    },
-    source: {
-      code: `<template>
+// Pip location story
+const pipLocationTemplate = `
   <u-container>
     <u-row>
       <u-col cols="12" sm="6">
@@ -470,61 +383,30 @@ PipLocation.parameters = {
       </u-col>
     </u-row>
   </u-container>
-</template>`,
-    },
-  },
-};
+  `;
 
-export const ColorPip: StoryFn<ComponentArgs> = () => ({
+/**
+ * You can move the pip icon within the input by utilizing the pip-location or hide
+ * it entirely with hide-pip.
+ */
+export const PipLocation: StoryFn<ComponentArgs> = () => ({
   components: { UColorInput, UContainer, URow, UCol },
   setup() {
     return {};
   },
-  template: `
-    <u-container>
-      <u-row>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            label="Colored Pip"
-            model-value="#7C0799"
-            color-pip
-            hide-actions
-          ></u-color-input>
-        </u-col>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            label="Colored Pip (tonal)"
-            model-value="#1493DB"
-            pip-variant="tonal"
-            color-pip
-            hide-actions
-          ></u-color-input>
-        </u-col>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            label="Colored Pip (flat)"
-            model-value="#74DB14"
-            pip-variant="flat"
-            color-pip
-            hide-actions
-          ></u-color-input>
-        </u-col>
-      </u-row>
-    </u-container>
-  `,
+  template: pipLocationTemplate,
 });
 
-ColorPip.parameters = {
+PipLocation.parameters = {
   docs: {
-    description: {
-      story:
-        'The color-pip is a boolean that determines whether the pip icon color matches the selected color.',
-    },
     source: {
-      code: `<template>
+      code: `<template>${pipLocationTemplate}</template>`,
+    },
+  },
+};
+
+// Color pip story
+const colorPipTemplate = `
   <u-container>
     <u-row>
       <u-col cols="12" sm="6">
@@ -558,43 +440,30 @@ ColorPip.parameters = {
       </u-col>
     </u-row>
   </u-container>
-</template>`,
-    },
-  },
-};
+  `;
 
-export const PipVariant: StoryFn<ComponentArgs> = () => ({
+/**
+ *The color-pip is a boolean that determines whether the pip icon color matches 
+ the selected color.
+ */
+export const ColorPip: StoryFn<ComponentArgs> = () => ({
   components: { UColorInput, UContainer, URow, UCol },
   setup() {
     return {};
   },
-  template: `
-    <u-container>
-      <u-row>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            pip-variant="tonal"
-          ></u-color-input>
-        </u-col>
-        <u-col cols="12" sm="6">
-          <u-color-input
-            hide-details="auto"
-            pip-variant="outlined"
-          ></u-color-input>
-        </u-col>
-      </u-row>
-    </u-container>
-  `,
+  template: colorPipTemplate,
 });
 
-PipVariant.parameters = {
+ColorPip.parameters = {
   docs: {
-    description: {
-      story: 'The pip-variant lets you further customize the pip icon.',
-    },
     source: {
-      code: `<template>
+      code: `<template>${colorPipTemplate}</template>`,
+    },
+  },
+};
+
+// Pip variant story
+const pipVariantTemplate = `
   <u-container>
     <u-row>
       <u-col cols="12" sm="6">
@@ -611,7 +480,23 @@ PipVariant.parameters = {
       </u-col>
     </u-row>
   </u-container>
-</template>`,
+  `;
+
+/**
+ * The pip-variant lets you further customize the pip icon.
+ */
+export const PipVariant: StoryFn<ComponentArgs> = () => ({
+  components: { UColorInput, UContainer, URow, UCol },
+  setup() {
+    return {};
+  },
+  template: pipVariantTemplate,
+});
+
+PipVariant.parameters = {
+  docs: {
+    source: {
+      code: `<template>${pipVariantTemplate}</template>`,
     },
   },
 };
