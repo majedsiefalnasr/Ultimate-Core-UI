@@ -51,7 +51,14 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-empty-state${attrsString}></u-empty-state>`;
+          return `<template>
+  <u-empty-state${attrsString}
+    headline="Whoops, 404"
+    title="Page not found"
+    text="The page you were looking for does not exist"
+    image="https://vuetifyjs.b-cdn.net/docs/images/logos/v.png"
+  ></u-empty-state>
+</template>`;
         },
       },
     },
@@ -186,6 +193,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UEmptyState },
   setup() {
@@ -201,22 +209,19 @@ Default.args = {
   image: 'https://vuetifyjs.b-cdn.net/docs/images/logos/v.png',
 } as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-empty-state
-    headline="Whoops, 404"
-    title="Page not found"
-    text="The page you were looking for does not exist"
-    image="https://vuetifyjs.b-cdn.net/docs/images/logos/v.png"
-  ></u-empty-state>
-</template>`,
-    },
-  },
-};
-
 // Content Story
+const contentTemplate = `
+    <u-empty-state
+      headline="No Messages Yet"
+      text="You haven't received any messages yet. When you do, they'll appear here."
+      title="Check back later."
+      @click:action="onClickAction"
+    ></u-empty-state>
+  `;
+
+/**
+ * There are three main properties for configuring text content, title, subtitle, and text.
+ */
 export const Content: StoryFn<ComponentArgs> = () => ({
   components: { UEmptyState },
   setup() {
@@ -225,32 +230,13 @@ export const Content: StoryFn<ComponentArgs> = () => ({
     };
     return { onClickAction };
   },
-  template: `
-    <u-empty-state
-      headline="No Messages Yet"
-      text="You haven't received any messages yet. When you do, they'll appear here."
-      title="Check back later."
-      @click:action="onClickAction"
-    ></u-empty-state>
-  `,
+  template: contentTemplate,
 });
 
 Content.parameters = {
   docs: {
-    description: {
-      story:
-        'There are three main properties for configuring text content, title, subtitle, and text.',
-    },
     source: {
-      code: `<template>
-  <u-empty-state
-    headline="No Messages Yet"
-    text="You haven't received any messages yet. When you do, they'll appear here."
-    title="Check back later."
-    @click:action="onClickAction"
-  ></u-empty-state>
-</template>
-
+      code: `<template>${contentTemplate}</template>
 <script setup lang="ts">
 function onClickAction() {
   alert('You clicked the action button');
@@ -261,35 +247,44 @@ function onClickAction() {
 };
 
 // Media Story
-export const Media: StoryFn<ComponentArgs> = () => ({
-  components: { UEmptyState },
-  template: `
+const mediaTemplate = `
     <u-empty-state
       icon="hugeicons:search-01"
       text="Try adjusting your search terms or filters. Sometimes less specific terms or broader queries can help you find what you're looking for."
       title="We couldn't find a match."
     ></u-empty-state>
-  `,
+  `;
+
+/**
+ * Add an icon or image to the empty state to help convey its purpose.
+ */
+export const Media: StoryFn<ComponentArgs> = () => ({
+  components: { UEmptyState },
+  template: mediaTemplate,
 });
 
 Media.parameters = {
   docs: {
-    description: {
-      story: 'Add an icon or image to the empty state to help convey its purpose.',
-    },
     source: {
-      code: `<template>
-  <u-empty-state
-    icon="hugeicons:search-01"
-    text="Try adjusting your search terms or filters. Sometimes less specific terms or broader queries can help you find what you're looking for."
-    title="We couldn't find a match."
-  ></u-empty-state>
-</template>`,
+      code: `<template>${mediaTemplate}</template>`,
     },
   },
 };
 
 // Actions Story
+const actionsTemplate = `
+    <u-empty-state
+      action-text="Retry Request"
+      image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/connection.svg"
+      text="There might be a problem with your connection or our servers. Please check your internet connection or try again later. We appreciate your patience."
+      title="Something Went Wrong"
+      @click:action="onClickAction"
+    ></u-empty-state>
+  `;
+
+/**
+ * Add a button to the empty state to help users take action.
+ */
 export const Actions: StoryFn<ComponentArgs> = () => ({
   components: { UEmptyState },
   setup() {
@@ -298,33 +293,13 @@ export const Actions: StoryFn<ComponentArgs> = () => ({
     };
     return { onClickAction };
   },
-  template: `
-    <u-empty-state
-      action-text="Retry Request"
-      image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/connection.svg"
-      text="There might be a problem with your connection or our servers. Please check your internet connection or try again later. We appreciate your patience."
-      title="Something Went Wrong"
-      @click:action="onClickAction"
-    ></u-empty-state>
-  `,
+  template: actionsTemplate,
 });
 
 Actions.parameters = {
   docs: {
-    description: {
-      story: 'Add a button to the empty state to help users take action.',
-    },
     source: {
-      code: `<template>
-  <u-empty-state
-    action-text="Retry Request"
-    image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/connection.svg"
-    text="There might be a problem with your connection or our servers. Please check your internet connection or try again later. We appreciate your patience."
-    title="Something Went Wrong"
-    @click:action="onClickAction"
-  ></u-empty-state>
-</template>
-
+      code: `<template>${actionsTemplate}</template>
 <script setup lang="ts">
 function onClickAction() {
   alert('You clicked the action button');
