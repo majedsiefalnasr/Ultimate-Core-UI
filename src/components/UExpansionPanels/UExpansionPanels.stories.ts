@@ -70,14 +70,15 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `
-<u-expansion-panels${attrsString}>
-  <u-expansion-panel
-    title="Title"
-    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-  >
-  </u-expansion-panel>
-</u-expansion-panels>`;
+          return `<template>
+  <u-expansion-panels${attrsString}>
+    <u-expansion-panel
+      title="Title"
+      text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
+    >
+    </u-expansion-panel>
+  </u-expansion-panels>
+</template>`;
         },
       },
     },
@@ -258,6 +259,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UExpansionPanels, UExpansionPanel },
   setup() {
@@ -276,26 +278,8 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-expansion-panels>
-    <u-expansion-panel
-      title="Title"
-      text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-    >
-    </u-expansion-panel>
-  </u-expansion-panels>
-</template>`,
-    },
-  },
-};
-
 // Variant Story
-export const Variant: StoryFn<ComponentArgs> = () => ({
-  components: { UExpansionPanel, UExpansionPanels },
-  template: `
+const variantTemplate = `
     <div>
       <div class="text-subtitle-2 mb-2">Default</div>
       <u-expansion-panels>
@@ -340,81 +324,26 @@ export const Variant: StoryFn<ComponentArgs> = () => ({
         ></u-expansion-panel>
       </u-expansion-panels>
     </div>
-  `,
+  `;
+
+/**
+ * There are four different variants of the expansion-panel. Accordion expansion-panels have no margins around the currently active panel. Inset expansion-panels become smaller when activated, while popout expansion-panels become larger.
+ */
+export const Variant: StoryFn<ComponentArgs> = () => ({
+  components: { UExpansionPanel, UExpansionPanels },
+  template: variantTemplate,
 });
 
 Variant.parameters = {
   docs: {
-    description: {
-      story:
-        'There are four different variants of the expansion-panel. Accordion expansion-panels have no margins around the currently active panel. Inset expansion-panels become smaller when activated, while poput expansion-panels become larger.',
-    },
     source: {
-      code: `<template>
-  <div>
-    <div class="text-subtitle-2 mb-2">Default</div>
-    <u-expansion-panels>
-      <u-expansion-panel
-        v-for="i in 3"
-        :key="i"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        title="Item"
-      ></u-expansion-panel>
-    </u-expansion-panels>
-
-    <div class="text-subtitle-2 mt-4 mb-2">Accordion</div>
-
-    <u-expansion-panels variant="accordion">
-      <u-expansion-panel
-        v-for="i in 3"
-        :key="i"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        title="Item"
-      ></u-expansion-panel>
-    </u-expansion-panels>
-
-    <div class="text-subtitle-2 mt-4 mb-2">Inset</div>
-
-    <u-expansion-panels class="my-4" variant="inset">
-      <u-expansion-panel
-        v-for="i in 3"
-        :key="i"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        title="Item"
-      ></u-expansion-panel>
-    </u-expansion-panels>
-
-    <div class="text-subtitle-2 mt-4 mb-2">Popout</div>
-
-    <u-expansion-panels class="my-4" variant="popout">
-      <u-expansion-panel
-        v-for="i in 3"
-        :key="i"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        title="Item"
-      ></u-expansion-panel>
-    </u-expansion-panels>
-  </div>
-</template>`,
+      code: `<template>${variantTemplate}</template>`,
     },
   },
 };
 
 // Disabled Story
-export const Disabled: StoryFn<ComponentArgs> = () => ({
-  components: {
-    UExpansionPanels,
-    UExpansionPanel,
-    UExpansionPanelTitle,
-    UExpansionPanelText,
-    UCheckbox,
-  },
-  setup() {
-    const panel = ref([0, 1]);
-    const disabled = ref(false);
-    return { panel, disabled };
-  },
-  template: `
+const disabledTemplate = `
     <div>
       <div class="d-flex">
         <u-checkbox
@@ -451,65 +380,12 @@ export const Disabled: StoryFn<ComponentArgs> = () => ({
         </u-expansion-panel>
       </u-expansion-panels>
     </div>
-  `,
-});
+  `;
 
-Disabled.parameters = {
-  docs: {
-    description: {
-      story: 'Both the expansion-panel and its content can be disabled using the disabled prop.',
-    },
-    source: {
-      code: `<template>
-  <div>
-    <div class="d-flex">
-      <u-checkbox
-        v-model="disabled"
-        label="Disabled"
-      ></u-checkbox>
-    </div>
-
-    <u-expansion-panels
-      v-model="panel"
-      :disabled="disabled"
-      multiple
-    >
-      <u-expansion-panel>
-        <u-expansion-panel-title>Panel 1</u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Some content
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-
-      <u-expansion-panel>
-        <u-expansion-panel-title>Panel 2</u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Some content
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-
-      <u-expansion-panel>
-        <u-expansion-panel-title>Panel 3</u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Some content
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-    </u-expansion-panels>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const panel = ref([0, 1]);
-const disabled = ref(false);
-</script>`,
-    },
-  },
-};
-
-// Readonly Story
-export const Readonly: StoryFn<ComponentArgs> = () => ({
+/**
+ * Both the expansion-panel and its content can be disabled using the disabled prop.
+ */
+export const Disabled: StoryFn<ComponentArgs> = () => ({
   components: {
     UExpansionPanels,
     UExpansionPanel,
@@ -519,10 +395,30 @@ export const Readonly: StoryFn<ComponentArgs> = () => ({
   },
   setup() {
     const panel = ref([0, 1]);
-    const readonly = ref(false);
-    return { panel, readonly };
+    const disabled = ref(false);
+    return { panel, disabled };
   },
-  template: `
+  template: disabledTemplate,
+});
+
+Disabled.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${disabledTemplate}</template>
+
+<script setup lang="ts">
+  import { ref } from 'vue';
+
+  const panel = ref([0, 1]);
+  const disabled = ref(false);
+</script>`,
+    },
+  },
+};
+
+// Readonly Story
+const readonlyTemplate = `
     <div>
       <div class="d-flex">
         <u-checkbox
@@ -559,93 +455,45 @@ export const Readonly: StoryFn<ComponentArgs> = () => ({
         </u-expansion-panel>
       </u-expansion-panels>
     </div>
-  `,
+  `;
+
+/**
+ * readonly prop does the same thing as disabled, but it doesn't touch styles.
+ */
+export const Readonly: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UExpansionPanels,
+    UExpansionPanel,
+    UExpansionPanelTitle,
+    UExpansionPanelText,
+    UCheckbox,
+  },
+  setup() {
+    const panel = ref([0, 1]);
+    const readonly = ref(false);
+    return { panel, readonly };
+  },
+  template: readonlyTemplate,
 });
 
 Readonly.parameters = {
   docs: {
-    description: {
-      story: "readonly prop does the same thing as disabled, but it doesn't touch styles.",
-    },
     source: {
-      code: `<template>
-  <div>
-    <div class="d-flex">
-      <u-checkbox
-        v-model="readonly"
-        label="Readonly"
-      ></u-checkbox>
-    </div>
-
-    <u-expansion-panels
-      v-model="panel"
-      :readonly="readonly"
-      multiple
-    >
-      <u-expansion-panel>
-        <u-expansion-panel-title>Panel 1</u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Some content
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-
-      <u-expansion-panel>
-        <u-expansion-panel-title>Panel 2</u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Some content
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-
-      <u-expansion-panel>
-        <u-expansion-panel-title>Panel 3</u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Some content
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-    </u-expansion-panels>
-  </div>
-</template>
+      code: `
+<template>${readonlyTemplate}</template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
-const panel = ref([0, 1]);
-const readonly = ref(false);
+  const panel = ref([0, 1]);
+  const readonly = ref(false);
 </script>`,
     },
   },
 };
 
 // Advanced Story
-export const Advanced: StoryFn<ComponentArgs> = () => ({
-  components: {
-    UExpansionPanels,
-    UExpansionPanel,
-    UExpansionPanelTitle,
-    UExpansionPanelText,
-    UFadeTransition,
-    URow,
-    UCol,
-    UTextField,
-    USelect,
-    USpacer,
-    UDivider,
-    UCardActions,
-    UBtn,
-  },
-  setup() {
-    const locations = ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'];
-
-    const trip = ref({
-      name: '',
-      location: null as string | null,
-      start: null as string | null,
-      end: null as string | null,
-    });
-
-    return { locations, trip };
-  },
-  template: `
+const advancedTemplate = `
     <u-expansion-panels>
       <u-expansion-panel>
         <u-expansion-panel-title>
@@ -811,210 +659,66 @@ export const Advanced: StoryFn<ComponentArgs> = () => ({
         </u-expansion-panel-text>
       </u-expansion-panel>
     </u-expansion-panels>
-  `,
+  `;
+
+/**
+ * The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the u-expansion-panel-title component to react to the state of being open or closed by fading content in and out.
+ */
+export const Advanced: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UExpansionPanels,
+    UExpansionPanel,
+    UExpansionPanelTitle,
+    UExpansionPanelText,
+    UFadeTransition,
+    URow,
+    UCol,
+    UTextField,
+    USelect,
+    USpacer,
+    UDivider,
+    UCardActions,
+    UBtn,
+  },
+  setup() {
+    const locations = ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'];
+
+    const trip = ref({
+      name: '',
+      location: null as string | null,
+      start: null as string | null,
+      end: null as string | null,
+    });
+
+    return { locations, trip };
+  },
+  template: advancedTemplate,
 });
 
 Advanced.parameters = {
   docs: {
-    description: {
-      story:
-        'The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the u-expansion-panel-title component to react to the state of being open or closed by fading content in and out.',
-    },
     source: {
-      code: `<template>
-  <u-expansion-panels>
-    <u-expansion-panel>
-      <u-expansion-panel-title>
-        <template #default="{ expanded }">
-          <u-row no-gutters>
-            <u-col class="d-flex justify-start" cols="4">
-              Trip name
-            </u-col>
-            <u-col
-              class="text-grey"
-              cols="8"
-            >
-              <u-fade-transition leave-absolute>
-                <span
-                  v-if="expanded"
-                  key="0"
-                >
-                  Enter a name for the trip
-                </span>
-                <span
-                  v-else
-                  key="1"
-                >
-                  {{ trip.name }}
-                </span>
-              </u-fade-transition>
-            </u-col>
-          </u-row>
-        </template>
-      </u-expansion-panel-title>
-      <u-expansion-panel-text>
-        <u-text-field
-          v-model="trip.name"
-          placeholder="Caribbean Cruise"
-          hide-details
-        ></u-text-field>
-      </u-expansion-panel-text>
-    </u-expansion-panel>
-
-    <u-expansion-panel>
-      <u-expansion-panel-title>
-        <template #default="{ expanded }">
-          <u-row no-gutters>
-            <u-col class="d-flex justify-start" cols="4">
-              Location
-            </u-col>
-            <u-col
-              class="text--secondary"
-              cols="8"
-            >
-              <u-fade-transition leave-absolute>
-                <span
-                  v-if="expanded"
-                  key="0"
-                >
-                  Select trip destination
-                </span>
-                <span
-                  v-else
-                  key="1"
-                >
-                  {{ trip.location }}
-                </span>
-              </u-fade-transition>
-            </u-col>
-          </u-row>
-        </template>
-      </u-expansion-panel-title>
-      <u-expansion-panel-text>
-        <u-row no-gutters>
-          <u-spacer></u-spacer>
-          <u-col cols="5">
-            <u-select
-              v-model="trip.location"
-              :items="locations"
-              variant="solo"
-              chips
-              flat
-            ></u-select>
-          </u-col>
-
-          <u-divider
-            class="mx-4"
-            vertical
-          ></u-divider>
-
-          <u-col cols="3">
-            Select your destination of choice
-            <br>
-            <a href="#">Learn more</a>
-          </u-col>
-        </u-row>
-
-        <u-card-actions>
-          <u-spacer></u-spacer>
-          <u-btn
-            color="secondary"
-            variant="text"
-          >
-            Cancel
-          </u-btn>
-          <u-btn
-            color="primary"
-            variant="text"
-          >
-            Save
-          </u-btn>
-        </u-card-actions>
-      </u-expansion-panel-text>
-    </u-expansion-panel>
-
-    <u-expansion-panel>
-      <u-expansion-panel-title>
-        <template #default="{ expanded }">
-          <u-row no-gutters>
-            <u-col class="d-flex justify-start" cols="4">
-              Start and end dates
-            </u-col>
-            <u-col
-              class="text--secondary"
-              cols="8"
-            >
-              <u-fade-transition leave-absolute>
-                <span v-if="expanded">When do you want to travel?</span>
-                <u-row
-                  v-else
-                  style="width: 100%"
-                  no-gutters
-                >
-                  <u-col class="d-flex justify-start" cols="6">
-                    Start date: {{ trip.start || 'Not set' }}
-                  </u-col>
-                  <u-col class="d-flex justify-start" cols="6">
-                    End date: {{ trip.end || 'Not set' }}
-                  </u-col>
-                </u-row>
-              </u-fade-transition>
-            </u-col>
-          </u-row>
-        </template>
-      </u-expansion-panel-title>
-      <u-expansion-panel-text>
-        <u-row
-          justify="space-around"
-          no-gutters
-        >
-          <u-col cols="3">
-            <u-text-field
-              v-model="trip.start"
-              label="Start date"
-              type="date"
-            ></u-text-field>
-          </u-col>
-
-          <u-col cols="3">
-            <u-text-field
-              v-model="trip.end"
-              label="End date"
-              type="date"
-            ></u-text-field>
-          </u-col>
-        </u-row>
-      </u-expansion-panel-text>
-    </u-expansion-panel>
-  </u-expansion-panels>
-</template>
+      code: `
+<template>${advancedTemplate}</template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
-const locations = ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'];
+  const locations = ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'];
 
-const trip = ref({
-  name: '',
-  location: null,
-  start: null,
-  end: null,
-});
+  const trip = ref({
+    name: '',
+    location: null,
+    start: null,
+    end: null,
+  });
 </script>`,
     },
   },
 };
 
 // Custom Icon Story
-export const CustomIcon: StoryFn<ComponentArgs> = () => ({
-  components: {
-    UExpansionPanels,
-    UExpansionPanel,
-    UExpansionPanelTitle,
-    UExpansionPanelText,
-    UIcon,
-  },
-  template: `
+const customIconTemplate = `
     <div>
       <u-expansion-panels class="mb-6">
         <u-expansion-panel
@@ -1064,66 +768,26 @@ export const CustomIcon: StoryFn<ComponentArgs> = () => ({
         </u-expansion-panel>
       </u-expansion-panels>
     </div>
-  `,
+  `;
+
+/**
+ * Expand action icon can be customized with expand-icon prop or the actions slot.
+ */
+export const CustomIcon: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UExpansionPanels,
+    UExpansionPanel,
+    UExpansionPanelTitle,
+    UExpansionPanelText,
+    UIcon,
+  },
+  template: customIconTemplate,
 });
 
 CustomIcon.parameters = {
   docs: {
-    description: {
-      story: 'Expand action icon can be customized with expand-icon prop or the actions slot.',
-    },
     source: {
-      code: `<template>
-  <div>
-    <u-expansion-panels class="mb-6">
-      <u-expansion-panel
-        v-for="i in 3"
-        :key="i"
-      >
-        <u-expansion-panel-title expand-icon="hugeicons:arrow-down-01">
-          Item
-        </u-expansion-panel-title>
-        <u-expansion-panel-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</u-expansion-panel-text>
-      </u-expansion-panel>
-    </u-expansion-panels>
-
-    <u-expansion-panels>
-      <u-expansion-panel>
-        <u-expansion-panel-title collapse-icon="hugeicons:minus-sign" expand-icon="hugeicons:add-01">
-          Item
-        </u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-
-      <u-expansion-panel>
-        <u-expansion-panel-title>
-          Item
-          <template #actions="{ expanded }">
-            <u-icon :color="!expanded ? 'teal' : ''" :icon="expanded ? 'hugeicons:pencil-edit-02' : 'hugeicons:tick-01'"></u-icon>
-          </template>
-        </u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-
-      <u-expansion-panel>
-        <u-expansion-panel-title disable-icon-rotate>
-          Item
-          <template #actions>
-            <u-icon color="error" icon="hugeicons:alert-02">
-            </u-icon>
-          </template>
-        </u-expansion-panel-title>
-        <u-expansion-panel-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </u-expansion-panel-text>
-      </u-expansion-panel>
-    </u-expansion-panels>
-  </div>
-</template>`,
+      code: `<template>${customIconTemplate}</template>`,
     },
   },
 };
