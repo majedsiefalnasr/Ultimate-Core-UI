@@ -202,12 +202,13 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UFab },
   setup() {
     return { args };
   },
-  template: '<u-fab v-bind="args" icon="$vuetify"></u-fab>',
+  template: '<u-fab v-bind="args"></u-fab>',
 });
 
 Default.args = {
@@ -215,13 +216,8 @@ Default.args = {
   variant: 'elevated',
 } as ComponentArgs;
 
-export const DisplayAnimation: StoryFn<ComponentArgs> = (args) => ({
-  components: { UFab, UCard, UAppBar, UMain, USheet, UBtn },
-  setup() {
-    const hidden = ref(false);
-    return { args, hidden };
-  },
-  template: `
+// Display Animation story
+const displayAnimationTemplate = `
     <u-card class="mx-auto" style="max-width:360px">
       <u-app-bar absolute extended>
         <template #extension>
@@ -239,70 +235,95 @@ export const DisplayAnimation: StoryFn<ComponentArgs> = (args) => ({
         </u-sheet>
       </u-main>
     </u-card>
-  `,
+  `;
+
+/**
+ * When displaying for the first time, a floating action button should animate onto the screen.
+ * Here we use the v-fab-transition with u-show. You can also use any custom transition provided
+ * by Vuetify or your own.
+ */
+export const DisplayAnimation: StoryFn<ComponentArgs> = (args) => ({
+  components: { UFab, UCard, UAppBar, UMain, USheet, UBtn },
+  setup() {
+    const hidden = ref(false);
+    return { args, hidden };
+  },
+  template: displayAnimationTemplate,
 });
 
 DisplayAnimation.parameters = {
   docs: {
     source: {
       code: `
-<template>
-  <u-card
-    class="mx-auto"
-    max-width="360"
-  >
-    <u-layout>
-      <u-app-bar absolute extended>
-        <u-app-bar-nav-icon></u-app-bar-nav-icon>
+<template>${displayAnimationTemplate}</template>
 
-        <template v-slot:extension>
-          <u-fab
-            :active="!hidden"
-            class="ms-4"
-            icon="hugeicons:add-01"
-            location="bottom start"
-            size="small"
-            absolute
-            offset
-          ></u-fab>
-        </template>
-      </u-app-bar>
+<script setup lang="ts">
+  import { ref } from 'vue';
 
-      <u-main>
-        <u-sheet class="pa-4 text-center" color="surface-light" height="300">
-          <u-btn
-            :text="hidden ? 'Show' : 'Hide'"
-            color="surface-variant"
-            width="80"
-            @click="hidden = !hidden"
-          >
-          </u-btn>
-        </u-sheet>
-
-        <u-sheet height="125">
-          <u-fab
-            :active="!hidden"
-            class="me-4"
-            icon="hugeicons:add-01"
-            location="top end"
-            absolute
-            offset
-          ></u-fab>
-        </u-sheet>
-      </u-main>
-    </u-layout>
-  </u-card>
-</template>
-<script setup>
-  import { ref } from 'vue'
-
-  const hidden = ref(false)
-</script>
-      `,
+  const hidden = ref(false);
+</script>`,
     },
   },
 };
 
+// Lateral Screens story
+const lateralScreensTemplate = `
+  <u-card>
+    <u-layout>
+      <u-app-bar
+        color="indigo"
+        absolute
+        flat
+      >
+        <u-app-bar-nav-icon></u-app-bar-nav-icon>
+
+        <u-app-bar-title>Page title</u-app-bar-title>
+
+        <u-btn icon="hugeicons:search-01"></u-btn>
+
+        <u-btn icon="hugeicons:menu-01">
+          <u-icon></u-icon>
+        </u-btn>
+
+        <template v-slot:extension>
+          <u-tabs
+            v-model="tabs"
+            align-tabs="title"
+            slider-color="pink"
+          >
+            <u-tab text="Item One" value="one"></u-tab>
+
+            <u-tab text="Item Two" value="two"></u-tab>
+
+            <u-tab text="Item Three" value="three"></u-tab>
+          </u-tabs>
+        </template>
+      </u-app-bar>
+
+      <u-main>
+        <u-sheet height="150"></u-sheet>
+      </u-main>
+
+      <u-fab
+        :key="activeFab.icon"
+        :color="activeFab.color"
+        :icon="activeFab.icon"
+        class="ms-4 mb-4"
+        location="bottom start"
+        size="64"
+        absolute
+        app
+        appear
+      ></u-fab>
+    </u-layout>
+  </u-card>
+  `;
+
+/**
+ * When changing the default action of your button, it is recommended that you display a
+ * transition to signify a change. We do this by binding the key prop to a piece of data
+ * that can properly signal a change in action to the Vue transition system.
+ */
 export const LateralScreens: StoryFn<ComponentArgs> = () => ({
   components: {
     UFab,
@@ -334,192 +355,38 @@ export const LateralScreens: StoryFn<ComponentArgs> = () => ({
     });
     return { tabs, activeFab };
   },
-  template: `
-  <u-card>
-    <u-layout>
-      <u-app-bar
-        color="indigo"
-        absolute
-        flat
-      >
-        <u-app-bar-nav-icon></u-app-bar-nav-icon>
-
-        <u-app-bar-title>Page title</u-app-bar-title>
-
-        <u-btn icon="hugeicons:search-01"></u-btn>
-
-        <u-btn icon="hugeicons:menu-01">
-          <u-icon></u-icon>
-        </u-btn>
-
-        <template v-slot:extension>
-          <u-tabs
-            v-model="tabs"
-            align-tabs="title"
-            slider-color="pink"
-          >
-            <u-tab text="Item One" value="one"></u-tab>
-
-            <u-tab text="Item Two" value="two"></u-tab>
-
-            <u-tab text="Item Three" value="three"></u-tab>
-          </u-tabs>
-        </template>
-      </u-app-bar>
-
-      <u-main>
-        <u-sheet height="150"></u-sheet>
-      </u-main>
-
-      <u-fab
-        :key="activeFab.icon"
-        :color="activeFab.color"
-        :icon="activeFab.icon"
-        class="ms-4 mb-4"
-        location="bottom start"
-        size="64"
-        absolute
-        app
-        appear
-      ></u-fab>
-    </u-layout>
-  </u-card>
-  `,
+  template: lateralScreensTemplate,
 });
 
 LateralScreens.parameters = {
   docs: {
     source: {
       code: `
-<template>
-  <u-card>
-    <u-layout>
-      <u-app-bar
-        color="indigo"
-        absolute
-        flat
-      >
-        <u-app-bar-nav-icon></u-app-bar-nav-icon>
+<template>${lateralScreensTemplate}</template>
 
-        <u-app-bar-title>Page title</u-app-bar-title>
+<script setup lang="ts">
+  import { computed, ref } from 'vue';
 
-        <u-btn icon="hugeicons:search-01"></u-btn>
-        <u-btn icon="hugeicons:menu-01">
-          <u-icon></u-icon>
-        </u-btn>
-
-        <template v-slot:extension>
-          <u-tabs
-            v-model="tabs"
-            align-tabs="title"
-            slider-color="pink"
-          >
-            <u-tab text="Item One" value="one"></u-tab>
-
-            <u-tab text="Item Two" value="two"></u-tab>
-
-            <u-tab text="Item Three" value="three"></u-tab>
-          </u-tabs>
-        </template>
-      </u-app-bar>
-
-      <u-main>
-        <u-sheet height="150"></u-sheet>
-      </u-main>
-
-      <u-fab
-        :key="activeFab.icon"
-        :color="activeFab.color"
-        :icon="activeFab.icon"
-        class="ms-4 mb-4"
-        location="bottom start"
-        size="64"
-        absolute
-        app
-        appear
-      ></u-fab>
-    </u-layout>
-  </u-card>
-</template>
-<script setup>
-  import { computed, ref } from 'vue'
-
-  const tabs = ref(null)
+  const tabs = ref<string | null>(null);
   const activeFab = computed(() => {
     switch (tabs.value) {
-      case 'one': return { color: 'success', icon: 'hugeicons:share-01' }
-      case 'two': return { color: 'red', icon: 'hugeicons:edit-02' }
-      case 'three': return { color: 'green', icon: 'hugeicons:arrow-up-01' }
-      default: return {}
+      case 'one':
+        return { color: 'success', icon: 'hugeicons:share-01' };
+      case 'two':
+        return { color: 'red', icon: 'hugeicons:edit-02' };
+      case 'three':
+        return { color: 'green', icon: 'hugeicons:arrow-up-01' };
+      default:
+        return {};
     }
-  })
-</script>
-      `,
+  });
+</script>`,
     },
   },
 };
 
-export const SmallVariant: StoryFn<ComponentArgs> = () => ({
-  components: {
-    UFab,
-    UCard,
-    UToolbar,
-    UToolbarTitle,
-    UAppBarNavIcon,
-    UBtn,
-    UList,
-    UListSubheader,
-    UListItem,
-    UAvatar,
-    UListItemTitle,
-    UListItemSubtitle,
-    UListItemAction,
-    UDivider,
-    UDialog,
-    UCardText,
-    UCardActions,
-    USpacer,
-    UTextField,
-  },
-  setup() {
-    const dialog = ref(false);
-    const items = ref([
-      {
-        icon: 'hugeicons:folder-01',
-        iconClass: 'bg-grey text-white',
-        title: 'Photos',
-        subtitle: 'Jan 9, 2014',
-      },
-      {
-        icon: 'hugeicons:folder-01',
-        iconClass: 'bg-grey text-white',
-        title: 'Recipes',
-        subtitle: 'Jan 17, 2014',
-      },
-      {
-        icon: 'hugeicons:folder-01',
-        iconClass: 'bg-grey text-white',
-        title: 'Work',
-        subtitle: 'Jan 28, 2014',
-      },
-    ]);
-    const items2 = ref([
-      {
-        icon: 'hugeicons:clipboard',
-        iconClass: 'bg-blue text-white',
-        title: 'Vacation itinerary',
-        subtitle: 'Jan 20, 2014',
-      },
-      {
-        icon: 'hugeicons:tap-01',
-        iconClass: 'bg-amber text-white',
-        title: 'Kitchen remodel',
-        subtitle: 'Jan 10, 2014',
-      },
-    ]);
-    return { dialog, items, items2 };
-  },
-  template: `
+// Small Variant story
+const smallVariantTemplate = `
   <u-card class="mx-auto" max-width="365">
     <u-toolbar
       color="light-blue"
@@ -621,115 +488,79 @@ export const SmallVariant: StoryFn<ComponentArgs> = () => ({
       </u-card>
     </u-dialog>
   </u-card>
-  `,
+  `;
+
+/**
+ * For better visual appeal, we use a small button to match our list avatars.
+ */
+export const SmallVariant: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UFab,
+    UCard,
+    UToolbar,
+    UToolbarTitle,
+    UAppBarNavIcon,
+    UBtn,
+    UList,
+    UListSubheader,
+    UListItem,
+    UAvatar,
+    UListItemTitle,
+    UListItemSubtitle,
+    UListItemAction,
+    UDivider,
+    UDialog,
+    UCardText,
+    UCardActions,
+    USpacer,
+    UTextField,
+  },
+  setup() {
+    const dialog = ref(false);
+    const items = ref([
+      {
+        icon: 'hugeicons:folder-01',
+        iconClass: 'bg-grey text-white',
+        title: 'Photos',
+        subtitle: 'Jan 9, 2014',
+      },
+      {
+        icon: 'hugeicons:folder-01',
+        iconClass: 'bg-grey text-white',
+        title: 'Recipes',
+        subtitle: 'Jan 17, 2014',
+      },
+      {
+        icon: 'hugeicons:folder-01',
+        iconClass: 'bg-grey text-white',
+        title: 'Work',
+        subtitle: 'Jan 28, 2014',
+      },
+    ]);
+    const items2 = ref([
+      {
+        icon: 'hugeicons:clipboard',
+        iconClass: 'bg-blue text-white',
+        title: 'Vacation itinerary',
+        subtitle: 'Jan 20, 2014',
+      },
+      {
+        icon: 'hugeicons:tap-01',
+        iconClass: 'bg-amber text-white',
+        title: 'Kitchen remodel',
+        subtitle: 'Jan 10, 2014',
+      },
+    ]);
+    return { dialog, items, items2 };
+  },
+  template: smallVariantTemplate,
 });
 
 SmallVariant.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-card class="mx-auto" max-width="365">
-    <u-toolbar
-      color="light-blue"
-      extended
-      light
-    >
-      <u-app-bar-nav-icon color="grey-darken-4"></u-app-bar-nav-icon>
+      code: `<template>${smallVariantTemplate}</template>
 
-      <u-toolbar-title>My files</u-toolbar-title>
-
-      <u-btn color="grey-darken-4" icon="hugeicons:search-01"></u-btn>
-      <u-btn color="grey-darken-4" icon="hugeicons:grid-view"></u-btn>
-
-      <template v-slot:extension>
-        <u-fab
-          class="ms-4"
-          color="cyan-accent-2"
-          icon="hugeicons:add-01"
-          location="bottom left"
-          size="40"
-          absolute
-          offset
-          @click="dialog = !dialog"
-        ></u-fab>
-      </template>
-    </u-toolbar>
-
-    <u-list lines="two">
-      <u-list-subheader title="Folders" inset></u-list-subheader>
-
-      <u-list-item
-        v-for="item in items"
-        :key="item.title"
-        link
-      >
-        <template v-slot:prepend>
-          <u-avatar :class="[item.iconClass]" :icon="item.icon"></u-avatar>
-        </template>
-
-        <u-list-item-title>{{ item.title }}</u-list-item-title>
-
-        <u-list-item-subtitle>{{ item.subtitle }}</u-list-item-subtitle>
-
-        <template v-slot:append>
-          <u-list-item-action>
-            <u-btn color="grey-lighten-1" icon="hugeicons:information-circle" variant="text"></u-btn>
-          </u-list-item-action>
-        </template>
-      </u-list-item>
-
-      <u-divider inset></u-divider>
-
-      <u-list-subheader title="Files" inset></u-list-subheader>
-
-      <u-list-item
-        v-for="item in items2"
-        :key="item.title"
-        link
-      >
-        <template v-slot:prepend>
-          <u-avatar :class="[item.iconClass]" :icon="item.icon"></u-avatar>
-        </template>
-
-        <u-list-item-title>{{ item.title }}</u-list-item-title>
-
-        <u-list-item-subtitle>{{ item.subtitle }}</u-list-item-subtitle>
-
-        <template v-slot:append>
-          <u-list-item-action>
-            <u-btn color="grey-lighten-1" icon="hugeicons:information-circle" variant="text"></u-btn>
-          </u-list-item-action>
-        </template>
-      </u-list-item>
-    </u-list>
-
-    <u-dialog
-      v-model="dialog"
-      max-width="500"
-    >
-      <u-card>
-        <u-card-text>
-          <u-text-field label="File name"></u-text-field>
-
-          <small class="text-grey">* This doesn't actually save.</small>
-        </u-card-text>
-
-        <u-card-actions>
-          <u-spacer></u-spacer>
-
-          <u-btn
-            color="primary"
-            variant="text"
-            @click="dialog = false"
-          >
-            Submit
-          </u-btn>
-        </u-card-actions>
-      </u-card>
-    </u-dialog>
-  </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -743,8 +574,7 @@ SmallVariant.parameters = {
     { icon: 'hugeicons:clipboard', iconClass: 'bg-blue text-white', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
     { icon: 'hugeicons:tap-01', iconClass: 'bg-amber text-white', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' },
   ])
-</script>
-      `,
+</script>`,
     },
   },
 };
@@ -752,38 +582,8 @@ SmallVariant.parameters = {
 /* This is for documentation purposes and will not be needed in your application */
 import './SpeedDial.story.scss';
 
-export const SpeedDial: StoryFn<ComponentArgs> = () => ({
-  components: {
-    UApp,
-    UCard,
-    URow,
-    UCol,
-    URadioGroup,
-    URadio,
-    UFab,
-    UIcon,
-    USpeedDial,
-    UBtn,
-  },
-  setup() {
-    const open = shallowRef(false);
-    const fabPosition = shallowRef('absolute');
-    const menuLocation = shallowRef('left center');
-    const fabLocation = shallowRef('right bottom');
-    const transition = shallowRef('slide-y-reverse-transition');
-
-    watch(menuLocation, reopen);
-    watch(transition, reopen);
-    watch(fabLocation, () => (open.value = false));
-    watch(fabPosition, () => (open.value = false));
-
-    function reopen() {
-      open.value = false;
-      setTimeout(() => (open.value = true), 400);
-    }
-    return { open, fabPosition, menuLocation, fabLocation, transition };
-  },
-  template: `
+// Speed Dial story
+const speedDialTemplate = `
   <u-app id="appSpeedDial">
     <u-card class="pa-6 mb-6" variant="flat">
       <u-row dense>
@@ -917,147 +717,51 @@ export const SpeedDial: StoryFn<ComponentArgs> = () => ({
       </u-fab>
     </u-card>
   </u-app>
-  `,
+  `;
+
+/**
+ * The speed-dial component has a very robust api for customizing your FAB experience exactly
+ * how you want.
+ */
+export const SpeedDial: StoryFn<ComponentArgs> = () => ({
+  components: {
+    UApp,
+    UCard,
+    URow,
+    UCol,
+    URadioGroup,
+    URadio,
+    UFab,
+    UIcon,
+    USpeedDial,
+    UBtn,
+  },
+  setup() {
+    const open = shallowRef(false);
+    const fabPosition = shallowRef('absolute');
+    const menuLocation = shallowRef('left center');
+    const fabLocation = shallowRef('right bottom');
+    const transition = shallowRef('slide-y-reverse-transition');
+
+    watch(menuLocation, reopen);
+    watch(transition, reopen);
+    watch(fabLocation, () => (open.value = false));
+    watch(fabPosition, () => (open.value = false));
+
+    function reopen() {
+      open.value = false;
+      setTimeout(() => (open.value = true), 400);
+    }
+    return { open, fabPosition, menuLocation, fabLocation, transition };
+  },
+  template: speedDialTemplate,
 });
 
 SpeedDial.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-app>
-    <u-card class="pa-6 mb-6" variant="flat">
-      <u-row dense>
-        <u-col cols="12" sm="3">
-          <h5>FAB position</h5>
+      code: `<template>${speedDialTemplate}</template>
 
-          <u-radio-group v-model="fabPosition" density="compact" hide-details>
-            <u-radio label="App (fixed)" value="fixed"></u-radio>
-            <u-radio label="Absolute" value="absolute"></u-radio>
-            <u-radio label="None" value=""></u-radio>
-          </u-radio-group>
-        </u-col>
-
-        <u-col cols="12" sm="3">
-          <h5>FAB location</h5>
-
-          <u-radio-group v-model="fabLocation" :disabled="!fabPosition" density="compact" hide-details>
-            <div class="d-flex">
-              <u-radio value="top left"></u-radio>
-              <u-radio value="top center"></u-radio>
-              <u-radio value="top right"></u-radio>
-            </div>
-
-            <div class="d-flex">
-              <u-radio value="left center"></u-radio>
-              <u-radio :disabled="fabPosition !== 'absolute'" value="center center"></u-radio>
-              <u-radio value="right center"></u-radio>
-            </div>
-
-            <div class="d-flex">
-              <u-radio value="left bottom"></u-radio>
-              <u-radio value="bottom center"></u-radio>
-              <u-radio value="right bottom"></u-radio>
-            </div>
-          </u-radio-group>
-
-          <code>({{ fabLocation }})</code>
-        </u-col>
-
-        <u-col cols="12" sm="3">
-          <h5>Menu location</h5>
-
-          <u-radio-group v-model="menuLocation" density="compact" hide-details>
-            <div class="d-flex">
-              <u-radio disabled></u-radio>
-              <u-radio value="top left"></u-radio>
-              <u-radio value="top center"></u-radio>
-              <u-radio value="top right"></u-radio>
-              <u-radio disabled></u-radio>
-            </div>
-
-            <div class="d-flex">
-              <u-radio value="left top"></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio value="right top"></u-radio>
-            </div>
-
-            <div class="d-flex">
-              <u-radio value="left center"></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio value="center"></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio value="right center"></u-radio>
-            </div>
-
-            <div class="d-flex">
-              <u-radio value="left bottom"></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio disabled></u-radio>
-              <u-radio value="right bottom"></u-radio>
-            </div>
-
-            <div class="d-flex">
-              <u-radio disabled></u-radio>
-              <u-radio value="bottom left"></u-radio>
-              <u-radio value="bottom center"></u-radio>
-              <u-radio value="bottom right"></u-radio>
-              <u-radio disabled></u-radio>
-            </div>
-          </u-radio-group>
-
-          <code>({{ menuLocation }})</code>
-        </u-col>
-
-        <u-col cols="12" sm="3">
-          <h5>Transition</h5>
-
-          <u-radio-group v-model="transition" density="compact" hide-details>
-            <u-radio label="Fade" value="fade-transition"></u-radio>
-            <u-radio label="Slide y" value="slide-y-transition"></u-radio>
-            <u-radio label="Slide y reverse" value="slide-y-reverse-transition"></u-radio>
-            <u-radio label="Slide x" value="slide-x-transition"></u-radio>
-            <u-radio label="Slide x reverse" value="slide-x-reverse-transition"></u-radio>
-            <u-radio label="Scale" value="scale-transition"></u-radio>
-          </u-radio-group>
-        </u-col>
-      </u-row>
-    </u-card>
-
-    <u-card :class="fabPosition === 'absolute' ? 'demo-panel-relative' : 'demo-panel-static'" border flat>
-      <u-fab
-        :key="fabPosition"
-        :absolute="fabPosition === 'absolute'"
-        :app="fabPosition === 'fixed'"
-        :color="open ? '' : 'primary'"
-        :location="fabLocation"
-        size="large"
-        icon
-      >
-        <u-icon>{{ open ? 'hugeicons:cancel-01' : 'hugeicons:crown' }}</u-icon>
-        <u-speed-dial v-model="open" :location="menuLocation" :transition="transition" activator="parent">
-          <u-btn key="1" color="success" icon>
-            <u-icon size="24">$success</u-icon>
-          </u-btn>
-
-          <u-btn key="2" color="info" icon>
-            <u-icon size="24">$info</u-icon>
-          </u-btn>
-          <u-btn key="3" color="warning" icon>
-            <u-icon size="24">$warning</u-icon>
-          </u-btn>
-
-          <u-btn key="4" color="error" icon>
-            <u-icon size="24">$error</u-icon>
-          </u-btn>
-        </u-speed-dial>
-      </u-fab>
-    </u-card>
-  </u-app>
-</template>
 <script setup>
   import { shallowRef, watch } from 'vue'
 
@@ -1078,48 +782,47 @@ SpeedDial.parameters = {
   }
 </script>
 <style scoped>
-/* This is for documentation purposes and will not be needed in your application */
-::v-deep(.v-application__wrap) {
-  min-height: 0 !important;
-}
+  /* This is for documentation purposes and will not be needed in your application */
+  ::v-deep(.v-application__wrap) {
+    min-height: 0 !important;
+  }
 
-.demo-panel-static,
-.demo-panel-relative {
-  margin: 0 80px 50px;
-  padding: 24px;
-  min-height: 300px;
-}
-.demo-panel-static {
-  position: static;
-}
-.demo-panel-relative {
-  position: relative;
-}
+  .demo-panel-static,
+  .demo-panel-relative {
+    margin: 0 80px 50px;
+    padding: 24px;
+    min-height: 300px;
+  }
+  .demo-panel-static {
+    position: static;
+  }
+  .demo-panel-relative {
+    position: relative;
+  }
 
-.v-selection-control--disabled,
-.v-input--disabled .v-selection-control {
-  opacity: .1;
-}
+  .v-selection-control--disabled,
+  .v-input--disabled .v-selection-control {
+    opacity: .1;
+  }
 
-.v-radio {
-  flex-grow: 0 !important;
-}
+  .v-radio {
+    flex-grow: 0 !important;
+  }
 
-h5 {
-  margin-bottom: 12px;
-}
+  h5 {
+    margin-bottom: 12px;
+  }
 
-code {
-  display: block;
-  font-size: .8rem;
-  margin-top: 12px;
-}
+  code {
+    display: block;
+    font-size: .8rem;
+    margin-top: 12px;
+  }
 
-::v-deep(.v-label) {
-  margin-left: 8px;
-}
-</style>
-      `,
+  ::v-deep(.v-label) {
+    margin-left: 8px;
+  }
+</style>`,
     },
   },
 };
