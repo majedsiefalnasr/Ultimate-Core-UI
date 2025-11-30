@@ -138,50 +138,23 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
-// Default
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UFooter },
   setup() {
     return { args };
   },
   template: `
-    <u-footer v-bind="args" class="text-center py-4">
-      {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
-    </u-footer>
-  `,
+  <u-footer v-bind="args" class="text-center py-4">
+    {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
+  </u-footer>
+`,
 });
 
 Default.args = {} as ComponentArgs;
 
-// Company Footer
-export const CompanyFooter: StoryFn<ComponentArgs> = (args) => ({
-  components: { UFooter, UBtn },
-  setup() {
-    const links = ['Home', 'About Us', 'Team', 'Services', 'Blog', 'Contact Us'];
-    return { args, links };
-  },
-  template: `
-    <u-footer class="d-flex align-center justify-center ga-2 flex-wrap flex-grow-1 py-3" color="surface-light" v-bind="args">
-      <u-btn
-        v-for="link in links"
-        :key="link"
-        variant="text"
-        rounded
-      >{{ link }}</u-btn>
-
-      <div class="flex-1-0-100 text-center mt-2">
-        {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
-      </div>
-    </u-footer>
-  `,
-});
-
-CompanyFooter.args = {} as ComponentArgs;
-
-CompanyFooter.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Company Footer Story
+const companyFooterTemplate = `
   <u-footer class="d-flex align-center justify-center ga-2 flex-wrap flex-grow-1 py-3" color="surface-light">
     <u-btn
       v-for="link in links"
@@ -194,7 +167,25 @@ CompanyFooter.parameters = {
       {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
     </div>
   </u-footer>
-</template>
+`;
+
+/**
+ * The footer component as a basic company footer with links.
+ */
+export const CompanyFooter: StoryFn<ComponentArgs> = (args) => ({
+  components: { UFooter, UBtn },
+  setup() {
+    const links = ['Home', 'About Us', 'Team', 'Services', 'Blog', 'Contact Us'];
+    return { args, links };
+  },
+  template: companyFooterTemplate,
+});
+
+CompanyFooter.parameters = {
+  docs: {
+    source: {
+      code: `<template>${companyFooterTemplate}</template>
+
 <script setup>
   const links = [
     'Home',
@@ -206,58 +197,12 @@ CompanyFooter.parameters = {
   ]
 </script>`,
     },
-    description: {
-      story: 'The footer component as a basic company footer with links.',
-    },
   },
 };
 
-// Indigo Footer
-export const IndigoFooter: StoryFn<ComponentArgs> = (args) => ({
-  components: { UFooter, UBtn, UDivider },
-  setup() {
-    const icons = [
-      'hugeicons:facebook-02',
-      'hugeicons:twitter',
-      'hugeicons:linkedin-02',
-      'hugeicons:instagram',
-    ];
-    return { args, icons };
-  },
-  template: `
-    <u-footer class="text-center d-flex flex-column ga-2 py-4" color="indigo-lighten-1" v-bind="args">
-      <div class="d-flex ga-3">
-        <u-btn
-          v-for="icon in icons"
-          :key="icon"
-          :icon="icon"
-          density="comfortable"
-          variant="text"
-        ></u-btn>
-      </div>
-
-      <u-divider class="my-2" thickness="2" width="50"></u-divider>
-
-      <div class="text-caption font-weight-regular opacity-60">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </div>
-
-      <u-divider></u-divider>
-
-      <div>
-        {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
-      </div>
-    </u-footer>
-  `,
-});
-
-IndigoFooter.args = {} as ComponentArgs;
-
-IndigoFooter.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-footer class="text-center d-flex flex-column ga-2 py-4" color="indigo-lighten-1">
+// Indigo Footer Story
+const indigoFooterTemplate = `
+  <u-footer class="text-center d-flex flex-column ga-2 py-4" color="indigo-lighten-1" >
     <div class="d-flex ga-3">
       <u-btn
         v-for="icon in icons"
@@ -280,7 +225,29 @@ IndigoFooter.parameters = {
       {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
     </div>
   </u-footer>
-</template>
+`;
+
+/**
+ * The footer component with Indigo background color and social media icons and button.
+ */
+export const IndigoFooter: StoryFn<ComponentArgs> = () => ({
+  components: { UFooter, UBtn, UDivider },
+  setup() {
+    const icons = [
+      'hugeicons:facebook-02',
+      'hugeicons:twitter',
+      'hugeicons:linkedin-02',
+      'hugeicons:instagram',
+    ];
+    return { icons };
+  },
+  template: indigoFooterTemplate,
+});
+
+IndigoFooter.parameters = {
+  docs: {
+    source: {
+      code: `<template>${indigoFooterTemplate}</template>
 <script setup>
   const icons = [
     'hugeicons:facebook-03',
@@ -290,53 +257,11 @@ IndigoFooter.parameters = {
   ]
 </script>`,
     },
-    description: {
-      story: 'The footer component with Indigo background color and social media icons and button.',
-    },
   },
 };
 
-// Teal Footer
-export const TealFooter: StoryFn<ComponentArgs> = (args) => ({
-  components: { UFooter, UBtn },
-  setup() {
-    const icons = [
-      'hugeicons:facebook-03',
-      'hugeicons:twitter-03',
-      'hugeicons:linkedin-03',
-      'hugeicons:instagram-03',
-    ];
-    return { args, icons };
-  },
-  template: `
-    <u-footer class="d-flex flex-column" color="teal" rounded="lg" v-bind="args">
-      <div class="d-flex w-100 align-center px-4 py-2">
-        <strong>Get connected with us on social networks!</strong>
-
-        <div class="d-flex ga-2 ms-auto">
-          <u-btn
-            v-for="icon in icons"
-            :key="icon"
-            :icon="icon"
-            size="small"
-            variant="plain"
-          ></u-btn>
-        </div>
-      </div>
-
-      <div class="px-4 py-2 bg-surface-variant text-center w-100 rounded-lg">
-        {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
-      </div>
-    </u-footer>
-  `,
-});
-
-TealFooter.args = {} as ComponentArgs;
-
-TealFooter.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Teal Footer Story
+const tealFooterTemplate = `
   <u-footer class="d-flex flex-column" color="teal" rounded="lg">
     <div class="d-flex w-100 align-center px-4 py-2">
       <strong>Get connected with us on social networks!</strong>
@@ -356,7 +281,29 @@ TealFooter.parameters = {
       {{ new Date().getFullYear() }} — <strong>Ultimate Solutions</strong>
     </div>
   </u-footer>
-</template>
+`;
+
+/**
+ * The footer component with a Teal color header and columns and rows of links.
+ */
+export const TealFooter: StoryFn<ComponentArgs> = () => ({
+  components: { UFooter, UBtn },
+  setup() {
+    const icons = [
+      'hugeicons:facebook-03',
+      'hugeicons:twitter-03',
+      'hugeicons:linkedin-03',
+      'hugeicons:instagram-03',
+    ];
+    return { icons };
+  },
+  template: tealFooterTemplate,
+});
+
+TealFooter.parameters = {
+  docs: {
+    source: {
+      code: `<template>${tealFooterTemplate}</template>
 <script setup>
   const icons = [
     'hugeicons:facebook-03',
@@ -365,9 +312,6 @@ TealFooter.parameters = {
     'hugeicons:instagram-03',
   ]
 </script>`,
-    },
-    description: {
-      story: 'The footer component with a Teal color header and columns and rows of links.',
     },
   },
 };
