@@ -69,7 +69,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<UFileUpload${attrsString}></UFileUpload>`;
+          return `<u-file-upload${attrsString}></u-file-upload>`;
         },
       },
     },
@@ -105,34 +105,6 @@ const meta: Meta<ComponentArgs> = {
             link: 'https://vuetifyjs.com/en/api/v-file-input/',
           },
           description: 'File input component',
-        },
-      ],
-    },
-    anatomy: {
-      title: 'Anatomy',
-      description:
-        'The file upload component consists of a drag and drop area with an icon, title, divider, and browse button.',
-      Image: '/images/stories/UFileUpload.anatomy.png',
-      data: [
-        {
-          element: '1. Icon',
-          description: 'The upload icon displayed at the top of the component.',
-        },
-        {
-          element: '2. Title',
-          description: 'The main heading text for the upload area.',
-        },
-        {
-          element: '3. Divider',
-          description: 'A visual separator with optional text.',
-        },
-        {
-          element: '4. Browse Button',
-          description: 'A button to open the file selection dialog.',
-        },
-        {
-          element: '5. Item',
-          description: 'The item slot is used to customize the appearance of the file item.',
         },
       ],
     },
@@ -432,212 +404,147 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileUpload },
   setup() {
     return { args };
   },
-  template: '<UFileUpload v-bind="args"></UFileUpload>',
+  template: '<u-file-upload v-bind="args"></u-file-upload>',
 });
 
 Default.args = {
   density: 'default',
 } as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <UFileUpload density="default"></UFileUpload>
-</template>`,
-    },
-  },
-};
+// DensityVariants story
+const densityVariantsTemplate = `
+    <div class="text-center pa-2 mb-2">
+      <u-btn-toggle v-model="density" density="comfortable" border divided rounded>
+        <u-btn value="default">Default</u-btn>
+        <u-btn value="comfortable">Comfortable</u-btn>
+        <u-btn value="compact">Compact</u-btn>
+      </u-btn-toggle>
+    </div>
+    <u-file-upload :density="density"></u-file-upload>
+  `;
 
-export const DensityVariants: StoryFn<ComponentArgs> = (args) => ({
+/**
+ * The density prop is used to control the vertical space the upload takes up.
+ */
+export const DensityVariants: StoryFn<ComponentArgs> = () => ({
   components: { UFileUpload, UBtn, UBtnToggle },
   setup() {
     const density = shallowRef<'default' | 'comfortable' | 'compact'>('default');
-    return { args, density };
+    return { density };
   },
-  template: `
-    <div class="text-center pa-2 mb-2">
-      <UBtnToggle v-model="density" density="comfortable" border divided rounded>
-        <UBtn value="default">Default</UBtn>
-        <UBtn value="comfortable">Comfortable</UBtn>
-        <UBtn value="compact">Compact</UBtn>
-      </UBtnToggle>
-    </div>
-    <UFileUpload :density="density"></UFileUpload>
-  `,
+  template: densityVariantsTemplate,
 });
-
-DensityVariants.args = {} as ComponentArgs;
 
 DensityVariants.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center pa-2 mb-2">
-    <UBtnToggle v-model="density" density="comfortable" border divided rounded>
-      <UBtn value="default">Default</UBtn>
-      <UBtn value="comfortable">Comfortable</UBtn>
-      <UBtn value="compact">Compact</UBtn>
-    </UBtnToggle>
-  </div>
-  <UFileUpload :density="density"></UFileUpload>
-</template>
+      code: `<template>${densityVariantsTemplate}</template>
 
 <script setup>
-import { shallowRef } from 'vue'
+  import { shallowRef } from 'vue'
 
-const density = shallowRef('default')
+  const density = shallowRef('default')
 </script>`,
     },
-    description: {
-      story: 'The density prop is used to control the vertical space the upload takes up.',
-    },
   },
 };
 
-export const CustomContent: StoryFn<ComponentArgs> = (args) => ({
+// CustomContent story
+const customContentTemplate =
+  '<u-file-upload browse-text="Local Filesystem" divider-text="or choose locally" icon="hugeicons:upload-04" title="Drag and Drop Here"></u-file-upload>';
+
+/**
+ * Use the browse-text, divider-text, icon, title, or subtitle props to customize the text displayed in the component.
+ */
+export const CustomContent: StoryFn<ComponentArgs> = () => ({
   components: { UFileUpload },
-  setup() {
-    return { args };
-  },
-  template: '<UFileUpload v-bind="args"></UFileUpload>',
+  template: customContentTemplate,
 });
 
-CustomContent.args = {
-  browseText: 'Local Filesystem',
-  dividerText: 'or choose locally',
-  icon: 'hugeicons:upload-04',
-  title: 'Drag and Drop Here',
-} as ComponentArgs;
+// Disabled story
+const disabledTemplate = '<u-file-upload disabled></u-file-upload>';
 
-CustomContent.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <UFileUpload
-    browse-text="Local Filesystem"
-    divider-text="or choose locally"
-    icon="hugeicons:upload-04"
-    title="Drag and Drop Here"
-  ></UFileUpload>
-</template>`,
-    },
-    description: {
-      story:
-        'Use the browse-text, divider-text, icon, title, or subtitle props to customize the text displayed in the component.',
-    },
-  },
-};
-
-export const Disabled: StoryFn<ComponentArgs> = (args) => ({
+/**
+ * The disabled property reduces the opacity of the component and prevents interaction.
+ */
+export const Disabled: StoryFn<ComponentArgs> = () => ({
   components: { UFileUpload },
-  setup() {
-    return { args };
-  },
-  template: '<UFileUpload v-bind="args"></UFileUpload>',
+  template: disabledTemplate,
 });
-
-Disabled.args = {
-  disabled: true,
-} as ComponentArgs;
 
 Disabled.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <UFileUpload disabled></UFileUpload>
-</template>`,
-    },
-    description: {
-      story: 'The disabled property reduces the opacity of the component and prevents interaction.',
+      code: `<template>${disabledTemplate}</template>`,
     },
   },
 };
 
-export const Scrim: StoryFn<ComponentArgs> = (args) => ({
-  components: { UFileUpload },
-  setup() {
-    return { args };
-  },
-  template: '<UFileUpload v-bind="args"></UFileUpload>',
-});
+// Scrim story
+const scrimTemplate = '<u-file-upload scrim="primary"></u-file-upload>';
 
-Scrim.args = {
-  scrim: 'primary',
-} as ComponentArgs;
+/**
+ * The scrim property allows you to set a colored scrim when hovering over the
+ * component with files.
+ */
+export const Scrim: StoryFn<ComponentArgs> = () => ({
+  components: { UFileUpload },
+  template: scrimTemplate,
+});
 
 Scrim.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <UFileUpload scrim="primary"></UFileUpload>
-</template>`,
-    },
-    description: {
-      story:
-        'The scrim property allows you to set a colored scrim when hovering over the component with files.',
+      code: `<template>${scrimTemplate}</template>`,
     },
   },
 };
 
-export const MultipleFiles: StoryFn<ComponentArgs> = (args) => ({
-  components: { UFileUpload },
-  setup() {
-    const model = shallowRef(null);
-    return { args, model };
-  },
-  template: `
-    <UFileUpload
+// MultipleFiles story
+const multipleFilesTemplate = `
+    <u-file-upload
       v-model="model"
-      v-bind="args"
       clearable
       multiple
       show-size
-    ></UFileUpload>
-  `,
-});
+    ></u-file-upload>
+  `;
 
-MultipleFiles.args = {} as ComponentArgs;
+/**
+ * Use the multiple prop to allow uploading multiple files at once.
+ */
+export const MultipleFiles: StoryFn<ComponentArgs> = () => ({
+  components: { UFileUpload },
+  setup() {
+    const model = shallowRef(null);
+    return { model };
+  },
+  template: multipleFilesTemplate,
+});
 
 MultipleFiles.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <UFileUpload
-    v-model="model"
-    clearable
-    multiple
-    show-size
-  ></UFileUpload>
-</template>
-
+      code: `<template>${multipleFilesTemplate}</template>
 <script setup>
-import { shallowRef } from 'vue'
+  import { shallowRef } from 'vue'
 
-const model = shallowRef(null)
+  const model = shallowRef(null)
 </script>`,
-    },
-    description: {
-      story: 'Use the multiple prop to allow uploading multiple files at once.',
     },
   },
 };
 
-export const Item: StoryFn<ComponentArgs> = (args) => ({
-  components: { UFileUpload, UBtn, UAvatar, UFileUploadItem },
-  setup() {
-    const model = shallowRef(null);
-    return { args, model };
-  },
-  template: `
+// Item story
+const itemTemplate = `
     <u-file-upload
       v-model="model"
-      v-bind="args"
       clearable
       multiple
       show-size
@@ -653,42 +560,29 @@ export const Item: StoryFn<ComponentArgs> = (args) => ({
         </u-file-upload-item>
       </template>
     </u-file-upload>
-  `,
-});
+  `;
 
-Item.args = {} as ComponentArgs;
+/**
+ * The item slot is used to customize the appearance of the file item.
+ */
+export const Item: StoryFn<ComponentArgs> = () => ({
+  components: { UFileUpload, UBtn, UAvatar, UFileUploadItem },
+  setup() {
+    const model = shallowRef(null);
+    return { model };
+  },
+  template: itemTemplate,
+});
 
 Item.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-file-upload
-    v-model="model"
-    clearable
-    multiple
-    show-size
-  >
-    <template v-slot:item="{ props: itemProps }">
-      <u-file-upload-item v-bind="itemProps" lines="one" nav>
-        <template v-slot:prepend>
-          <u-avatar size="32" rounded></u-avatar>
-        </template>
-        <template v-slot:clear="{ props: clearProps }">
-          <u-btn color="primary" v-bind="clearProps"></u-btn>
-        </template>
-      </u-file-upload-item>
-    </template>
-  </u-file-upload>
-</template>
-
+      code: `<template>${itemTemplate}</template>
 <script setup>
-import { shallowRef } from 'vue'
+  import { shallowRef } from 'vue'
 
-const model = shallowRef(null)
+  const model = shallowRef(null)
 </script>`,
-    },
-    description: {
-      story: 'The item slot is used to customize the appearance of the file item.',
     },
   },
 };
