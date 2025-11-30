@@ -179,6 +179,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
@@ -191,12 +192,19 @@ Default.args = {
   label: 'File input',
 } as ComponentArgs;
 
+// Accept story
+const acceptTemplate = '<u-file-input v-bind="args"></u-file-input>';
+
+/**
+ * u-file-input component can accept only specific media formats/file types if you want.
+ * For more information, checkout the documentation on the accept attribute.
+ */
 export const Accept: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
     return { args };
   },
-  template: '<u-file-input v-bind="args"></u-file-input>',
+  template: acceptTemplate,
 });
 Accept.args = {
   accept: 'image/*',
@@ -205,27 +213,25 @@ Accept.args = {
 
 Accept.parameters = {
   docs: {
-    description: {
-      story:
-        'u-file-input component can accept only specific media formats/file types if you want. For more information, checkout the documentation on the accept attribute.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    accept="image/*"
-    label="File input"
-  ></u-file-input>
-</template>`,
+      code: `<template>${acceptTemplate}</template>`,
     },
   },
 };
 
+// Chips story
+const chipsTemplate = '<div><u-file-input v-bind="args"></u-file-input></div>';
+
+/**
+ * A selected file can be displayed as a chip. When using the chips and multiple props,
+ * each chip will be displayed (as opposed to the file count).
+ */
 export const Chips: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
     return { args };
   },
-  template: '<div><u-file-input v-bind="args"></u-file-input></div>',
+  template: chipsTemplate,
 });
 Chips.args = {
   label: 'File input w/ chips',
@@ -235,30 +241,25 @@ Chips.args = {
 
 Chips.parameters = {
   docs: {
-    description: {
-      story:
-        'A selected file can be displayed as a chip. When using the chips and multiple props, each chip will be displayed (as opposed to the file count).',
-    },
     source: {
-      code: `<template>
-  <div>
-    <u-file-input
-      label="File input w/ chips"
-      chips
-      multiple
-    ></u-file-input>
-  </div>
-</template>`,
+      code: `<template>${chipsTemplate}</template>`,
     },
   },
 };
 
+// Counter story
+const counterTemplate = '<u-file-input v-bind="args"></u-file-input>';
+
+/**
+ * When using the show-size property along with counter, the total number of files and size
+ * will be displayed under the input.
+ */
 export const Counter: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
     return { args };
   },
-  template: '<u-file-input v-bind="args"></u-file-input>',
+  template: counterTemplate,
 });
 Counter.args = {
   label: 'File input',
@@ -269,29 +270,24 @@ Counter.args = {
 
 Counter.parameters = {
   docs: {
-    description: {
-      story:
-        'When using the show-size property along with counter, the total number of files and size will be displayed under the input.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    label="File input"
-    counter
-    multiple
-    show-size
-  ></u-file-input>
-</template>`,
+      code: `<template>${counterTemplate}</template>`,
     },
   },
 };
 
+// Density story
+const densityTemplate = '<u-file-input v-bind="args"></u-file-input>';
+
+/**
+ * You can reduces the file input height with the density prop.
+ */
 export const Density: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
     return { args };
   },
-  template: '<u-file-input v-bind="args"></u-file-input>',
+  template: densityTemplate,
 });
 Density.args = {
   density: 'compact',
@@ -300,26 +296,24 @@ Density.args = {
 
 Density.parameters = {
   docs: {
-    description: {
-      story: 'You can reduces the file input height with the density prop.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    density="compact"
-    label="File input"
-  ></u-file-input>
-</template>`,
+      code: `<template>${densityTemplate}</template>`,
     },
   },
 };
 
+// Multiple story
+const multipleTemplate = '<u-file-input v-bind="args"></u-file-input>';
+
+/**
+ * The u-file-input can contain multiple files at the same time when using the multiple prop.
+ */
 export const Multiple: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
     return { args };
   },
-  template: '<u-file-input v-bind="args"></u-file-input>',
+  template: multipleTemplate,
 });
 Multiple.args = {
   label: 'File input',
@@ -328,27 +322,24 @@ Multiple.args = {
 
 Multiple.parameters = {
   docs: {
-    description: {
-      story:
-        'The u-file-input can contain multiple files at the same time when using the multiple prop.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    label="File input"
-    multiple
-  ></u-file-input>
-</template>`,
+      code: `<template>${multipleTemplate}</template>`,
     },
   },
 };
 
+// PrependIcon story
+const prependIconTemplate = '<u-file-input v-bind="args"></u-file-input>';
+
+/**
+ * PrependIcon story demonstrating custom prepend icon.
+ */
 export const PrependIcon: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
     return { args };
   },
-  template: '<u-file-input v-bind="args"></u-file-input>',
+  template: prependIconTemplate,
 });
 PrependIcon.args = {
   label: 'File input',
@@ -358,28 +349,25 @@ PrependIcon.args = {
 
 PrependIcon.parameters = {
   docs: {
-    description: {
-      story:
-        'The u-file-input has a default prepend-icon that can be set on the component or adjusted globally. More information on changing global components can be found on the customizing icons page.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    label="File input"
-    prepend-icon="hugeicons:camera-01"
-    variant="filled"
-  ></u-file-input>
-</template>`,
+      code: `<template>${prependIconTemplate}</template>`,
     },
   },
 };
 
+// ShowSize story
+const showSizeTemplate = '<u-file-input v-bind="args"></u-file-input>';
+
+/**
+ * The displayed size of the selected file(s) can be configured with the show-size property.
+ * Display sizes can be either 1024 (the default used when providing true) or 1000.
+ */
 export const ShowSize: StoryFn<ComponentArgs> = (args) => ({
   components: { UFileInput },
   setup() {
     return { args };
   },
-  template: '<u-file-input v-bind="args"></u-file-input>',
+  template: showSizeTemplate,
 });
 ShowSize.args = {
   label: 'File input',
@@ -388,21 +376,29 @@ ShowSize.args = {
 
 ShowSize.parameters = {
   docs: {
-    description: {
-      story:
-        'The displayed size of the selected file(s) can be configured with the show-size property. Display sizes can be either 1024 (the default used when providing true) or 1000.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    label="File input"
-    show-size
-  ></u-file-input>
-</template>`,
+      code: `<template>${showSizeTemplate}</template>`,
     },
   },
 };
 
+// Validation story
+const validationTemplate = `
+    <u-file-input
+      :rules="rules"
+      accept="image/png, image/jpeg, image/bmp"
+      label="Photos"
+      placeholder="Upload your photos"
+      prepend-icon="hugeicons:camera-01"
+      multiple
+    ></u-file-input>
+  `;
+
+/**
+ * Similar to other inputs, you can use the rules prop to create your own custom validation
+ * parameters. If multiple props is set, the value passed in the validation functions will be
+ * an array.
+ */
 export const Validation: StoryFn<ComponentArgs> = () => ({
   components: { UFileInput },
   setup() {
@@ -425,35 +421,13 @@ export const Validation: StoryFn<ComponentArgs> = () => ({
 
     return { rules };
   },
-  template: `
-    <u-file-input
-      :rules="rules"
-      accept="image/png, image/jpeg, image/bmp"
-      label="Photos"
-      placeholder="Upload your photos"
-      prepend-icon="hugeicons:camera-01"
-      multiple
-    ></u-file-input>
-  `,
+  template: validationTemplate,
 });
 
 Validation.parameters = {
   docs: {
-    description: {
-      story:
-        'Similar to other inputs, you can use the rules prop to create your own custom validation parameters. If multiple props is set, the value passed in the validation functions will be an array.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    :rules="rules"
-    accept="image/png, image/jpeg, image/bmp"
-    label="Photos"
-    placeholder="Upload your photos"
-    prepend-icon="hugeicons:camera-01"
-    multiple
-  ></u-file-input>
-</template>
+      code: `<template>${validationTemplate}</template>
 <script setup>
   const maxSize = 5000000 // 5 MB
   const errorMessage = 'Total image size should be less than 5 MB!'
@@ -475,13 +449,8 @@ Validation.parameters = {
   },
 };
 
-export const Selection: StoryFn = () => ({
-  components: { UFileInput },
-  setup() {
-    const files = ref<any[]>([]);
-    return { files };
-  },
-  template: `
+// Selection story
+const selectionTemplate = `
     <u-file-input
       v-model="files"
       label="File input"
@@ -495,38 +464,25 @@ export const Selection: StoryFn = () => ({
         </template>
       </template>
     </u-file-input>
-  `,
+  `;
+
+/**
+ * Using the selection slot, you can customize the appearance of your input selections.
+ * This is typically done with chips, however any component or markup can be used.
+ */
+export const Selection: StoryFn = () => ({
+  components: { UFileInput },
+  setup() {
+    const files = ref<any[]>([]);
+    return { files };
+  },
+  template: selectionTemplate,
 });
 
 Selection.parameters = {
   docs: {
-    description: {
-      story:
-        'Using the selection slot, you can customize the appearance of your input selections. This is typically done with chips, however any component or markup can be used.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    v-model="files"
-    label="File input"
-    placeholder="Upload your documents"
-    prepend-icon="hugeicons:document-attachment"
-    multiple
-  >
-    <template v-slot:selection="{ fileNames }">
-      <template v-for="fileName in fileNames" :key="fileName">
-        <u-chip
-          class="me-2"
-          color="primary"
-          size="small"
-          label
-        >
-          {{ fileName }}
-        </u-chip>
-      </template>
-    </template>
-  </u-file-input>
-</template>
+      code: `<template>${selectionTemplate}</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -536,13 +492,8 @@ Selection.parameters = {
   },
 };
 
-export const ComplexSelection: StoryFn = () => ({
-  components: { UFileInput },
-  setup() {
-    const files = ref<any[]>([]);
-    return { files };
-  },
-  template: `
+// ComplexSelection story
+const complexSelectionTemplate = `
     <u-file-input
       v-model="files"
       :show-size="1000"
@@ -573,50 +524,26 @@ export const ComplexSelection: StoryFn = () => ({
         </template>
       </template>
     </u-file-input>
-  `,
+  `;
+
+/**
+ * The flexibility of the selection slot allows you accommodate complex use-cases. In this
+ * example we show the first 2 selections as chips while adding a number indicator for the
+ * remaining amount.
+ */
+export const ComplexSelection: StoryFn = () => ({
+  components: { UFileInput },
+  setup() {
+    const files = ref<any[]>([]);
+    return { files };
+  },
+  template: complexSelectionTemplate,
 });
 
 ComplexSelection.parameters = {
   docs: {
-    description: {
-      story:
-        'The flexibility of the selection slot allows you accommodate complex use-cases. In this example we show the first 2 selections as chips while adding a number indicator for the remaining amount.',
-    },
     source: {
-      code: `<template>
-  <u-file-input
-    v-model="files"
-    :show-size="1000"
-    color="deep-purple-accent-4"
-    label="File input"
-    placeholder="Select your files"
-    prepend-icon="hugeicons:document-attachment"
-    variant="outlined"
-    counter
-    multiple
-  >
-    <template v-slot:selection="{ fileNames }">
-      <template v-for="(fileName, index) in fileNames" :key="fileName">
-        <u-chip
-          v-if="index < 2"
-          class="me-2"
-          color="deep-purple-accent-4"
-          size="small"
-          label
-        >
-          {{ fileName }}
-        </u-chip>
-
-        <span
-          v-else-if="index === 2"
-          class="text-overline text-grey-darken-3 mx-2"
-        >
-          +{{ files.length - 2 }} File(s)
-        </span>
-      </template>
-    </template>
-  </u-file-input>
-</template>
+      code: `<template>${complexSelectionTemplate}</template>
 <script setup>
   import { ref } from 'vue'
 
