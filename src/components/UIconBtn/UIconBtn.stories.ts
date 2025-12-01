@@ -9,6 +9,7 @@ import {
   UCardText,
   UDialog,
   UDivider,
+  UIcon,
   UIconBtn,
   UList,
   UListItem,
@@ -281,118 +282,79 @@ Default.args = {
   icon: 'hugeicons:app-store',
   variant: 'flat',
   size: 'default',
+  iconSize: '64',
 } as ComponentArgs;
 
 // Active Story
-export const Active: StoryFn<ComponentArgs> = (args) => ({
-  components: { UIconBtn, UToolbar, UMenu, UList, UListItem },
+const activeTemplate = `
+  <u-toolbar class="px-3 mx-auto" rounded="pill" title="Toolbar">
+    <template v-slot:append>
+      <u-icon-btn :active="menu" active-color="surface-variant" icon="hugeicons:more-vertical">
+        <u-icon></u-icon>
+
+        <u-menu v-model="menu" activator="parent" location="bottom end" offset="4">
+          <u-list
+            bg-color="surface-light"
+            class="d-flex flex-column ga-1 pa-1"
+            density="compact"
+            rounded="lg"
+            variant="text"
+            slim
+          >
+            <u-list-item
+              prepend-icon="hugeicons:user-circle"
+              rounded="lg"
+              title="Account"
+              link
+            ></u-list-item>
+
+            <u-list-item
+              prepend-icon="hugeicons:settings-01"
+              rounded="lg"
+              title="Settings"
+              link
+            ></u-list-item>
+
+            <u-list-item
+              prepend-icon="hugeicons:logout-02"
+              rounded="lg"
+              title="Logout"
+              link
+            ></u-list-item>
+          </u-list>
+        </u-menu>
+      </u-icon-btn>
+    </template>
+  </u-toolbar>
+  `;
+
+/**
+ * Use the active prop with active-color to style stateful icon buttons.
+ */
+export const Active: StoryFn<ComponentArgs> = () => ({
+  components: { UIconBtn, UIcon, UToolbar, UMenu, UList, UListItem },
   setup() {
     const menu = shallowRef(false);
-    return { args, menu };
+    return { menu };
   },
-  template: `
-    <u-toolbar class="px-3 mx-auto" rounded="pill" title="Toolbar">
-      <template v-slot:append>
-        <u-icon-btn :active="menu" icon="hugeicons:more-vertical">
-          <u-menu v-model="menu" activator="parent" location="bottom end" offset="4">
-            <u-list
-              bg-color="surface-light"
-              class="d-flex flex-column ga-1 pa-1"
-              density="compact"
-              rounded="lg"
-              variant="text"
-              slim
-            >
-              <u-list-item
-                prepend-icon="hugeicons:user-circle"
-                rounded="lg"
-                title="Account"
-                link
-              ></u-list-item>
-
-              <u-list-item
-                prepend-icon="hugeicons:settings-01"
-                rounded="lg"
-                title="Settings"
-                link
-              ></u-list-item>
-
-              <u-list-item
-                prepend-icon="hugeicons:logout-02"
-                rounded="lg"
-                title="Logout"
-                link
-              ></u-list-item>
-            </u-list>
-          </u-menu>
-        </u-icon-btn>
-      </template>
-    </u-toolbar>
-  `,
+  template: activeTemplate,
 });
-
-Active.args = {} as ComponentArgs;
 
 Active.parameters = {
   docs: {
     source: {
-      code: `<template>
-    <u-toolbar class="px-3 mx-auto" rounded="pill" title="Toolbar">
-      <template v-slot:append>
-        <u-icon-btn :active="menu" icon="hugeicons:more-vertical">
-          <u-menu v-model="menu" activator="parent" location="bottom end" offset="4">
-            <u-list
-              bg-color="surface-light"
-              class="d-flex flex-column ga-1 pa-1"
-              density="compact"
-              rounded="lg"
-              variant="text"
-              slim
-            >
-              <u-list-item
-                prepend-icon="hugeicons:user-circle"
-                rounded="lg"
-                title="Account"
-                link
-              ></u-list-item>
+      code: `<template>${activeTemplate}</template>
 
-              <u-list-item
-                prepend-icon="hugeicons:settings-01"
-                rounded="lg"
-                title="Settings"
-                link
-              ></u-list-item>
-
-              <u-list-item
-                prepend-icon="hugeicons:logout-02"
-                rounded="lg"
-                title="Logout"
-                link
-              ></u-list-item>
-            </u-list>
-          </u-menu>
-        </u-icon-btn>
-      </template>
-    </u-toolbar>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
   const menu = shallowRef(false)
 </script>`,
     },
-    description: { story: 'Use the active prop with active-color to style stateful icon buttons.' },
   },
 };
 
 // Opacity Story
-export const Opacity: StoryFn<ComponentArgs> = (args) => ({
-  components: { UIconBtn, UTextField, UDialog, UCard, UCardText, UCardActions, UBtn, USpacer },
-  setup() {
-    const dialog = shallowRef(false);
-    const search = shallowRef('');
-    return { dialog, search, args };
-  },
-  template: `
+const opacityTemplate = `
     <u-text-field
       class="mx-auto"
       hide-details="auto"
@@ -423,52 +385,35 @@ export const Opacity: StoryFn<ComponentArgs> = (args) => ({
         </u-dialog>
       </template>
     </u-text-field>
-  `,
-});
+  `;
 
-Opacity.args = {} as ComponentArgs;
+/**
+ * Control internal icon opacity for contextual emphasis.
+ */
+export const Opacity: StoryFn<ComponentArgs> = () => ({
+  components: { UIconBtn, UTextField, UDialog, UCard, UCardText, UCardActions, UBtn, USpacer },
+  setup() {
+    const dialog = shallowRef(false);
+    const search = shallowRef('');
+    return { dialog, search };
+  },
+  template: opacityTemplate,
+});
 
 Opacity.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-text-field class="mx-auto" hide-details="auto" label="Search" max-width="260" variant="outlined">
-    <template #append-inner>
-      <u-icon-btn :opacity="dialog ? 1 : 0.35" icon="hugeicons:search-01" @click.stop="dialog = true" hide-overlay variant="text"></u-icon-btn>
-      <u-dialog v-model="dialog" activator="parent" width="420">
-        <u-card title="Find in page" density="comfortable">
-          <u-card-text>
-            <u-text-field v-model="search" hide-details="auto" label="Search" variant="outlined"></u-text-field>
-          </u-card-text>
-          <template #actions>
-            <u-card-actions class="justify-end">
-              <u-btn variant="plain" text="Cancel" @click="dialog = false"></u-btn>
-              <u-btn text="Search" @click="dialog = false"></u-btn>
-            </u-card-actions>
-          </template>
-        </u-card>
-      </u-dialog>
-    </template>
-  </u-text-field>
-</template>
-<script setup>
+      code: `<template>${opacityTemplate}</template><script setup>
   import { shallowRef } from 'vue'
   const dialog = shallowRef(false)
   const search = shallowRef('')
 </script>`,
     },
-    description: { story: 'Control internal icon opacity for contextual emphasis.' },
   },
 };
 
 // Rotate Story
-export const Rotate: StoryFn<ComponentArgs> = (args) => ({
-  components: { UIconBtn, UBtn, UMenu, UList, UListItem },
-  setup() {
-    const open = shallowRef(false);
-    return { open, args };
-  },
-  template: `
+const rotateTemplate = `
     <div class="text-center">
       <u-menu v-model="open">
         <template #activator="{ props, isActive }">
@@ -491,39 +436,219 @@ export const Rotate: StoryFn<ComponentArgs> = (args) => ({
         </u-list>
       </u-menu>
     </div>
-  `,
-});
+  `;
 
-Rotate.args = {} as ComponentArgs;
+/**
+ * Rotate internal icon to reflect expanded or collapsed states.
+ */
+export const Rotate: StoryFn<ComponentArgs> = () => ({
+  components: { UIconBtn, UBtn, UMenu, UList, UListItem },
+  setup() {
+    const open = shallowRef(false);
+    return { open };
+  },
+  template: rotateTemplate,
+});
 
 Rotate.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-menu>
-      <template #activator="{ props, isActive }">
-        <u-btn v-bind="props" text="Toggle">
-          <template #append>
-            <u-icon-btn :rotate="isActive ? 180 : 0" icon="hugeicons:arrow-down-01" size="20" variant="plain" hide-overlay></u-icon-btn>
-          </template>
-        </u-btn>
-      </template>
-      <u-list density="comfortable">
-        <u-list-item title="Item 1" link></u-list-item>
-        <u-list-item title="Item 2" link></u-list-item>
-        <u-list-item title="Item 3" link></u-list-item>
-      </u-list>
-    </u-menu>
-  </div>
-</template>`,
+      code: `<template>${rotateTemplate}</template><script setup>
+  import { shallowRef } from 'vue'
+  const open = shallowRef(false)
+</script>`,
     },
-    description: { story: 'Rotate internal icon to reflect expanded or collapsed states.' },
   },
 };
 
 // Video Controls Story
-export const VideoControls: StoryFn<ComponentArgs> = (args) => ({
+const videoControlsTemplate = `
+    <u-container class="pa-md-12 text-center">
+      <u-sheet
+        class="d-inline-flex ga-1 pa-4 align-center justify-center mx-auto"
+        color="surface-light"
+        rounded="pill"
+      >
+        <u-sheet
+          :rounded="!mic ? 'lg' : 'xl'"
+          class="overflow-visible d-flex align-center"
+          color="surface"
+          height="48"
+          width="88"
+          flat
+        >
+          <u-icon-btn
+            v-model:active="micOptions"
+            :active-variant="!mic ? 'flat' : 'text'"
+            :base-variant="!mic ? 'flat' : 'text'"
+            :color="!mic ? 'error' : ''"
+            :rotate="micOptions ? 180 : 0"
+            :rounded="!mic ? 'lg' : 'circle'"
+            icon="hugeicons:arrow-up-01" 
+            size="48"
+            hide-overlay
+          ></u-icon-btn>
+
+          <u-icon-btn
+            v-model:active="mic"
+            :rounded="!mic ? 'lg' : 'circle'"
+            active-color=""
+            active-icon="hugeicons:mic-01"
+            active-variant="tonal"
+            base-variant="flat"
+            class="ms-n2"
+            color="#f9dedc"
+            icon="hugeicons:mic-off-01"
+            size="48"
+            v-ripple
+          ></u-icon-btn>
+        </u-sheet>
+
+        <u-sheet
+          :rounded="!video ? 'lg' : 'xl'"
+          class="overflow-visible d-flex align-center"
+          color="surface"
+          height="48"
+          width="88"
+          flat
+        >
+          <u-icon-btn
+            v-model:active="videoOptions"
+            :active-variant="!video ? 'flat' : 'text'"
+            :base-variant="!video ? 'flat' : 'text'"
+            :color="!video ? 'error' : ''"
+            :rotate="videoOptions ? 180 : 0"
+            :rounded="!video ? 'lg' : 'circle'"
+            icon="hugeicons:arrow-up-01"
+            size="48"
+            hide-overlay
+          ></u-icon-btn>
+
+          <u-icon-btn
+            v-model:active="video"
+            :rounded="!video ? 'lg' : 'circle'"
+            active-color=""
+            active-icon="hugeicons:video-02"
+            active-variant="tonal"
+            base-variant="flat"
+            class="ms-n2"
+            color="#f9dedc"
+            icon="hugeicons:video-off"
+            size="48"
+          ></u-icon-btn>
+        </u-sheet>
+
+        <u-icon-btn
+          v-model:active="caption"
+          :class="!caption ? 'mx-1' : undefined"
+          :rounded="!caption ? 'circle' : 'lg'"
+          :width="caption ? 56 : 48"
+          active-color="#9bbbef"
+          active-icon="hugeicons:closed-caption"
+          active-variant="flat"
+          height="48"
+          icon="hugeicons:closed-caption"
+        ></u-icon-btn>
+
+        <u-icon-btn
+          v-model:active="emoji"
+          :class="!emoji ? 'mx-1' : undefined"
+          :rounded="!emoji ? 'circle' : 'lg'"
+          :width="emoji ? 56 : 48"
+          active-color="#9bbbef"
+          active-icon="hugeicons:happy"
+          height="48"
+          icon="hugeicons:happy"
+        ></u-icon-btn>
+
+        <u-icon-btn
+          v-model:active="share"
+          :class="!share ? 'mx-1' : undefined"
+          :rounded="!share ? 'circle' : 'lg'"
+          :width="share ? 56 : 48"
+          active-color="#9bbbef"
+          active-icon="hugeicons:square-arrow-up-02"
+          height="48"
+          icon="hugeicons:square-arrow-up-02"
+          @click="onClick"
+        ></u-icon-btn>
+
+        <u-icon-btn
+          v-model:active="raised"
+          :class="!raised ? 'mx-1' : undefined"
+          :rounded="!raised ? 'circle' : 'lg'"
+          :width="raised ? 56 : 48"
+          active-color="#9bbbef"
+          active-icon="hugeicons:waving-hand-02"
+          height="48"
+          icon="hugeicons:waving-hand-02"
+        ></u-icon-btn>
+
+        <u-icon-btn
+          height="48"
+          icon="hugeicons:more-vertical"
+          rounded="xl"
+          variant="tonal"
+        >
+          <u-icon></u-icon>
+
+          <u-menu activator="parent" location="top end" offset="4">
+            <u-list rounded="lg" slim>
+              <u-list-item
+                prepend-icon="hugeicons:radio-button"
+                title="Manage recording"
+                link
+              ></u-list-item>
+
+              <u-divider class="my-2"></u-divider>
+
+              <u-list-item
+                prepend-icon="hugeicons:grid-view"
+                title="Change layout"
+                link
+              ></u-list-item>
+
+              <u-list-item
+                prepend-icon="hugeicons:full-screen"
+                title="Full screen"
+                link
+              ></u-list-item>
+
+              <u-list-item
+                prepend-icon="hugeicons:computer-screen-share"
+                title="Share screen"
+                link
+              ></u-list-item>
+
+              <u-divider class="my-2"></u-divider>
+
+              <u-list-item
+                prepend-icon="hugeicons:settings-01"
+                title="Settings"
+                link
+              ></u-list-item>
+            </u-list>
+          </u-menu>
+        </u-icon-btn>
+
+        <u-icon-btn
+          v-model:active="hangup"
+          active-variant="outlined"
+          base-variant="flat"
+          color="error"
+          height="48"
+          icon="hugeicons:call-end-04"
+          rounded="xl"
+          width="72"
+        ></u-icon-btn>
+      </u-sheet>
+    </u-container>
+  `;
+
+/**
+ * Flexible arrangement replicating common video conferencing controls.
+ */
+export const VideoControls: StoryFn<ComponentArgs> = () => ({
   components: { UIconBtn, USheet, UMenu, UList, UListItem, UDivider },
   setup() {
     const caption = shallowRef(false);
@@ -549,381 +674,29 @@ export const VideoControls: StoryFn<ComponentArgs> = (args) => ({
       video,
       videoOptions,
       onClick,
-      args,
     };
   },
-  template: `
-    <u-container class="pa-md-12 text-center">
-      <u-sheet
-        class="d-inline-flex ga-1 pa-4 align-center justify-center mx-auto"
-        color="surface-light"
-        rounded="pill"
-      >
-        <u-sheet
-          :rounded="!mic ? 'lg' : 'xl'"
-          class="overflow-visible d-flex align-center"
-          color="surface"
-          height="48"
-          width="88"
-          flat
-        >
-          <u-icon-btn
-            v-model:active="micOptions"
-            :active-variant="!mic ? 'flat' : 'text'"
-            :base-variant="!mic ? 'flat' : 'text'"
-            :color="!mic ? 'error' : ''"
-            :rotate="micOptions ? 180 : 0"
-            :rounded="!mic ? 'lg' : 'circle'"
-            icon="hugeicons:arrow-up-01" 
-            size="48"
-            hide-overlay
-          ></u-icon-btn>
-
-          <u-icon-btn
-            v-model:active="mic"
-            :rounded="!mic ? 'lg' : 'circle'"
-            active-color=""
-            active-icon="hugeicons:mic-01"
-            active-variant="tonal"
-            base-variant="flat"
-            class="ms-n2"
-            color="#f9dedc"
-            icon="hugeicons:mic-off-01"
-            size="48"
-            v-ripple
-          ></u-icon-btn>
-        </u-sheet>
-
-        <u-sheet
-          :rounded="!video ? 'lg' : 'xl'"
-          class="overflow-visible d-flex align-center"
-          color="surface"
-          height="48"
-          width="88"
-          flat
-        >
-          <u-icon-btn
-            v-model:active="videoOptions"
-            :active-variant="!video ? 'flat' : 'text'"
-            :base-variant="!video ? 'flat' : 'text'"
-            :color="!video ? 'error' : ''"
-            :rotate="videoOptions ? 180 : 0"
-            :rounded="!video ? 'lg' : 'circle'"
-            icon="hugeicons:arrow-up-01"
-            size="48"
-            hide-overlay
-          ></u-icon-btn>
-
-          <u-icon-btn
-            v-model:active="video"
-            :rounded="!video ? 'lg' : 'circle'"
-            active-color=""
-            active-icon="hugeicons:video-02"
-            active-variant="tonal"
-            base-variant="flat"
-            class="ms-n2"
-            color="#f9dedc"
-            icon="hugeicons:video-off"
-            size="48"
-          ></u-icon-btn>
-        </u-sheet>
-
-        <u-icon-btn
-          v-model:active="caption"
-          :class="!caption ? 'mx-1' : undefined"
-          :rounded="!caption ? 'circle' : 'lg'"
-          :width="caption ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:closed-caption"
-          active-variant="flat"
-          height="48"
-          icon="hugeicons:closed-caption"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="emoji"
-          :class="!emoji ? 'mx-1' : undefined"
-          :rounded="!emoji ? 'circle' : 'lg'"
-          :width="emoji ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:happy"
-          height="48"
-          icon="hugeicons:happy"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="share"
-          :class="!share ? 'mx-1' : undefined"
-          :rounded="!share ? 'circle' : 'lg'"
-          :width="share ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:square-arrow-up-02"
-          height="48"
-          icon="hugeicons:square-arrow-up-02"
-          @click="onClick"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="raised"
-          :class="!raised ? 'mx-1' : undefined"
-          :rounded="!raised ? 'circle' : 'lg'"
-          :width="raised ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:waving-hand-02"
-          height="48"
-          icon="hugeicons:waving-hand-02"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          height="48"
-          icon="hugeicons:more-vertical"
-          rounded="xl"
-          variant="tonal"
-        >
-          <u-icon></u-icon>
-
-          <u-menu activator="parent" location="top end" offset="4">
-            <u-list rounded="lg" slim>
-              <u-list-item
-                prepend-icon="hugeicons:radio-button"
-                title="Manage recording"
-                link
-              ></u-list-item>
-
-              <u-divider class="my-2"></u-divider>
-
-              <u-list-item
-                prepend-icon="hugeicons:grid-view"
-                title="Change layout"
-                link
-              ></u-list-item>
-
-              <u-list-item
-                prepend-icon="hugeicons:full-screen"
-                title="Full screen"
-                link
-              ></u-list-item>
-
-              <u-list-item
-                prepend-icon="hugeicons:computer-screen-share"
-                title="Share screen"
-                link
-              ></u-list-item>
-
-              <u-divider class="my-2"></u-divider>
-
-              <u-list-item
-                prepend-icon="hugeicons:settings-01"
-                title="Settings"
-                link
-              ></u-list-item>
-            </u-list>
-          </u-menu>
-        </u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="hangup"
-          active-variant="outlined"
-          base-variant="flat"
-          color="error"
-          height="48"
-          icon="hugeicons:call-end-04"
-          rounded="xl"
-          width="72"
-        ></u-icon-btn>
-      </u-sheet>
-    </u-container>
-  `,
+  template: videoControlsTemplate,
 });
-
-VideoControls.args = {} as ComponentArgs;
 
 VideoControls.parameters = {
   docs: {
     source: {
-      code: `<template>
-    <u-container class="pa-md-12 text-center">
-      <u-sheet
-        class="d-inline-flex ga-1 pa-4 align-center justify-center mx-auto"
-        color="surface-light"
-        rounded="pill"
-      >
-        <u-sheet
-          :rounded="!mic ? 'lg' : 'xl'"
-          class="overflow-visible d-flex align-center"
-          color="surface"
-          height="48"
-          width="88"
-          flat
-        >
-          <u-icon-btn
-            v-model:active="micOptions"
-            :active-variant="!mic ? 'flat' : 'text'"
-            :base-variant="!mic ? 'flat' : 'text'"
-            :color="!mic ? 'error' : ''"
-            :rotate="micOptions ? 180 : 0"
-            :rounded="!mic ? 'lg' : 'circle'"
-            icon="hugeicons:arrow-up-01" 
-            size="48"
-            hide-overlay
-          ></u-icon-btn>
-
-          <u-icon-btn
-            v-model:active="mic"
-            :rounded="!mic ? 'lg' : 'circle'"
-            active-color=""
-            active-icon="hugeicons:mic-01"
-            active-variant="tonal"
-            base-variant="flat"
-            class="ms-n2"
-            color="#f9dedc"
-            icon="hugeicons:mic-off-01"
-            size="48"
-            v-ripple
-          ></u-icon-btn>
-        </u-sheet>
-
-        <u-sheet
-          :rounded="!video ? 'lg' : 'xl'"
-          class="overflow-visible d-flex align-center"
-          color="surface"
-          height="48"
-          width="88"
-          flat
-        >
-          <u-icon-btn
-            v-model:active="videoOptions"
-            :active-variant="!video ? 'flat' : 'text'"
-            :base-variant="!video ? 'flat' : 'text'"
-            :color="!video ? 'error' : ''"
-            :rotate="videoOptions ? 180 : 0"
-            :rounded="!video ? 'lg' : 'circle'"
-            icon="hugeicons:arrow-up-01"
-            size="48"
-            hide-overlay
-          ></u-icon-btn>
-
-          <u-icon-btn
-            v-model:active="video"
-            :rounded="!video ? 'lg' : 'circle'"
-            active-color=""
-            active-icon="hugeicons:video-02"
-            active-variant="tonal"
-            base-variant="flat"
-            class="ms-n2"
-            color="#f9dedc"
-            icon="hugeicons:video-off"
-            size="48"
-          ></u-icon-btn>
-        </u-sheet>
-
-        <u-icon-btn
-          v-model:active="caption"
-          :class="!caption ? 'mx-1' : undefined"
-          :rounded="!caption ? 'circle' : 'lg'"
-          :width="caption ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:closed-caption"
-          active-variant="flat"
-          height="48"
-          icon="hugeicons:closed-caption"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="emoji"
-          :class="!emoji ? 'mx-1' : undefined"
-          :rounded="!emoji ? 'circle' : 'lg'"
-          :width="emoji ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:happy"
-          height="48"
-          icon="hugeicons:happy"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="share"
-          :class="!share ? 'mx-1' : undefined"
-          :rounded="!share ? 'circle' : 'lg'"
-          :width="share ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:square-arrow-up-02"
-          height="48"
-          icon="hugeicons:square-arrow-up-02"
-          @click="onClick"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="raised"
-          :class="!raised ? 'mx-1' : undefined"
-          :rounded="!raised ? 'circle' : 'lg'"
-          :width="raised ? 56 : 48"
-          active-color="#9bbbef"
-          active-icon="hugeicons:waving-hand-02"
-          height="48"
-          icon="hugeicons:waving-hand-02"
-        ></u-icon-btn>
-
-        <u-icon-btn
-          height="48"
-          icon="hugeicons:more-vertical"
-          rounded="xl"
-          variant="tonal"
-        >
-          <u-icon></u-icon>
-
-          <u-menu activator="parent" location="top end" offset="4">
-            <u-list rounded="lg" slim>
-              <u-list-item
-                prepend-icon="hugeicons:radio-button"
-                title="Manage recording"
-                link
-              ></u-list-item>
-
-              <u-divider class="my-2"></u-divider>
-
-              <u-list-item
-                prepend-icon="hugeicons:grid-view"
-                title="Change layout"
-                link
-              ></u-list-item>
-
-              <u-list-item
-                prepend-icon="hugeicons:full-screen"
-                title="Full screen"
-                link
-              ></u-list-item>
-
-              <u-list-item
-                prepend-icon="hugeicons:computer-screen-share"
-                title="Share screen"
-                link
-              ></u-list-item>
-
-              <u-divider class="my-2"></u-divider>
-
-              <u-list-item
-                prepend-icon="hugeicons:settings-01"
-                title="Settings"
-                link
-              ></u-list-item>
-            </u-list>
-          </u-menu>
-        </u-icon-btn>
-
-        <u-icon-btn
-          v-model:active="hangup"
-          active-variant="outlined"
-          base-variant="flat"
-          color="error"
-          height="48"
-          icon="hugeicons:call-end-04"
-          rounded="xl"
-          width="72"
-        ></u-icon-btn>
-      </u-sheet>
-    </u-container>
-</template>`,
+      code: `<template>${videoControlsTemplate}</template><script setup>
+  import { shallowRef } from 'vue'
+  const caption = shallowRef(false)
+  const emoji = shallowRef(false)
+  const hangup = shallowRef(false)
+  const mic = shallowRef(true)
+  const micOptions = shallowRef(false)
+  const raised = shallowRef(false)
+  const share = shallowRef(false)
+  const video = shallowRef(true)
+  const videoOptions = shallowRef(false)
+  function onClick() {
+    console.log('Sharing your screen')
+  }
+</script>`,
     },
-    description: { story: 'Flexible arrangement replicating common video conferencing controls.' },
   },
 };
