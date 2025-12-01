@@ -179,6 +179,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UInfiniteScroll },
   setup() {
@@ -202,21 +203,38 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
     return { args, items, load };
   },
   template: `
-    <u-infinite-scroll v-bind="args" @load="load">
-      <template v-for="(item, index) in items" :key="item">
-        <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-          Item number #{{ item }}
-        </div>
-      </template>
-    </u-infinite-scroll>
-  `,
+  <u-infinite-scroll v-bind="args" @load="load">
+    <template v-for="(item, index) in items" :key="item">
+      <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
+        Item number #{{ item }}
+      </div>
+    </template>
+  </u-infinite-scroll>
+`,
 });
 
 Default.args = {
   maxHeight: '400',
 } as ComponentArgs;
 
-export const Mode: StoryFn<ComponentArgs> = (args) => ({
+// Mode Story
+const modeTemplate = `
+  <UInfiniteScroll v-bind="args" height="300" mode="manual" @load="load">
+    <template v-for="(item, index) in items" :key="item">
+      <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
+        Item number {{ item }}
+      </div>
+    </template>
+  </UInfiniteScroll>
+`;
+
+/**
+ * The default behavior of the component is to try to load more content automatically when the
+ * scrollbar gets close to the end. However, a manual mode is also supported, where the user
+ * needs to do some interaction to load the content. By default this is a button, but it can
+ * be customized with a #slot.
+ */
+export const Mode: StoryFn<ComponentArgs> = () => ({
   components: { UInfiniteScroll },
   setup() {
     const items = ref(Array.from({ length: 50 }, (k, v) => v + 1));
@@ -229,46 +247,48 @@ export const Mode: StoryFn<ComponentArgs> = (args) => ({
       }, 1000);
     }
 
-    return { args, items, load };
+    return { items, load };
   },
-  template: `
-    <UInfiniteScroll v-bind="args" height="300" mode="manual" @load="load">
-      <template v-for="(item, index) in items" :key="item">
-        <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-          Item number {{ item }}
-        </div>
-      </template>
-    </UInfiniteScroll>
-  `,
+  template: modeTemplate,
 });
 
-Mode.args = {} as ComponentArgs;
 Mode.parameters = {
   docs: {
     source: {
-      code: `<v-infinite-scroll height="300" mode="manual" @load="load">
-  <template v-for="(item, index) in items" :key="item">
-    <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-      Item number {{ item }}
-    </div>
-  </template>
-</v-infinite-scroll>
-<script setup>
-import { ref } from 'vue'
+      code: `<template>${modeTemplate}</template>
 
-const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
-function load ({ done }) {
-  setTimeout(() => {
-    items.value.push(...Array.from({ length: 10 }, (k, v) => v + items.value.at(-1) + 1))
-    done('ok')
-  }, 1000)
-}
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
+
+  function load({ done }) {
+    setTimeout(() => {
+      const last = items.value.at(-1) ?? 0
+      items.value.push(...Array.from({ length: 10 }, (k, v) => v + last + 1))
+      done('ok')
+    }, 1000)
+  }
 </script>`,
     },
   },
 };
 
-export const Direction: StoryFn<ComponentArgs> = (args) => ({
+// Direction Story
+const directionTemplate = `
+  <UInfiniteScroll v-bind="args" direction="horizontal" @load="load">
+    <template v-for="(item, index) in items" :key="item">
+      <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']" style="display:inline-block; min-width:120px;">
+        Item #{{ item }}
+      </div>
+    </template>
+  </UInfiniteScroll>
+`;
+
+/**
+ * The u-infinite-scroll component can be used with either vertical or horizontal scrolling.
+ */
+export const Direction: StoryFn<ComponentArgs> = () => ({
   components: { UInfiniteScroll },
   setup() {
     const items = ref(Array.from({ length: 50 }, (k, v) => v + 1));
@@ -281,47 +301,54 @@ export const Direction: StoryFn<ComponentArgs> = (args) => ({
       }, 1000);
     }
 
-    return { args, items, load };
+    return { items, load };
   },
-  template: `
-    <UInfiniteScroll v-bind="args" direction="horizontal" @load="load">
-      <template v-for="(item, index) in items" :key="item">
-        <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']" style="display:inline-block; min-width:120px;">
-          Item #{{ item }}
-        </div>
-      </template>
-    </UInfiniteScroll>
-  `,
+  template: directionTemplate,
 });
 
-Direction.args = {} as ComponentArgs;
 Direction.parameters = {
   docs: {
     source: {
-      code: `<v-infinite-scroll direction="horizontal" @load="load">
-  <template v-for="(item, index) in items" :key="item">
-    <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-      Item #{{ item }}
-    </div>
-  </template>
-</v-infinite-scroll>
+      code: `<template>${directionTemplate}</template>
+
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
+  const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
 
-function load ({ done }) {
-  setTimeout(() => {
-    items.value.push(...Array.from({ length: 10 }, (k, v) => v + items.value.at(-1) + 1))
-    done('ok')
-  }, 1000)
-}
+  function load({ done }) {
+    setTimeout(() => {
+      const last = items.value.at(-1) ?? 0
+      items.value.push(...Array.from({ length: 10 }, (k, v) => v + last + 1))
+      done('ok')
+    }, 1000)
+  }
 </script>`,
     },
   },
 };
 
-export const Side: StoryFn<ComponentArgs> = (args) => ({
+// Side Story
+const sideTemplate = `
+  <u-infinite-scroll
+    height="300"
+    side="start"
+    @load="load"
+  >
+    <template v-for="(item, index) in items" :key="item">
+      <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
+        Item number {{ item }}
+      </div>
+    </template>
+  </u-infinite-scroll>
+`;
+
+/**
+ * By default, the u-infinite-scroll component assumes that new content will appear at the end
+ * of existing content. But it also supports content being added to the start and appearing
+ * both at the beginning and the end.
+ */
+export const Side: StoryFn<ComponentArgs> = () => ({
   components: { UInfiniteScroll, UBtn },
   setup() {
     const items = ref(Array.from({ length: 50 }, (k, v) => v + 1));
@@ -332,40 +359,16 @@ export const Side: StoryFn<ComponentArgs> = (args) => ({
       }, 1000);
     }
 
-    return { args, items, load };
+    return { items, load };
   },
-  template: `
-  <u-infinite-scroll
-    height="300"
-    side="start"
-    @load="load"
-  >
-    <template v-for="(item, index) in items" :key="item">
-      <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-        Item number {{ item }}
-      </div>
-    </template>
-  </u-infinite-scroll>
-  `,
+  template: sideTemplate,
 });
 
-Side.args = {} as ComponentArgs;
 Side.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-infinite-scroll
-    height="300"
-    side="start"
-    @load="load"
-  >
-    <template v-for="(item, index) in items" :key="item">
-      <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-        Item number {{ item }}
-      </div>
-    </template>
-  </u-infinite-scroll>
-</template>
+      code: `<template>${sideTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -381,42 +384,8 @@ Side.parameters = {
   },
 };
 
-export const Color: StoryFn<ComponentArgs> = (args) => ({
-  components: { UInfiniteScroll },
-  setup() {
-    const items = ref(Array.from({ length: 50 }, (k, v) => v + 1));
-
-    function load({ done }: { done: (status: string) => void }) {
-      setTimeout(() => {
-        const last = items.value.at(-1) ?? 0;
-        items.value.push(...Array.from({ length: 10 }, (k, v) => v + last + 1));
-        done('ok');
-      }, 1000);
-    }
-
-    return { args, items, load };
-  },
-  template: `
-    <u-infinite-scroll
-      color="secondary"
-      height="400"
-      mode="manual"
-      @load="load"
-    >
-      <template v-for="(item, index) in items" :key="item">
-        <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-          Item #{{ item }}
-        </div>
-      </template>
-    </u-infinite-scroll>
-  `,
-});
-
-Color.args = {} as ComponentArgs;
-Color.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Color Story
+const colorTemplate = `
   <u-infinite-scroll
     color="secondary"
     height="400"
@@ -429,17 +398,44 @@ Color.parameters = {
       </div>
     </template>
   </u-infinite-scroll>
-</template>
-<script setup>
-import { ref } from 'vue'
+`;
 
-const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
-function load ({ done }) {
-  setTimeout(() => {
-    items.value.push(...Array.from({ length: 10 }, (k, v) => v + items.value.at(-1) + 1))
-    done('ok')
-  }, 1000)
-}
+/**
+ * The default load more button and loading spinner can be colored with the color prop.
+ */
+export const Color: StoryFn<ComponentArgs> = () => ({
+  components: { UInfiniteScroll },
+  setup() {
+    const items = ref(Array.from({ length: 50 }, (k, v) => v + 1));
+
+    function load({ done }: { done: (status: string) => void }) {
+      setTimeout(() => {
+        const last = items.value.at(-1) ?? 0;
+        items.value.push(...Array.from({ length: 10 }, (k, v) => v + last + 1));
+        done('ok');
+      }, 1000);
+    }
+
+    return { items, load };
+  },
+  template: colorTemplate,
+});
+
+Color.parameters = {
+  docs: {
+    source: {
+      code: `<template>${colorTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
+  function load ({ done }) {
+    setTimeout(() => {
+      items.value.push(...Array.from({ length: 10 }, (k, v) => v + items.value.at(-1) + 1))
+      done('ok')
+    }, 1000)
+  }
 </script>`,
     },
   },
