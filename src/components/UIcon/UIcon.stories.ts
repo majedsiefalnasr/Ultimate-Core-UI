@@ -119,16 +119,17 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UIcon },
   setup() {
     return { args };
   },
   template: `
-    <div class="text-center">
-      <u-icon v-bind="args"></u-icon>
-    </div>
-  `,
+  <div class="text-center">
+    <u-icon v-bind="args"></u-icon>
+  </div>
+`,
 });
 
 Default.args = {
@@ -136,29 +137,8 @@ Default.args = {
   size: 'default',
 } as ComponentArgs;
 
-export const Color: StoryFn<ComponentArgs> = (args) => ({
-  components: { UIcon, URow },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-row class="py-4" justify="space-around">
-      <u-icon color="green-darken-2" icon="hugeicons:building-03" size="large"></u-icon>
-      <u-icon color="blue-darken-2" icon="hugeicons:message-01" size="large"></u-icon>
-      <u-icon color="purple-darken-2" icon="hugeicons:dialpad-circle-01" size="large"></u-icon>
-      <u-icon color="teal-darken-2" icon="hugeicons:mail-01" size="large"></u-icon>
-      <u-icon color="blue-grey-darken-2" icon="hugeicons:git-branch" size="large"></u-icon>
-      <u-icon color="orange-darken-2" icon="hugeicons:arrow-up-02" size="large"></u-icon>
-    </u-row>
-  `,
-});
-
-Color.args = {} as ComponentArgs;
-
-Color.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Color Story
+const colorTemplate = `
   <u-row class="py-4" justify="space-around">
     <u-icon color="green-darken-2" icon="hugeicons:building-03" size="large"></u-icon>
     <u-icon color="blue-darken-2" icon="hugeicons:message-01" size="large"></u-icon>
@@ -167,63 +147,26 @@ Color.parameters = {
     <u-icon color="blue-grey-darken-2" icon="hugeicons:git-branch" size="large"></u-icon>
     <u-icon color="orange-darken-2" icon="hugeicons:arrow-up-02" size="large"></u-icon>
   </u-row>
-</template>`,
-    },
-    description: {
-      story:
-        'Using color helpers you can change the color of an icon from the standard dark and light themes.',
+`;
+
+/**
+ * Using color helpers you can change the color of an icon from the standard dark and light themes.
+ */
+export const Color: StoryFn<ComponentArgs> = () => ({
+  components: { UIcon, URow },
+  template: colorTemplate,
+});
+
+Color.parameters = {
+  docs: {
+    source: {
+      code: `<template>${colorTemplate}</template>`,
     },
   },
 };
 
-export const Buttons: StoryFn<ComponentArgs> = (args) => ({
-  components: { UIcon, UBtn },
-  setup() {
-    return { args };
-  },
-  template: `
-    <div class="text-center">
-      <div>
-        <u-btn class="ma-2" color="primary">
-          Accept
-          <u-icon icon="hugeicons:checkmark-circle-02" end></u-icon>
-        </u-btn>
-
-        <u-btn class="ma-2" color="red">
-          Decline
-          <u-icon icon="hugeicons:cancel-01" end></u-icon>
-        </u-btn>
-
-        <u-btn class="ma-2">
-          <u-icon icon="hugeicons:cancel-circle" start></u-icon>
-          Cancel
-        </u-btn>
-      </div>
-
-      <div>
-        <u-btn class="ma-2" color="orange-darken-2">
-          <u-icon icon="hugeicons:arrow-left-02" start></u-icon>
-          Back
-        </u-btn>
-
-        <u-btn class="ma-2" color="purple" icon="hugeicons:wrench-01"></u-btn>
-        <u-btn class="ma-2" color="indigo" icon="hugeicons:cloud-upload"></u-btn>
-      </div>
-
-      <div>
-        <u-btn class="ma-2" color="blue-lighten-2" icon="hugeicons:thumbs-up" variant="text"></u-btn>
-        <u-btn class="ma-2" color="red-lighten-2" icon="hugeicons:thumbs-down" variant="text"></u-btn>
-      </div>
-    </div>
-  `,
-});
-
-Buttons.args = {} as ComponentArgs;
-
-Buttons.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Buttons Story
+const buttonsTemplate = `
   <div class="text-center">
     <div>
       <u-btn class="ma-2" color="primary">
@@ -257,10 +200,20 @@ Buttons.parameters = {
       <u-btn class="ma-2" color="red-lighten-2" icon="hugeicons:thumbs-down" variant="text"></u-btn>
     </div>
   </div>
-</template>`,
-    },
-    description: {
-      story: 'Icons can be used inside of buttons to add emphasis to the action.',
+`;
+
+/**
+ * Icons can be used inside of buttons to add emphasis to the action.
+ */
+export const Buttons: StoryFn<ComponentArgs> = () => ({
+  components: { UIcon, UBtn },
+  template: buttonsTemplate,
+});
+
+Buttons.parameters = {
+  docs: {
+    source: {
+      code: `<template>${buttonsTemplate}</template>`,
     },
   },
 };
