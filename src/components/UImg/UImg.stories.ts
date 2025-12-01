@@ -85,17 +85,17 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
-// Default
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UImg },
   setup() {
     return { args };
   },
   template: `
-    <div class="text-center">
-      <u-img v-bind="args"></u-img>
-    </div>
-  `,
+  <div class="text-center">
+    <u-img v-bind="args"></u-img>
+  </div>
+`,
 });
 
 Default.args = {
@@ -105,50 +105,8 @@ Default.args = {
   cover: false,
 } as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    description: { story: 'Basic responsive image with aspect ratio and width.' },
-  },
-};
-
-// Cover
-export const Cover: StoryFn<ComponentArgs> = (args) => ({
-  components: { UImg, UContainer, URow, UCol },
-  setup() {
-    return { args };
-  },
-  template: `
-    <div class="d-flex justify-space-around align-center">
-      <div class="ma-4">
-        <div class="text-subtitle-2">Default</div>
-        <u-img
-          :aspect-ratio="1"
-          class="bg-surface elevation-10"
-          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          width="300"
-        ></u-img>
-      </div>
-
-      <div class="ma-4">
-        <div class="text-subtitle-2">Cover</div>
-        <u-img
-          :aspect-ratio="1"
-          class="bg-surface elevation-10"
-          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          width="300"
-          cover
-        ></u-img>
-      </div>
-    </div>
-  `,
-});
-
-Cover.args = {} as ComponentArgs;
-
-Cover.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Cover Story
+const coverTemplate = `
   <div class="d-flex justify-space-around align-center">
     <div class="ma-4">
       <div class="text-subtitle-2">Default</div>
@@ -171,85 +129,97 @@ Cover.parameters = {
       ></u-img>
     </div>
   </div>
-</template>`,
-    },
-    description: {
-      story: 'Use the `cover` prop to fill the container and crop the image as needed.',
+`;
+
+/**
+ * Use the `cover` prop to fill the container and crop the image as needed.
+ */
+export const Cover: StoryFn<ComponentArgs> = () => ({
+  components: { UImg, UContainer, URow, UCol },
+  template: coverTemplate,
+});
+
+Cover.parameters = {
+  docs: {
+    source: {
+      code: `<template>${coverTemplate}</template>`,
     },
   },
 };
 
-// Height
-export const Height: StoryFn<ComponentArgs> = (args) => ({
+// Height Story
+const heightTemplate = `
+  <u-container
+    class="fill-height"
+    style="min-height: 434px"
+    fluid
+  >
+    <u-fade-transition mode="out-in">
+      <u-row>
+        <u-col cols="6">
+          <u-card>
+            <u-img
+              class="bg-grey-lighten-2"
+              height="125"
+              src="https://picsum.photos/350/165?random"
+            ></u-img>
+            <u-card-title class="text-h6">
+              height
+            </u-card-title>
+          </u-card>
+        </u-col>
+
+        <u-col cols="6">
+          <u-card>
+            <u-img
+              class="bg-grey-lighten-2"
+              height="125"
+              src="https://picsum.photos/350/165?random"
+              cover
+            ></u-img>
+            <u-card-title class="text-h6">
+              height with cover
+            </u-card-title>
+          </u-card>
+        </u-col>
+
+        <u-col cols="6">
+          <u-card>
+            <u-img
+              class="bg-grey-lighten-2"
+              max-height="125"
+              src="https://picsum.photos/350/165?random"
+            ></u-img>
+            <u-card-title class="text-h6">
+              max-height
+            </u-card-title>
+          </u-card>
+        </u-col>
+
+        <u-col cols="6">
+          <u-card>
+            <u-img
+              class="bg-grey-lighten-2"
+              max-height="125"
+              src="https://picsum.photos/350/165?random"
+              cover
+            ></u-img>
+            <u-card-title class="text-h6">
+              max-height with cover
+            </u-card-title>
+          </u-card>
+        </u-col>
+      </u-row>
+    </u-fade-transition>
+  </u-container>
+`;
+
+/**
+ * Limit image height or max-height and combine with `cover`.
+ */
+export const Height: StoryFn<ComponentArgs> = () => ({
   components: { UImg, UContainer, URow, UCol, UCard, UCardTitle, UFadeTransition },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-container
-      class="fill-height"
-      style="min-height: 434px"
-      fluid
-    >
-      <u-fade-transition mode="out-in">
-        <u-row>
-          <u-col cols="6">
-            <u-card>
-              <u-img
-                class="bg-grey-lighten-2"
-                height="125"
-                src="https://picsum.photos/350/165?random"
-              ></u-img>
-              <u-card-title class="text-h6">
-                height
-              </u-card-title>
-            </u-card>
-          </u-col>
-
-          <u-col cols="6">
-            <u-card>
-              <u-img
-                class="bg-grey-lighten-2"
-                height="125"
-                src="https://picsum.photos/350/165?random"
-                cover
-              ></u-img>
-              <u-card-title class="text-h6">
-                height with cover
-              </u-card-title>
-            </u-card>
-          </u-col>
-
-          <u-col cols="6">
-            <u-card>
-              <u-img
-                class="bg-grey-lighten-2"
-                max-height="125"
-                src="https://picsum.photos/350/165?random"
-              ></u-img>
-              <u-card-title class="text-h6">
-                max-height
-              </u-card-title>
-            </u-card>
-          </u-col>
-
-          <u-col cols="6">
-            <u-card>
-              <u-img
-                class="bg-grey-lighten-2"
-                max-height="125"
-                src="https://picsum.photos/350/165?random"
-                cover
-              ></u-img>
-              <u-card-title class="text-h6">
-                max-height with cover
-              </u-card-title>
-            </u-card>
-          </u-col>
-        </u-row>
-      </u-fade-transition>
-    </u-container>
-  `,
+  template: heightTemplate,
 });
 
 Height.args = {} as ComponentArgs;
@@ -257,82 +227,50 @@ Height.args = {} as ComponentArgs;
 Height.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-img class="bg-grey-lighten-2" height="125" src="https://picsum.photos/350/165?random"></u-img>
-  <u-img class="bg-grey-lighten-2" height="125" src="https://picsum.photos/350/165?random" cover></u-img>
-  <u-img class="bg-grey-lighten-2" max-height="125" src="https://picsum.photos/350/165?random"></u-img>
-  <u-img class="bg-grey-lighten-2" max-height="125" src="https://picsum.photos/350/165?random" cover></u-img>
-</template>`,
+      code: `<template>${heightTemplate}</template>`,
     },
-    description: { story: 'Limit image height or max-height and combine with `cover`.' },
   },
 };
 
-// Gradient
-export const Gradient: StoryFn<ComponentArgs> = (args) => ({
+// Gradient Story
+const gradientTemplate = `
+  <u-row>
+    <u-col cols="4" sm="4">
+      <u-img gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)" src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"></u-img>
+    </u-col>
+
+    <u-col cols="4" sm="4">
+      <u-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+        <div class="fill-height bottom-gradient"></div>
+      </u-img>
+    </u-col>
+
+    <u-col cols="4" sm="4">
+      <u-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+        <div class="fill-height repeating-gradient"></div>
+      </u-img>
+    </u-col>
+  </u-row>
+`;
+
+/**
+ * Apply simple linear gradients via the `gradient` prop or via content slot.
+ */
+export const Gradient: StoryFn<ComponentArgs> = () => ({
   components: { UImg, URow, UCol },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-row>
-      <u-col cols="4" sm="4">
-        <u-img gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)" src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"></u-img>
-      </u-col>
-
-      <u-col cols="4" sm="4">
-        <u-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
-          <div class="fill-height bottom-gradient"></div>
-        </u-img>
-      </u-col>
-
-      <u-col cols="4" sm="4">
-        <u-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
-          <div class="fill-height repeating-gradient"></div>
-        </u-img>
-      </u-col>
-    </u-row>
-  `,
+  template: gradientTemplate,
 });
-
-Gradient.args = {} as ComponentArgs;
 
 Gradient.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-img gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)" src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"></u-img>
-</template>`,
-    },
-    description: {
-      story: 'Apply simple linear gradients via the `gradient` prop or via content slot.',
+      code: `<template>${gradientTemplate}</template>`,
     },
   },
 };
 
-// Placeholder
-export const Placeholder: StoryFn<ComponentArgs> = (args) => ({
-  components: { UImg, UProgressCircular },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-img class="mx-auto" height="300" lazy-src="https://picsum.photos/id/11/100/60" max-width="500" src="https://bad.src/not/valid">
-      <template #placeholder>
-        <div class="d-flex align-center justify-center fill-height">
-          <u-progress-circular color="grey-lighten-4" indeterminate></u-progress-circular>
-        </div>
-      </template>
-    </u-img>
-  `,
-});
-
-Placeholder.args = {} as ComponentArgs;
-
-Placeholder.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Placeholder Story
+const placeholderTemplate = `
   <u-img class="mx-auto" height="300" lazy-src="https://picsum.photos/id/11/100/60" max-width="500" src="https://bad.src/not/valid">
     <template #placeholder>
       <div class="d-flex align-center justify-center fill-height">
@@ -340,83 +278,76 @@ Placeholder.parameters = {
       </div>
     </template>
   </u-img>
-</template>`,
+`;
+
+/**
+ * Provide a `placeholder` slot for progressive loading states.
+ */
+export const Placeholder: StoryFn<ComponentArgs> = () => ({
+  components: { UImg, UProgressCircular },
+  template: placeholderTemplate,
+});
+
+Placeholder.parameters = {
+  docs: {
+    source: {
+      code: `<template>${placeholderTemplate}</template>`,
     },
-    description: { story: 'Provide a `placeholder` slot for progressive loading states.' },
   },
 };
 
-// Error
-export const Error: StoryFn<ComponentArgs> = (args) => ({
-  components: { UImg },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-img class="mx-auto" height="300" max-width="500" src="https://bad.src/not/valid">
-      <template #error>
-        <u-img class="mx-auto" height="300" max-width="500" src="https://picsum.photos/500/300?image=232"></u-img>
-      </template>
-    </u-img>
-  `,
-});
-
-Error.args = {} as ComponentArgs;
-
-Error.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Error Story
+const errorTemplate = `
   <u-img class="mx-auto" height="300" max-width="500" src="https://bad.src/not/valid">
     <template #error>
       <u-img class="mx-auto" height="300" max-width="500" src="https://picsum.photos/500/300?image=232"></u-img>
     </template>
   </u-img>
-</template>`,
-    },
-    description: {
-      story: 'Use the `error` slot to show a fallback image or content when loading fails.',
+`;
+
+/**
+ * Use the `error` slot to show a fallback image or content when loading fails.
+ */
+export const Error: StoryFn<ComponentArgs> = () => ({
+  components: { UImg },
+  template: errorTemplate,
+});
+
+Error.parameters = {
+  docs: {
+    source: {
+      code: `<template>${errorTemplate}</template>`,
     },
   },
 };
 
-// Grid
-export const Grid: StoryFn<ComponentArgs> = (args) => ({
-  components: { UImg, URow, UCol, UProgressCircular },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-row>
-      <u-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
-        <u-img :lazy-src="'https://picsum.photos/10/6?image=' + (n * 5 + 10)" :src="'https://picsum.photos/500/300?image=' + (n * 5 + 10)" aspect-ratio="1" class="bg-grey-lighten-2" cover>
-          <template #placeholder>
-            <u-row align="center" class="fill-height ma-0" justify="center">
-              <u-progress-circular color="grey-lighten-5" indeterminate></u-progress-circular>
-            </u-row>
-          </template>
-        </u-img>
-      </u-col>
-    </u-row>
-  `,
-});
+// Grid Story
+const gridTemplate = `
+  <u-row>
+    <u-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
+      <u-img :lazy-src="'https://picsum.photos/10/6?image=' + (n * 5 + 10)" :src="'https://picsum.photos/500/300?image=' + (n * 5 + 10)" aspect-ratio="1" class="bg-grey-lighten-2" cover>
+        <template #placeholder>
+          <u-row align="center" class="fill-height ma-0" justify="center">
+            <u-progress-circular color="grey-lighten-5" indeterminate></u-progress-circular>
+          </u-row>
+        </template>
+      </u-img>
+    </u-col>
+  </u-row>
+`;
 
-Grid.args = {} as ComponentArgs;
+/**
+ * Use `u-img` in grids for galleries; provide `lazy-src` placeholders for progressive loading.
+ */
+export const Grid: StoryFn<ComponentArgs> = () => ({
+  components: { UImg, URow, UCol, UProgressCircular },
+  template: gridTemplate,
+});
 
 Grid.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-row>
-      <u-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
-      <u-img :lazy-src="'https://picsum.photos/10/6?image=' + (n * 5 + 10)" :src="'https://picsum.photos/500/300?image=' + (n * 5 + 10)" aspect-ratio="1" cover></u-img>
-    </u-col>
-  </u-row>
-</template>`,
-    },
-    description: {
-      story:
-        'Use `u-img` in grids for galleries; provide `lazy-src` placeholders for progressive loading.',
+      code: `<template>${gridTemplate}</template>`,
     },
   },
 };
