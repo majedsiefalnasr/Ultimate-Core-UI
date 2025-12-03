@@ -202,14 +202,13 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UNumberInput },
   setup() {
     return { args };
   },
-  template: `
-    <u-number-input v-bind="args"></u-number-input>
-  `,
+  template: `<u-number-input v-bind="args"></u-number-input>`,
 });
 
 Default.args = {
@@ -220,9 +219,8 @@ Default.args = {
   inset: false,
 } as ComponentArgs;
 
-export const ControlVariant: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UNumberInput, URow },
-  template: `
+// Control Variant story
+const controlVariantTemplate = `
     <u-container>
       <u-row>
         <u-col cols="12" md="4" sm="4">
@@ -250,50 +248,27 @@ export const ControlVariant: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
-});
+  `;
 
-ControlVariant.args = {} as ComponentArgs;
+/**
+ * The control-variant prop offers an easy way to customize steppers button layout.
+ * The following values are valid options: default, stacked, split and hidden.
+ */
+export const ControlVariant: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UNumberInput, URow },
+  template: controlVariantTemplate,
+});
 
 ControlVariant.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col cols="12" md="4" sm="4">
-        <h5>Default</h5>
-
-        <u-number-input control-variant="default"></u-number-input>
-      </u-col>
-
-      <u-col cols="12" md="4" sm="4">
-        <h5>Stacked</h5>
-
-        <u-number-input control-variant="stacked"></u-number-input>
-      </u-col>
-
-      <u-col cols="12" md="4" sm="4">
-        <h5>Split</h5>
-
-        <u-number-input control-variant="split"></u-number-input>
-      </u-col>
-
-      <u-col cols="12" md="4" sm="4">
-        <h5>Hidden</h5>
-
-        <u-number-input control-variant="hidden"></u-number-input>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${controlVariantTemplate}</template>`,
     },
   },
 };
 
-export const Reverse: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UNumberInput, URow },
-  template: `
+// Reverse story
+const reverseTemplate = `
     <u-container>
       <u-row>
         <u-col cols="12" md="4" sm="4">
@@ -323,52 +298,27 @@ export const Reverse: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
-});
+  `;
 
-Reverse.args = {} as ComponentArgs;
+/**
+ * The reverse prop automatically changes the stepper buttons’ position to the opposite
+ * side for both the default and stacked control variants.
+ */
+export const Reverse: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UNumberInput, URow },
+  template: reverseTemplate,
+});
 
 Reverse.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col cols="12" md="4" sm="4">
-        <h5>Default</h5>
-
-        <u-number-input
-          control-variant="default"
-          reverse
-        ></u-number-input>
-      </u-col>
-
-      <u-col cols="12" md="4" sm="4">
-        <h5>Stacked</h5>
-
-        <u-number-input
-          control-variant="stacked"
-          reverse
-        ></u-number-input>
-      </u-col>
-
-      <u-col cols="12" md="4" sm="4">
-        <h5>Split</h5>
-
-        <u-number-input
-          control-variant="split"
-        ></u-number-input>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${reverseTemplate}</template>`,
     },
   },
 };
 
-export const HideInput: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UNumberInput, URow },
-  template: `
+// Hide Input story
+const hideInputTemplate = `
     <u-container>
       <u-row justify="center">
         <u-col cols="auto">
@@ -376,28 +326,27 @@ export const HideInput: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * The hide-input prop hides the input field, allowing only the stepper buttons to be visible.
+ * These stepper buttons follow a stacked control-variant layout.
+ */
+export const HideInput: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UNumberInput, URow },
+  template: hideInputTemplate,
 });
 
 HideInput.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row justify="center">
-      <u-col cols="auto">
-        <u-number-input variant="outlined" hide-details hide-input></u-number-input>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${hideInputTemplate}</template>`,
     },
   },
 };
 
-export const Inset: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UNumberInput, URow },
-  template: `
+// Inset story
+const insetTemplate = `
     <u-container>
       <u-row>
         <u-col cols="12" sm="6">
@@ -437,60 +386,27 @@ export const Inset: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * The inset prop adjusts the style of the stepper buttons by reducing the size of the
+ * button dividers.
+ */
+export const Inset: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UNumberInput, URow },
+  template: insetTemplate,
 });
 
 Inset.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col cols="12" sm="6">
-        <h5>Default</h5>
-
-        <u-number-input
-          control-variant="default"
-          inset
-        ></u-number-input>
-      </u-col>
-
-      <u-col cols="12" sm="6">
-        <h5>Stacked</h5>
-
-        <u-number-input
-          control-variant="stacked"
-          inset
-        ></u-number-input>
-      </u-col>
-
-      <u-col cols="12" sm="6">
-        <h5>Split</h5>
-
-        <u-number-input
-          control-variant="split"
-          inset
-        ></u-number-input>
-      </u-col>
-
-      <u-col cols="12" sm="6">
-        <h5>Hide-input</h5>
-
-        <u-number-input
-          hide-input
-          inset
-        ></u-number-input>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${insetTemplate}</template>`,
     },
   },
 };
 
-export const MinMax: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UNumberInput, URow },
-  template: `
+// Min Max story
+const minMaxTemplate = `
     <u-container>
       <u-row>
         <u-col>
@@ -504,44 +420,27 @@ export const MinMax: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * The min and max props specify the minimum and maximum values accepted by v-number-input,
+ * behaving identically to the native min and max attributes for <input type="number">.
+ */
+export const MinMax: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UNumberInput, URow },
+  template: minMaxTemplate,
 });
 
 MinMax.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col>
-        <h5>min:10/max:20</h5>
-
-        <u-number-input
-          :max="20"
-          :min="10"
-          :model-value="15"
-        ></u-number-input>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${minMaxTemplate}</template>`,
     },
   },
 };
 
-export const Step: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UNumberInput, URow },
-  setup() {
-    const step = 50;
-    const value = shallowRef(100);
-    const roundedValue = computed({
-      get: () => value.value,
-      set: (v) => (value.value = Math.round(v / step) * step),
-    });
-
-    return { step, roundedValue };
-  },
-  template: `
+// Step story
+const stepTemplate = `
     <u-container>
       <u-row>
         <u-col>
@@ -563,35 +462,32 @@ export const Step: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * The step prop behaves the same as the step attribute in the <input type="number">, it
+ * defines the incremental steps for adjusting the numeric value.
+ */
+export const Step: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UNumberInput, URow },
+  setup() {
+    const step = 50;
+    const value = shallowRef(100);
+    const roundedValue = computed({
+      get: () => value.value,
+      set: (v) => (value.value = Math.round(v / step) * step),
+    });
+
+    return { step, roundedValue };
+  },
+  template: stepTemplate,
 });
 
 Step.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col>
-        <h5>step 2; min:10; max:20</h5>
+      code: `<template>${stepTemplate}</template>
 
-        <u-number-input
-          :max="20"
-          :min="10"
-          :model-value="15"
-          :step="2"
-        ></u-number-input>
-      </u-col>
-      <u-col>
-        <h5>step {{ step }}, rounding on blur</h5>
-        <u-number-input
-          v-model="roundedValue"
-          :step="step"
-        ></u-number-input>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>
 <script setup>
   import { computed, shallowRef } from 'vue'
 
@@ -606,17 +502,8 @@ Step.parameters = {
   },
 };
 
-export const Precision: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UNumberInput, URow },
-  setup() {
-    const example1 = ref(4.052);
-    const example2 = ref(123);
-    const example3 = ref(25.5);
-    const example4 = ref(0.052);
-
-    return { example1, example2, example3, example4 };
-  },
-  template: `
+// Precision story
+const precisionTemplate = `
     <u-container>
       <u-row>
         <u-col>
@@ -643,40 +530,30 @@ export const Precision: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * The precision prop enforces strict precision. It is expected to be an integer value in
+ * range between 0 and 15. Input will prevent user from typing or pasting an invalid value.
+ */
+export const Precision: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UNumberInput, URow },
+  setup() {
+    const example1 = ref(4.052);
+    const example2 = ref(123);
+    const example3 = ref(25.5);
+    const example4 = ref(0.052);
+
+    return { example1, example2, example3, example4 };
+  },
+  template: precisionTemplate,
 });
 
 Precision.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col>
-        <h5>(default precision="0")</h5>
-        <u-number-input v-model="example1" :precision="0" hide-details="auto"></u-number-input>
-        <code class="d-block pt-3">value: {{ example1 }}</code>
-      </u-col>
-    </u-row>
-    <u-row>
-      <u-col>
-        <h5>(precision="2")</h5>
-        <u-number-input v-model="example2" :precision="2" hide-details="auto"></u-number-input>
-        <code class="d-block pt-3">value: {{ example2 }}</code>
-      </u-col>
-      <u-col>
-        <h5>(precision="5")</h5>
-        <u-number-input v-model="example3" :precision="5" hide-details="auto"></u-number-input>
-        <code class="d-block pt-3">value: {{ example3 }}</code>
-      </u-col>
-      <u-col>
-        <h5>(precision unrestricted)</h5>
-        <u-number-input v-model="example4" :precision="null" hide-details="auto"></u-number-input>
-        <code class="d-block pt-3">value: {{ example4 }}</code>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>
+      code: `<template>${precisionTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
