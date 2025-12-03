@@ -226,6 +226,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = () => ({
   components: { UProgressLinear },
   template: `<u-progress-linear v-bind="args"></u-progress-linear>`,
@@ -235,8 +236,37 @@ Default.args = {
   modelValue: 20,
 } as ComponentArgs;
 
+// Buffering Story
+const bufferingTemplate = `
+    <div>
+      <u-progress-linear
+        v-model="value"
+        :buffer-value="bufferValue"
+      ></u-progress-linear>
+      <br>
+      <u-progress-linear
+        v-model="value"
+        :buffer-value="bufferValue"
+        color="purple"
+      ></u-progress-linear>
+      <br>
+      <u-progress-linear
+        v-model="value"
+        :buffer-value="bufferValue"
+        color="red-lighten-2"
+      ></u-progress-linear>
+      <br>
+      <u-progress-linear
+        v-model="value"
+        :buffer-value="bufferValue"
+        color="black"
+      ></u-progress-linear>
+    </div>
+  `;
+
 /**
- * The primary value is controlled by v-model, whereas the buffer is controlled by the buffer-value prop.
+ * The primary value is controlled by v-model, whereas the buffer is controlled by the
+ * buffer-value prop.
  */
 export const Buffering: StoryFn<ComponentArgs> = () => ({
   components: { UProgressLinear },
@@ -271,65 +301,14 @@ export const Buffering: StoryFn<ComponentArgs> = () => ({
 
     return { value, bufferValue };
   },
-  template: `
-    <div>
-      <u-progress-linear
-        v-model="value"
-        :buffer-value="bufferValue"
-      ></u-progress-linear>
-      <br>
-      <u-progress-linear
-        v-model="value"
-        :buffer-value="bufferValue"
-        color="purple"
-      ></u-progress-linear>
-      <br>
-      <u-progress-linear
-        v-model="value"
-        :buffer-value="bufferValue"
-        color="red-lighten-2"
-      ></u-progress-linear>
-      <br>
-      <u-progress-linear
-        v-model="value"
-        :buffer-value="bufferValue"
-        color="black"
-      ></u-progress-linear>
-    </div>
-  `,
+  template: bufferingTemplate,
 });
-
-Buffering.args = {} as ComponentArgs;
 
 Buffering.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      v-model="value"
-      :buffer-value="bufferValue"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      v-model="value"
-      :buffer-value="bufferValue"
-      color="purple"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      v-model="value"
-      :buffer-value="bufferValue"
-      color="red-lighten-2"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      v-model="value"
-      :buffer-value="bufferValue"
-      color="black"
-    ></u-progress-linear>
-  </div>
-</template>
+      code: `<template>${bufferingTemplate}</template>
+
 <script setup>
   import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
@@ -363,22 +342,8 @@ Buffering.parameters = {
   },
 };
 
-/**
- * The component can be split into chunks using chunk-count or chunk-width. Visible progress is snapped to the last filled chunk.
- */
-export const Chunks: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UIcon, UProgressLinear },
-  setup() {
-    const value = shallowRef(63);
-    const setZero = () => {
-      value.value = 0;
-    };
-    const setFull = () => {
-      value.value = 100;
-    };
-    return { value, setZero, setFull };
-  },
-  template: `
+// Chunks Story
+const chunksTemplate = `
     <div>
       <u-progress-linear
         v-model="value"
@@ -449,86 +414,32 @@ export const Chunks: StoryFn<ComponentArgs> = () => ({
         </u-btn>
       </div>
     </div>
-  `,
-});
+  `;
 
-Chunks.args = {} as ComponentArgs;
+/**
+ * The component can be split into chunks using chunk-count or chunk-width. Visible progress
+ * is snapped to the last filled chunk.
+ */
+export const Chunks: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UIcon, UProgressLinear },
+  setup() {
+    const value = shallowRef(63);
+    const setZero = () => {
+      value.value = 0;
+    };
+    const setFull = () => {
+      value.value = 100;
+    };
+    return { value, setZero, setFull };
+  },
+  template: chunksTemplate,
+});
 
 Chunks.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      v-model="value"
-      chunk-width="4"
-      color="purple"
-      height="15"
-      rounded="lg"
-      clickable
-    ></u-progress-linear>
+      code: `<template>${chunksTemplate}</template>
 
-    <br>
-
-    <u-progress-linear
-      v-model="value"
-      chunk-gap="2"
-      chunk-width="50"
-      color="primary"
-      height="10"
-      clickable
-      rounded
-    ></u-progress-linear>
-
-    <br>
-
-    <u-progress-linear
-      v-model="value"
-      bg-color="#888"
-      chunk-count="50"
-      chunk-gap="3"
-      color="green"
-      height="25"
-      rounded="sm"
-      clickable
-    ></u-progress-linear>
-
-    <br>
-
-    <u-progress-linear
-      v-model="value"
-      bg-color="#888"
-      chunk-count="15"
-      chunk-gap="6"
-      color="pink"
-      height="25"
-      rounded="sm"
-      clickable
-    ></u-progress-linear>
-
-    <br>
-
-    <div class="d-flex ga-2 align-center">
-      <u-progress-linear
-        v-model="value"
-        chunk-count="5"
-        chunk-gap="9"
-        color="indigo"
-        height="25"
-        rounded="sm"
-        clickable
-      >
-        <small class="text-white">{{ value.toFixed() }}%</small>
-      </u-progress-linear>
-      <u-btn variant="text" size="x-small" @click="value = 0">
-        <u-icon icon="hugeicons:arrow-left-01" size="18" />
-      </u-btn>
-      <u-btn variant="text" size="x-small" @click="value = 100">
-        <u-icon icon="hugeicons:checkmark-circle-02" size="18" />
-      </u-btn>
-    </div>
-  </div>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -538,12 +449,8 @@ Chunks.parameters = {
   },
 };
 
-/**
- * You can set the colors of the progress bar using the props color and bg-color.
- */
-export const Colors: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  template: `
+// Colors Story
+const colorsTemplate = `
     <div>
       <u-progress-linear
         bg-color="pink-lighten-3"
@@ -563,45 +470,26 @@ export const Colors: StoryFn<ComponentArgs> = () => ({
         model-value="45"
       ></u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-Colors.args = {} as ComponentArgs;
+/**
+ * You can set the colors of the progress bar using the props color and bg-color.
+ */
+export const Colors: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  template: colorsTemplate,
+});
 
 Colors.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      bg-color="pink-lighten-3"
-      color="pink-lighten-1"
-      model-value="15"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      bg-color="blue-grey"
-      color="lime"
-      model-value="30"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      bg-color="success"
-      color="error"
-      model-value="45"
-    ></u-progress-linear>
-  </div>
-</template>`,
+      code: `<template>${colorsTemplate}</template>`,
     },
   },
 };
 
-/**
- * Using the indeterminate prop, u-progress-linear continuously animates.
- */
-export const Indeterminate: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  template: `
+// Indeterminate Story
+const indeterminateTemplate = `
     <div>
       <u-progress-linear
         color="yellow-darken-2"
@@ -623,47 +511,26 @@ export const Indeterminate: StoryFn<ComponentArgs> = () => ({
         indeterminate
       ></u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-Indeterminate.args = {} as ComponentArgs;
+/**
+ * Using the indeterminate prop, u-progress-linear continuously animates.
+ */
+export const Indeterminate: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  template: indeterminateTemplate,
+});
 
 Indeterminate.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      color="yellow-darken-2"
-      indeterminate
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="green"
-      indeterminate
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="teal"
-      indeterminate
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="cyan"
-      indeterminate
-    ></u-progress-linear>
-  </div>
-</template>`,
+      code: `<template>${indeterminateTemplate}</template>`,
     },
   },
 };
 
-/**
- * Displays reversed progress. The component also has RTL support, such that a progress bar in right-to-left mode with reverse prop enabled will display left-to-right.
- */
-export const Reversed: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  template: `
+// Reversed Story
+const reversedTemplate = `
     <div>
       <u-progress-linear
         color="pink"
@@ -689,51 +556,26 @@ export const Reversed: StoryFn<ComponentArgs> = () => ({
         stream
       ></u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-Reversed.args = {} as ComponentArgs;
+/**
+ * Displays reversed progress. The component also has RTL support, such that a progress bar in right-to-left mode with reverse prop enabled will display left-to-right.
+ */
+export const Reversed: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  template: reversedTemplate,
+});
 
 Reversed.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      color="pink"
-      model-value="15"
-      reverse
-    ></u-progress-linear>
-
-    <br>
-
-    <u-progress-linear
-      color="lime"
-      indeterminate
-      reverse
-    ></u-progress-linear>
-
-    <br>
-
-    <u-progress-linear
-      buffer-value="55"
-      color="success"
-      model-value="30"
-      reverse
-      stream
-    ></u-progress-linear>
-  </div>
-</template>`,
+      code: `<template>${reversedTemplate}</template>`,
     },
   },
 };
 
-/**
- * The rounded prop is used to apply a border radius to the u-progress-linear component.
- */
-export const Rounded: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  template: `
+// Rounded Story
+const roundedTemplate = `
     <div>
       <u-progress-linear
         color="red-darken-2"
@@ -759,51 +601,26 @@ export const Rounded: StoryFn<ComponentArgs> = () => ({
         rounded
       ></u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-Rounded.args = {} as ComponentArgs;
+/**
+ * The rounded prop is used to apply a border radius to the u-progress-linear component.
+ */
+export const Rounded: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  template: roundedTemplate,
+});
 
 Rounded.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      color="red-darken-2"
-      model-value="100"
-      rounded
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="indigo"
-      model-value="100"
-      rounded
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="teal"
-      model-value="100"
-      rounded
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="cyan-darken-2"
-      model-value="100"
-      rounded
-    ></u-progress-linear>
-  </div>
-</template>`,
+      code: `<template>${roundedTemplate}</template>`,
     },
   },
 };
 
-/**
- * The stream property works with buffer-value to convey to the user that there is some action taking place.
- */
-export const Stream: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  template: `
+// Stream Story
+const streamTemplate = `
     <div>
       <u-progress-linear
         buffer-value="0"
@@ -831,53 +648,27 @@ export const Stream: StoryFn<ComponentArgs> = () => ({
         stream
       ></u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-Stream.args = {} as ComponentArgs;
+/**
+ * The stream property works with buffer-value to convey to the user that there is some
+ * action taking place.
+ */
+export const Stream: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  template: streamTemplate,
+});
 
 Stream.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      buffer-value="0"
-      color="red-lighten-2"
-      stream
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      buffer-value="0"
-      color="teal"
-      model-value="20"
-      stream
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      buffer-value="50"
-      color="cyan"
-      stream
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      buffer-value="60"
-      color="orange"
-      model-value="40"
-      stream
-    ></u-progress-linear>
-  </div>
-</template>`,
+      code: `<template>${streamTemplate}</template>`,
     },
   },
 };
 
-/**
- * This applies a striped background over the value portion of the v-progress-linear. This prop has no effect when using indeterminate.
- */
-export const Striped: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  template: `
+// Striped Story
+const stripedTemplate = `
     <div>
       <u-progress-linear
         color="light-blue"
@@ -907,62 +698,27 @@ export const Striped: StoryFn<ComponentArgs> = () => ({
         striped
       ></u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-Striped.args = {} as ComponentArgs;
+/**
+ * This applies a striped background over the value portion of the v-progress-linear.
+ * This prop has no effect when using indeterminate.
+ */
+export const Striped: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  template: stripedTemplate,
+});
 
 Striped.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      color="light-blue"
-      height="10"
-      model-value="10"
-      striped
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="light-green-darken-4"
-      height="10"
-      model-value="20"
-      striped
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="lime"
-      height="10"
-      model-value="45"
-      striped
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      color="deep-orange"
-      height="10"
-      model-value="60"
-      striped
-    ></u-progress-linear>
-  </div>
-</template>`,
+      code: `<template>${stripedTemplate}</template>`,
     },
   },
 };
 
-/**
- * The v-progress-linear component will be responsive to user input when using v-model. You can use the default slot or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out u-slider.
-.
- */
-export const ModelsAndSlots: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  setup() {
-    const skill = ref(20);
-    const knowledge = ref(33);
-    const power = ref(78);
-    return { skill, knowledge, power, Math };
-  },
-  template: `
+// ModelsAndSlots Story
+const modelsAndSlotsTemplate = `
     <div>
       <u-progress-linear
         v-model="power"
@@ -991,44 +747,30 @@ export const ModelsAndSlots: StoryFn<ComponentArgs> = () => ({
         <strong>{{ Math.ceil(knowledge) }}%</strong>
       </u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-ModelsAndSlots.args = {} as ComponentArgs;
+/**
+ * The v-progress-linear component will be responsive to user input when using v-model. 
+ * You can use the default slot or bind a local model to display inside of the progress. 
+ * If you are looking for advanced features on a linear type component, check out u-slider.
+.
+ */
+export const ModelsAndSlots: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  setup() {
+    const skill = ref(20);
+    const knowledge = ref(33);
+    const power = ref(78);
+    return { skill, knowledge, power, Math };
+  },
+  template: modelsAndSlotsTemplate,
+});
 
 ModelsAndSlots.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      v-model="power"
-      color="amber"
-      height="25"
-    ></u-progress-linear>
+      code: `<template>${modelsAndSlotsTemplate}</template>
 
-    <br>
-
-    <u-progress-linear
-      v-model="skill"
-      color="blue-grey"
-      height="25"
-    >
-      <template v-slot:default="{ value }">
-        <strong>{{ Math.ceil(value) }}%</strong>
-      </template>
-    </u-progress-linear>
-
-    <br>
-
-    <u-progress-linear
-      v-model="knowledge"
-      height="25"
-    >
-      <strong>{{ Math.ceil(knowledge) }}%</strong>
-    </u-progress-linear>
-  </div>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -1040,16 +782,8 @@ ModelsAndSlots.parameters = {
   },
 };
 
-/**
- * The progress linear component can have a determinate state modified by v-model.
- */
-export const Determinate: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressLinear },
-  setup() {
-    const valueDeterminate = ref(50);
-    return { valueDeterminate };
-  },
-  template: `
+// Determinate Story
+const determinateTemplate = `
     <div>
       <u-progress-linear
         v-model="valueDeterminate"
@@ -1071,37 +805,25 @@ export const Determinate: StoryFn<ComponentArgs> = () => ({
         color="amber"
       ></u-progress-linear>
     </div>
-  `,
-});
+  `;
 
-Determinate.args = {} as ComponentArgs;
+/**
+ * The progress linear component can have a determinate state modified by v-model.
+ */
+export const Determinate: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressLinear },
+  setup() {
+    const valueDeterminate = ref(50);
+    return { valueDeterminate };
+  },
+  template: determinateTemplate,
+});
 
 Determinate.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-progress-linear
-      v-model="valueDeterminate"
-      color="deep-purple-accent-4"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      v-model="valueDeterminate"
-      color="pink"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      v-model="valueDeterminate"
-      color="indigo-darken-2"
-    ></u-progress-linear>
-    <br>
-    <u-progress-linear
-      v-model="valueDeterminate"
-      color="amber"
-    ></u-progress-linear>
-  </div>
-</template>
+      code: `<template>${determinateTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -1111,12 +833,8 @@ Determinate.parameters = {
   },
 };
 
-/**
- * The u-progress-linear component is good for communicating to the user that they are waiting for a response.
- */
-export const FileLoader: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UToolbar, UBtn, UIcon, UContainer, URow, UCol, UProgressLinear },
-  template: `
+// FileLoader Story
+const fileLoaderTemplate = `
     <u-card class="mx-auto" max-width="344">
       <u-toolbar color="deep-purple-accent-4" class="px-2">
         <u-btn variant="text" size="small">
@@ -1144,63 +862,27 @@ export const FileLoader: StoryFn<ComponentArgs> = () => ({
         </u-row>
       </u-container>
     </u-card>
-  `,
-});
+  `;
 
-FileLoader.args = {} as ComponentArgs;
+/**
+ * The u-progress-linear component is good for communicating to the user that they are
+ * waiting for a response.
+ */
+export const FileLoader: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UToolbar, UBtn, UIcon, UContainer, URow, UCol, UProgressLinear },
+  template: fileLoaderTemplate,
+});
 
 FileLoader.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card class="mx-auto" max-width="344">
-    <u-toolbar color="deep-purple-accent-4" class="px-2">
-      <u-btn variant="text" size="small">
-        <u-icon icon="hugeicons:plus-sign-01" />
-      </u-btn>
-      <div class="text-subtitle-1 ml-2">My Files</div>
-      <div class="ml-auto d-flex ga-1">
-        <u-btn variant="text" size="small"><u-icon icon="hugeicons:share-07" /></u-btn>
-        <u-btn variant="text" size="small"><u-icon icon="hugeicons:search-01" /></u-btn>
-        <u-btn variant="text" size="small"><u-icon icon="hugeicons:menu-01" /></u-btn>
-      </div>
-    </u-toolbar>
-
-    <u-container style="height: 400px;">
-      <u-row class="fill-height" align-content="center" justify="center">
-        <u-col cols="12" class="text-subtitle-1 text-center">Getting your files</u-col>
-        <u-col cols="6">
-          <u-progress-linear
-            color="deep-purple-accent-4"
-            height="6"
-            indeterminate
-            rounded
-          />
-        </u-col>
-      </u-row>
-    </u-container>
-  </u-card>
-</template>`,
+      code: `<template>${fileLoaderTemplate}</template>`,
     },
   },
 };
 
-/**
- * Using the absolute prop we are able to position the v-progress-linear component at the bottom of the u-toolbar. We also use the active prop which allows us to control the visibility of the progress.
- */
-export const ToolbarLoader: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UToolbar, UBtn, UIcon, UContainer, URow, UCol, UProgressLinear },
-  setup() {
-    const loading = ref(false);
-    watch(loading, (val) => {
-      if (!val) return;
-      setTimeout(() => {
-        loading.value = false;
-      }, 3000);
-    });
-    return { loading };
-  },
-  template: `
+// ToolbarLoader Story
+const toolbarLoaderTemplate = `
     <u-card class="mx-auto mt-6" width="344">
       <u-toolbar class="px-2">
         <u-btn variant="text" size="small"><u-icon icon="hugeicons:arrow-left-01" /></u-btn>
@@ -1228,43 +910,33 @@ export const ToolbarLoader: StoryFn<ComponentArgs> = () => ({
         </u-row>
       </u-container>
     </u-card>
-  `,
-});
+  `;
 
-ToolbarLoader.args = {} as ComponentArgs;
+/**
+ * Using the absolute prop we are able to position the v-progress-linear component at the
+ * bottom of the u-toolbar. We also use the active prop which allows us to control the
+ * visibility of the progress.
+ */
+export const ToolbarLoader: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UToolbar, UBtn, UIcon, UContainer, URow, UCol, UProgressLinear },
+  setup() {
+    const loading = ref(false);
+    watch(loading, (val) => {
+      if (!val) return;
+      setTimeout(() => {
+        loading.value = false;
+      }, 3000);
+    });
+    return { loading };
+  },
+  template: toolbarLoaderTemplate,
+});
 
 ToolbarLoader.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card class="mx-auto mt-6" width="344">
-    <u-toolbar class="px-2">
-      <u-btn variant="text" size="small"><u-icon icon="hugeicons:arrow-left-01" /></u-btn>
-      <div class="text-subtitle-1 ml-2">My Recipes</div>
-
-      <u-progress-linear
-        :active="loading"
-        :indeterminate="loading"
-        color="deep-purple-accent-4"
-        location="bottom"
-        absolute
-      ></u-progress-linear>
-
-      <div class="ml-auto d-flex ga-1">
-        <u-btn variant="text" size="small"><u-icon icon="hugeicons:search-01" /></u-btn>
-        <u-btn variant="text" size="small"><u-icon icon="hugeicons:menu-01" /></u-btn>
-      </div>
-    </u-toolbar>
-
-    <u-container style="height: 282px;">
-      <u-row class="fill-height" align="center" justify="center">
-        <div v-if="!loading" class="text-center">
-          <u-btn color="primary" @click="loading = true">Start loading</u-btn>
-        </div>
-      </u-row>
-    </u-container>
-  </u-card>
-</template>
+      code: `<template>${toolbarLoaderTemplate}</template>
+      
 <script setup>
   import { ref, watch } from 'vue'
 
