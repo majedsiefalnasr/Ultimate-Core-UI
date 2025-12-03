@@ -58,20 +58,21 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UInput, UContainer, URow, UCol },
   setup() {
     return { args };
   },
   template: `
-    <u-container id="input-usage" fluid>
-      <u-row>
-        <u-col cols="12">
-          <u-input v-bind="args">Default Slot</u-input>
-        </u-col>
-      </u-row>
-    </u-container>
-  `,
+  <u-container id="input-usage" fluid>
+    <u-row>
+      <u-col cols="12">
+        <u-input v-bind="args">Default Slot</u-input>
+      </u-col>
+    </u-row>
+  </u-container>
+`,
 });
 
 Default.args = {
@@ -80,49 +81,45 @@ Default.args = {
   prependIcon: 'hugeicons:smart-phone-01',
 } as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-container id="input-usage" fluid>
-    <u-row>
-      <u-col cols="12">
-        <u-input :messages="['Messages']" append-icon="hugeicons:close-24" prepend-icon="hugeicons:phone-24">
-          Default Slot
-        </u-input>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
-    },
-  },
-};
+// Error Story
+const errorTemplate = `
+  <u-input :error-messages="['Fatal error', 'Another error']" :max-errors="2" disabled error>
+    Input
+  </u-input>
+`;
 
-export const Error: StoryFn<ComponentArgs> = (_args) => ({
+/**
+ * Input component with error states and messages.
+ */
+export const Error: StoryFn<ComponentArgs> = () => ({
   components: { UInput },
-  setup() {
-    return {};
-  },
-  template: `
-    <u-input :error-messages="['Fatal error', 'Another error']" :max-errors="2" disabled error>
-      Input
-    </u-input>
-  `,
+  template: errorTemplate,
 });
 
 Error.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-input :error-messages="['Fatal error', 'Another error']" :max-errors="2" disabled error>
-    Input
-  </u-input>
-</template>`,
+      code: `<template>${errorTemplate}</template>`,
     },
   },
 };
 
-export const HideDetails: StoryFn<ComponentArgs> = (_args) => ({
+// HideDetails Story
+const hideDetailsTemplate = `
+  <div>
+    <u-text-field
+      :rules="rules"
+      hide-details="auto"
+      label="Main input"
+    ></u-text-field>
+    <u-text-field label="Another input"></u-text-field>
+  </div>
+`;
+
+/**
+ * Control the visibility of input details and hints.
+ */
+export const HideDetails: StoryFn<ComponentArgs> = () => ({
   components: { UInput, UTextField },
   setup() {
     const rules = [
@@ -131,27 +128,13 @@ export const HideDetails: StoryFn<ComponentArgs> = (_args) => ({
     ];
     return { rules };
   },
-  template: `
-    <div>
-      <u-text-field
-        :rules="rules"
-        hide-details="auto"
-        label="Main input"
-      ></u-text-field>
-      <u-text-field label="Another input"></u-text-field>
-    </div>
-  `,
+  template: hideDetailsTemplate,
 });
 
 HideDetails.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-input :rules="rules" hide-details="auto" label="Main input"></u-input>
-    <u-input label="Another input"></u-input>
-  </div>
-</template>
+      code: `<template>${hideDetailsTemplate}</template>
 <script setup>
 const rules = [
   value => !!value || 'Required.',
@@ -162,33 +145,38 @@ const rules = [
   },
 };
 
-export const Loading: StoryFn<ComponentArgs> = (_args) => ({
-  components: { UInput },
-  setup() {
-    return {};
-  },
-  template: `
-    <u-text-field color="success" disabled loading>
-      Loading
-    </u-text-field>
-  `,
-});
+// Loading Story
+const loadingTemplate = `
+  <u-text-field color="success" disabled loading>
+    Loading
+  </u-text-field>
+`;
 
-Loading.args = {} as ComponentArgs;
+/**
+ * Input component with loading state.
+ */
+export const Loading: StoryFn<ComponentArgs> = () => ({
+  components: { UInput },
+  template: loadingTemplate,
+});
 
 Loading.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-text-field color="success" disabled loading>
-    Loading
-  </u-text-field>
-</template>`,
+      code: `<template>${loadingTemplate}</template>`,
     },
   },
 };
 
-export const Rules: StoryFn<ComponentArgs> = (_args) => ({
+// Rules Story
+const rulesTemplate = `
+  <u-text-field :rules="rules"></u-text-field>
+`;
+
+/**
+ * Input component with validation rules.
+ */
+export const Rules: StoryFn<ComponentArgs> = () => ({
   components: { UInput },
   setup() {
     const rules = [
@@ -202,19 +190,13 @@ export const Rules: StoryFn<ComponentArgs> = (_args) => ({
 
     return { rules };
   },
-  template: `
-    <u-text-field :rules="rules"></u-text-field>
-  `,
+  template: rulesTemplate,
 });
-
-Rules.args = {} as ComponentArgs;
 
 Rules.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-input :rules="rules"></u-input>
-</template>
+      code: `<template>${rulesTemplate}</template>
 <script setup>
 const rules = [
   value => !!value || 'Required.',
