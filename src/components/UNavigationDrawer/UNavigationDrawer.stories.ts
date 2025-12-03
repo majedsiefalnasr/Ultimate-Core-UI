@@ -378,6 +378,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UDivider, UListItem, UNavigationDrawer },
   setup() {
@@ -396,6 +397,46 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
+// Bottom Drawer story
+const bottomDrawerTemplate = `
+    <u-card>
+      <u-layout>
+        <u-app-bar color="primary">
+          <u-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></u-app-bar-nav-icon>
+
+          <u-toolbar-title>My files</u-toolbar-title>
+
+          <u-btn icon="hugeicons:search-01" variant="text"></u-btn>
+
+          <u-btn icon="hugeicons:filter" variant="text"></u-btn>
+
+          <u-btn icon="hugeicons:more-vertical" variant="text"></u-btn>
+        </u-app-bar>
+
+        <u-navigation-drawer
+          v-model="drawer"
+          location="bottom"
+          temporary
+        >
+          <u-list
+            :items="items"
+          ></u-list>
+        </u-navigation-drawer>
+
+        <u-main style="height: 500px;">
+          <u-card-text>
+            The navigation drawer will appear from the bottom on smaller size screens.
+          </u-card-text>
+        </u-main>
+      </u-layout>
+    </u-card>
+  `;
+
+/**
+ * Using the bottom prop, we are able to relocate our drawer on mobile devices to come
+ * from the bottom of the screen. This is an alternative style and only activates once
+ * the mobile-breakpoint is met.
+ */
 export const BottomDrawer: StoryFn<ComponentArgs> = () => ({
   components: {
     UAppBar,
@@ -438,79 +479,14 @@ export const BottomDrawer: StoryFn<ComponentArgs> = () => ({
 
     return { items, drawer, group };
   },
-  template: `
-    <u-card>
-      <u-layout>
-        <u-app-bar color="primary">
-          <u-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></u-app-bar-nav-icon>
-
-          <u-toolbar-title>My files</u-toolbar-title>
-
-          <u-btn icon="hugeicons:search-01" variant="text"></u-btn>
-
-          <u-btn icon="hugeicons:filter" variant="text"></u-btn>
-
-          <u-btn icon="hugeicons:more-vertical" variant="text"></u-btn>
-        </u-app-bar>
-
-        <u-navigation-drawer
-          v-model="drawer"
-          location="bottom"
-          temporary
-        >
-          <u-list
-            :items="items"
-          ></u-list>
-        </u-navigation-drawer>
-
-        <u-main style="height: 500px;">
-          <u-card-text>
-            The navigation drawer will appear from the bottom on smaller size screens.
-          </u-card-text>
-        </u-main>
-      </u-layout>
-    </u-card>
-  `,
+  template: bottomDrawerTemplate,
 });
-
-BottomDrawer.args = {} as ComponentArgs;
 
 BottomDrawer.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-layout>
-      <u-app-bar color="primary">
-        <u-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></u-app-bar-nav-icon>
+      code: `<template>${bottomDrawerTemplate}</template>
 
-        <u-toolbar-title>My files</u-toolbar-title>
-
-        <u-btn icon="hugeicons:search-01" variant="text"></u-btn>
-
-        <u-btn icon="hugeicons:filter" variant="text"></u-btn>
-
-        <u-btn icon="hugeicons:more-vertical" variant="text"></u-btn>
-      </u-app-bar>
-
-      <u-navigation-drawer
-        v-model="drawer"
-        location="bottom"
-        temporary
-      >
-        <u-list
-          :items="items"
-        ></u-list>
-      </u-navigation-drawer>
-
-      <u-main style="height: 500px;">
-        <u-card-text>
-          The navigation drawer will appear from the bottom on smaller size screens.
-        </u-card-text>
-      </u-main>
-    </u-layout>
-  </u-card>
-</template>
 <script setup>
   import { ref, watch } from 'vue'
 
@@ -544,9 +520,8 @@ BottomDrawer.parameters = {
   },
 };
 
-export const ExpandOnHover: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UDivider, ULayout, UList, UListItem, UMain, UNavigationDrawer },
-  template: `
+// Expand On Hover story
+const expandOnHoverTemplate = `
     <u-card>
       <u-layout>
         <u-navigation-drawer
@@ -574,55 +549,27 @@ export const ExpandOnHover: StoryFn<ComponentArgs> = () => ({
         <u-main style="height: 250px"></u-main>
       </u-layout>
     </u-card>
-  `,
-});
+  `;
 
-ExpandOnHover.args = {} as ComponentArgs;
+/**
+ * Places the component in rail mode and expands once hovered. This does not alter the
+ * content area of v-main. The width can be controlled with the rail-width property.
+ */
+export const ExpandOnHover: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UDivider, ULayout, UList, UListItem, UMain, UNavigationDrawer },
+  template: expandOnHoverTemplate,
+});
 
 ExpandOnHover.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-layout>
-      <u-navigation-drawer
-        expand-on-hover
-        permanent
-        rail
-      >
-        <u-list>
-          <u-list-item
-            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-            subtitle="sandra_a88@gmailcom"
-            title="Sandra Adams"
-          ></u-list-item>
-        </u-list>
-
-        <u-divider></u-divider>
-
-        <u-list density="compact" nav>
-          <u-list-item prepend-icon="hugeicons:folder-01" title="My Files" value="myfiles"></u-list-item>
-          <u-list-item prepend-icon="hugeicons:user-multiple-02" title="Shared with me" value="shared"></u-list-item>
-          <u-list-item prepend-icon="hugeicons:star" title="Starred" value="starred"></u-list-item>
-        </u-list>
-      </u-navigation-drawer>
-
-      <u-main style="height: 250px"></u-main>
-    </u-layout>
-  </u-card>
-</template>`,
+      code: `<template>${expandOnHoverTemplate}</template>`,
     },
   },
 };
 
-export const Temporary: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UCard, UDivider, ULayout, UList, UListItem, UMain, UNavigationDrawer },
-  setup() {
-    const drawer = ref(null);
-
-    return { drawer };
-  },
-  template: `
+// Temporary story
+const temporaryTemplate = `
     <u-card>
       <u-layout>
         <u-navigation-drawer
@@ -653,46 +600,28 @@ export const Temporary: StoryFn<ComponentArgs> = () => ({
         </u-main>
       </u-layout>
     </u-card>
-  `,
-});
+  `;
 
-Temporary.args = {} as ComponentArgs;
+/**
+ * A temporary drawer sits above its application and uses a scrim (overlay) to darken the
+ * background. This drawer behavior is mimicked by default when on mobile. Clicking outside
+ * of the drawer will cause it to close.
+ */
+export const Temporary: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCard, UDivider, ULayout, UList, UListItem, UMain, UNavigationDrawer },
+  setup() {
+    const drawer = ref(null);
+
+    return { drawer };
+  },
+  template: temporaryTemplate,
+});
 
 Temporary.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-layout>
-      <u-navigation-drawer
-        v-model="drawer"
-        temporary
-      >
-        <u-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-          title="John Leider"
-        ></u-list-item>
+      code: `<template>${temporaryTemplate}</template>
 
-        <u-divider></u-divider>
-
-        <u-list density="compact" nav>
-          <u-list-item prepend-icon="hugeicons:home-01" title="Home" value="home"></u-list-item>
-          <u-list-item prepend-icon="hugeicons:message-02" title="About" value="about"></u-list-item>
-        </u-list>
-      </u-navigation-drawer>
-      <u-main style="height: 250px">
-        <div class="d-flex justify-center align-center h-100">
-          <u-btn
-            color="primary"
-            @click.stop="drawer = !drawer"
-          >
-            Toggle
-          </u-btn>
-        </div>
-      </u-main>
-    </u-layout>
-  </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
 
