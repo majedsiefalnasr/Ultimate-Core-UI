@@ -359,31 +359,21 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UPagination },
   setup() {
     return { args };
   },
-  template: `
-    <u-pagination v-bind="args"></u-pagination>
-  `,
+  template: `<u-pagination v-bind="args"></u-pagination>`,
 });
 
 Default.args = {
   length: 5,
 } as ComponentArgs;
 
-/**
- * The rounded prop allows you to render pagination buttons with alternative styles.
- */
-export const Rounded: StoryFn<ComponentArgs> = () => ({
-  components: { UPagination },
-  setup() {
-    const page = ref(1);
-
-    return { page };
-  },
-  template: `
+// Rounded Story
+const roundedTemplate = `
     <div class="text-center">
       <u-pagination
         v-model="page"
@@ -397,29 +387,26 @@ export const Rounded: StoryFn<ComponentArgs> = () => ({
         rounded="0"
       ></u-pagination>
     </div>
-  `,
-});
+  `;
 
-Rounded.args = {} as ComponentArgs;
+/**
+ * The rounded prop allows you to render pagination buttons with alternative styles.
+ */
+export const Rounded: StoryFn<ComponentArgs> = () => ({
+  components: { UPagination },
+  setup() {
+    const page = ref(1);
+
+    return { page };
+  },
+  template: roundedTemplate,
+});
 
 Rounded.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-pagination
-      v-model="page"
-      :length="4"
-      rounded="circle"
-    ></u-pagination>
+      code: `<template>${roundedTemplate}</template>
 
-    <u-pagination
-      v-model="page"
-      :length="4"
-      rounded="0"
-    ></u-pagination>
-  </div>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -429,37 +416,43 @@ Rounded.parameters = {
   },
 };
 
-/**
- * Pagination items can be manually deactivated using the disabled prop.
- */
-export const Disabled: StoryFn<ComponentArgs> = () => ({
-  components: { UPagination },
-  template: `
+// Disabled Story
+const disabledTemplate = `
     <div class="text-center">
       <u-pagination
         :length="3"
         disabled
       ></u-pagination>
     </div>
-  `,
-});
+  `;
 
-Disabled.args = {} as ComponentArgs;
+/**
+ * Pagination items can be manually deactivated using the disabled prop.
+ */
+export const Disabled: StoryFn<ComponentArgs> = () => ({
+  components: { UPagination },
+  template: disabledTemplate,
+});
 
 Disabled.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-pagination
-      :length="3"
-      disabled
-    ></u-pagination>
-  </div>
-</template>`,
+      code: `<template>${disabledTemplate}</template>`,
     },
   },
 };
+
+// Icons Story
+const iconsTemplate = `
+    <div class="text-center">
+      <u-pagination
+        v-model="page"
+        :length="4"
+        next-icon="hugeicons:circle-arrow-right-01"
+        prev-icon="hugeicons:circle-arrow-left-01"
+      ></u-pagination>
+    </div>
+  `;
 
 /**
  * Previous and next page icons can be customized with the prev-icon and next-icon props.
@@ -471,33 +464,14 @@ export const Icons: StoryFn<ComponentArgs> = () => ({
 
     return { page };
   },
-  template: `
-    <div class="text-center">
-      <u-pagination
-        v-model="page"
-        :length="4"
-        next-icon="hugeicons:circle-arrow-right-01"
-        prev-icon="hugeicons:circle-arrow-left-01"
-      ></u-pagination>
-    </div>
-  `,
+  template: iconsTemplate,
 });
-
-Icons.args = {} as ComponentArgs;
 
 Icons.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-pagination
-      v-model="page"
-      :length="4"
-      next-icon="hugeicons:circle-arrow-right-01"
-      prev-icon="hugeicons:circle-arrow-left-01"
-    ></u-pagination>
-  </div>
-</template>
+      code: `<template>${iconsTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -507,18 +481,8 @@ Icons.parameters = {
   },
 };
 
-/**
- * Using the length prop you can set the length of v-pagination, if the number of page buttons
- * exceeds the parent container, it will truncate the list.
- */
-export const Length: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, UContainer, UPagination, URow },
-  setup() {
-    const page = ref(1);
-
-    return { page };
-  },
-  template: `
+// Length Story
+const lengthTemplate = `
     <div class="text-center">
       <u-container>
         <u-row justify="center">
@@ -534,31 +498,27 @@ export const Length: StoryFn<ComponentArgs> = () => ({
         </u-row>
       </u-container>
     </div>
-  `,
-});
+  `;
 
-Length.args = {} as ComponentArgs;
+/**
+ * Using the length prop you can set the length of v-pagination, if the number of page buttons
+ * exceeds the parent container, it will truncate the list.
+ */
+export const Length: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, UContainer, UPagination, URow },
+  setup() {
+    const page = ref(1);
+
+    return { page };
+  },
+  template: lengthTemplate,
+});
 
 Length.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-container>
-      <u-row justify="center">
-        <u-col cols="8">
-          <u-container class="max-width">
-            <u-pagination
-              v-model="page"
-              :length="15"
-              class="my-4"
-            ></u-pagination>
-          </u-container>
-        </u-col>
-      </u-row>
-    </u-container>
-  </div>
-</template>
+      code: `<template>${lengthTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -567,6 +527,17 @@ Length.parameters = {
     },
   },
 };
+
+// Total Visible Story
+const totalVisibleTemplate = `
+    <div class="text-center">
+      <u-pagination
+        v-model="page"
+        :length="15"
+        :total-visible="7"
+      ></u-pagination>
+    </div>
+  `;
 
 /**
  * You can also manually set the maximum number of visible page buttons with the total-visible prop.
@@ -578,31 +549,14 @@ export const TotalVisible: StoryFn<ComponentArgs> = () => ({
 
     return { page };
   },
-  template: `
-    <div class="text-center">
-      <u-pagination
-        v-model="page"
-        :length="15"
-        :total-visible="7"
-      ></u-pagination>
-    </div>
-  `,
+  template: totalVisibleTemplate,
 });
-
-TotalVisible.args = {} as ComponentArgs;
 
 TotalVisible.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-pagination
-      v-model="page"
-      :length="15"
-      :total-visible="7"
-    ></u-pagination>
-  </div>
-</template>
+      code: `<template>${totalVisibleTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
