@@ -86,9 +86,10 @@ const meta: Meta<ComponentArgs> = {
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-const snackbar = ref(false)
-const text = ref("Hello, I'm a snackbar")
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+  const text = ref("Hello, I'm a snackbar")
 </script>`;
         },
       },
@@ -230,6 +231,7 @@ const text = ref("Hello, I'm a snackbar")
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USnackbar, UBtn },
   setup() {
@@ -254,6 +256,25 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
+// MultiLine Story
+const multiLineTemplate = `
+  <div class="text-center">
+    <u-btn color="red-darken-2" @click="snackbar = true">Open Snackbar</u-btn>
+
+    <u-snackbar v-model="snackbar" multi-line>
+      {{ text }}
+
+      <template v-slot:actions>
+        <u-btn color="red" variant="text" @click="snackbar = false">Close</u-btn>
+      </template>
+    </u-snackbar>
+  </div>
+  `;
+
+/**
+ * The multi-line property extends the height of the u-snackbar to give you a little
+ * more room for content.
+ */
 export const MultiLine: StoryFn<ComponentArgs> = () => ({
   components: { USnackbar, UBtn },
   setup() {
@@ -263,46 +284,42 @@ export const MultiLine: StoryFn<ComponentArgs> = () => ({
     );
     return { snackbar, text };
   },
-  template: `
-  <div class="text-center">
-    <u-btn color="red-darken-2" @click="snackbar = true">Open Snackbar</u-btn>
-
-    <u-snackbar v-model="snackbar" multi-line>
-      {{ text }}
-
-      <template v-slot:actions>
-        <u-btn color="red" variant="text" @click="snackbar = false">Close</u-btn>
-      </template>
-    </u-snackbar>
-  </div>
-  `,
+  template: multiLineTemplate,
 });
 
 MultiLine.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-btn color="red-darken-2" @click="snackbar = true">Open Snackbar</u-btn>
+      code: `<template>${multiLineTemplate}</template>
 
-    <u-snackbar v-model="snackbar" multi-line>
-      {{ text }}
-
-      <template v-slot:actions>
-        <u-btn color="red" variant="text" @click="snackbar = false">Close</u-btn>
-      </template>
-    </u-snackbar>
-  </div>
-</template>
 <script setup>
-import { ref } from 'vue'
-const snackbar = ref(false)
-const text = ref('I am a multi-line snackbar.\nI can have more than one line. This is another line that is quite long.')
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+  const text = ref('I am a multi-line snackbar.\nI can have more than one line. This is another line that is quite long.')
 </script>`,
     },
   },
 };
 
+// Timeout Story
+const timeoutTemplate = `
+  <div class="text-center">
+    <u-btn color="orange-darken-2" @click="snackbar = true">Open Snackbar</u-btn>
+
+    <u-snackbar v-model="snackbar" :timeout="timeout">
+      {{ text }}
+
+      <template v-slot:actions>
+        <u-btn color="blue" variant="text" @click="snackbar = false">Close</u-btn>
+      </template>
+    </u-snackbar>
+  </div>
+  `;
+
+/**
+ * The timeout property lets you customize the delay before the u-snackbar is hidden.
+ */
 export const Timeout: StoryFn<ComponentArgs> = () => ({
   components: { USnackbar, UBtn },
   setup() {
@@ -311,50 +328,27 @@ export const Timeout: StoryFn<ComponentArgs> = () => ({
     const timeout = ref(2000);
     return { snackbar, text, timeout };
   },
-  template: `
-  <div class="text-center">
-    <u-btn color="orange-darken-2" @click="snackbar = true">Open Snackbar</u-btn>
-
-    <u-snackbar v-model="snackbar" :timeout="timeout">
-      {{ text }}
-
-      <template v-slot:actions>
-        <u-btn color="blue" variant="text" @click="snackbar = false">Close</u-btn>
-      </template>
-    </u-snackbar>
-  </div>
-  `,
+  template: timeoutTemplate,
 });
 
 Timeout.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-btn color="orange-darken-2" @click="snackbar = true">Open Snackbar</u-btn>
+      code: `<template>${timeoutTemplate}</template>
 
-    <u-snackbar v-model="snackbar" :timeout="timeout">
-      {{ text }}
-
-      <template v-slot:actions>
-        <u-btn color="blue" variant="text" @click="snackbar = false">Close</u-btn>
-      </template>
-    </u-snackbar>
-  </div>
-</template>
 <script setup>
-import { ref } from 'vue'
-const snackbar = ref(false)
-const text = ref('My timeout is set to 2000.')
-const timeout = ref(2000)
+  import { ref } from 'vue'
+
+  const snackbar = ref(false)
+  const text = ref('My timeout is set to 2000.')
+  const timeout = ref(2000)
 </script>`,
     },
   },
 };
 
-export const Variants: StoryFn<ComponentArgs> = () => ({
-  components: { USnackbar, UBtn, USheet },
-  template: `
+// Variants Story
+const variantsTemplate = `
   <u-sheet class="d-flex flex-column">
     <u-snackbar :timeout="2000">
       <template v-slot:activator="{ props }">
@@ -391,95 +385,55 @@ export const Variants: StoryFn<ComponentArgs> = () => ({
       Snackbar with <strong>outlined</strong> variant.
     </u-snackbar>
   </u-sheet>
-  `,
+  `;
+
+/**
+ * Apply different styles to the snackbar using props such as text, shaped, outlined, and more.
+ */
+export const Variants: StoryFn<ComponentArgs> = () => ({
+  components: { USnackbar, UBtn, USheet },
+  template: variantsTemplate,
 });
 
 Variants.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet class="d-flex flex-column">
-    <u-snackbar :timeout="2000">
-      <template v-slot:activator="{ props }">
-        <u-btn class="ma-2" v-bind="props">open</u-btn>
-      </template>
-      Lorem ipsum dolor sit amet consectetur.
-    </u-snackbar>
-
-    <u-snackbar :timeout="2000" color="blue-grey" rounded="pill">
-      <template v-slot:activator="{ props }">
-        <u-btn class="ma-2" color="blue-grey" rounded="pill" v-bind="props">open</u-btn>
-      </template>
-      Snackbar with <strong>rounded="pill"</strong>.
-    </u-snackbar>
-
-    <u-snackbar :timeout="2000" class="elevation-24" color="deep-purple-accent-4">
-      <template v-slot:activator="{ props }">
-        <u-btn class="ma-2" color="deep-purple-accent-4" v-bind="props">open</u-btn>
-      </template>
-      Snackbar with <strong>elevation="24"</strong>.
-    </u-snackbar>
-
-    <u-snackbar :timeout="2000" color="primary" variant="tonal">
-      <template v-slot:activator="{ props }">
-        <u-btn class="ma-2" color="primary" variant="tonal" v-bind="props">open</u-btn>
-      </template>
-      Snackbar with <strong>tonal</strong> variant.
-    </u-snackbar>
-
-    <u-snackbar :timeout="2000" color="success" variant="outlined">
-      <template v-slot:activator="{ props }">
-        <u-btn class="ma-2" color="success" variant="outlined" v-bind="props">open</u-btn>
-      </template>
-      Snackbar with <strong>outlined</strong> variant.
-    </u-snackbar>
-  </u-sheet>
-</template>`,
+      code: `<template>${variantsTemplate}</template>`,
     },
   },
 };
 
+// Vertical Story
+const verticalTemplate = `
+  <div class="text-center">
+    <u-btn color="indigo" @click="snackbar = true">Open Snackbar</u-btn>
+
+    <u-snackbar v-model="snackbar" vertical>
+      <div class="text-subtitle-1 pb-2">This is a snackbar message</div>
+      <p>This is a longer paragraph explaining something</p>
+      <template v-slot:actions>
+        <u-btn color="indigo" variant="text" @click="snackbar = false">Close</u-btn>
+      </template>
+    </u-snackbar>
+  </div>
+  `;
+
+/**
+ * The vertical property allows you to stack the content of your v-snackbar.
+ */
 export const Vertical: StoryFn<ComponentArgs> = () => ({
   components: { USnackbar, UBtn },
   setup() {
     const snackbar = ref(false);
     return { snackbar };
   },
-  template: `
-  <div class="text-center">
-    <u-btn color="indigo" @click="snackbar = true">Open Snackbar</u-btn>
-
-    <u-snackbar v-model="snackbar" vertical>
-      <div class="text-subtitle-1 pb-2">This is a snackbar message</div>
-      <p>This is a longer paragraph explaining something</p>
-      <template v-slot:actions>
-        <u-btn color="indigo" variant="text" @click="snackbar = false">Close</u-btn>
-      </template>
-    </u-snackbar>
-  </div>
-  `,
+  template: verticalTemplate,
 });
 
 Vertical.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-btn color="indigo" @click="snackbar = true">Open Snackbar</u-btn>
-
-    <u-snackbar v-model="snackbar" vertical>
-      <div class="text-subtitle-1 pb-2">This is a snackbar message</div>
-      <p>This is a longer paragraph explaining something</p>
-      <template v-slot:actions>
-        <u-btn color="indigo" variant="text" @click="snackbar = false">Close</u-btn>
-      </template>
-    </u-snackbar>
-  </div>
-</template>
-<script setup>
-import { ref } from 'vue'
-const snackbar = ref(false)
-</script>`,
+      code: `<template>${verticalTemplate}</template><script setup>import { ref } from 'vue'; const snackbar = ref(false);</script>`,
     },
   },
 };
