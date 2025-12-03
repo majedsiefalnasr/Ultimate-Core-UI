@@ -52,7 +52,7 @@ const meta: Meta<ComponentArgs> = {
           </u-col>
         </u-row>
       </u-container>
-    </u-item-group>          `;
+    </u-item-group>`;
         },
       },
     },
@@ -133,58 +133,33 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UItemGroup, UItem, UContainer, URow, UCol, UCard },
   setup() {
     return { args };
   },
   template: `
-    <u-item-group v-bind="args">
-      <u-container>
-        <u-row>
-          <u-col v-for="n in 3" :key="n" cols="12" md="4">
-            <u-item>
-              <u-card class="d-flex align-center" height="200" dark @click="toggle">
-                <div class="text-h3 flex-grow-1 text-center">Group Item</div>
-              </u-card>
-            </u-item>
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-item-group>
-  `,
+  <u-item-group v-bind="args">
+    <u-container>
+      <u-row>
+        <u-col v-for="n in 3" :key="n" cols="12" md="4">
+          <u-item>
+            <u-card class="d-flex align-center" height="200" dark @click="toggle">
+              <div class="text-h3 flex-grow-1 text-center">Group Item</div>
+            </u-card>
+          </u-item>
+        </u-col>
+      </u-row>
+    </u-container>
+  </u-item-group>
+`,
 });
 
 Default.args = {} as ComponentArgs;
 
-export const SelectedClass: StoryFn<ComponentArgs> = (args) => ({
-  components: { UItemGroup, UItem, UContainer, URow, UCol, UCard },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-item-group v-bind="args">
-      <u-container>
-        <u-row>
-          <u-col v-for="n in 3" :key="n" cols="12" md="4">
-            <u-item v-slot="{ isSelected, selectedClass, toggle }">
-              <u-card :class="['d-flex align-center', selectedClass]" height="200" dark @click="toggle">
-                <div class="text-h3 flex-grow-1 text-center">{{ isSelected ? 'Selected' : 'Click Me!' }}</div>
-              </u-card>
-            </u-item>
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-item-group>
-  `,
-});
-
-SelectedClass.args = { selectedClass: 'bg-primary' } as ComponentArgs;
-
-SelectedClass.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// SelectedClass Story
+const selectedClassTemplate = `
   <u-item-group selected-class="bg-primary">
     <u-container>
       <u-row>
@@ -198,42 +173,26 @@ SelectedClass.parameters = {
       </u-row>
     </u-container>
   </u-item-group>
-</template>
-<script setup lang="ts"></script>`,
+`;
+
+/**
+ * Customize the selected CSS class applied to items.
+ */
+export const SelectedClass: StoryFn<ComponentArgs> = () => ({
+  components: { UItemGroup, UItem, UContainer, URow, UCol, UCard },
+  template: selectedClassTemplate,
+});
+
+SelectedClass.parameters = {
+  docs: {
+    source: {
+      code: `<template>${selectedClassTemplate}</template>`,
     },
   },
 };
 
-export const Mandatory: StoryFn<ComponentArgs> = (args) => ({
-  components: { UItemGroup, UItem, UContainer, URow, UCol, UCard, USlideYTransition },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-item-group v-bind="args">
-      <u-container>
-        <u-row>
-          <u-col v-for="n in 3" :key="n" cols="12" md="4">
-            <u-item v-slot="{ isSelected, toggle }">
-              <u-card :color="isSelected ? 'primary' : ''" class="d-flex align-center" height="200" dark @click="toggle">
-                <u-slide-y-transition>
-                  <div class="text-h3 flex-grow-1 text-center">{{ isSelected ? 'Selected' : 'Click Me!' }}</div>
-                </u-slide-y-transition>
-              </u-card>
-            </u-item>
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-item-group>
-  `,
-});
-
-Mandatory.args = { mandatory: true } as ComponentArgs;
-
-Mandatory.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Mandatory Story
+const mandatoryTemplate = `
   <u-item-group mandatory>
     <u-container>
       <u-row>
@@ -249,42 +208,26 @@ Mandatory.parameters = {
       </u-row>
     </u-container>
   </u-item-group>
-</template>
-<script setup lang="ts"></script>`,
+`;
+
+/**
+ * Force at least one item to always be selected.
+ */
+export const Mandatory: StoryFn<ComponentArgs> = () => ({
+  components: { UItemGroup, UItem, UContainer, URow, UCol, UCard, USlideYTransition },
+  template: mandatoryTemplate,
+});
+
+Mandatory.parameters = {
+  docs: {
+    source: {
+      code: `<template>${mandatoryTemplate}</template>`,
     },
   },
 };
 
-export const Multiple: StoryFn<ComponentArgs> = (args) => ({
-  components: { UItemGroup, UItem, UContainer, URow, UCol, UCard, USlideYTransition },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-item-group v-bind="args">
-      <u-container>
-        <u-row>
-          <u-col v-for="n in 3" :key="n" cols="12" md="4">
-            <u-item v-slot="{ isSelected, toggle }">
-              <u-card :color="isSelected ? 'primary' : ''" class="d-flex align-center" height="200" dark @click="toggle">
-                <u-slide-y-transition>
-                  <div class="text-h3 flex-grow-1 text-center">{{ isSelected ? 'Selected' : 'Click Me!' }}</div>
-                </u-slide-y-transition>
-              </u-card>
-            </u-item>
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-item-group>
-  `,
-});
-
-Multiple.args = { multiple: true } as ComponentArgs;
-
-Multiple.parameters = {
-  docs: {
-    source: {
-      code: `<template>
+// Multiple Story
+const multipleTemplate = `
   <u-item-group multiple>
     <u-container>
       <u-row>
@@ -300,8 +243,20 @@ Multiple.parameters = {
       </u-row>
     </u-container>
   </u-item-group>
-</template>
-<script setup lang="ts"></script>`,
+`;
+
+/**
+ * Allow multiple items to be selected simultaneously.
+ */
+export const Multiple: StoryFn<ComponentArgs> = () => ({
+  components: { UItemGroup, UItem, UContainer, URow, UCol, UCard, USlideYTransition },
+  template: multipleTemplate,
+});
+
+Multiple.parameters = {
+  docs: {
+    source: {
+      code: `<template>${multipleTemplate}</template>`,
     },
   },
 };
