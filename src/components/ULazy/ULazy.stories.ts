@@ -156,6 +156,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { ULazy, USheet, UResponsive, UCard, UBtn, UContainer },
   setup() {
