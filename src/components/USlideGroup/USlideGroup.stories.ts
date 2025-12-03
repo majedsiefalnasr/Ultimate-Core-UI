@@ -48,13 +48,15 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-slide-group${attrsString}>
+          return `<u-sheet class="mx-auto" max-width="600">
+    <u-slide-group${attrsString}>
       <template v-for="n in 25">
         <u-slide-group-item :key="n" v-slot="{ isSelected, toggle }">
           <u-btn :color="isSelected ? 'primary' : undefined" class="ma-2" rounded @click="toggle">Options {{ n }}</u-btn>
         </u-slide-group-item>
       </template>
-    </u-slide-group>`;
+    </u-slide-group>
+  </u-sheet>`;
         },
       },
     },
@@ -185,6 +187,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USlideGroup, USheet, UBtn },
   setup() {
@@ -207,59 +210,49 @@ Default.args = {
   showArrows: 'true',
 } as ComponentArgs;
 
-/** Selected class: customize active item class */
+// SelectedClass Story
+const selectedClassTemplate = `
+  <u-sheet class="mx-auto" elevation="8" max-width="800">
+    <u-slide-group v-model="model" class="pa-4" selected-class="bg-success" show-arrows>
+      <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle, selectedClass }">
+        <u-card :class="['ma-4', selectedClass]" color="grey-lighten-1" height="200" width="100" @click="toggle">
+          <div class="d-flex fill-height align-center justify-center">
+            <u-icon v-if="isSelected" icon="hugeicons:close-circle-24" size="48" color="white" />
+          </div>
+        </u-card>
+      </u-slide-group-item>
+    </u-slide-group>
+  </u-sheet>
+  `;
+
+/**
+ * selected-class prop allows you to pass a class to customize the active items.
+ */
 export const SelectedClass: StoryFn<ComponentArgs> = () => ({
   components: { USlideGroup, USheet, UCard },
   setup() {
     const model = ref(null as null | number);
     return { model };
   },
-  template: `
-  <u-sheet class="mx-auto" elevation="8" max-width="800">
-    <u-slide-group v-model="model" class="pa-4" selected-class="bg-success" show-arrows>
-      <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle, selectedClass }">
-        <u-card :class="['ma-4', selectedClass]" color="grey-lighten-1" height="200" width="100" @click="toggle">
-          <div class="d-flex fill-height align-center justify-center">
-            <u-icon v-if="isSelected" icon="hugeicons:close-circle-24" size="48" color="white" />
-          </div>
-        </u-card>
-      </u-slide-group-item>
-    </u-slide-group>
-  </u-sheet>
-  `,
+  template: selectedClassTemplate,
 });
 
 SelectedClass.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet class="mx-auto" elevation="8" max-width="800">
-    <u-slide-group v-model="model" class="pa-4" selected-class="bg-success" show-arrows>
-      <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle, selectedClass }">
-        <u-card :class="['ma-4', selectedClass]" color="grey-lighten-1" height="200" width="100" @click="toggle">
-          <div class="d-flex fill-height align-center justify-center">
-            <u-icon v-if="isSelected" icon="hugeicons:close-circle-24" size="48" color="white" />
-          </div>
-        </u-card>
-      </u-slide-group-item>
-    </u-slide-group>
-  </u-sheet>
-</template>
+      code: `<template>${selectedClassTemplate}</template>
+
 <script setup>
-import { ref } from 'vue'
-const model = ref(null)
+  import { ref } from 'vue'
+
+  const model = ref(null)
 </script>`,
     },
   },
 };
 
-export const CenterActive: StoryFn<ComponentArgs> = () => ({
-  components: { USlideGroup, USheet, UCard },
-  setup() {
-    const model = ref(null as null | number);
-    return { model };
-  },
-  template: `
+// CenterActive Story
+const centerActiveTemplate = `
   <u-sheet class="mx-auto" elevation="8" max-width="800">
     <u-slide-group v-model="model" class="pa-4" center-active show-arrows>
       <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle }">
@@ -271,34 +264,36 @@ export const CenterActive: StoryFn<ComponentArgs> = () => ({
       </u-slide-group-item>
     </u-slide-group>
   </u-sheet>
-  `,
+  `;
+
+/**
+ * Using the center-active prop will make the active item always centered.
+ */
+export const CenterActive: StoryFn<ComponentArgs> = () => ({
+  components: { USlideGroup, USheet, UCard },
+  setup() {
+    const model = ref(null as null | number);
+    return { model };
+  },
+  template: centerActiveTemplate,
 });
 
 CenterActive.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet class="mx-auto" elevation="8" max-width="800">
-    <u-slide-group v-model="model" class="pa-4" center-active show-arrows>
-      <!-- items -->
-    </u-slide-group>
-  </u-sheet>
-</template>
+      code: `<template>${centerActiveTemplate}</template>
+
 <script setup>
-import { ref } from 'vue'
-const model = ref(null)
+  import { ref } from 'vue'
+
+  const model = ref(null)
 </script>`,
     },
   },
 };
 
-export const CustomIcons: StoryFn<ComponentArgs> = () => ({
-  components: { USlideGroup, USheet, UCard, UIcon },
-  setup() {
-    const model = ref(null as null | number);
-    return { model };
-  },
-  template: `
+// CustomIcons Story
+const customIconsTemplate = `
   <u-sheet class="mx-auto" elevation="8" max-width="800">
     <u-slide-group v-model="model" class="pa-4" next-icon="hugeicons:plus-24" prev-icon="hugeicons:minus-24" selected-class="bg-primary" show-arrows>
       <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle, selectedClass }">
@@ -306,30 +301,31 @@ export const CustomIcons: StoryFn<ComponentArgs> = () => ({
       </u-slide-group-item>
     </u-slide-group>
   </u-sheet>
-  `,
+  `;
+
+/**
+ * You can add your custom pagination icons instead of arrows using the next-icon and
+ * prev-icon props.
+ */
+export const CustomIcons: StoryFn<ComponentArgs> = () => ({
+  components: { USlideGroup, USheet, UCard, UIcon },
+  setup() {
+    const model = ref(null as null | number);
+    return { model };
+  },
+  template: customIconsTemplate,
 });
 
 CustomIcons.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet class="mx-auto" elevation="8" max-width="800">
-    <u-slide-group next-icon="hugeicons:plus-24" prev-icon="hugeicons:minus-24" selected-class="bg-primary" show-arrows>
-      <!-- items -->
-    </u-slide-group>
-  </u-sheet>
-</template>`,
+      code: `<template>${customIconsTemplate}</template>`,
     },
   },
 };
 
-export const Mandatory: StoryFn<ComponentArgs> = () => ({
-  components: { USlideGroup, USheet, UCard },
-  setup() {
-    const model = ref(null as null | number);
-    return { model };
-  },
-  template: `
+// Mandatory Story
+const mandatoryTemplate = `
   <u-sheet class="mx-auto" elevation="8" max-width="800">
     <u-slide-group v-model="model" class="pa-4" selected-class="bg-primary" mandatory show-arrows>
       <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle, selectedClass }">
@@ -337,28 +333,36 @@ export const Mandatory: StoryFn<ComponentArgs> = () => ({
       </u-slide-group-item>
     </u-slide-group>
   </u-sheet>
-  `,
+  `;
+
+/**
+ * the mandatory prop will make the slide group require at least 1 item must be selected.
+ */
+export const Mandatory: StoryFn<ComponentArgs> = () => ({
+  components: { USlideGroup, USheet, UCard },
+  setup() {
+    const model = ref(null as null | number);
+    return { model };
+  },
+  template: mandatoryTemplate,
 });
 
 Mandatory.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-slide-group mandatory selected-class="bg-primary">
-    <!-- items -->
-  </u-slide-group>
-</template>`,
+      code: `<template>${mandatoryTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref(null)
+</script>`,
     },
   },
 };
 
-export const Multiple: StoryFn<ComponentArgs> = () => ({
-  components: { USlideGroup, USheet, UCard },
-  setup() {
-    const model = ref([] as number[]);
-    return { model };
-  },
-  template: `
+// Multiple Story
+const multipleTemplate = `
   <u-sheet class="mx-auto" elevation="8" max-width="800">
     <u-slide-group v-model="model" class="pa-4" selected-class="bg-primary" multiple show-arrows>
       <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle, selectedClass }">
@@ -366,28 +370,36 @@ export const Multiple: StoryFn<ComponentArgs> = () => ({
       </u-slide-group-item>
     </u-slide-group>
   </u-sheet>
-  `,
+  `;
+
+/**
+ * You can select multiple items by setting the multiple prop.
+ */
+export const Multiple: StoryFn<ComponentArgs> = () => ({
+  components: { USlideGroup, USheet, UCard },
+  setup() {
+    const model = ref([] as number[]);
+    return { model };
+  },
+  template: multipleTemplate,
 });
 
 Multiple.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-slide-group multiple selected-class="bg-primary">
-    <!-- items -->
-  </u-slide-group>
-</template>`,
+      code: `<template>${multipleTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref([])
+</script>`,
     },
   },
 };
 
-export const PseudoCarousel: StoryFn<ComponentArgs> = () => ({
-  components: { USlideGroup, USheet, UCard },
-  setup() {
-    const model = ref(null as null | number);
-    return { model };
-  },
-  template: `
+// PseudoCarousel Story
+const pseudoCarouselTemplate = `
   <u-sheet class="mx-auto" elevation="8" max-width="800">
     <u-slide-group v-model="model" class="pa-4" selected-class="bg-primary" show-arrows>
       <u-slide-group-item v-for="n in 15" :key="n" v-slot="{ isSelected, toggle, selectedClass }">
@@ -399,17 +411,31 @@ export const PseudoCarousel: StoryFn<ComponentArgs> = () => ({
       <h3 class="text-h6">Selected {{ model }}</h3>
     </div>
   </u-sheet>
-  `,
+  `;
+
+/**
+ * Customize the slide group to creatively display information on sheets. Using the
+ * selection, we can display auxiliary information easily for the user.
+ */
+export const PseudoCarousel: StoryFn<ComponentArgs> = () => ({
+  components: { USlideGroup, USheet, UCard },
+  setup() {
+    const model = ref(null as null | number);
+    return { model };
+  },
+  template: pseudoCarouselTemplate,
 });
 
 PseudoCarousel.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-slide-group v-model="model" selected-class="bg-primary">
-    <!-- items -->
-  </u-slide-group>
-</template>`,
+      code: `<template>${pseudoCarouselTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref(null)
+</script>`,
     },
   },
 };
