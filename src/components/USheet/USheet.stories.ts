@@ -90,9 +90,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
-/**
- * Default: simple sheet with explicit height and width
- */
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USheet },
   setup() {
@@ -108,8 +106,22 @@ Default.args = {
   width: '200',
 } as ComponentArgs;
 
+// Elevation Story
+const elevationTemplate = `
+    <div class="v-container">
+      <div class="v-row" style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div v-for="e in elevations" :key="e" style="flex:0 0 120px;">
+          <u-sheet class="pa-6" color="grey-lighten-3">
+            <u-sheet :elevation="e" class="mx-auto" :height="100" :width="100"></u-sheet>
+          </u-sheet>
+        </div>
+      </div>
+    </div>
+  `;
+
 /**
- * Elevation: demonstrate a range of elevations
+ * The v-sheet component accepts a custom elevation between 0 and 24 (0 is default).
+ * The elevation property modifies the box-shadow property.
  */
 export const Elevation: StoryFn<ComponentArgs> = () => ({
   components: { USheet },
@@ -117,40 +129,36 @@ export const Elevation: StoryFn<ComponentArgs> = () => ({
     const elevations = [0, 4, 8, 12, 16, 20];
     return { elevations };
   },
-  template: `
-  <div class="v-container">
-    <div class="v-row" style="display:flex;gap:16px;flex-wrap:wrap;">
-      <div v-for="e in elevations" :key="e" style="flex:0 0 120px;">
-        <u-sheet class="pa-6" color="grey-lighten-3">
-          <u-sheet :elevation="e" class="mx-auto" :height="100" :width="100"></u-sheet>
-        </u-sheet>
-      </div>
-    </div>
-  </div>
-  `,
+  template: elevationTemplate,
 });
 
 Elevation.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <div v-for="elevation in [0,4,8,12,16,20]" :key="elevation">
-      <u-sheet class="pa-12" color="grey-lighten-3">
-        <u-sheet :elevation="elevation" class="mx-auto" height="100" width="100" />
-      </u-sheet>
-    </div>
-  </div>
-</template>
+      code: `<template>${elevationTemplate}</template>
+
 <script setup>
-const elevations = [0,4,8,12,16,20]
+  const elevations = [0, 4, 8, 12, 16, 20]
 </script>`,
     },
   },
 };
 
+// Rounded Story
+const roundedTemplate = `
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <div v-for="r in values" :key="String(r)" style="flex:0 0 160px;">
+        <u-sheet class="pa-6" color="grey-lighten-3">
+          <u-sheet :rounded="r" class="mx-auto" :height="100" :width="100"></u-sheet>
+        </u-sheet>
+      </div>
+    </div>
+  `;
+
 /**
- * Rounded: demonstrate different rounded values
+ * The rounded prop adds a default border-radius of 4px. By default, the v-sheet component
+ * has no border-radius. Customize the radius’s size and location by providing a custom rounded
+ * value; e.g. a rounded value of tr-xl l-pill equates to rounded-tr-xl rounded-l-pill.
  */
 export const Rounded: StoryFn<ComponentArgs> = () => ({
   components: { USheet },
@@ -158,129 +166,116 @@ export const Rounded: StoryFn<ComponentArgs> = () => ({
     const values = [false, true, 'xl'];
     return { values };
   },
-  template: `
-  <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <div v-for="r in values" :key="String(r)" style="flex:0 0 160px;">
-      <u-sheet class="pa-6" color="grey-lighten-3">
-        <u-sheet :rounded="r" class="mx-auto" :height="100" :width="100"></u-sheet>
-      </u-sheet>
-    </div>
-  </div>
-  `,
+  template: roundedTemplate,
 });
 
 Rounded.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-sheet v-for="rounded in [false, true, 'xl']" :key="String(rounded)" class="pa-12" color="grey-lighten-3">
-      <u-sheet :rounded="rounded" class="mx-auto" height="100" width="100" />
-    </u-sheet>
-  </div>
-</template>`,
+      code: `<template>${roundedTemplate}</template>
+
+<script setup>
+  const values = [false, true, 'xl']
+</script>`,
     },
   },
 };
 
+// Color Story
+const colorTemplate = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <u-sheet class="d-flex" color="grey-lighten-3" :height="120" :width="160">
+        <div class="ma-auto">#1</div>
+      </u-sheet>
+
+      <u-sheet class="d-flex" color="green-lighten-3" :height="120" :width="160">
+        <div class="ma-auto">#2</div>
+      </u-sheet>
+
+      <u-sheet class="d-flex" color="yellow-lighten-3" :height="120" :width="160">
+        <div class="ma-auto">#3</div>
+      </u-sheet>
+    </div>
+  `;
+
 /**
- * Color: show different color combinations and layouts
+ * Sheets and components based on them can have different sizes and colors.
+ *
+ * The v-sheet component accepts custom Material Design Color values such as warning, amber
+ * darken-3, and deep-purple accent — as well as rgb, rgba, and hexadecimal values.
  */
 export const Color: StoryFn<ComponentArgs> = () => ({
   components: { USheet },
-  template: `
-  <div style="display:flex;gap:12px;flex-wrap:wrap;">
-    <u-sheet class="d-flex" color="grey-lighten-3" :height="120" :width="160">
-      <div class="ma-auto">#1</div>
-    </u-sheet>
-
-    <u-sheet class="d-flex" color="green-lighten-3" :height="120" :width="160">
-      <div class="ma-auto">#2</div>
-    </u-sheet>
-
-    <u-sheet class="d-flex" color="yellow-lighten-3" :height="120" :width="160">
-      <div class="ma-auto">#3</div>
-    </u-sheet>
-  </div>
-  `,
+  template: colorTemplate,
 });
 
 Color.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet color="grey-lighten-3" height="120" width="160">#1</u-sheet>
-  <u-sheet color="green-lighten-3" height="120" width="160">#2</u-sheet>
-  <u-sheet color="yellow-lighten-3" height="120" width="160">#3</u-sheet>
-</template>`,
+      code: `<template>${colorTemplate}</template>`,
     },
   },
 };
 
+// Congratulations Story
+const congratulationsTemplate = `
+    <u-sheet class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4" elevation="4" :height="250" :max-width="800" width="100%" rounded>
+      <div>
+        <h2 class="text-h4 font-weight-black text-orange">Congratulations!</h2>
+        <div class="text-h5 font-weight-medium mb-2">You are officially a part of the community!</div>
+        <p class="text-body-2 mb-4">Please check your inbox for a verification email.</p>
+        <u-btn color="orange" variant="text">Go to Login</u-btn>
+      </div>
+    </u-sheet>
+  `;
+
 /**
- * Congratulations: a centered banner built with sheets
+ * This example uses a sheet component to create a banner congratulating users for signing
+ * up for the Vuetify community.
  */
 export const Congratulations: StoryFn<ComponentArgs> = () => ({
   components: { USheet, UBtn },
-  template: `
-  <u-sheet class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4" elevation="4" :height="250" :max-width="800" width="100%" rounded>
-    <div>
-      <h2 class="text-h4 font-weight-black text-orange">Congratulations!</h2>
-      <div class="text-h5 font-weight-medium mb-2">You are officially a part of the community!</div>
-      <p class="text-body-2 mb-4">Please check your inbox for a verification email.</p>
-      <u-btn color="orange" variant="text">Go to Login</u-btn>
-    </div>
-  </u-sheet>
-  `,
+  template: congratulationsTemplate,
 });
 
 Congratulations.parameters = {
   docs: {
     source: {
-      code: `<u-sheet class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4" elevation="4" height="250" max-width="800" width="100%" rounded>
-  <div>
-    <h2 class="text-h4 font-weight-black text-orange">Congratulations!</h2>
-    <div class="text-h5 font-weight-medium mb-2">You are officially a part of the community!</div>
-    <p class="text-body-2 mb-4">Please check your inbox for a verification email.</p>
-    <u-btn color="orange" variant="text">Go to Login</u-btn>
-  </div>
-</u-sheet>`,
+      code: `<template>${congratulationsTemplate}</template>`,
     },
   },
 };
 
+// ReconcileNotification Story
+const reconcileNotificationTemplate = `
+    <u-sheet class="pa-4 text-center mx-auto" :elevation="12" :max-width="600" rounded="lg" width="100%">
+      <u-icon class="mb-5" color="success" size="112" icon="hugeicons:checkmark-circle-02"></u-icon>
+
+      <h2 class="text-h5 mb-6">You reconciled this account</h2>
+
+      <p class="mb-4 text-medium-emphasis text-body-2">To see a report on this reconciliation, click <a class="text-decoration-none text-info" href="#">View reconciliation report.</a></p>
+
+      <u-divider class="mb-4" />
+
+      <div class="text-end">
+        <u-btn class="text-none" color="success" variant="flat" :width="90" rounded>Done</u-btn>
+      </div>
+    </u-sheet>
+  `;
+
 /**
- * ReconcileNotification: banner notifying reconciliation with icon and actions
+ * The following example uses a sheet component to create a banner that notifies users that
+ * the account balance has been reconciled.
  */
 export const ReconcileNotification: StoryFn<ComponentArgs> = () => ({
   components: { USheet, UIcon, UBtn, UDivider },
-  template: `
-  <u-sheet class="pa-4 text-center mx-auto" :elevation="12" :max-width="600" rounded="lg" width="100%">
-    <u-icon class="mb-5" color="success" size="112" icon="hugeicons:checkmark-circle-02"></u-icon>
-
-    <h2 class="text-h5 mb-6">You reconciled this account</h2>
-
-    <p class="mb-4 text-medium-emphasis text-body-2">To see a report on this reconciliation, click <a class="text-decoration-none text-info" href="#">View reconciliation report.</a></p>
-
-    <u-divider class="mb-4" />
-
-    <div class="text-end">
-      <u-btn class="text-none" color="success" variant="flat" :width="90" rounded>Done</u-btn>
-    </div>
-  </u-sheet>
-  `,
+  template: reconcileNotificationTemplate,
 });
 
 ReconcileNotification.parameters = {
   docs: {
     source: {
-      code: `<u-sheet class="pa-4 text-center mx-auto" elevation="12" max-width="600" rounded="lg" width="100%">
-  <u-icon class="mb-5" color="success" size="112">hugeicons:check-circle-112</u-icon>
-  <h2 class="text-h5 mb-6">You reconciled this account</h2>
-  <p class="mb-4 text-medium-emphasis text-body-2">To see a report on this reconciliation, click <a class="text-decoration-none text-info" href="#">View reconciliation report.</a></p>
-  <u-divider class="mb-4" />
-  <div class="text-end"><u-btn class="text-none" color="success" variant="flat" width="90" rounded>Done</u-btn></div>
-</u-sheet>`,
+      code: `<template>${reconcileNotificationTemplate}</template>`,
     },
   },
 };
