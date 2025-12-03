@@ -1,17 +1,21 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import {
   UBtn,
   UCard,
   UCardText,
   UCardTitle,
+  UCol,
   UHover,
   UImg,
   UOverlay,
   UProgressCircular,
+  URadio,
+  URadioGroup,
   URating,
   URow,
+  UTooltip,
 } from '../index';
 
 interface ComponentArgs {
@@ -79,7 +83,19 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-overlay${attrsString}></u-overlay>`;
+          return `<template>
+  <div class="text-center">
+    <u-btn
+      color="error"
+      @click="overlay = !overlay"
+    >
+      Show Overlay
+    </u-btn>
+
+    <u-overlay${attrsString} v-model="overlay"></u-overlay>
+  </div>
+</template>
+  `;
         },
       },
     },
@@ -458,6 +474,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default Story
 export const Default: StoryFn<ComponentArgs> = () => ({
   components: { UBtn, UOverlay },
   setup() {
@@ -488,14 +505,284 @@ export const Default: StoryFn<ComponentArgs> = () => ({
 
 Default.args = {} as ComponentArgs;
 
-export const Contained: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UCard, UOverlay, URow },
-  setup() {
-    const overlay = ref(false);
+// Connected Story
+const connectedTemplate = `
+  <div>
+    <u-row>
+      <u-col class="d-flex flex-column align-center" cols="12">
+        <code>{{ code }}</code>
 
-    return { overlay };
+        <u-tooltip
+          :location="location"
+          :origin="origin"
+          no-click-animation
+        >
+          <template v-slot:activator="{ props }">
+            <u-btn v-bind="props" class="my-12" text="Hover Me"></u-btn>
+          </template>
+
+          <div>Overlay content</div>
+        </u-tooltip>
+      </u-col>
+
+      <u-col>
+        <u-radio-group v-model="locationSide" label="Location side">
+          <u-radio label="top" value="top"></u-radio>
+          <u-radio label="end" value="end"></u-radio>
+          <u-radio label="bottom" value="bottom"></u-radio>
+          <u-radio label="start" value="start"></u-radio>
+        </u-radio-group>
+      </u-col>
+
+      <u-col>
+        <u-radio-group v-model="locationAlign" label="Location alignment">
+          <u-radio :disabled="locationSide === 'top' || locationSide === 'bottom'" label="top" value="top"></u-radio>
+          <u-radio :disabled="!(locationSide === 'top' || locationSide === 'bottom')" label="start" value="start"></u-radio>
+          <u-radio label="center" value="center"></u-radio>
+          <u-radio :disabled="!(locationSide === 'top' || locationSide === 'bottom')" label="end" value="end"></u-radio>
+          <u-radio :disabled="locationSide === 'top' || locationSide === 'bottom'" label="bottom" value="bottom"></u-radio>
+        </u-radio-group>
+      </u-col>
+
+      <u-col>
+        <u-radio-group v-model="originSide" label="Origin side">
+          <u-radio label="auto" value="auto"></u-radio>
+          <u-radio label="overlap" value="overlap"></u-radio>
+          <u-radio label="top" value="top"></u-radio>
+          <u-radio label="end" value="end"></u-radio>
+          <u-radio label="bottom" value="bottom"></u-radio>
+          <u-radio label="start" value="start"></u-radio>
+        </u-radio-group>
+      </u-col>
+
+      <u-col>
+        <u-radio-group v-model="originAlign" label="Origin alignment">
+          <u-radio :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'" label="top" value="top"></u-radio>
+          <u-radio :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')" label="start" value="start"></u-radio>
+          <u-radio :disabled="originDisabled" label="center" value="center"></u-radio>
+          <u-radio :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')" label="end" value="end"></u-radio>
+          <u-radio :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'" label="bottom" value="bottom"></u-radio>
+        </u-radio-group>
+      </u-col>
+    </u-row>
+  </div>
+  `;
+
+/**
+ * location-strategy="connected"
+ *
+ * The connected strategy is used by v-menu
+ * and v-tooltip
+ * to attach the overlay content to an activator element.
+ *
+ * location selects a point on the activator, and origin a point on the overlay content.
+ * The content element will be positioned so the two points overlap.
+ */
+export const Connected: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, URadio, URadioGroup, URow, UCol, UTooltip },
+  setup() {
+    const locationSide = ref('top');
+    const locationAlign = ref('center');
+    const originSide = ref('auto');
+    const originAlign = ref('');
+
+    const location = computed(() => {
+      return `${locationSide.value} ${locationAlign.value}`;
+    });
+    const origin = computed(() => {
+      return originDisabled.value ? originSide.value : `${originSide.value} ${originAlign.value}`;
+    });
+    const code = computed(() => {
+      return `<v-tooltip location="${location.value}" origin="${origin.value}" />`;
+    });
+    const originDisabled = computed(() => {
+      return ['auto', 'overlap'].includes(originSide.value);
+    });
+
+    watch(locationSide, (val) => {
+      if (['top', 'bottom'].includes(val)) {
+        locationAlign.value =
+          {
+            top: 'start',
+            bottom: 'end',
+          }[locationAlign.value] || locationAlign.value;
+      } else {
+        locationAlign.value =
+          {
+            start: 'top',
+            end: 'bottom',
+          }[locationAlign.value] || locationAlign.value;
+      }
+    });
+    watch(originDisabled, (val) => {
+      if (!val && !originAlign.value) {
+        originAlign.value = 'center';
+      }
+    });
+
+    return {
+      locationSide,
+      locationAlign,
+      originSide,
+      originAlign,
+      location,
+      origin,
+      code,
+      originDisabled,
+    };
   },
-  template: `
+  template: connectedTemplate,
+});
+
+Connected.parameters = {
+  docs: {
+    source: {
+      code: `<template>${connectedTemplate}</template>
+
+<script setup>
+  import { computed, ref, watch } from 'vue'
+
+  const locationSide = ref('top')
+  const locationAlign = ref('center')
+  const originSide = ref('auto')
+  const originAlign = ref('')
+
+  const location = computed(() => {
+    return \`\${locationSide.value} \${locationAlign.value}\`
+  })
+  const origin = computed(() => {
+    return originDisabled.value ? originSide.value : \`\${originSide.value} \${originAlign.value}\`
+  })
+  const code = computed(() => {
+    return \`<v-tooltip location="\${location.value}" origin="\${origin.value}" />\`
+  })
+  const originDisabled = computed(() => {
+    return ['auto', 'overlap'].includes(originSide.value)
+  })
+
+  watch(locationSide, val => {
+    if (['top', 'bottom'].includes(val)) {
+      locationAlign.value = {
+        top: 'start',
+        bottom: 'end',
+      }[locationAlign.value] || locationAlign.value
+    } else {
+      locationAlign.value = {
+        start: 'top',
+        end: 'bottom',
+      }[locationAlign.value] || locationAlign.value
+    }
+  })
+  watch(originDisabled, val => {
+    if (!val && !originAlign.value) {
+      originAlign.value = 'center'
+    }
+  })
+</script>`,
+    },
+  },
+};
+
+// Scroll Strategies Story
+const scrollStrategiesTemplate = `
+  <div class="d-flex justify-center align-center ga-4 flex-wrap">
+    <u-btn>
+      block
+
+      <u-overlay
+        activator="parent"
+        location-strategy="connected"
+        scroll-strategy="block"
+      >
+        <u-card class="pa-2">
+          Hello!
+        </u-card>
+      </u-overlay>
+    </u-btn>
+
+    <u-btn>
+      Close
+
+      <u-overlay
+        activator="parent"
+        location-strategy="connected"
+        scroll-strategy="close"
+      >
+        <u-card class="pa-2">
+          Hello!
+        </u-card>
+      </u-overlay>
+    </u-btn>
+
+    <u-btn>
+      Reposition
+
+      <u-overlay
+        activator="parent"
+        location-strategy="connected"
+        scroll-strategy="reposition"
+      >
+        <u-card class="pa-2">
+          Hello!
+        </u-card>
+      </u-overlay>
+    </u-btn>
+    
+    <u-btn>
+      None
+
+      <u-overlay
+        activator="parent"
+        location-strategy="connected"
+        scroll-strategy="none"
+      >
+        <u-card class="pa-2">
+          Hello!
+        </u-card>
+      </u-overlay>
+    </u-btn>
+  </div>
+  `;
+
+/**
+ * #### Block (default)
+ * scroll-strategy="block"
+ *
+ * Scrolling is blocked while the overlay is active, and the scrollbar is hidden. If contained
+ * is also set, scrolling will only be blocked up to the overlay’s
+ * offsetParent
+ * .
+ * #### Close
+ * scroll-strategy="close"
+ *
+ * Scrolling when the overlay is active will de-activate it.
+ *
+ * #### Reposition
+ * scroll-strategy="reposition"
+ *
+ * When using the connected location strategy, this scroll strategy will reposition the overlay
+ * element to always respect the activator location.
+ *
+ * #### None
+ * scroll-strategy="none"
+ *
+ * No scroll strategy is used.
+ */
+export const ScrollStrategies: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCard, UOverlay },
+  template: scrollStrategiesTemplate,
+});
+
+ScrollStrategies.parameters = {
+  docs: {
+    source: {
+      code: `<template>${scrollStrategiesTemplate}</template>`,
+    },
+  },
+};
+
+// Contained Story
+const containedTemplate = `
     <u-row
       align="center"
       class="ma-4"
@@ -529,49 +816,26 @@ export const Contained: StoryFn<ComponentArgs> = () => ({
         </u-row>
       </u-card>
     </u-row>
-  `,
-});
+  `;
 
-Contained.args = {} as ComponentArgs;
+/**
+ * A contained overlay is positioned absolutely and contained inside its parent element.
+ */
+export const Contained: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCard, UOverlay, URow },
+  setup() {
+    const overlay = ref(false);
+
+    return { overlay };
+  },
+  template: containedTemplate,
+});
 
 Contained.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-row
-    align="center"
-    class="ma-4"
-    justify="center"
-  >
-    <u-card
-      height="300"
-      width="250"
-    >
-      <u-row justify="center">
-        <u-btn
-          class="mt-12"
-          color="success"
-          @click="overlay = !overlay"
-        >
-          Show Overlay
-        </u-btn>
+      code: `<template>${containedTemplate}</template>
 
-        <u-overlay
-          v-model="overlay"
-          class="align-center justify-center"
-          contained
-        >
-          <u-btn
-            color="success"
-            @click="overlay = false"
-          >
-            Hide Overlay
-          </u-btn>
-        </u-overlay>
-      </u-row>
-    </u-card>
-  </u-row>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -581,9 +845,8 @@ Contained.parameters = {
   },
 };
 
-export const Advanced: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UCard, UCardText, UCardTitle, UHover, UImg, UOverlay, URating },
-  template: `
+// Advanced Story
+const advancedTemplate = `
     <div>
       <u-hover v-slot="{ isHovering, props }">
         <u-card
@@ -622,73 +885,27 @@ export const Advanced: StoryFn<ComponentArgs> = () => ({
         </u-card>
       </u-hover>
     </div>
-  `,
-});
+  `;
 
-Advanced.args = {} as ComponentArgs;
+/**
+ * Using the u-hover, we are able to add a nice scrim over the information card with
+ * additional actions the user can take.
+ */
+export const Advanced: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCard, UCardText, UCardTitle, UHover, UImg, UOverlay, URating },
+  template: advancedTemplate,
+});
 
 Advanced.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-hover v-slot="{ isHovering, props }">
-      <u-card
-        class="mx-auto"
-        max-width="344"
-        v-bind="props"
-      >
-        <u-img src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"></u-img>
-
-        <u-card-text>
-          <h2 class="text-h6 text-primary">
-            Magento Forests
-          </h2>
-          Travel to the best outdoor experience on planet Earth. A vacation you will never forget!
-        </u-card-text>
-
-        <u-card-title>
-          <u-rating
-            :model-value="4"
-            class="me-2"
-            color="orange"
-            density="compact"
-            hover
-          ></u-rating>
-          <span class="text-primary text-subtitle-2">64 Reviews</span>
-        </u-card-title>
-
-        <u-overlay
-          :model-value="!!isHovering"
-          class="align-center justify-center"
-          scrim="#036358"
-          contained
-        >
-          <u-btn variant="flat">See more info</u-btn>
-        </u-overlay>
-      </u-card>
-    </u-hover>
-  </div>
-</template>`,
+      code: `<template>${advancedTemplate}</template>`,
     },
   },
 };
 
-export const Loader: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UOverlay, UProgressCircular },
-  setup() {
-    const overlay = ref(false);
-
-    watch(overlay, (val) => {
-      val &&
-        setTimeout(() => {
-          overlay.value = false;
-        }, 3000);
-    });
-
-    return { overlay };
-  },
-  template: `
+// Loader Story
+const loaderTemplate = `
     <div class="text-center">
       <u-btn
         append-icon="hugeicons:arrow-expand-02"
@@ -709,36 +926,34 @@ export const Loader: StoryFn<ComponentArgs> = () => ({
         ></u-progress-circular>
       </u-overlay>
     </div>
-  `,
-});
+  `;
 
-Loader.args = {} as ComponentArgs;
+/**
+ * Using the u-overlay as a background, add a progress component to easily create a
+ * custom loader.
+ */
+export const Loader: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UOverlay, UProgressCircular },
+  setup() {
+    const overlay = ref(false);
+
+    watch(overlay, (val) => {
+      val &&
+        setTimeout(() => {
+          overlay.value = false;
+        }, 3000);
+    });
+
+    return { overlay };
+  },
+  template: loaderTemplate,
+});
 
 Loader.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-btn
-      append-icon="hugeicons:arrow-expand-02"
-      color="deep-purple-accent-4"
-      @click="overlay = !overlay"
-    >
-      Launch Application
-    </u-btn>
+      code: `<template>${loaderTemplate}</template>
 
-    <u-overlay
-      :model-value="overlay"
-      class="align-center justify-center"
-    >
-      <u-progress-circular
-        color="primary"
-        size="64"
-        indeterminate
-      ></u-progress-circular>
-    </u-overlay>
-  </div>
-</template>
 <script setup>
   import { ref, watch } from 'vue'
 
