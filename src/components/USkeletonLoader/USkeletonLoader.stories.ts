@@ -111,9 +111,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
-/**
- * Default: simple card skeleton
- */
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USkeletonLoader },
   setup() {
@@ -127,12 +125,8 @@ Default.args = {
   maxWidth: '300',
 } as ComponentArgs;
 
-/**
- * Type: show different skeleton types side-by-side
- */
-export const Type: StoryFn<ComponentArgs> = () => ({
-  components: { USkeletonLoader, UContainer, URow, UCol },
-  template: `
+// Type Story
+const typeTemplate = `
   <u-container>
     <u-row>
       <u-col cols="12" md="6">
@@ -144,7 +138,11 @@ export const Type: StoryFn<ComponentArgs> = () => ({
       </u-col>
     </u-row>
   </u-container>
-  `,
+  `;
+
+export const Type: StoryFn<ComponentArgs> = () => ({
+  components: { USkeletonLoader, UContainer, URow, UCol },
+  template: typeTemplate,
 });
 
 Type.parameters = {
@@ -190,33 +188,13 @@ The following built-in types are available:
 `,
     },
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col cols="12" md="6">
-        <u-skeleton-loader class="mx-auto border" max-width="300" type="card-avatar, actions" />
-      </u-col>
-
-      <u-col cols="12" md="6">
-        <u-skeleton-loader class="mx-auto border" max-width="300" type="image, article" />
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${typeTemplate}</template>`,
     },
   },
 };
 
-/**
- * Loading: toggle loading state to show slot vs skeleton
- */
-export const Loading: StoryFn<ComponentArgs> = () => ({
-  components: { USkeletonLoader, UBtn, UListItem },
-  setup() {
-    const loading = ref(true);
-    return { loading };
-  },
-  template: `
+// Loading Story
+const loadingTemplate = `
   <div>
     <div class="text-center mb-6">
       <u-btn size="x-large" @click="loading = !loading">Toggle Loading</u-btn>
@@ -237,92 +215,90 @@ export const Loading: StoryFn<ComponentArgs> = () => ({
       </u-col>
     </u-row>
   </div>
-  `,
+  `;
+
+/**
+ * A skeleton loader is considered to be in a loading state if one of the following 
+ * conditions are met:
+
+ * - The default slot is not used
+ * - The loading property is set to true
+
+ * If either condition is met, the skeleton loader returns the type structure in place of the 
+ * default slot and applies dimensions values; e.g. height, width, min-height, etc. If the 
+ * condition is not met, the default slot is returned.
+ */
+export const Loading: StoryFn<ComponentArgs> = () => ({
+  components: { USkeletonLoader, UBtn, UListItem },
+  setup() {
+    const loading = ref(true);
+    return { loading };
+  },
+  template: loadingTemplate,
 });
 
 Loading.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-btn @click="loading = !loading">Toggle Loading</u-btn>
+      code: `<template>${loadingTemplate}</template>
 
-    <u-skeleton-loader :loading="loading" type="list-item-two-line">
-      <u-list-item lines="two" subtitle="Subtitle" title="Title" rounded />
-    </u-skeleton-loader>
-  </div>
-</template>
 <script setup>
-import { ref } from 'vue'
-const loading = ref(true)
+  import { ref } from 'vue'
+
+  const loading = ref(true)
 </script>`,
     },
   },
 };
 
+// Elevation Story
+const elevationTemplate = `
+  <u-skeleton-loader class="mx-auto" elevation="12" max-width="400" type="table-heading, list-item-two-line, image, table-tfoot"></u-skeleton-loader>
+  `;
+
 /**
- * Elevation: match skeleton elevation to content
+ * The elevation property makes it easy to match the elevation of the skeleton loader to
+ * the content it is replacing.
  */
 export const Elevation: StoryFn<ComponentArgs> = () => ({
   components: { USkeletonLoader },
-  template: `
-  <u-skeleton-loader class="mx-auto" elevation="12" max-width="400" type="table-heading, list-item-two-line, image, table-tfoot"></u-skeleton-loader>
-  `,
+  template: elevationTemplate,
 });
 
 Elevation.parameters = {
   docs: {
     source: {
-      code: `<u-skeleton-loader class="mx-auto" elevation="12" max-width="400" type="table-heading, list-item-two-line, image, table-tfoot" />`,
+      code: `<template>${elevationTemplate}</template>`,
     },
   },
 };
 
+// Boilerplate Story
+const boilerplateTemplate = `
+  <u-skeleton-loader class="mx-auto" elevation="2" max-width="360" type="card-avatar, article, actions" boilerplate></u-skeleton-loader>
+  `;
+
 /**
- * Boilerplate: use boilerplate mode for mockups
+ * The u-skeleton-loader can be used as boilerplate designs when creating mockups. Mix and
+ * match various pre-defined options or create your own unique implementations. In this
+ * example, we use a custom data property to apply the same props to multiple
+ * u-skeleton-loader’s at once.
  */
 export const Boilerplate: StoryFn<ComponentArgs> = () => ({
   components: { USkeletonLoader },
-  template: `
-  <u-skeleton-loader class="mx-auto" elevation="2" max-width="360" type="card-avatar, article, actions" boilerplate></u-skeleton-loader>
-  `,
+  template: boilerplateTemplate,
 });
 
 Boilerplate.parameters = {
   docs: {
     source: {
-      code: `<u-skeleton-loader class="mx-auto" elevation="2" max-width="360" type="card-avatar, article, actions" boilerplate />`,
+      code: `<template>${boilerplateTemplate}</template>`,
     },
   },
 };
 
-/**
- * IceCreamSuggestions: a larger example using cards and loading toggles
- */
-export const IceCreamSuggestions: StoryFn<ComponentArgs> = () => ({
-  components: { USkeletonLoader, UCard, UImg, UChip, UBtn },
-  setup() {
-    const loading = ref(true);
-    const cards = [
-      {
-        title: 'Homemade Dulce de Leche Ice Cream with Chocolate Chips',
-        subtitle: 'Happy Foods',
-        src: 'https://cdn.vuetifyjs.com/docs/images/graphics/dulce-ice-cream.png',
-      },
-      {
-        title: 'Salted Caramel Swirl Ice Cream',
-        subtitle: 'Stone Kitchen',
-        src: 'https://cdn.vuetifyjs.com/docs/images/graphics/salted-caramel-ice-cream.png',
-      },
-      {
-        title: 'Peanut Butter No-Churn Ice Cream',
-        subtitle: 'The Sweeter Side',
-        src: 'https://cdn.vuetifyjs.com/docs/images/graphics/peanut-butter-ice-cream.png',
-      },
-    ];
-    return { loading, cards };
-  },
-  template: `
+// IceCreamSuggestions Story
+const iceCreamSuggestionsTemplate = `
   <div>
     <div class="text-center">
       <u-btn class="mb-6" size="x-large" @click="loading = !loading">Toggle Loading</u-btn>
@@ -347,34 +323,65 @@ export const IceCreamSuggestions: StoryFn<ComponentArgs> = () => ({
       </u-container>
     </u-card>
   </div>
-  `,
+  `;
+
+/**
+ * The following example demonstrates how the u-skeleton-loader component can be used to
+ * create a placeholder loading state for when content is being fetched from a server or
+ * loaded asynchronously.
+ */
+export const IceCreamSuggestions: StoryFn<ComponentArgs> = () => ({
+  components: { USkeletonLoader, UCard, UImg, UChip, UBtn },
+  setup() {
+    const loading = ref(true);
+    const cards = [
+      {
+        title: 'Homemade Dulce de Leche Ice Cream with Chocolate Chips',
+        subtitle: 'Happy Foods',
+        src: 'https://cdn.vuetifyjs.com/docs/images/graphics/dulce-ice-cream.png',
+      },
+      {
+        title: 'Salted Caramel Swirl Ice Cream',
+        subtitle: 'Stone Kitchen',
+        src: 'https://cdn.vuetifyjs.com/docs/images/graphics/salted-caramel-ice-cream.png',
+      },
+      {
+        title: 'Peanut Butter No-Churn Ice Cream',
+        subtitle: 'The Sweeter Side',
+        src: 'https://cdn.vuetifyjs.com/docs/images/graphics/peanut-butter-ice-cream.png',
+      },
+    ];
+    return { loading, cards };
+  },
+  template: iceCreamSuggestionsTemplate,
 });
 
 IceCreamSuggestions.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-btn @click="loading = !loading">Toggle Loading</u-btn>
+      code: `<template>${iceCreamSuggestionsTemplate}</template>
 
-    <u-card max-width="800" rounded="lg" theme="dark">
-      <u-container>
-        <u-row>
-          <u-col v-for="card in cards" :key="card.title" cols="12" lg="4" md="6">
-            <u-skeleton-loader :loading="loading" height="240" type="image, list-item-two-line">
-              <u-img :src="card.src" class="rounded-lg mb-2" height="184" cover />
-              <u-list-item :subtitle="card.subtitle" :title="card.title" class="px-0" />
-            </u-skeleton-loader>
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-card>
-  </div>
-</template>
 <script setup>
-import { ref } from 'vue'
-const loading = ref(true)
-const cards = [ /* ... */ ]
+  import { ref } from 'vue'
+  
+  const loading = ref(true)
+  const cards = [
+    {
+      title: 'Homemade Dulce de Leche Ice Cream with Chocolate Chips',
+      subtitle: 'Happy Foods',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/dulce-ice-cream.png',
+    },
+    {
+      title: 'Salted Caramel Swirl Ice Cream',
+      subtitle: 'Stone Kitchen',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/salted-caramel-ice-cream.png',
+    },
+    {
+      title: 'Peanut Butter No-Churn Ice Cream',
+      subtitle: 'The Sweeter Side',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/peanut-butter-ice-cream.png',
+    },
+  ]
 </script>`,
     },
   },
