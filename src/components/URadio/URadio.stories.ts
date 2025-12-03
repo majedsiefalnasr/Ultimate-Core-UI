@@ -283,6 +283,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { URadio },
   setup() {
@@ -296,17 +297,8 @@ Default.args = {
   value: 'one',
 } as ComponentArgs;
 
-/**
- * Radios can be colored by using any of the builtin colors and contextual names using the color prop.
- */
-export const Colors: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCardText, UCol, UContainer, URadio, URadioGroup, URow },
-  setup() {
-    const ex7 = ref('red');
-    const ex8 = ref('primary');
-    return { ex7, ex8 };
-  },
-  template: `
+// Colors Story
+const colorsTemplate = `
     <u-card flat>
       <u-card-text>
         <u-container fluid>
@@ -335,49 +327,26 @@ export const Colors: StoryFn<ComponentArgs> = () => ({
         </u-container>
       </u-card-text>
     </u-card>
-  `,
-});
+  `;
 
-Colors.args = {} as ComponentArgs;
+/**
+ * Radios can be colored by using any of the builtin colors and contextual names using
+ * the color prop.
+ */
+export const Colors: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCardText, UCol, UContainer, URadio, URadioGroup, URow },
+  setup() {
+    const ex7 = ref('red');
+    const ex8 = ref('primary');
+    return { ex7, ex8 };
+  },
+  template: colorsTemplate,
+});
 
 Colors.parameters = {
   docs: {
-    description: {
-      story:
-        'Radios can be colored by using any of the builtin colors and contextual names using the color prop.',
-    },
     source: {
-      code: `
-<template>
-  <u-card flat>
-    <u-card-text>
-      <u-container fluid>
-        <u-row>
-          <u-col cols="12" md="6" sm="6">
-            <u-radio-group v-model="ex7">
-              <u-radio color="red" label="red" value="red"></u-radio>
-              <u-radio color="red-darken-3" label="red-darken-3" value="red-darken-3"></u-radio>
-              <u-radio color="indigo" label="indigo" value="indigo"></u-radio>
-              <u-radio color="indigo-darken-3" label="indigo-darken-3" value="indigo-darken-3"></u-radio>
-              <u-radio color="orange" label="orange" value="orange"></u-radio>
-              <u-radio color="orange-darken-3" label="orange-darken-3" value="orange-darken-3"></u-radio>
-            </u-radio-group>
-          </u-col>
-          <u-col cols="12" md="6" sm="6">
-            <u-radio-group v-model="ex8">
-              <u-radio color="primary" label="primary" value="primary"></u-radio>
-              <u-radio color="secondary" label="secondary" value="secondary"></u-radio>
-              <u-radio color="success" label="success" value="success"></u-radio>
-              <u-radio color="info" label="info" value="info"></u-radio>
-              <u-radio color="warning" label="warning" value="warning"></u-radio>
-              <u-radio color="error" label="error" value="error"></u-radio>
-            </u-radio-group>
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-card-text>
-  </u-card>
-</template>
+      code: `<template>${colorsTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
