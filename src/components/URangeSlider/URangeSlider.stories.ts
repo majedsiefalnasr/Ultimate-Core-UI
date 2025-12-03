@@ -548,6 +548,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { URangeSlider },
   setup() {
@@ -561,16 +562,8 @@ Default.args = {
   modelValue: [25, 75],
 } as ComponentArgs;
 
-/**
- * With the strict prop applied, the thumbs of the range slider are not allowed to cross over each other.
- */
-export const Strict: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UCardText, URangeSlider },
-  setup() {
-    const value = ref([20, 40]);
-    return { value };
-  },
-  template: `
+// Strict Story
+const strictTemplate = `
     <u-card>
       <u-card-text>
         <u-range-slider
@@ -579,25 +572,25 @@ export const Strict: StoryFn<ComponentArgs> = () => ({
         ></u-range-slider>
       </u-card-text>
     </u-card>
-  `,
-});
+  `;
 
-Strict.args = {} as ComponentArgs;
+/**
+ * With the strict prop applied, the thumbs of the range slider are not allowed to cross
+ * over each other.
+ */
+export const Strict: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UCardText, URangeSlider },
+  setup() {
+    const value = ref([30, 60]);
+    return { value };
+  },
+  template: strictTemplate,
+});
 
 Strict.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-card>
-    <u-card-text>
-      <u-range-slider
-        v-model="value"
-        strict
-      ></u-range-slider>
-    </u-card-text>
-  </u-card>
-</template>
+      code: `<template>${strictTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -609,16 +602,8 @@ Strict.parameters = {
   },
 };
 
-/**
- * You cannot interact with disabled sliders.
- */
-export const Disabled: StoryFn<ComponentArgs> = () => ({
-  components: { UCol, URow, URangeSlider },
-  setup() {
-    const value = ref([30, 60]);
-    return { value };
-  },
-  template: `
+// Disabled Story
+const disabledTemplate = `
     <u-row>
       <u-col cols="12">
         <u-range-slider
@@ -628,26 +613,24 @@ export const Disabled: StoryFn<ComponentArgs> = () => ({
         ></u-range-slider>
       </u-col>
     </u-row>
-  `,
-});
+  `;
 
-Disabled.args = {} as ComponentArgs;
+/**
+ * You cannot interact with disabled sliders.
+ */
+export const Disabled: StoryFn<ComponentArgs> = () => ({
+  components: { UCol, URow, URangeSlider },
+  setup() {
+    const value = ref([30, 60]);
+    return { value };
+  },
+  template: disabledTemplate,
+});
 
 Disabled.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-row>
-    <u-col cols="12">
-      <u-range-slider
-        v-model="value"
-        label="Disabled"
-        disabled
-      ></u-range-slider>
-    </u-col>
-  </u-row>
-</template>
+      code: `<template>${disabledTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -659,16 +642,8 @@ Disabled.parameters = {
   },
 };
 
-/**
- * You can set min and max values of sliders.
- */
-export const MinAndMax: StoryFn<ComponentArgs> = () => ({
-  components: { URangeSlider, UTextField },
-  setup() {
-    const range = ref([-5, 5]);
-    return { range };
-  },
-  template: `
+// MinAndMax Story
+const minAndMaxTemplate = `
     <u-range-slider
       v-model="range"
       :max="10"
@@ -700,48 +675,24 @@ export const MinAndMax: StoryFn<ComponentArgs> = () => ({
         ></u-text-field>
       </template>
     </u-range-slider>
-  `,
-});
+  `;
 
-MinAndMax.args = {} as ComponentArgs;
+/**
+ * You can set min and max values of sliders.
+ */
+export const MinAndMax: StoryFn<ComponentArgs> = () => ({
+  components: { URangeSlider, UTextField },
+  setup() {
+    const range = ref([-5, 5]);
+    return { range };
+  },
+  template: minAndMaxTemplate,
+});
 
 MinAndMax.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-range-slider
-    v-model="range"
-    :max="10"
-    :min="-10"
-    :step="1"
-    class="align-center"
-    hide-details
-  >
-    <template v-slot:prepend>
-      <u-text-field
-        v-model="range[0]"
-        density="compact"
-        style="width: 70px"
-        type="number"
-        variant="outlined"
-        hide-details
-        single-line
-      ></u-text-field>
-    </template>
-    <template v-slot:append>
-      <u-text-field
-        v-model="range[1]"
-        density="compact"
-        style="width: 70px"
-        type="number"
-        variant="outlined"
-        hide-details
-        single-line
-      ></u-text-field>
-    </template>
-  </u-range-slider>
-</template>
+      code: `<template>${minAndMaxTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -753,6 +704,15 @@ MinAndMax.parameters = {
   },
 };
 
+// Step Story
+const stepTemplate = `
+    <u-range-slider
+      v-model="value"
+      step="10"
+      thumb-label="always"
+    ></u-range-slider>
+  `;
+
 /**
  * u-range-slider can have steps other than 1. This can be helpful for some applications where you need to adjust values with more or less accuracy.
  */
@@ -762,28 +722,13 @@ export const Step: StoryFn<ComponentArgs> = () => ({
     const value = ref([20, 40]);
     return { value };
   },
-  template: `
-    <u-range-slider
-      v-model="value"
-      step="10"
-      thumb-label="always"
-    ></u-range-slider>
-  `,
+  template: stepTemplate,
 });
-
-Step.args = {} as ComponentArgs;
 
 Step.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-range-slider
-    v-model="value"
-    step="10"
-    thumb-label="always"
-  ></u-range-slider>
-</template>
+      code: `<template>${stepTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -794,6 +739,14 @@ Step.parameters = {
     },
   },
 };
+
+// VerticalSliders Story
+const verticalSlidersTemplate = `
+    <u-range-slider
+      v-model="value"
+      direction="vertical"
+    ></u-range-slider>
+  `;
 
 /**
  * You can use the vertical prop to switch sliders to a vertical orientation. If you need to change the height of a vertical slider, be aware that u-range-slider is not a simple HTML element. This means plain CSS on the component will not affect the correct internal element. Instead, you must use a deep selector.
@@ -804,26 +757,13 @@ export const VerticalSliders: StoryFn<ComponentArgs> = () => ({
     const value = ref([20, 40]);
     return { value };
   },
-  template: `
-    <u-range-slider
-      v-model="value"
-      direction="vertical"
-    ></u-range-slider>
-  `,
+  template: verticalSlidersTemplate,
 });
-
-VerticalSliders.args = {} as ComponentArgs;
 
 VerticalSliders.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-range-slider
-    v-model="value"
-    direction="vertical"
-  ></u-range-slider>
-</template>
+      code: `<template>${verticalSlidersTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -834,6 +774,28 @@ VerticalSliders.parameters = {
     },
   },
 };
+
+// ThumbLabel Story
+const thumbLabelTemplate = `
+    <u-row>
+      <u-col class="pa-12">
+        <u-range-slider
+          :model-value="[0, 1]"
+          :step="1"
+          :ticks="seasons"
+          max="3"
+          min="0"
+          show-ticks="always"
+          thumb-label="always"
+          tick-size="4"
+        >
+          <template v-slot:thumb-label="{ modelValue }">
+            <u-icon :icon="season(modelValue)" theme="dark"></u-icon>
+          </template>
+        </u-range-slider>
+      </u-col>
+    </u-row>
+  `;
 
 /**
  * Using the tick-labels prop along with the thumb-label slot, you can create a very customized solution.
@@ -858,54 +820,13 @@ export const ThumbLabel: StoryFn<ComponentArgs> = () => ({
     }
     return { seasons, icons, season };
   },
-  template: `
-    <u-row>
-      <u-col class="pa-12">
-        <u-range-slider
-          :model-value="[0, 1]"
-          :step="1"
-          :ticks="seasons"
-          max="3"
-          min="0"
-          show-ticks="always"
-          thumb-label="always"
-          tick-size="4"
-        >
-          <template v-slot:thumb-label="{ modelValue }">
-            <u-icon :icon="season(modelValue)" theme="dark"></u-icon>
-          </template>
-        </u-range-slider>
-      </u-col>
-    </u-row>
-  `,
+  template: thumbLabelTemplate,
 });
-
-ThumbLabel.args = {} as ComponentArgs;
 
 ThumbLabel.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-row>
-    <u-col class="pa-12">
-      <u-range-slider
-        :model-value="[0, 1]"
-        :step="1"
-        :ticks="seasons"
-        max="3"
-        min="0"
-        show-ticks="always"
-        thumb-label="always"
-        tick-size="4"
-      >
-        <template v-slot:thumb-label="{ modelValue }">
-          <u-icon :icon="season(modelValue)" theme="dark"></u-icon>
-        </template>
-      </u-range-slider>
-    </u-col>
-  </u-row>
-</template>
+      code: `<template>${thumbLabelTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
