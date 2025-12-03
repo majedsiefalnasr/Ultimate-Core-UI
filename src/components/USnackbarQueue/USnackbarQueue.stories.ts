@@ -100,17 +100,17 @@ const meta: Meta<ComponentArgs> = {
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const text = ref('');
-const messages = ref<string[]>([]);
-function onClick() {
-  if (text.value && text.value.trim() !== '') {
-    messages.value.push(text.value);
-    text.value = '';
-    console.log('Current queue:', messages.value);
+  const text = ref('');
+  const messages = ref<string[]>([]);
+  function onClick() {
+    if (text.value && text.value.trim() !== '') {
+      messages.value.push(text.value);
+      text.value = '';
+      console.log('Current queue:', messages.value);
+    }
   }
-}
 </script>`;
         },
       },
@@ -171,6 +171,7 @@ function onClick() {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USnackbarQueue, UBtn, UTextField },
   setup() {
