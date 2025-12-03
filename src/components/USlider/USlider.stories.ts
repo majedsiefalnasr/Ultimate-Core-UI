@@ -374,6 +374,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USlider },
   setup() {
@@ -382,6 +383,18 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
   template: `<u-slider v-bind="args"></u-slider>`,
 });
 
+// Colors Story
+const colorsTemplate = `
+  <div>
+    <u-slider v-model="slider1" color="orange" label="color"></u-slider>
+    <u-slider v-model="slider2" label="track-color" track-color="green"></u-slider>
+    <u-slider v-model="slider3" label="thumb-color" thumb-color="purple"></u-slider>
+  </div>
+  `;
+
+/**
+ * You can set the colors of the slider using the props color, track-color and thumb-color.
+ */
 export const Colors: StoryFn<ComponentArgs> = () => ({
   components: { USlider },
   setup() {
@@ -390,61 +403,88 @@ export const Colors: StoryFn<ComponentArgs> = () => ({
     const slider3 = ref(100);
     return { slider1, slider2, slider3 };
   },
-  template: `
-  <div>
-    <u-slider v-model="slider1" color="orange" label="color"></u-slider>
-
-    <u-slider v-model="slider2" label="track-color" track-color="green"></u-slider>
-
-    <u-slider v-model="slider3" label="thumb-color" thumb-color="purple"></u-slider>
-  </div>
-  `,
+  template: colorsTemplate,
 });
 
 Colors.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-slider v-model="slider1" color="orange" label="color" />
-    <u-slider v-model="slider2" label="track-color" track-color="green" />
-    <u-slider v-model="slider3" label="thumb-color" thumb-color="purple" />
-  </div>
-</template>
+      code: `<template>${colorsTemplate}</template>
+
 <script setup>
-import { ref } from 'vue'
-const slider1 = ref(0)
-const slider2 = ref(50)
-const slider3 = ref(100)
+  import { ref } from 'vue'
+
+  const slider1 = ref(0)
+  const slider2 = ref(50)
+  const slider3 = ref(100)
 </script>`,
     },
   },
 };
 
+// Disabled Story
+const disabledTemplate = `<u-slider model-value="30" disabled></u-slider>`;
+
+/**
+ * You cannot interact with disabled sliders.
+ */
 export const Disabled: StoryFn<ComponentArgs> = () => ({
   components: { USlider },
-  template: `<u-slider model-value="30" disabled></u-slider>`,
+  template: disabledTemplate,
 });
 
-Disabled.parameters = { docs: { source: { code: `<u-slider model-value="30" disabled />` } } };
+Disabled.parameters = { docs: { source: { code: `<template>${disabledTemplate}</template>` } } };
 
+// Step Story
+const stepTemplate = `
+  <u-slider v-model="value" :max="1" :min="0" :step="0.2" thumb-label></u-slider>
+  `;
+
+/**
+ * Using the step prop you can control the precision of the slider, and how much it
+ * should move each step.
+ */
 export const Step: StoryFn<ComponentArgs> = () => ({
   components: { USlider },
   setup() {
     const value = ref(0);
     return { value };
   },
-  template: `
-  <u-slider v-model="value" :max="1" :min="0" :step="0.2" thumb-label></u-slider>
-  `,
+  template: stepTemplate,
 });
 
 Step.parameters = {
   docs: {
-    source: { code: `<u-slider v-model="value" :max="1" :min="0" :step="0.2" thumb-label />` },
+    source: {
+      code: `<template>${stepTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(0)
+</script>`,
+    },
   },
 };
 
+// Icons Story
+const iconsTemplate = `
+  <div>
+    <div class="text-caption">Media volume</div>
+    <u-slider v-model="media" prepend-icon="hugeicons:volume-24"></u-slider>
+
+    <div class="text-caption">Alarm volume</div>
+    <u-slider v-model="alarm" append-icon="hugeicons:alarm-24"></u-slider>
+
+    <div class="text-caption">Icon click callback</div>
+    <u-slider v-model="zoom" append-icon="hugeicons:magnify-plus-24" prepend-icon="hugeicons:magnify-minus-24" @click:append="zoomIn" @click:prepend="zoomOut"></u-slider>
+  </div>
+  `;
+
+/**
+ * You can add icons to the slider with the append-icon and prepend-icon props. With
+ * @click:append and @click:prepend you can trigger a callback function when click the icon.
+ */
 export const Icons: StoryFn<ComponentArgs> = () => ({
   components: { USlider, UBtn },
   setup() {
@@ -461,34 +501,43 @@ export const Icons: StoryFn<ComponentArgs> = () => ({
 
     return { media, alarm, zoom, zoomOut, zoomIn };
   },
-  template: `
-  <div>
-    <div class="text-caption">Media volume</div>
-    <u-slider v-model="media" prepend-icon="hugeicons:volume-24"></u-slider>
-
-    <div class="text-caption">Alarm volume</div>
-    <u-slider v-model="alarm" append-icon="hugeicons:alarm-24"></u-slider>
-
-    <div class="text-caption">Icon click callback</div>
-    <u-slider v-model="zoom" append-icon="hugeicons:magnify-plus-24" prepend-icon="hugeicons:magnify-minus-24" @click:append="zoomIn" @click:prepend="zoomOut"></u-slider>
-  </div>
-  `,
+  template: iconsTemplate,
 });
 
 Icons.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-slider v-model="media" prepend-icon="hugeicons:volume-24" />
-    <u-slider v-model="alarm" append-icon="hugeicons:alarm-24" />
-    <u-slider v-model="zoom" append-icon="hugeicons:magnify-plus-24" prepend-icon="hugeicons:magnify-minus-24" />
-  </div>
-</template>`,
+      code: `<template>${iconsTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const media = ref(0)
+  const alarm = ref(0)
+  const zoom = ref(0)
+  function zoomOut() {
+    zoom.value = zoom.value - 10 || 0
+  }
+  function zoomIn() {
+    zoom.value = zoom.value + 10 || 100
+  }
+</script>`,
     },
   },
 };
 
+// MinMax Story
+const minMaxTemplate = `
+  <u-slider v-model="slider" :max="max" :min="min" class="align-center" hide-details>
+    <template v-slot:append>
+      <u-text-field v-model="slider" density="compact" style="width: 70px" type="number" hide-details single-line></u-text-field>
+    </template>
+  </u-slider>
+  `;
+
+/**
+ * You can set min and max values of sliders.
+ */
 export const MinMax: StoryFn<ComponentArgs> = () => ({
   components: { USlider, UTextField },
   setup() {
@@ -497,60 +546,42 @@ export const MinMax: StoryFn<ComponentArgs> = () => ({
     const slider = ref(40);
     return { min, max, slider };
   },
-  template: `
-  <u-slider v-model="slider" :max="max" :min="min" class="align-center" hide-details>
-    <template v-slot:append>
-      <u-text-field v-model="slider" density="compact" style="width: 70px" type="number" hide-details single-line></u-text-field>
-    </template>
-  </u-slider>
-  `,
+  template: minMaxTemplate,
 });
 
 MinMax.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-slider v-model="slider" :max="max" :min="min" class="align-center" hide-details>
-    <template v-slot:append>
-      <u-text-field v-model="slider" density="compact" style="width: 70px" type="number" hide-details single-line />
-    </template>
-  </u-slider>
-</template>`,
+      code: `<template>${minMaxTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const min = ref(-50)
+  const max = ref(90)
+  const slider = ref(40)
+</script>`,
     },
   },
 };
 
+// Readonly Story
+const readonlyTemplate = `<u-slider label="Readonly" model-value="30" readonly />`;
+
+/**
+ * You cannot interact with readonly sliders, but they look as ordinary ones.
+ */
 export const Readonly: StoryFn<ComponentArgs> = () => ({
   components: { USlider },
-  template: `<u-slider label="Readonly" model-value="30" readonly />`,
+  template: readonlyTemplate,
 });
 
 Readonly.parameters = {
-  docs: { source: { code: `<u-slider label="Readonly" model-value="30" readonly />` } },
+  docs: { source: { code: `<template>${readonlyTemplate}</template>` } },
 };
 
-export const Thumb: StoryFn<ComponentArgs> = () => ({
-  components: { USlider },
-  setup() {
-    const slider1 = ref(50);
-    const slider2 = ref(50);
-    const slider3 = ref(50);
-    const slider4 = ref(50);
-    const satisfactionEmojis = [
-      '\ud83d\ude2d',
-      '\ud83d\ude22',
-      '\u2639\ufe0f',
-      '\ud83d\ude41',
-      '\ud83d\ude10',
-      '\ud83d\ude42',
-      '\ud83d\ude0a',
-      '\ud83d\ude01',
-      '\ud83d\ude04',
-      '\ud83d\ude0d',
-    ];
-    return { slider1, slider2, slider3, slider4, satisfactionEmojis };
-  },
-  template: `
+// Thumb Story
+const thumbTemplate = `
   <div class="d-flex flex-column">
     <div>
       <div class="text-caption">Show thumb when using slider</div>
@@ -576,58 +607,59 @@ export const Thumb: StoryFn<ComponentArgs> = () => ({
       </u-slider>
     </div>
   </div>
-  `,
+  `;
+
+/**
+ * You can display a thumb label while sliding or always with the thumb-label prop . It can
+ * have a custom color by setting thumb-color prop and a custom size with the thumb-size prop.
+ */
+export const Thumb: StoryFn<ComponentArgs> = () => ({
+  components: { USlider },
+  setup() {
+    const slider1 = ref(50);
+    const slider2 = ref(50);
+    const slider3 = ref(50);
+    const slider4 = ref(50);
+    const satisfactionEmojis = [
+      '\ud83d\ude2d',
+      '\ud83d\ude22',
+      '\u2639\ufe0f',
+      '\ud83d\ude41',
+      '\ud83d\ude10',
+      '\ud83d\ude42',
+      '\ud83d\ude0a',
+      '\ud83d\ude01',
+      '\ud83d\ude04',
+      '\ud83d\ude0d',
+    ];
+    return { slider1, slider2, slider3, slider4, satisfactionEmojis };
+  },
+  template: thumbTemplate,
 });
 
 Thumb.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="d-flex flex-column">
-    <div>
-      <div class="text-caption">Show thumb when using slider</div>
-      <u-slider v-model="slider1" thumb-label />
-    </div>
+      code: `<template>${thumbTemplate}</template>
 
-    <div>
-      <div class="text-caption">Always show thumb label</div>
-      <u-slider v-model="slider2" thumb-label="always" />
-    </div>
-
-    <div>
-      <div class="text-caption">Custom thumb size</div>
-      <u-slider v-model="slider3" :thumb-size="36" thumb-label="always" />
-    </div>
-
-    <div>
-      <div class="text-caption">Custom thumb label</div>
-      <u-slider v-model="slider4" thumb-label="always">
-        <template v-slot:thumb-label="{ modelValue }">
-          {{ satisfactionEmojis[Math.min(Math.floor(modelValue / 10), 9)] }}
-        </template>
-      </u-slider>
-    </div>
-  </div>
-</template>
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const slider1 = ref(50)
-const slider2 = ref(50)
-const slider3 = ref(50)
-const slider4 = ref(50)
+  const slider1 = ref(50)
+  const slider2 = ref(50)
+  const slider3 = ref(50)
+  const slider4 = ref(50)
 
-const satisfactionEmojis = [
-  '\ud83d\ude2d', '\ud83d\ude22', '\u2639\ufe0f', '\ud83d\ude41', '\ud83d\ude10', '\ud83d\ude42', '\ud83d\ude0a', '\ud83d\ude01', '\ud83d\ude04', '\ud83d\ude0d'
-]
+  const satisfactionEmojis = [
+    '\ud83d\ude2d', '\ud83d\ude22', '\u2639\ufe0f', '\ud83d\ude41', '\ud83d\ude10', '\ud83d\ude42', '\ud83d\ude0a', '\ud83d\ude01', '\ud83d\ude04', '\ud83d\ude0d'
+  ]
 </script>`,
     },
   },
 };
 
-export const Ticks: StoryFn<ComponentArgs> = () => ({
-  components: { USlider },
-  template: `
+// Ticks Story
+const ticksTemplate = `
   <div>
     <div class="text-caption">Show ticks when using slider</div>
     <u-slider step="10" show-ticks></u-slider>
@@ -638,89 +670,59 @@ export const Ticks: StoryFn<ComponentArgs> = () => ({
     <div class="text-caption">Tick size</div>
     <u-slider show-ticks="always" step="10" tick-size="4"></u-slider>
   </div>
-  `,
+  `;
+
+/**
+ * Tick marks represent predetermined values to which the user can move the slider.
+ */
+export const Ticks: StoryFn<ComponentArgs> = () => ({
+  components: { USlider },
+  template: ticksTemplate,
 });
 
 Ticks.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <div class="text-caption">Show ticks when using slider</div>
-
-    <u-slider step="10" show-ticks></u-slider>
-
-    <div class="text-caption">Always show ticks</div>
-
-    <u-slider show-ticks="always" step="10"></u-slider>
-
-    <div class="text-caption">Tick size</div>
-
-    <u-slider show-ticks="always" step="10" tick-size="4"></u-slider>
-
-    <div class="text-caption">Tick labels</div>
-
-    <u-slider :max="3" :ticks="tickLabels" show-ticks="always" step="1" tick-size="4"></u-slider>
-  </div>
-</template>
-<script setup>
-const tickLabels = {
-  0: 'Figs',
-  1: 'Lemon',
-  2: 'Pear',
-  3: 'Apple',
-}
-</script>`,
+      code: `<template>${ticksTemplate}</template>`,
     },
   },
 };
 
+// Vertical Story
+const verticalTemplate = `<u-slider v-model="value" direction="vertical" label="Regular"></u-slider>`;
+
+/**
+ * You can use the direction prop to switch sliders to a vertical orientation.
+ * If you need to change the height of the slider, use css.
+ */
 export const Vertical: StoryFn<ComponentArgs> = () => ({
   components: { USlider },
   setup() {
     const value = ref(10);
     return { value };
   },
-  template: `<u-slider v-model="value" direction="vertical" label="Regular"></u-slider>`,
+  template: verticalTemplate,
 });
 
 Vertical.parameters = {
-  docs: { source: { code: `<u-slider v-model="value" direction="vertical" label="Regular" />` } },
+  docs: {
+    source: {
+      code: `<template>${verticalTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref(10)
+</script>`,
+    },
+  },
 };
 
 /* This is for documentation purposes and will not be needed in your application */
 import './AppendPrepend.story.scss';
 
-export const AppendPrepend: StoryFn<ComponentArgs> = () => ({
-  components: { USlider, UCard, URow, UCol, UBtn, UIcon, UFadeTransition, UAvatar },
-  setup() {
-    const bpm = ref(40);
-    const isPlaying = ref(false);
-
-    const color = computed(() => {
-      if (bpm.value < 100) return 'indigo';
-      if (bpm.value < 125) return 'teal';
-      if (bpm.value < 140) return 'green';
-      if (bpm.value < 175) return 'orange';
-      return 'red';
-    });
-    const animationDuration = computed(() => {
-      return `${60 / bpm.value}s`;
-    });
-
-    function decrement() {
-      bpm.value--;
-    }
-    function increment() {
-      bpm.value++;
-    }
-    function toggle() {
-      isPlaying.value = !isPlaying.value;
-    }
-
-    return { bpm, isPlaying, color, decrement, increment, toggle, animationDuration };
-  },
-  template: `
+// AppendPrepend Story
+const appendPrependTemplate = `
     <u-card
       class="mx-auto"
       max-width="600"
@@ -801,94 +803,48 @@ export const AppendPrepend: StoryFn<ComponentArgs> = () => ({
         </u-slider>
       </u-card-text>
     </u-card>
-  `,
+  `;
+
+/**
+ * Use slots such as append and prepend to easily customize the u-slider to fit any situation.
+ */
+export const AppendPrepend: StoryFn<ComponentArgs> = () => ({
+  components: { USlider, UCard, URow, UCol, UBtn, UIcon, UFadeTransition, UAvatar },
+  setup() {
+    const bpm = ref(40);
+    const isPlaying = ref(false);
+
+    const color = computed(() => {
+      if (bpm.value < 100) return 'indigo';
+      if (bpm.value < 125) return 'teal';
+      if (bpm.value < 140) return 'green';
+      if (bpm.value < 175) return 'orange';
+      return 'red';
+    });
+    const animationDuration = computed(() => {
+      return `${60 / bpm.value}s`;
+    });
+
+    function decrement() {
+      bpm.value--;
+    }
+    function increment() {
+      bpm.value++;
+    }
+    function toggle() {
+      isPlaying.value = !isPlaying.value;
+    }
+
+    return { bpm, isPlaying, color, decrement, increment, toggle, animationDuration };
+  },
+  template: appendPrependTemplate,
 });
 
 AppendPrepend.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <v-card
-    class="mx-auto"
-    max-width="600"
-  >
-    <v-toolbar
-      dense
-      flat
-    >
-      <v-toolbar-title>
-        <span class="text-subheading">METRONOME</span>
-      </v-toolbar-title>
-      <v-btn icon="hugeicons:share-08" variant="text"></v-btn>
-    </v-toolbar>
+      code: `<template>${appendPrependTemplate}</template>
 
-    <v-card-text>
-      <v-row
-        class="mb-4"
-        justify="space-between"
-      >
-        <v-col class="text-left">
-          <span
-            class="text-h2 font-weight-light"
-            v-text="bpm"
-          ></span>
-          <span class="subheading font-weight-light me-1">BPM</span>
-          <v-fade-transition>
-            <v-avatar
-              v-if="isPlaying"
-              :color="color"
-              :style="{
-                animationDuration: animationDuration
-              }"
-              class="mb-1 v-avatar--metronome"
-              size="12"
-            ></v-avatar>
-          </v-fade-transition>
-        </v-col>
-        <v-col class="text-right">
-          <v-btn
-            :color="color"
-            elevation="0"
-            theme="dark"
-            icon
-            @click="toggle"
-          >
-            <v-icon :icon="isPlaying ? 'hugeicons:pause' : 'hugeicons:play'" size="large"></v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-
-      <v-slider
-        v-model="bpm"
-        :color="color"
-        :step="1"
-        max="218"
-        min="40"
-        track-color="grey"
-      >
-        <template v-slot:prepend>
-          <v-btn
-            :color="color"
-            icon="hugeicons:minus-sign"
-            size="small"
-            variant="text"
-            @click="decrement"
-          ></v-btn>
-        </template>
-
-        <template v-slot:append>
-          <v-btn
-            :color="color"
-            icon="hugeicons:plus-sign"
-            size="small"
-            variant="text"
-            @click="increment"
-          ></v-btn>
-        </template>
-      </v-slider>
-    </v-card-text>
-  </v-card>
-</template>
 <script setup>
   import { computed, ref } from 'vue'
 
