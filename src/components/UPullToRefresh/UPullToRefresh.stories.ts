@@ -124,6 +124,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UList, UListItem, UPullToRefresh },
   setup() {
