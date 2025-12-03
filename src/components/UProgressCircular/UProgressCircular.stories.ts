@@ -148,6 +148,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UProgressCircular },
   setup() {
@@ -164,159 +165,156 @@ Default.args = {
   modelValue: 20,
 } as ComponentArgs;
 
-/**
- * Alternate colors can be applied to u-progress-circular using the color prop.
- */
-export const Color: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressCircular },
-  template: `
+// Color Story
+const colorTemplate = `
     <div class="text-center">
       <u-progress-circular
         color="blue-grey"
         model-value="100"
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
         color="deep-orange-lighten-2"
         model-value="80"
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
         color="brown"
         model-value="60"
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
         color="lime"
         model-value="40"
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
         color="indigo-darken-2"
         model-value="20"
+        style="margin: 1rem;"
       ></u-progress-circular>
     </div>
-  `,
-});
+  `;
 
-Color.args = {} as ComponentArgs;
+/**
+ * Alternate colors can be applied to u-progress-circular using the color prop.
+ */
+export const Color: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressCircular },
+  template: colorTemplate,
+});
 
 Color.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-progress-circular
-      color="blue-grey"
-      model-value="100"
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="deep-orange-lighten-2"
-      model-value="80"
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="brown"
-      model-value="60"
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="lime"
-      model-value="40"
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="indigo-darken-2"
-      model-value="20"
-    ></u-progress-circular>
-  </div>
-</template>
-<style scoped>
-.u-progress-circular {
-  margin: 1rem;
-}
-</style>`,
+      code: `<template>${colorTemplate}</template>`,
     },
   },
 };
+
+// Indeterminate Story
+const indeterminateTemplate = `
+    <div class="text-center">
+      <u-progress-circular
+        color="primary"
+        indeterminate
+        style="margin: 1rem;"
+      ></u-progress-circular>
+
+      <u-progress-circular
+        color="red"
+        indeterminate
+        style="margin: 1rem;"
+      ></u-progress-circular>
+
+      <u-progress-circular
+        color="purple"
+        indeterminate
+        style="margin: 1rem;"
+      ></u-progress-circular>
+
+      <u-progress-circular
+        color="green"
+        indeterminate
+        style="margin: 1rem;"
+      ></u-progress-circular>
+
+      <u-progress-circular
+        color="amber"
+        indeterminate
+        style="margin: 1rem;"
+      ></u-progress-circular>
+    </div>
+  `;
 
 /**
  * Using the indeterminate prop, a u-progress-circular continues to animate indefinitely.
  */
 export const Indeterminate: StoryFn<ComponentArgs> = () => ({
   components: { UProgressCircular },
-  template: `
-    <div class="text-center">
-      <u-progress-circular
-        color="primary"
-        indeterminate
-      ></u-progress-circular>
-
-      <u-progress-circular
-        color="red"
-        indeterminate
-      ></u-progress-circular>
-
-      <u-progress-circular
-        color="purple"
-        indeterminate
-      ></u-progress-circular>
-
-      <u-progress-circular
-        color="green"
-        indeterminate
-      ></u-progress-circular>
-
-      <u-progress-circular
-        color="amber"
-        indeterminate
-      ></u-progress-circular>
-    </div>
-  `,
+  template: indeterminateTemplate,
 });
-
-Indeterminate.args = {} as ComponentArgs;
 
 Indeterminate.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-progress-circular
-      color="primary"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="red"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="purple"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="green"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      color="amber"
-      indeterminate
-    ></u-progress-circular>
-  </div>
-</template>
-<style scoped>
-.u-progress-circular {
-  margin: 1rem;
-}
-</style>`,
+      code: `<template>${indeterminateTemplate}</template>`,
     },
   },
 };
+
+// Rotate Story
+const rotateTemplate = `
+    <div class="text-center">
+      <u-progress-circular
+        :model-value="value"
+        :rotate="360"
+        :size="100"
+        :width="15"
+        color="teal"
+        style="margin: 1rem;"
+      >
+        {{ value }}
+      </u-progress-circular>
+
+      <u-progress-circular
+        :model-value="value"
+        :rotate="-90"
+        :size="100"
+        :width="15"
+        color="primary"
+        style="margin: 1rem;"
+      >
+        {{ value }}
+      </u-progress-circular>
+
+      <u-progress-circular
+        :model-value="value"
+        :rotate="90"
+        :size="100"
+        :width="15"
+        color="red"
+        style="margin: 1rem;"
+      >
+        {{ value }}
+      </u-progress-circular>
+
+      <u-progress-circular
+        :model-value="value"
+        :rotate="180"
+        :size="100"
+        :width="15"
+        color="pink"
+        style="margin: 1rem;"
+      >
+        {{ value }}
+      </u-progress-circular>
+    </div>
+  `;
 
 /**
  * The rotate prop gives you the ability to customize the u-progress-circular's origin.
@@ -342,99 +340,14 @@ export const Rotate: StoryFn<ComponentArgs> = () => ({
 
     return { value };
   },
-  template: `
-    <div class="text-center">
-      <u-progress-circular
-        :model-value="value"
-        :rotate="360"
-        :size="100"
-        :width="15"
-        color="teal"
-      >
-        {{ value }}
-      </u-progress-circular>
-
-      <u-progress-circular
-        :model-value="value"
-        :rotate="-90"
-        :size="100"
-        :width="15"
-        color="primary"
-      >
-        {{ value }}
-      </u-progress-circular>
-
-      <u-progress-circular
-        :model-value="value"
-        :rotate="90"
-        :size="100"
-        :width="15"
-        color="red"
-      >
-        {{ value }}
-      </u-progress-circular>
-
-      <u-progress-circular
-        :model-value="value"
-        :rotate="180"
-        :size="100"
-        :width="15"
-        color="pink"
-      >
-        {{ value }}
-      </u-progress-circular>
-    </div>
-  `,
+  template: rotateTemplate,
 });
-
-Rotate.args = {} as ComponentArgs;
 
 Rotate.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-progress-circular
-      :model-value="value"
-      :rotate="360"
-      :size="100"
-      :width="15"
-      color="teal"
-    >
-      {{ value }}
-    </u-progress-circular>
+      code: `<template>${rotateTemplate}</template>
 
-    <u-progress-circular
-      :model-value="value"
-      :rotate="-90"
-      :size="100"
-      :width="15"
-      color="primary"
-    >
-      {{ value }}
-    </u-progress-circular>
-
-    <u-progress-circular
-      :model-value="value"
-      :rotate="90"
-      :size="100"
-      :width="15"
-      color="red"
-    >
-      {{ value }}
-    </u-progress-circular>
-
-    <u-progress-circular
-      :model-value="value"
-      :rotate="180"
-      :size="100"
-      :width="15"
-      color="pink"
-    >
-      {{ value }}
-    </u-progress-circular>
-  </div>
-</template>
 <script setup>
   import { onBeforeUnmount, onMounted, ref } from 'vue'
 
@@ -452,33 +365,26 @@ Rotate.parameters = {
   onBeforeUnmount(() => {
     if (interval) clearInterval(interval)
   })
-</script>
-<style scoped>
-.u-progress-circular {
-  margin: 1rem;
-}
-</style>`,
+</script>`,
     },
   },
 };
 
-/**
- * The size and width props allow you to easily alter the size and width of the u-progress-circular component.
- */
-export const SizeAndWidth: StoryFn<ComponentArgs> = () => ({
-  components: { UProgressCircular },
-  template: `
+// SizeAndWidth Story
+const sizeAndWidthTemplate = `
     <div class="text-center">
       <u-progress-circular
         :size="50"
         color="primary"
         indeterminate
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
         :width="3"
         color="red"
         indeterminate
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
@@ -486,70 +392,49 @@ export const SizeAndWidth: StoryFn<ComponentArgs> = () => ({
         :width="7"
         color="purple"
         indeterminate
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
         :width="3"
         color="green"
         indeterminate
+        style="margin: 1rem;"
       ></u-progress-circular>
 
       <u-progress-circular
         :size="50"
         color="amber"
         indeterminate
+        style="margin: 1rem;"
       ></u-progress-circular>
     </div>
-  `,
-});
+  `;
 
-SizeAndWidth.args = {} as ComponentArgs;
+/**
+ * The size and width props allow you to easily alter the size and width of the u-progress-circular component.
+ */
+export const SizeAndWidth: StoryFn<ComponentArgs> = () => ({
+  components: { UProgressCircular },
+  template: sizeAndWidthTemplate,
+});
 
 SizeAndWidth.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-progress-circular
-      :size="50"
-      color="primary"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      :width="3"
-      color="red"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      :size="70"
-      :width="7"
-      color="purple"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      :width="3"
-      color="green"
-      indeterminate
-    ></u-progress-circular>
-
-    <u-progress-circular
-      :size="50"
-      color="amber"
-      indeterminate
-    ></u-progress-circular>
-  </div>
-</template>
-<style scoped>
-.u-progress-circular {
-  margin: 1rem;
-}
-</style>`,
+      code: `<template>${sizeAndWidthTemplate}</template>`,
     },
   },
 };
+
+// DefaultSlot Story
+const defaultSlotTemplate = `
+    <div class="text-center">
+      <u-progress-circular :model-value="value" :rotate="360" :size="100" :width="15" color="teal" style="margin: 1rem;">
+        <template v-slot:default> {{ value }} % </template>
+      </u-progress-circular>
+    </div>
+  `;
 
 /**
  * Default slot can be used to replace the text inside the loader.
@@ -575,27 +460,14 @@ export const DefaultSlot: StoryFn<ComponentArgs> = () => ({
 
     return { value };
   },
-  template: `
-    <div class="text-center">
-      <u-progress-circular :model-value="value" :rotate="360" :size="100" :width="15" color="teal">
-        <template v-slot:default> {{ value }} % </template>
-      </u-progress-circular>
-    </div>
-  `,
+  template: defaultSlotTemplate,
 });
-
-DefaultSlot.args = {} as ComponentArgs;
 
 DefaultSlot.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-progress-circular :model-value="value" :rotate="360" :size="100" :width="15" color="teal">
-      <template v-slot:default> {{ value }} % </template>
-    </u-progress-circular>
-  </div>
-</template>
+      code: `<template>${defaultSlotTemplate}</template>
+
 <script setup>
   import { onBeforeUnmount, onMounted, ref } from 'vue'
 
@@ -613,12 +485,7 @@ DefaultSlot.parameters = {
   onBeforeUnmount(() => {
     if (interval) clearInterval(interval)
   })
-</script>
-<style scoped>
-.u-progress-circular {
-  margin: 1rem;
-}
-</style>`,
+</script>`,
     },
   },
 };
