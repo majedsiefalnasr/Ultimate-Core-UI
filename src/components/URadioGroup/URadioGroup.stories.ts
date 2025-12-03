@@ -71,7 +71,13 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<u-radio${attrsString}></u-radio>`;
+          return `
+    <u-radio-group${attrsString}>
+      <u-radio label="Radio One" value="one"></u-radio>
+      <u-radio label="Radio Two" value="two"></u-radio>
+      <u-radio label="Radio Three" value="three"></u-radio>
+    </u-radio-group>
+  `;
         },
       },
     },
@@ -457,6 +463,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { URadio, URadioGroup },
   setup() {
@@ -473,13 +480,8 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-export const ModelGroup: StoryFn<ComponentArgs> = () => ({
-  components: { UContainer, URadio, URadioGroup },
-  setup() {
-    const radios = ref('one');
-    return { radios };
-  },
-  template: `
+// ModelGroup Story
+const modelGroupTemplate = `
     <u-container fluid>
       <p>Selected Button: {{ radios }}</p>
       <u-radio-group v-model="radios">
@@ -488,29 +490,25 @@ export const ModelGroup: StoryFn<ComponentArgs> = () => ({
         <u-radio :value="3" label="Option 3 (integer)"></u-radio>
       </u-radio-group>
     </u-container>
-  `,
-});
+  `;
 
-ModelGroup.args = {} as ComponentArgs;
+/**
+ * Using the v-model (or model-value) you can access and control the selected radio
+ * button defined by the set value on the child v-radio components.
+ */
+export const ModelGroup: StoryFn<ComponentArgs> = () => ({
+  components: { UContainer, URadio, URadioGroup },
+  setup() {
+    const radios = ref('one');
+    return { radios };
+  },
+  template: modelGroupTemplate,
+});
 
 ModelGroup.parameters = {
   docs: {
-    description: {
-      story:
-        'Using the v-model (or model-value) you can access and control the selected radio button defined by the set value on the child v-radio components.',
-    },
     source: {
-      code: `
-<template>
-  <u-container fluid>
-    <p>Selected Button: {{ radios }}</p>
-    <u-radio-group v-model="radios">
-      <u-radio label="Option One" value="one"></u-radio>
-      <u-radio label="Option 2 (string)" value="2"></u-radio>
-      <u-radio :value="3" label="Option 3 (integer)"></u-radio>
-    </u-radio-group>
-  </u-container>
-</template>
+      code: `<template>${modelGroupTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -522,13 +520,8 @@ ModelGroup.parameters = {
   },
 };
 
-export const ModelRadio: StoryFn<ComponentArgs> = () => ({
-  components: { UContainer, URadio, USelect },
-  setup() {
-    const radio = ref('Option 1');
-    return { radio };
-  },
-  template: `
+// ModelRadio Story
+const modelRadioTemplate = `
     <u-container fluid>
       <u-select
         v-model="radio"
@@ -550,42 +543,25 @@ export const ModelRadio: StoryFn<ComponentArgs> = () => ({
         readonly
       ></u-radio>
     </u-container>
-  `,
-});
+  `;
 
-ModelRadio.args = {} as ComponentArgs;
+/**
+ * The v-model (or model-value) you can access and control the value of a single radio button.
+ * The true/false values can be independently defined using the true-value and false-value props.
+ */
+export const ModelRadio: StoryFn<ComponentArgs> = () => ({
+  components: { UContainer, URadio, USelect },
+  setup() {
+    const radio = ref('Option 1');
+    return { radio };
+  },
+  template: modelRadioTemplate,
+});
 
 ModelRadio.parameters = {
   docs: {
-    description: {
-      story:
-        'The v-model (or model-value) you can access and control the value of a single radio button. The true/false values can be independently defined using the true-value and false-value props.',
-    },
     source: {
-      code: `
-<template>
-  <u-container fluid>
-    <u-select
-      v-model="radio"
-      :items="['Option 1', 'Option 2']"
-      label="Select Option"
-    ></u-select>
-    <u-radio
-      v-model="radio"
-      false-value="Option 2"
-      label="Option 1"
-      true-value="Option 1"
-      readonly
-    ></u-radio>
-    <u-radio
-      v-model="radio"
-      false-value="Option 1"
-      label="Option 2"
-      true-value="Option 2"
-      readonly
-    ></u-radio>
-  </u-container>
-</template>
+      code: `<template>${modelRadioTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -597,14 +573,8 @@ ModelRadio.parameters = {
   },
 };
 
-export const Direction: StoryFn<ComponentArgs> = () => ({
-  components: { UContainer, URadio, URadioGroup },
-  setup() {
-    const column = ref(null);
-    const inline = ref(null);
-    return { column, inline };
-  },
-  template: `
+// Direction Story
+const directionTemplate = `
     <u-container fluid>
       <u-radio-group v-model="column">
         <u-radio label="Option 1" value="radio-1"></u-radio>
@@ -616,32 +586,27 @@ export const Direction: StoryFn<ComponentArgs> = () => ({
         <u-radio label="Option 2" value="radio-2"></u-radio>
       </u-radio-group>
     </u-container>
-  `,
+  `;
+
+export const Direction: StoryFn<ComponentArgs> = () => ({
+  components: { UContainer, URadio, URadioGroup },
+  setup() {
+    const column = ref(null);
+    const inline = ref(null);
+    return { column, inline };
+  },
+  template: directionTemplate,
 });
 
-Direction.args = {} as ComponentArgs;
-
+/**
+ * Radio-groups can be presented either as a row or a column, using their respective props.
+ * The default is as a column.
+ */
 Direction.parameters = {
   docs: {
-    description: {
-      story:
-        'Radio-groups can be presented either as a row or a column, using their respective props. The default is as a column.',
-    },
     source: {
       code: `
-<template>
-  <u-container fluid>
-    <u-radio-group v-model="column">
-      <u-radio label="Option 1" value="radio-1"></u-radio>
-      <u-radio label="Option 2" value="radio-2"></u-radio>
-    </u-radio-group>
-    <hr>
-    <u-radio-group v-model="inline" inline>
-      <u-radio label="Option 1" value="radio-1"></u-radio>
-      <u-radio label="Option 2" value="radio-2"></u-radio>
-    </u-radio-group>
-  </u-container>
-</template>
+<template>${directionTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
@@ -654,13 +619,8 @@ Direction.parameters = {
   },
 };
 
-export const Label: StoryFn<ComponentArgs> = () => ({
-  components: { UContainer, URadio, URadioGroup },
-  setup() {
-    const radios = ref('Duckduckgo');
-    return { radios };
-  },
-  template: `
+// Label Story
+const labelTemplate = `
     <u-container fluid>
       <u-radio-group v-model="radios">
         <template v-slot:label>
@@ -678,38 +638,24 @@ export const Label: StoryFn<ComponentArgs> = () => ({
         </u-radio>
       </u-radio-group>
     </u-container>
-  `,
-});
+  `;
 
-Label.args = {} as ComponentArgs;
+/**
+ * Radio Group labels can be defined in label slot - that will allow to use HTML content.
+ */
+export const Label: StoryFn<ComponentArgs> = () => ({
+  components: { UContainer, URadio, URadioGroup },
+  setup() {
+    const radios = ref('Duckduckgo');
+    return { radios };
+  },
+  template: labelTemplate,
+});
 
 Label.parameters = {
   docs: {
-    description: {
-      story:
-        'Radio Group labels can be defined in label slot - that will allow to use HTML content.',
-    },
     source: {
-      code: `
-<template>
-  <u-container fluid>
-    <u-radio-group v-model="radios">
-      <template v-slot:label>
-        <div>Your favourite <strong>search engine</strong></div>
-      </template>
-      <u-radio value="Google">
-        <template v-slot:label>
-          <div>Of course it's <strong class="text-success">Google</strong></div>
-        </template>
-      </u-radio>
-      <u-radio value="Duckduckgo">
-        <template v-slot:label>
-          <div>Definitely <strong class="text-primary">Duckduckgo</strong></div>
-        </template>
-      </u-radio>
-    </u-radio-group>
-  </u-container>
-</template>
+      code: `<template>${labelTemplate}</template>
 
 <script setup>
   import { ref } from 'vue'
