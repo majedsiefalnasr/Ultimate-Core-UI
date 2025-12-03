@@ -82,14 +82,13 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UParallax },
   setup() {
     return { args };
   },
-  template: `
-    <u-parallax v-bind="args"></u-parallax>
-  `,
+  template: `<u-parallax v-bind="args"></u-parallax>`,
 });
 
 Default.args = {
