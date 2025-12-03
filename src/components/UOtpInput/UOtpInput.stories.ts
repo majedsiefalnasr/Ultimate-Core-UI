@@ -62,9 +62,7 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `<template>
-  <u-otp-input${attrsString}></u-otp-input>
-</template>`;
+          return `<u-otp-input${attrsString}></u-otp-input>`;
         },
       },
     },
@@ -342,133 +340,121 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UOtpInput },
   setup() {
     return { args };
   },
-  template: `
-    <u-otp-input v-bind="args"></u-otp-input>
-  `,
+  template: `<u-otp-input v-bind="args"></u-otp-input>`,
 });
 
 Default.args = {
   autofocus: true,
 } as ComponentArgs;
 
-export const Length: StoryFn<ComponentArgs> = () => ({
-  components: { UOtpInput },
-  template: `
+// Length Story
+const lengthTemplate = `
     <u-otp-input
       length="7"
       model-value="3214214"
     ></u-otp-input>
-  `,
-});
+  `;
 
-Length.args = {} as ComponentArgs;
+/**
+ * The length prop determines the number of u-field components that are rendered.
+ * The default value is 6.
+ */
+export const Length: StoryFn<ComponentArgs> = () => ({
+  components: { UOtpInput },
+  template: lengthTemplate,
+});
 
 Length.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-otp-input
-    length="7"
-    model-value="3214214"
-  ></u-otp-input>
-</template>`,
+      code: `<template>${lengthTemplate}</template>`,
     },
   },
 };
 
-export const FocusAll: StoryFn<ComponentArgs> = () => ({
-  components: { UOtpInput },
-  template: `
+// Focus All Story
+const focusAllTemplate = `
     <u-otp-input
       model-value="425"
       focus-all
       focused
     ></u-otp-input>
-  `,
+  `;
+
+/**
+ * The autofocus prop automatically focuses the first element in the u-otp-input component.
+ */
+export const FocusAll: StoryFn<ComponentArgs> = () => ({
+  components: { UOtpInput },
+  template: focusAllTemplate,
 });
 
 FocusAll.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-otp-input
-    model-value="425"
-    focus-all
-    focused
-  ></u-otp-input>
-</template>`,
+      code: `<template>${focusAllTemplate}</template>`,
     },
   },
 };
 
-export const Error: StoryFn<ComponentArgs> = () => ({
-  components: { UOtpInput },
-  template: `
+// Error Story
+const errorTemplate = `
     <u-otp-input
       model-value="221"
       error
     ></u-otp-input>
-  `,
+  `;
+
+/**
+ * The error prop puts the u-otp-input into an error state. This is useful for displaying
+ * validation errors.
+ */
+export const Error: StoryFn<ComponentArgs> = () => ({
+  components: { UOtpInput },
+  template: errorTemplate,
 });
 
 Error.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-otp-input
-    model-value="221"
-    error
-  ></u-otp-input>
-</template>`,
+      code: `<template>${errorTemplate}</template>`,
     },
   },
 };
 
-export const Variants: StoryFn<ComponentArgs> = () => ({
-  components: { UOtpInput },
-  template: `
+// Variants Story
+const variantsTemplate = `
     <u-otp-input
       model-value="8011"
       variant="filled"
     ></u-otp-input>
-  `,
+  `;
+
+/**
+ * The u-otp-input component supports the same variants as u-field, u-text-field and
+ * other inputs.
+ */
+export const Variants: StoryFn<ComponentArgs> = () => ({
+  components: { UOtpInput },
+  template: variantsTemplate,
 });
 
 Variants.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-otp-input
-    model-value="8011"
-    variant="filled"
-  ></u-otp-input>
-</template>`,
+      code: `<template>${variantsTemplate}</template>`,
     },
   },
 };
 
-export const Loader: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UOtpInput },
-  setup() {
-    const loading = shallowRef(false);
-    const otp = shallowRef('31');
-
-    function onClick() {
-      loading.value = true;
-
-      setTimeout(() => {
-        loading.value = false;
-      }, 2000);
-    }
-
-    return { loading, otp, onClick };
-  },
-  template: `
+// Loader Story
+const loaderTemplate = `
     <div class="text-center">
       <u-otp-input
         v-model="otp"
@@ -486,31 +472,36 @@ export const Loader: StoryFn<ComponentArgs> = () => ({
         @click="onClick"
       ></u-btn>
     </div>
-  `,
+  `;
+
+/**
+ * The loader prop displays a loader when the u-otp-input component is in a loading state.
+ * When complete, emits a finish event.
+ */
+export const Loader: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UOtpInput },
+  setup() {
+    const loading = shallowRef(false);
+    const otp = shallowRef('31');
+
+    function onClick() {
+      loading.value = true;
+
+      setTimeout(() => {
+        loading.value = false;
+      }, 2000);
+    }
+
+    return { loading, otp, onClick };
+  },
+  template: loaderTemplate,
 });
 
 Loader.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-otp-input
-      v-model="otp"
-      :loading="loading"
-      length="5"
-      variant="underlined"
-    ></u-otp-input>
+      code: `<template>${loaderTemplate}</template>
 
-    <u-btn
-      :disabled="otp.length < 5 || loading"
-      class="my-5"
-      color="surface-variant"
-      text="Submit"
-      variant="tonal"
-      @click="onClick"
-    ></u-btn>
-  </div>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -529,14 +520,8 @@ Loader.parameters = {
   },
 };
 
-export const CardVariants: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UCard, UOtpInput, USheet },
-  setup() {
-    const otp = shallowRef('');
-
-    return { otp };
-  },
-  template: `
+// Card Variants Story
+const cardVariantsTemplate = `
     <u-card
       class="py-8 px-6 text-center mx-auto ma-4"
       elevation="12"
@@ -572,49 +557,26 @@ export const CardVariants: StoryFn<ComponentArgs> = () => ({
         Didn't receive the code? <a href="#" @click.prevent="otp = ''">Resend</a>
       </div>
     </u-card>
-  `,
+  `;
+
+/**
+ * The following example is a detailed example of a u-otp-input component used within a card.
+ */
+export const CardVariants: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCard, UOtpInput, USheet },
+  setup() {
+    const otp = shallowRef('');
+
+    return { otp };
+  },
+  template: cardVariantsTemplate,
 });
 
 CardVariants.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="py-8 px-6 text-center mx-auto ma-4"
-    elevation="12"
-    max-width="400"
-    width="100%"
-  >
-    <h3 class="text-h6 mb-4">Verify Your Account</h3>
+      code: `<template>${cardVariantsTemplate}</template>
 
-    <div class="text-body-2">
-      We sent a verification code to john..@gmail.com <br>
-
-      Please check your email and paste the code below.
-    </div>
-
-    <u-sheet color="surface">
-      <u-otp-input
-        v-model="otp"
-        type="password"
-        variant="solo"
-      ></u-otp-input>
-    </u-sheet>
-
-    <u-btn
-      class="my-4"
-      color="purple"
-      height="40"
-      text="Verify"
-      variant="flat"
-      width="70%"
-    ></u-btn>
-
-    <div class="text-caption">
-      Didn't receive the code? <a href="#" @click.prevent="otp = ''">Resend</a>
-    </div>
-  </u-card>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -624,14 +586,8 @@ CardVariants.parameters = {
   },
 };
 
-export const MobileText: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UDivider, UOtpInput, USheet },
-  setup() {
-    const otp = shallowRef('');
-
-    return { otp };
-  },
-  template: `
+// Mobile Text Story
+const mobileTextTemplate = `
     <u-sheet
       class="pt-8 pb-12 px-6 ma-4 mx-auto"
       max-width="350"
@@ -666,48 +622,26 @@ export const MobileText: StoryFn<ComponentArgs> = () => ({
         @click="otp = ''"
       ></u-btn>
     </u-sheet>
-  `,
+  `;
+
+/**
+ * The following example is a detailed example of a u-otp-input component used with mobile text.
+ */
+export const MobileText: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UDivider, UOtpInput, USheet },
+  setup() {
+    const otp = shallowRef('');
+
+    return { otp };
+  },
+  template: mobileTextTemplate,
 });
 
 MobileText.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet
-    class="pt-8 pb-12 px-6 ma-4 mx-auto"
-    max-width="350"
-    width="100%"
-    border
-  >
-    <h3 class="text-h6 mb-1">Mobile phone verification</h3>
+      code: `<template>${mobileTextTemplate}</template>
 
-    <div class="text-body-2 font-weight-light">
-      Enter the code we just sent to your mobile phone <span class="font-weight-black text-primary">+1 408 555 1212</span>
-    </div>
-
-    <u-otp-input
-      v-model="otp"
-      class="mt-3 ms-n2"
-      length="4"
-      placeholder="0"
-      variant="underlined"
-    ></u-otp-input>
-
-    <u-divider class="mt-3 mb-6"></u-divider>
-
-    <div class="mb-3 text-body-2">
-      Need another <strong>code</strong>?
-    </div>
-
-    <u-btn
-      color="primary"
-      size="small"
-      text="Re-send Email"
-      variant="tonal"
-      @click="otp = ''"
-    ></u-btn>
-  </u-sheet>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -717,23 +651,8 @@ MobileText.parameters = {
   },
 };
 
-export const VerifyAccount: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UCard, UOtpInput },
-  setup() {
-    const otp = shallowRef('2401');
-    const validating = shallowRef(false);
-
-    function onClick() {
-      validating.value = true;
-
-      setTimeout(() => {
-        validating.value = false;
-      }, 2000);
-    }
-
-    return { otp, validating, onClick };
-  },
-  template: `
+// Verify Account Story
+const verifyAccountTemplate = `
     <u-card
       class="py-12 px-8 text-center mx-auto ma-4"
       max-width="420"
@@ -764,44 +683,36 @@ export const VerifyAccount: StoryFn<ComponentArgs> = () => ({
         @click="onClick"
       ></u-btn>
     </u-card>
-  `,
+  `;
+
+/**
+ * The following example is a detailed example of a u-otp-input component used to verify
+ * a user’s account.
+ */
+export const VerifyAccount: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UCard, UOtpInput },
+  setup() {
+    const otp = shallowRef('2401');
+    const validating = shallowRef(false);
+
+    function onClick() {
+      validating.value = true;
+
+      setTimeout(() => {
+        validating.value = false;
+      }, 2000);
+    }
+
+    return { otp, validating, onClick };
+  },
+  template: verifyAccountTemplate,
 });
 
 VerifyAccount.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="py-12 px-8 text-center mx-auto ma-4"
-    max-width="420"
-    width="100%"
-  >
-    <h3 class="text-h6 mb-2">
-      Please enter the one time password to verify your account
-    </h3>
+      code: `<template>${verifyAccountTemplate}</template>
 
-    <div>A code has been sent to *****2489</div>
-
-    <u-otp-input
-      v-model="otp"
-      :disabled="validating"
-      color="primary"
-      variant="plain"
-    ></u-otp-input>
-
-    <u-btn
-      :loading="validating"
-      class="mt-6 text-none bg-surface-variant"
-      height="40"
-      text="Validate"
-      variant="plain"
-      width="135"
-      border
-      rounded
-      @click="onClick"
-    ></u-btn>
-  </u-card>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -820,14 +731,8 @@ VerifyAccount.parameters = {
   },
 };
 
-export const Divider: StoryFn<ComponentArgs> = () => ({
-  components: { UBtn, UOtpInput, USheet },
-  setup() {
-    const otp = shallowRef('');
-
-    return { otp };
-  },
-  template: `
+// Divider Story
+const dividerTemplate = `
     <u-sheet
       class="py-8 px-6 mx-auto ma-4 text-center"
       elevation="4"
@@ -857,43 +762,26 @@ export const Divider: StoryFn<ComponentArgs> = () => ({
         ></u-btn>
       </div>
     </u-sheet>
-  `,
+  `;
+
+/**
+ * The following example is a detailed example of a u-otp-input component used with a divider.
+ */
+export const Divider: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UOtpInput, USheet },
+  setup() {
+    const otp = shallowRef('');
+
+    return { otp };
+  },
+  template: dividerTemplate,
 });
 
 Divider.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet
-    class="py-8 px-6 mx-auto ma-4 text-center"
-    elevation="4"
-    max-width="500"
-    rounded="lg"
-    width="100%"
-  >
-    <h3 class="text-h5">Verification Code</h3>
-
-    <div class="text-subtitle-2 font-weight-light mb-3">Please enter the verification code sent to your mobile</div>
-
-    <u-otp-input
-      v-model="otp"
-      class="mb-8"
-      divider="•"
-      length="4"
-      variant="outlined"
-    ></u-otp-input>
-
-    <div class="text-caption">
-      <u-btn
-        color="primary"
-        size="x-small"
-        text="Send New Code"
-        variant="text"
-        @click="otp = ''"
-      ></u-btn>
-    </div>
-  </u-sheet>
-</template>
+      code: `<template>${dividerTemplate}</template>
+      
 <script setup>
   import { shallowRef } from 'vue'
 
