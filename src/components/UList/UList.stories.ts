@@ -178,6 +178,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UList, UListItem, UCard },
   setup() {
@@ -199,6 +200,17 @@ Default.args = {
   ],
 } as ComponentArgs;
 
+// Items story
+const itemsTemplate = `
+    <u-card class="mx-auto" max-width="300">
+      <u-list :items="items"></u-list>
+    </u-card>
+  `;
+
+/**
+ * Lists can either be created by markup using the many sub-components that are available,
+ * or by using the items prop.
+ */
 export const Items: StoryFn<ComponentArgs> = () => ({
   components: { UCard, UList },
   setup() {
@@ -215,49 +227,34 @@ export const Items: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <u-card class="mx-auto" max-width="300">
-      <u-list :items="items"></u-list>
-    </u-card>
-  `,
+  template: itemsTemplate,
 });
 
 Items.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card class="mx-auto" max-width="300">
-    <u-list :items="items"></u-list>
-  </u-card>
-</template>
+      code: `
+<template>${itemsTemplate}</template>
+
 <script setup>
-const items = [
-  { type: 'subheader', title: 'Group #1' },
-  { title: 'Item #1', value: 1 },
-  { title: 'Item #2', value: 2 },
-  { title: 'Item #3', value: 3 },
-  { type: 'divider' },
-  { type: 'subheader', title: 'Group #2' },
-  { title: 'Item #4', value: 4 },
-  { title: 'Item #5', value: 5 },
-  { title: 'Item #6', value: 6 },
-]
+  const items = [
+    { type: 'subheader', title: 'Group #1' },
+    { title: 'Item #1', value: 1 },
+    { title: 'Item #2', value: 2 },
+    { title: 'Item #3', value: 3 },
+    { type: 'divider' },
+    { type: 'subheader', title: 'Group #2' },
+    { title: 'Item #4', value: 4 },
+    { title: 'Item #5', value: 5 },
+    { title: 'Item #6', value: 6 },
+  ]
 </script>`,
     },
   },
 };
 
-export const Density: StoryFn<ComponentArgs> = () => ({
-  components: { UCard, UList, UListItem, UIcon, UListItemTitle, UListSubheader },
-  setup() {
-    const items = [
-      { text: 'Real-Time', icon: 'hugeicons:clock-01' },
-      { text: 'Audience', icon: 'hugeicons:user-03' },
-      { text: 'Conversions', icon: 'hugeicons:flag-01' },
-    ];
-    return { items };
-  },
-  template: `
+// Density story
+const densityTemplate = `
     <u-card class="mx-auto" max-width="300">
       <u-list density="compact">
         <u-list-subheader>REPORTS</u-list-subheader>
@@ -271,39 +268,12 @@ export const Density: StoryFn<ComponentArgs> = () => ({
         </u-list-item>
       </u-list>
     </u-card>
-  `,
-});
+  `;
 
-Density.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-card class="mx-auto" max-width="300">
-    <u-list density="compact">
-      <u-list-subheader>REPORTS</u-list-subheader>
-
-      <u-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary">
-        <template #prepend>
-          <u-icon :icon="item.icon"></u-icon>
-        </template>
-
-        <u-list-item-title v-text="item.text"></u-list-item-title>
-      </u-list-item>
-    </u-list>
-  </u-card>
-</template>
-<script setup>
-const items = [
-  { text: 'Real-Time', icon: 'hugeicons:clock-01' },
-  { text: 'Audience', icon: 'hugeicons:user-03' },
-  { text: 'Conversions', icon: 'hugeicons:flag-01' },
-]
-</script>`,
-    },
-  },
-};
-
-export const Disabled: StoryFn<ComponentArgs> = () => ({
+/**
+ * u-list supports the density property.
+ */
+export const Density: StoryFn<ComponentArgs> = () => ({
   components: { UCard, UList, UListItem, UIcon, UListItemTitle, UListSubheader },
   setup() {
     const items = [
@@ -313,7 +283,28 @@ export const Disabled: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
+  template: densityTemplate,
+});
+
+Density.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${densityTemplate}</template>
+
+<script setup>
+  const items = [
+    { text: 'Real-Time', icon: 'hugeicons:clock-01' },
+    { text: 'Audience', icon: 'hugeicons:user-03' },
+    { text: 'Conversions', icon: 'hugeicons:flag-01' },
+  ]
+</script>`,
+    },
+  },
+};
+
+// Disabled story
+const disabledTemplate = `
     <u-card class="mx-auto" max-width="300">
       <u-list disabled>
         <u-list-subheader>REPORTS</u-list-subheader>
@@ -327,39 +318,12 @@ export const Disabled: StoryFn<ComponentArgs> = () => ({
         </u-list-item>
       </u-list>
     </u-card>
-  `,
-});
+  `;
 
-Disabled.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-card class="mx-auto" max-width="300">
-    <u-list disabled>
-      <u-list-subheader>REPORTS</u-list-subheader>
-
-      <u-list-item v-for="(item, i) in items" :key="i">
-        <template #prepend>
-          <u-icon :icon="item.icon"></u-icon>
-        </template>
-
-        <u-list-item-title v-text="item.text"></u-list-item-title>
-      </u-list-item>
-    </u-list>
-  </u-card>
-</template>
-<script setup>
-const items = [
-  { text: 'Real-Time', icon: 'hugeicons:clock-01' },
-  { text: 'Audience', icon: 'hugeicons:user-03' },
-  { text: 'Conversions', icon: 'hugeicons:flag-01' },
-]
-</script>`,
-    },
-  },
-};
-
-export const Variant: StoryFn<ComponentArgs> = () => ({
+/**
+ * You cannot interact with disabled u-list.
+ */
+export const Disabled: StoryFn<ComponentArgs> = () => ({
   components: { UCard, UList, UListItem, UIcon, UListItemTitle, UListSubheader },
   setup() {
     const items = [
@@ -369,7 +333,28 @@ export const Variant: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
+  template: disabledTemplate,
+});
+
+Disabled.parameters = {
+  docs: {
+    source: {
+      code: `
+<template>${disabledTemplate}</template>
+
+<script setup>
+  const items = [
+    { text: 'Real-Time', icon: 'hugeicons:clock-01' },
+    { text: 'Audience', icon: 'hugeicons:user-03' },
+    { text: 'Conversions', icon: 'hugeicons:flag-01' },
+  ]
+</script>`,
+    },
+  },
+};
+
+// Variant story
+const variantTemplate = `
     <u-card class="mx-auto" max-width="300">
       <u-list>
         <u-list-subheader>Plain Variant</u-list-subheader>
@@ -395,50 +380,75 @@ export const Variant: StoryFn<ComponentArgs> = () => ({
         </u-list-item>
       </u-list>
     </u-card>
-  `,
+  `;
+
+/**
+ * u-list supports the variant prop.
+ */
+export const Variant: StoryFn<ComponentArgs> = () => ({
+  components: { UCard, UList, UListItem, UIcon, UListItemTitle, UListSubheader },
+  setup() {
+    const items = [
+      { text: 'Real-Time', icon: 'hugeicons:clock-01' },
+      { text: 'Audience', icon: 'hugeicons:user-03' },
+      { text: 'Conversions', icon: 'hugeicons:flag-01' },
+    ];
+    return { items };
+  },
+  template: variantTemplate,
 });
 
 Variant.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card class="mx-auto" max-width="300">
-    <u-list>
-      <u-list-subheader>Plain Variant</u-list-subheader>
+      code: `
+<template>${variantTemplate}</template>
 
-      <u-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary" variant="plain">
-        <template #prepend>
-          <u-icon :icon="item.icon"></u-icon>
-        </template>
-
-        <u-list-item-title v-text="item.text"></u-list-item-title>
-      </u-list-item>
-    </u-list>
-
-    <u-list>
-      <u-list-subheader>Tonal Variant</u-list-subheader>
-
-      <u-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary" variant="tonal">
-        <template #prepend>
-          <u-icon :icon="item.icon"></u-icon>
-        </template>
-
-        <u-list-item-title v-text="item.text"></u-list-item-title>
-      </u-list-item>
-    </u-list>
-  </u-card>
-</template>
 <script setup>
-const items = [
-  { text: 'Real-Time', icon: 'hugeicons:clock-01' },
-  { text: 'Audience', icon: 'hugeicons:user-03' },
-  { text: 'Conversions', icon: 'hugeicons:flag-01' },
-]
+  const items = [
+    { text: 'Real-Time', icon: 'hugeicons:clock-01' },
+    { text: 'Audience', icon: 'hugeicons:user-03' },
+    { text: 'Conversions', icon: 'hugeicons:flag-01' },
+  ]
 </script>`,
     },
   },
 };
 
+// Nav story
+const navTemplate = `
+    <u-card class="mx-auto" width="256">
+      <u-layout>
+        <u-navigation-drawer absolute permanent>
+          <u-list>
+            <u-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.png" subtitle="john@google.com" title="John Leider">
+              <template #append>
+                <u-btn icon="hugeicons:menu-down-24" size="small" variant="text"></u-btn>
+              </template>
+            </u-list-item>
+          </u-list>
+
+          <u-divider></u-divider>
+
+          <u-list :lines="false" density="compact" nav>
+            <u-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary">
+              <template #prepend>
+                <u-icon :icon="item.icon"></u-icon>
+              </template>
+              <u-list-item-title v-text="item.text"></u-list-item-title>
+            </u-list-item>
+          </u-list>
+        </u-navigation-drawer>
+
+        <u-main style="height: 354px;"></u-main>
+      </u-layout>
+    </u-card>
+  `;
+
+/**
+ * Lists can receive an alternative nav styling that reduces the width u-list-item takes
+ * up as well as adding a border radius.
+ */
 export const Nav: StoryFn<ComponentArgs> = () => ({
   components: { UCard, ULayout, UNavigationDrawer, UList, UListItem, UDivider, UMain, UBtn },
   setup() {
@@ -453,82 +463,64 @@ export const Nav: StoryFn<ComponentArgs> = () => ({
     ];
     return { items };
   },
-  template: `
-    <u-card class="mx-auto" width="256">
-      <u-layout>
-        <u-navigation-drawer absolute permanent>
-          <u-list>
-            <u-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.png" subtitle="john@google.com" title="John Leider">
-              <template #append>
-                <u-btn icon="hugeicons:menu-down-24" size="small" variant="text"></u-btn>
-              </template>
-            </u-list-item>
-          </u-list>
-
-          <u-divider></u-divider>
-
-          <u-list :lines="false" density="compact" nav>
-            <u-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary">
-              <template #prepend>
-                <u-icon :icon="item.icon"></u-icon>
-              </template>
-              <u-list-item-title v-text="item.text"></u-list-item-title>
-            </u-list-item>
-          </u-list>
-        </u-navigation-drawer>
-
-        <u-main style="height: 354px;"></u-main>
-      </u-layout>
-    </u-card>
-  `,
+  template: navTemplate,
 });
 
 Nav.parameters = {
   docs: {
     source: {
-      code: `<template>
-    <u-card class="mx-auto" width="256">
-      <u-layout>
-        <u-navigation-drawer absolute permanent>
-          <u-list>
-            <u-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.png" subtitle="john@google.com" title="John Leider">
-              <template #append>
-                <u-btn icon="hugeicons:menu-down-24" size="small" variant="text"></u-btn>
-              </template>
-            </u-list-item>
-          </u-list>
+      code: `
+<template>${navTemplate}</template>
 
-          <u-divider></u-divider>
-
-          <u-list :lines="false" density="compact" nav>
-            <u-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary">
-              <template #prepend>
-                <u-icon :icon="item.icon"></u-icon>
-              </template>
-              <u-list-item-title v-text="item.text"></u-list-item-title>
-            </u-list-item>
-          </u-list>
-        </u-navigation-drawer>
-
-        <u-main style="height: 354px;"></u-main>
-      </u-layout>
-    </u-card>
-</template>
 <script setup>
-    const items = [
-      { text: 'My Files', icon: 'hugeicons:folder-01' },
-      { text: 'Shared with me', icon: 'hugeicons:folder-shared-01' },
-      { text: 'Starred', icon: 'hugeicons:star' },
-      { text: 'Recent', icon: 'hugeicons:work-history' },
-      { text: 'Offline', icon: 'hugeicons:circle' },
-      { text: 'Uploads', icon: 'hugeicons:upload-01' },
-      { text: 'Backups', icon: 'hugeicons:archive-02' },
-    ];
+  const items = [
+    { text: 'My Files', icon: 'hugeicons:folder-01' },
+    { text: 'Shared with me', icon: 'hugeicons:folder-shared-01' },
+    { text: 'Starred', icon: 'hugeicons:star' },
+    { text: 'Recent', icon: 'hugeicons:work-history' },
+    { text: 'Offline', icon: 'hugeicons:circle' },
+    { text: 'Uploads', icon: 'hugeicons:upload-01' },
+    { text: 'Backups', icon: 'hugeicons:archive-02' },
+  ];
 </script>`,
     },
   },
 };
 
+// SubGroup story
+const subGroupTemplate = `
+    <u-card class="mx-auto" width="300">
+      <u-list v-model:opened="open">
+        <u-list-item prepend-icon="hugeicons:home-01" title="Home"></u-list-item>
+
+        <u-list-group value="Users">
+          <template #activator="{ props }">
+            <u-list-item v-bind="props" prepend-icon="hugeicons:user-circle" title="Users"></u-list-item>
+          </template>
+
+          <u-list-group value="Admin">
+            <template #activator="{ props }">
+              <u-list-item v-bind="props" title="Admin"></u-list-item>
+            </template>
+
+            <u-list-item v-for="([title, icon], i) in admins" :key="i" :prepend-icon="icon" :title="title" :value="title"></u-list-item>
+          </u-list-group>
+
+          <u-list-group value="Actions">
+            <template #activator="{ props }">
+              <u-list-item v-bind="props" title="Actions"></u-list-item>
+            </template>
+
+            <u-list-item v-for="([title, icon], i) in cruds" :key="i" :prepend-icon="icon" :title="title" :value="title"></u-list-item>
+          </u-list-group>
+        </u-list-group>
+      </u-list>
+    </u-card>
+  `;
+
+/**
+ * Using the u-list-group component you can create sub-groups of items.
+ */
 export const SubGroup: StoryFn<ComponentArgs> = () => ({
   components: { UCard, UList, UListItem, UListGroup },
   setup() {
@@ -545,69 +537,15 @@ export const SubGroup: StoryFn<ComponentArgs> = () => ({
     ];
     return { open, admins, cruds };
   },
-  template: `
-    <u-card class="mx-auto" width="300">
-      <u-list v-model:opened="open">
-        <u-list-item prepend-icon="hugeicons:home-01" title="Home"></u-list-item>
-
-        <u-list-group value="Users">
-          <template #activator="{ props }">
-            <u-list-item v-bind="props" prepend-icon="hugeicons:user-circle" title="Users"></u-list-item>
-          </template>
-
-          <u-list-group value="Admin">
-            <template #activator="{ props }">
-              <u-list-item v-bind="props" title="Admin"></u-list-item>
-            </template>
-
-            <u-list-item v-for="([title, icon], i) in admins" :key="i" :prepend-icon="icon" :title="title" :value="title"></u-list-item>
-          </u-list-group>
-
-          <u-list-group value="Actions">
-            <template #activator="{ props }">
-              <u-list-item v-bind="props" title="Actions"></u-list-item>
-            </template>
-
-            <u-list-item v-for="([title, icon], i) in cruds" :key="i" :prepend-icon="icon" :title="title" :value="title"></u-list-item>
-          </u-list-group>
-        </u-list-group>
-      </u-list>
-    </u-card>
-  `,
+  template: subGroupTemplate,
 });
 
 SubGroup.parameters = {
   docs: {
     source: {
-      code: `<template>
-    <u-card class="mx-auto" width="300">
-      <u-list v-model:opened="open">
-        <u-list-item prepend-icon="hugeicons:home-01" title="Home"></u-list-item>
+      code: `
+<template>${subGroupTemplate}</template>
 
-        <u-list-group value="Users">
-          <template #activator="{ props }">
-            <u-list-item v-bind="props" prepend-icon="hugeicons:user-circle" title="Users"></u-list-item>
-          </template>
-
-          <u-list-group value="Admin">
-            <template #activator="{ props }">
-              <u-list-item v-bind="props" title="Admin"></u-list-item>
-            </template>
-
-            <u-list-item v-for="([title, icon], i) in admins" :key="i" :prepend-icon="icon" :title="title" :value="title"></u-list-item>
-          </u-list-group>
-
-          <u-list-group value="Actions">
-            <template #activator="{ props }">
-              <u-list-item v-bind="props" title="Actions"></u-list-item>
-            </template>
-
-            <u-list-item v-for="([title, icon], i) in cruds" :key="i" :prepend-icon="icon" :title="title" :value="title"></u-list-item>
-          </u-list-group>
-        </u-list-group>
-      </u-list>
-    </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
   const open = ref(['Users']);
