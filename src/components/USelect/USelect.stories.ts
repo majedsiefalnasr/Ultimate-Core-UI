@@ -79,6 +79,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USelect },
   setup() {
@@ -92,20 +93,17 @@ Default.args = {
   items: ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'],
 } as ComponentArgs;
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `
-        <u-select
-          label="Select"
-          :items="['California','Colorado','Florida','Georgia','Texas','Wyoming']"
-        />`,
-    },
-  },
-};
+// Density Story
+const densityTemplate = `
+  <div>
+    <u-select :items="items" density="compact" label="Compact" class="ma-2" />
+    <u-select :items="items" density="comfortable" label="Comfortable" class="ma-2" />
+    <u-select :items="items" label="Default" class="ma-2" />
+  </div>
+  `;
 
 /**
- * Density: demonstrate compact, comfortable and default densities
+ * You can use density prop to adjust vertical spacing within the component.
  */
 export const Density: StoryFn<ComponentArgs> = () => ({
   components: { USelect },
@@ -113,34 +111,28 @@ export const Density: StoryFn<ComponentArgs> = () => ({
     const items = ['Foo', 'Bar', 'Fizz', 'Buzz'];
     return { items };
   },
-  template: `
-  <div>
-    <u-select :items="items" density="compact" label="Compact" class="ma-2" />
-    <u-select :items="items" density="comfortable" label="Comfortable" class="ma-2" />
-    <u-select :items="items" label="Default" class="ma-2" />
-  </div>
-  `,
+  template: densityTemplate,
 });
 
 Density.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select :items="items" density="compact" label="Compact" />
-  <u-select :items="items" density="comfortable" label="Comfortable" />
-  <u-select :items="items" label="Default" />
-</template>
+      code: `<template>${densityTemplate}</template>
+
 <script setup>
   const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
-</script>
-      `,
+</script>`,
     },
   },
 };
 
+// Multiple Story
+const multipleTemplate = `
+  <u-select v-model="favorites" :items="states" hint="Pick your favorite states" label="Select" multiple persistent-hint />
+  `;
+
 /**
- * Multiple: allow selecting multiple values
+ * The multiple prop allows for multiple selections.
  */
 export const Multiple: StoryFn<ComponentArgs> = () => ({
   components: { USelect },
@@ -207,25 +199,14 @@ export const Multiple: StoryFn<ComponentArgs> = () => ({
 
     return { favorites, states };
   },
-  template: `
-  <u-select v-model="favorites" :items="states" hint="Pick your favorite states" label="Select" multiple persistent-hint />
-  `,
+  template: multipleTemplate,
 });
 
 Multiple.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select
-    v-model="favorites"
-    :items="states"
-    hint="Pick your favorite states"
-    label="Select"
-    multiple
-    persistent-hint
-  ></u-select>
-</template>
+      code: `<template>${multipleTemplate}</template>
+
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -242,7 +223,6 @@ Multiple.parameters = {
     'Connecticut',
     'Delaware',
     'District of Columbia',
-    'Federated States of Micronesia',
     'Florida',
     'Georgia',
     'Guam',
@@ -271,11 +251,9 @@ Multiple.parameters = {
     'New York',
     'North Carolina',
     'North Dakota',
-    'Northern Mariana Islands',
     'Ohio',
     'Oklahoma',
     'Oregon',
-    'Palau',
     'Pennsylvania',
     'Puerto Rico',
     'Rhode Island',
@@ -292,14 +270,18 @@ Multiple.parameters = {
     'Wisconsin',
     'Wyoming',
   ]
-</script>
-      `,
+</script>`,
     },
   },
 };
 
+// Chips Story
+const chipsTemplate = `
+  <u-select v-model="value" :items="items" label="Chips" chips multiple />
+  `;
+
 /**
- * Chips: show selected items as chips (works with multiple)
+ * Display selected items as chips with the chips prop.
  */
 export const Chips: StoryFn<ComponentArgs> = () => ({
   components: { USelect },
@@ -308,37 +290,31 @@ export const Chips: StoryFn<ComponentArgs> = () => ({
     const value = shallowRef(['foo', 'bar']);
     return { items, value };
   },
-  template: `
-  <u-select v-model="value" :items="items" label="Chips" chips multiple />
-  `,
+  template: chipsTemplate,
 });
 
 Chips.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select
-    v-model="value"
-    :items="items"
-    label="Chips"
-    chips
-    multiple
-  ></u-select>
-</template>
+      code: `<template>${chipsTemplate}</template>
+
 <script setup>
   import { shallowRef } from 'vue'
 
   const items = shallowRef(['foo', 'bar', 'fizz', 'buzz'])
-  const value = shallowRef(['foo', 'bar', 'fizz', 'buzz'])
-</script>
-      `,
+  const value = shallowRef(['foo', 'bar'])
+</script>`,
     },
   },
 };
 
+// Readonly Story
+const readonlyTemplate = `
+  <u-select v-model="model" :items="items" label="Read-only" readonly />
+  `;
+
 /**
- * Readonly: display a non-editable value
+ * You can use the readonly prop on u-select which will prevent a user from changing its value.
  */
 export const Readonly: StoryFn<ComponentArgs> = () => ({
   components: { USelect },
@@ -347,36 +323,32 @@ export const Readonly: StoryFn<ComponentArgs> = () => ({
     const items = ['Foo', 'Bar', 'Fizz', 'Buzz'];
     return { model, items };
   },
-  template: `
-  <u-select v-model="model" :items="items" label="Read-only" readonly />
-  `,
+  template: readonlyTemplate,
 });
 
 Readonly.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select
-    v-model="model"
-    :items="items"
-    label="Read-only"
-    readonly
-  ></u-select>
-</template>
+      code: `<template>${readonlyTemplate}</template>
+
 <script setup>
   import { shallowRef } from 'vue'
 
   const model = shallowRef('Foo')
   const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
-</script>
-      `,
+</script>`,
     },
   },
 };
 
+// Disabled Story
+const disabledTemplate = `
+  <u-select :items="items" label="Disabled" disabled />
+  `;
+
 /**
- * Disabled: disable the select so it cannot be interacted with
+ * Applying the disabled prop to a u-select will prevent a user from interacting with
+ * the component.
  */
 export const Disabled: StoryFn<ComponentArgs> = () => ({
   components: { USelect },
@@ -384,32 +356,30 @@ export const Disabled: StoryFn<ComponentArgs> = () => ({
     const items = ['Foo', 'Bar', 'Fizz', 'Buzz'];
     return { items };
   },
-  template: `
-  <u-select :items="items" label="Disabled" disabled />
-  `,
+  template: disabledTemplate,
 });
 
 Disabled.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select
-    :items="items"
-    label="Disabled"
-    disabled
-  ></u-select>
-</template>
+      code: `<template>${disabledTemplate}</template>
+
 <script setup>
   const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
-</script>
-      `,
+</script>`,
     },
   },
 };
 
+// CustomTitleValue Story
+const customTitleValueTemplate = `
+  <u-select v-model="select" :items="items" item-title="state" item-value="abbr" label="Select" persistent-hint return-object single-line />
+  `;
+
 /**
- * Custom title/value: return the full object and configure item-title/item-value
+ * You can specify the specific properties within your items array that correspond to the
+ * title and value fields. By default, this is title and value. In this example we also use
+ * the return-object prop which will return the entire object of the selected item on selection.
  */
 export const CustomTitleValue: StoryFn<ComponentArgs> = () => ({
   components: { USelect },
@@ -424,28 +394,14 @@ export const CustomTitleValue: StoryFn<ComponentArgs> = () => ({
     ];
     return { select, items };
   },
-  template: `
-  <u-select v-model="select" :items="items" item-title="state" item-value="abbr" label="Select" persistent-hint return-object single-line />
-  `,
+  template: customTitleValueTemplate,
 });
 
 CustomTitleValue.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select
-    v-model="select"
-    :hint="\`\${select.state}, \${select.abbr}\`"
-    :items="items"
-    item-title="state"
-    item-value="abbr"
-    label="Select"
-    persistent-hint
-    return-object
-    single-line
-  ></u-select>
-</template>
+      code: `<template>${customTitleValueTemplate}</template>
+      
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -458,11 +414,15 @@ CustomTitleValue.parameters = {
     { state: 'California', abbr: 'CA' },
     { state: 'New York', abbr: 'NY' },
   ]
-</script>
-      `,
+</script>`,
     },
   },
 };
+
+// MenuProps Story
+const menuPropsTemplate = `
+  <u-select :items="items" :menu-props="{ scrim: true, scrollStrategy: 'close' }" label="Label" />
+  `;
 
 /**
  * Menu props: pass custom props to the underlying menu (scrim + scroll strategy)
@@ -473,29 +433,25 @@ export const MenuProps: StoryFn<ComponentArgs> = () => ({
     const items = ['Foo', 'Bar', 'Fizz', 'Buzz'];
     return { items };
   },
-  template: `
-  <u-select :items="items" :menu-props="{ scrim: true, scrollStrategy: 'close' }" label="Label" />
-  `,
+  template: menuPropsTemplate,
 });
 
 MenuProps.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select
-    :items="items"
-    :menu-props="{ scrim: true, scrollStrategy: 'close' }"
-    label="Label"
-  ></u-select>
-</template>
+      code: `<template>${menuPropsTemplate}</template>
+
 <script setup>
   const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
-</script>
-      `,
+</script>`,
     },
   },
 };
+
+// ListProps Story
+const listPropsTemplate = `
+  <u-select v-model="selected" :items="['Apple','Orange','Banana','Pear']" :list-props="{ bgColor: 'purple' }" item-color="yellow" label="Label" multiple />
+  `;
 
 /**
  * List props: pass props to the underlying list (e.g. background color)
@@ -506,31 +462,19 @@ export const ListProps: StoryFn<ComponentArgs> = () => ({
     const selected = ref(['Apple']);
     return { selected };
   },
-  template: `
-  <u-select v-model="selected" :items="['Apple','Orange','Banana','Pear']" :list-props="{ bgColor: 'purple' }" item-color="yellow" label="Label" multiple />
-  `,
+  template: listPropsTemplate,
 });
 
 ListProps.parameters = {
   docs: {
     source: {
-      code: `
-<template>
-  <u-select
-    v-model="selected"
-    :items="['Apple', 'Orange', 'Banana', 'Pear']"
-    :list-props="{ bgColor: 'purple' }"
-    item-color="yellow"
-    label="Label"
-    multiple
-  ></u-select>
-</template>
+      code: `<template>${listPropsTemplate}</template>
+      
 <script setup>
   import { ref } from 'vue'
 
   const selected = ref(['Apple'])
-</script>
-      `,
+</script>`,
     },
   },
 };
