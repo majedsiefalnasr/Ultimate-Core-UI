@@ -232,6 +232,7 @@ function sampleItems() {
   ];
 }
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UTreeview },
   setup() {
@@ -245,6 +246,9 @@ Default.args = {
   itemValue: 'id',
 } as ComponentArgs;
 
+// Activatable Story
+const activatableTemplate = `<u-treeview :items="items" item-value="id" activatable></u-treeview>`;
+
 /**
  * Treeview nodes can be activated by clicking on them.
  */
@@ -254,19 +258,14 @@ export const Activatable: StoryFn<ComponentArgs> = (args) => ({
     const items = ref(sampleItems());
     return { args, items };
   },
-  template: `<u-treeview :items="items" item-value="id" activatable></u-treeview>`,
+  template: activatableTemplate,
 });
 
 Activatable.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-treeview
-    :items="items"
-    item-value="id"
-    activatable
-  ></u-treeview>
-</template>
+      code: `<template>${activatableTemplate}</template>
+      
 <script setup>
   import { ref } from 'vue'
 
@@ -346,6 +345,9 @@ Activatable.parameters = {
     },
   },
 };
+
+// Color Story
+const colorTemplate = `<u-treeview :items="items" color="warning" item-value="id" activatable></u-treeview>`;
 
 /**
  * You can control the text and background color of the active treeview node.
@@ -356,20 +358,14 @@ export const Color: StoryFn<ComponentArgs> = (args) => ({
     const items = ref(sampleItems());
     return { args, items };
   },
-  template: `<u-treeview :items="items" color="warning" item-value="id" activatable></u-treeview>`,
+  template: colorTemplate,
 });
 
 Color.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-treeview
-    :items="items"
-    color="warning"
-    item-value="id"
-    activatable
-  ></u-treeview>
-</template>
+      code: `<template>${colorTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -449,6 +445,9 @@ Color.parameters = {
     },
   },
 };
+
+// Density Story
+const densityTemplate = `<u-treeview :items="items" density="compact" item-value="id"></u-treeview>`;
 
 /**
  * Dense mode provides more compact layout with decreased heights of the items.
@@ -459,19 +458,14 @@ export const DenseMode: StoryFn<ComponentArgs> = (args) => ({
     const items = ref(sampleItems());
     return { args, items };
   },
-  template: `<u-treeview :items="items" density="compact" item-value="id"></u-treeview>`,
+  template: densityTemplate,
 });
 
 DenseMode.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-treeview
-    :items="items"
-    density="compact"
-    item-value="id"
-  ></u-treeview>
-</template>
+      code: `<template>${densityTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -551,6 +545,9 @@ DenseMode.parameters = {
     },
   },
 };
+
+// Item Props Story
+const itemPropsTemplate = `<u-treeview :items="items" item-value="id" item-props selectable></u-treeview>`;
 
 /**
  * If item-props is set to true then the whole item will be spread. In the following example, the disabled prop defined in each item will disable the item accordingly.
@@ -564,20 +561,14 @@ export const ItemProps: StoryFn<ComponentArgs> = (args) => ({
     (items.value as any)[2].children[0].disabled = true;
     return { args, items };
   },
-  template: `<u-treeview :items="items" item-value="id" item-props selectable></u-treeview>`,
+  template: itemPropsTemplate,
 });
 
 ItemProps.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-treeview
-    :items="items"
-    item-value="id"
-    item-props
-    selectable
-  ></u-treeview>
-</template>
+      code: `<template>${itemPropsTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -660,6 +651,9 @@ ItemProps.parameters = {
   },
 };
 
+// Open All Story
+const openAllTemplate = `<u-treeview :items="items" item-value="id" open-all></u-treeview>`;
+
 /**
  * Treeview nodes can be pre-opened on page load.
  */
@@ -669,19 +663,14 @@ export const OpenAll: StoryFn<ComponentArgs> = (args) => ({
     const items = ref(sampleItems());
     return { args, items };
   },
-  template: `<u-treeview :items="items" item-value="id" open-all></u-treeview>`,
+  template: openAllTemplate,
 });
 
 OpenAll.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-treeview
-    :items="items"
-    item-value="id"
-    open-all
-  ></u-treeview>
-</template>
+      code: `<template>${openAllTemplate}</template>
+
 <script setup>
   const items = [
     {
@@ -760,6 +749,9 @@ OpenAll.parameters = {
   },
 };
 
+// Fluid Story
+const fluidTemplate = `<u-treeview :items="items" item-value="id" fluid></u-treeview>`;
+
 /**
  * The fluid prop removes the extra indentation used to line up children. This is useful when you want to reduce the horizontal space used by the treeview.
  */
@@ -769,19 +761,14 @@ export const Fluid: StoryFn<ComponentArgs> = (args) => ({
     const items = ref(sampleItems());
     return { args, items };
   },
-  template: `<u-treeview :items="items" item-value="id" fluid></u-treeview>`,
+  template: fluidTemplate,
 });
 
 Fluid.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-treeview
-    :items="items"
-    item-value="id"
-    fluid
-  ></u-treeview>
-</template>
+      code: `<template>${fluidTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -862,6 +849,9 @@ Fluid.parameters = {
   },
 };
 
+// Selected Color Story
+const selectedColorTemplate = `<u-treeview :items="items" item-value="id" selected-color="red" selectable></u-treeview>`;
+
 /**
  * You can control the color of the selected node checkbox.
  */
@@ -871,20 +861,14 @@ export const SelectedColor: StoryFn<ComponentArgs> = (args) => ({
     const items = ref(sampleItems());
     return { args, items };
   },
-  template: `<u-treeview :items="items" item-value="id" selected-color="red" selectable></u-treeview>`,
+  template: selectedColorTemplate,
 });
 
 SelectedColor.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-treeview
-    :items="items"
-    item-value="id"
-    selected-color="red"
-    selectable
-  ></u-treeview>
-</template>
+      code: `<template>${selectedColorTemplate}</template>
+
 <script setup>
   const items = [
     {
@@ -963,6 +947,44 @@ SelectedColor.parameters = {
   },
 };
 
+// Selection Type Story
+const selectionTypeTemplate = `
+  <u-sheet border rounded>
+    <u-container fluid>
+      <u-select
+        v-model="strategy"
+        :items="['leaf', 'single-leaf', 'independent', 'single-independent', 'classic']"
+        label="Selection type"
+      ></u-select>
+      
+      <u-row>
+        <u-col cols="12" md="6">
+          <u-treeview
+            v-model:selected="selected"
+            :items="items"
+            :select-strategy="strategy"
+            item-value="id"
+            return-object
+            selectable
+          ></u-treeview>
+        </u-col>
+
+        <u-divider vertical></u-divider>
+
+        <u-col class="pa-6" cols="12" md="6">
+          <template v-if="!selected.length">No nodes selected.</template>
+
+          <template v-else>
+            <div v-for="node in selected" :key="node.id">
+              {{ node.title }}
+            </div>
+          </template>
+        </u-col>
+      </u-row>
+    </u-container>
+  </u-sheet>
+  `;
+
 /**
  * Treeview now supports two different selection types. The default type is ‘leaf’, which will only include leaf nodes in the v-model array, but will render parent nodes as either partially or fully selected. The alternative mode is ‘independent’, which allows one to select parent nodes, but each node is independent of its parent and children.
  */
@@ -991,83 +1013,14 @@ export const SelectionType: StoryFn<ComponentArgs> = (args) => ({
     ]);
     return { args, strategy, selected, items };
   },
-  template: `
-  <u-sheet border rounded>
-    <u-container fluid>
-      <u-select
-        v-model="strategy"
-        :items="['leaf', 'single-leaf', 'independent', 'single-independent', 'classic']"
-        label="Selection type"
-      ></u-select>
-      
-      <u-row>
-        <u-col cols="12" md="6">
-          <u-treeview
-            v-model:selected="selected"
-            :items="items"
-            :select-strategy="strategy"
-            item-value="id"
-            return-object
-            selectable
-          ></u-treeview>
-        </u-col>
-
-        <u-divider vertical></u-divider>
-
-        <u-col class="pa-6" cols="12" md="6">
-          <template v-if="!selected.length">No nodes selected.</template>
-
-          <template v-else>
-            <div v-for="node in selected" :key="node.id">
-              {{ node.title }}
-            </div>
-          </template>
-        </u-col>
-      </u-row>
-    </u-container>
-  </u-sheet>
-  `,
+  template: selectionTypeTemplate,
 });
 
 SelectionType.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet border rounded>
-    <u-container fluid>
-      <u-select
-        v-model="strategy"
-        :items="['leaf', 'single-leaf', 'independent', 'single-independent', 'classic']"
-        label="Selection type"
-      ></u-select>
-      
-      <u-row>
-        <u-col cols="12" md="6">
-          <u-treeview
-            v-model:selected="selected"
-            :items="items"
-            :select-strategy="strategy"
-            item-value="id"
-            return-object
-            selectable
-          ></u-treeview>
-        </u-col>
+      code: `<template>${selectionTypeTemplate}</template>
 
-        <u-divider vertical></u-divider>
-
-        <u-col class="pa-6" cols="12" md="6">
-          <template v-if="!selected.length">No nodes selected.</template>
-
-          <template v-else>
-            <div v-for="node in selected" :key="node.id">
-              {{ node.title }}
-            </div>
-          </template>
-        </u-col>
-      </u-row>
-    </u-container>
-  </u-sheet>
-</template>
 <script setup>
   import { ref, shallowRef } from 'vue'
 
@@ -1095,6 +1048,95 @@ SelectionType.parameters = {
     },
   },
 };
+
+// Load Children Story
+const loadChildrenTemplate = `<u-container fluid>
+    <u-row justify="space-between" dense>
+      <u-col cols="12" md="5">
+        <u-treeview
+          v-model:activated="active"
+          v-model:opened="open"
+          :items="items"
+          :load-children="fetchUsers"
+          density="compact"
+          item-title="name"
+          item-value="id"
+          activatable
+          border
+          fluid
+          open-on-click
+          rounded
+        >
+          <template v-slot:prepend="{ item }">
+            <u-icon v-if="!item.children" icon="hugeicons:user-03"></u-icon>
+          </template>
+        </u-treeview>
+      </u-col>
+
+      <u-col class="d-flex text-center" cols="12" md="7">
+        <u-card
+          class="text-h6 justify-center align-center flex-1-1 d-flex"
+          color="surface-light"
+          height="100%"
+          flat
+          rounded
+        >
+          <template v-slot:text>
+            <div v-if="!selected" class="text-subtitle-1">Select a User</div>
+
+            <template v-else>
+              <u-avatar :image="\`https://avataaars.io/\${avatar}\`" class="mb-2" size="88"></u-avatar>
+
+              <h3 class="text-h5">{{ selected.name }}</h3>
+
+              <div class="text-medium-emphasis">{{ selected.email }}</div>
+
+              <div class="text-medium-emphasis font-weight-bold">{{ selected.username }}</div>
+
+              <u-divider class="my-4"></u-divider>
+
+              <u-text-field
+                :model-value="selected.company.name"
+                class="mx-auto mb-2"
+                density="compact"
+                max-width="250"
+                prefix="Company:"
+                variant="solo"
+                flat
+                hide-details
+                readonly
+              ></u-text-field>
+
+              <u-text-field
+                :model-value="selected.website"
+                class="mx-auto mb-2"
+                density="compact"
+                max-width="250"
+                prefix="Website:"
+                variant="solo"
+                flat
+                hide-details
+                readonly
+              ></u-text-field>
+
+              <u-text-field
+                :model-value="selected.phone"
+                class="mx-auto"
+                density="compact"
+                max-width="250"
+                prefix="Phone:"
+                variant="solo"
+                flat
+                hide-details
+                readonly
+              ></u-text-field>
+            </template>
+          </template>
+        </u-card>
+      </u-col>
+    </u-row>
+  </u-container>
+  `;
 
 /**
  * You can dynamically load child data by supplying a Promise callback to the load-children prop. This callback will be executed the first time a user tries to expand an item that has a children property that is an empty array.
@@ -1188,184 +1230,14 @@ export const LoadChildren: StoryFn<ComponentArgs> = (args) => ({
 
     return { args, active, avatar, open, items, fetchUsers, selected };
   },
-  template: `<u-container fluid>
-    <u-row justify="space-between" dense>
-      <u-col cols="12" md="5">
-        <u-treeview
-          v-model:activated="active"
-          v-model:opened="open"
-          :items="items"
-          :load-children="fetchUsers"
-          density="compact"
-          item-title="name"
-          item-value="id"
-          activatable
-          border
-          fluid
-          open-on-click
-          rounded
-        >
-          <template v-slot:prepend="{ item }">
-            <u-icon v-if="!item.children" icon="hugeicons:user-03"></u-icon>
-          </template>
-        </u-treeview>
-      </u-col>
-
-      <u-col class="d-flex text-center" cols="12" md="7">
-        <u-card
-          class="text-h6 justify-center align-center flex-1-1 d-flex"
-          color="surface-light"
-          height="100%"
-          flat
-          rounded
-        >
-          <template v-slot:text>
-            <div v-if="!selected" class="text-subtitle-1">Select a User</div>
-
-            <template v-else>
-              <u-avatar :image="\`https://avataaars.io/\${avatar}\`" class="mb-2" size="88"></u-avatar>
-
-              <h3 class="text-h5">{{ selected.name }}</h3>
-
-              <div class="text-medium-emphasis">{{ selected.email }}</div>
-
-              <div class="text-medium-emphasis font-weight-bold">{{ selected.username }}</div>
-
-              <u-divider class="my-4"></u-divider>
-
-              <u-text-field
-                :model-value="selected.company.name"
-                class="mx-auto mb-2"
-                density="compact"
-                max-width="250"
-                prefix="Company:"
-                variant="solo"
-                flat
-                hide-details
-                readonly
-              ></u-text-field>
-
-              <u-text-field
-                :model-value="selected.website"
-                class="mx-auto mb-2"
-                density="compact"
-                max-width="250"
-                prefix="Website:"
-                variant="solo"
-                flat
-                hide-details
-                readonly
-              ></u-text-field>
-
-              <u-text-field
-                :model-value="selected.phone"
-                class="mx-auto"
-                density="compact"
-                max-width="250"
-                prefix="Phone:"
-                variant="solo"
-                flat
-                hide-details
-                readonly
-              ></u-text-field>
-            </template>
-          </template>
-        </u-card>
-      </u-col>
-    </u-row>
-  </u-container>`,
+  template: loadChildrenTemplate,
 });
 
 LoadChildren.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-row justify="space-between" dense>
-      <u-col cols="12" md="5">
-        <u-treeview
-          v-model:activated="active"
-          v-model:opened="open"
-          :items="items"
-          :load-children="fetchUsers"
-          density="compact"
-          item-title="name"
-          item-value="id"
-          activatable
-          border
-          fluid
-          open-on-click
-          rounded
-        >
-          <template v-slot:prepend="{ item }">
-            <u-icon v-if="!item.children" icon="hugeicons:user-03"></u-icon>
-          </template>
-        </u-treeview>
-      </u-col>
-      <u-col class="d-flex text-center" cols="12" md="7">
-        <u-card
-          class="text-h6 justify-center align-center flex-1-1 d-flex"
-          color="surface-light"
-          height="100%"
-          flat
-          rounded
-        >
-          <template v-slot:text>
-            <div v-if="!selected" class="text-subtitle-1">Select a User</div>
-
-            <template v-else>
-              <u-avatar :image="\`https://avataaars.io/\${avatar}\`" class="mb-2" size="88"></u-avatar>
-
-              <h3 class="text-h5">{{ selected.name }}</h3>
-
-              <div class="text-medium-emphasis">{{ selected.email }}</div>
-
-              <div class="text-medium-emphasis font-weight-bold">{{ selected.username }}</div>
-
-              <u-divider class="my-4"></u-divider>
-
-              <u-text-field
-                :model-value="selected.company.name"
-                class="mx-auto mb-2"
-                density="compact"
-                max-width="250"
-                prefix="Company:"
-                variant="solo"
-                flat
-                hide-details
-                readonly
-              ></u-text-field>
-
-              <u-text-field
-                :model-value="selected.website"
-                class="mx-auto mb-2"
-                density="compact"
-                max-width="250"
-                prefix="Website:"
-                variant="solo"
-                flat
-                hide-details
-                readonly
-              ></u-text-field>
-
-              <u-text-field
-                :model-value="selected.phone"
-                class="mx-auto"
-                density="compact"
-                max-width="250"
-                prefix="Phone:"
-                variant="solo"
-                flat
-                hide-details
-                readonly
-              ></u-text-field>
-            </template>
-          </template>
-        </u-card>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>
+      code: `<template>${loadChildrenTemplate}</template>
+      
 <script setup>
   import { computed, ref, watch } from 'vue'
 
