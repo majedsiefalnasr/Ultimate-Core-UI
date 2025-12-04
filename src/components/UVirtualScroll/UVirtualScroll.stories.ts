@@ -158,12 +158,14 @@ The u-virtual-scroll component contains only a default slot with no styling opti
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UVirtualScroll },
   setup() {
     return { args };
   },
-  template: `<u-virtual-scroll v-bind="args">
+  template: `
+<u-virtual-scroll v-bind="args">
   <template v-slot:default="{ item }">
     Item {{ item }}
   </template>
@@ -206,32 +208,30 @@ Default.args = {
   ],
 } as ComponentArgs;
 
-/**
- * The u-virtual-scroll component does not have any initial height set on itself.
- */
-export const Height: StoryFn<ComponentArgs> = (args) => ({
-  components: { UVirtualScroll },
-  setup() {
-    const items = Array.from({ length: 1000 }, (_, i) => i + 1);
-    return { args, items };
-  },
-  template: `<u-virtual-scroll :items="items" height="200">
+// Height story
+const heightTemplate = `<u-virtual-scroll :items="items" height="200">
     <template v-slot:default="{ item }">
       Virtual Item {{ item }}
     </template>
-  </u-virtual-scroll>`,
+  </u-virtual-scroll>`;
+
+/**
+ * The u-virtual-scroll component does not have any initial height set on itself.
+ */
+export const Height: StoryFn<ComponentArgs> = () => ({
+  components: { UVirtualScroll },
+  setup() {
+    const items = Array.from({ length: 1000 }, (_, i) => i + 1);
+    return { items };
+  },
+  template: heightTemplate,
 });
 
 Height.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-virtual-scroll :items="items" height="200">
-    <template v-slot:default="{ item }">
-      Virtual Item {{ item }}
-    </template>
-  </u-virtual-scroll>
-</template>
+      code: `<template>${heightTemplate}</template>
+
 <script setup>
   const items = Array.from({ length: 1000 }, (k, v) => v + 1)
 </script>`,
@@ -239,16 +239,8 @@ Height.parameters = {
   },
 };
 
-/**
- * For lists where the item height is static and uniform for all items, it’s recommended that you define a specific item-height. This value is used for u-virtual-scroll’s calculations.
- */
-export const ItemHeight: StoryFn<ComponentArgs> = (args) => ({
-  components: { UVirtualScroll, UCard, UDivider, UListItem, UBtn, UIcon },
-  setup() {
-    const items = Array.from({ length: 1000 }, (_, i) => i + 1);
-    return { args, items };
-  },
-  template: `<u-card
+// ItemHeight story
+const itemHeightTemplate = `  <u-card
     class="mx-auto"
     max-width="500"
   >
@@ -282,49 +274,27 @@ export const ItemHeight: StoryFn<ComponentArgs> = (args) => ({
         </u-list-item>
       </template>
     </u-virtual-scroll>
-  </u-card>`,
+  </u-card>`;
+
+/**
+ * For lists where the item height is static and uniform for all items, it's recommended
+ * that you define a specific item-height. This value is used for u-virtual-scroll's
+ * calculations.
+ */
+export const ItemHeight: StoryFn<ComponentArgs> = () => ({
+  components: { UVirtualScroll, UCard, UDivider, UListItem, UBtn, UIcon },
+  setup() {
+    const items = Array.from({ length: 1000 }, (_, i) => i + 1);
+    return { items };
+  },
+  template: itemHeightTemplate,
 });
 
 ItemHeight.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    max-width="500"
-  >
-    <u-card-title>
-      Company Employee List
-    </u-card-title>
+      code: `<template>${itemHeightTemplate}</template>
 
-    <u-divider></u-divider>
-    
-    <u-virtual-scroll
-      :items="items"
-      height="320"
-      item-height="48"
-    >
-      <template v-slot:default="{ item }">
-        <u-list-item
-          :subtitle="\`Badge #\${item}\`"
-          :title="\`Employee Name\`"
-        >
-          <template v-slot:prepend>
-            <u-icon class="bg-primary">hugeicons:user-03</u-icon>
-          </template>
-
-          <template v-slot:append>
-            <u-btn
-              icon="hugeicons:edit-02"
-              size="x-small"
-              variant="tonal"
-            ></u-btn>
-          </template>
-        </u-list-item>
-      </template>
-    </u-virtual-scroll>
-  </u-card>
-</template>
 <script setup>
   const items = Array.from({ length: 1000 }, (k, v) => v + 1)
 </script>`,
@@ -332,10 +302,41 @@ ItemHeight.parameters = {
   },
 };
 
+// Renderless story
+const renderlessTemplate = `<u-container>
+    <p class="text-caption opacity-80">
+      💡 The <code>height</code> prop should be a plain number,
+      or a value with units like <code>px</code> and <code>vh</code>, but not the percentage
+      (<code>%</code>).
+    </p>
+
+    <u-table height="300" fixed-header>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Icon</th>
+        </tr>
+      </thead>
+      <tbody>
+        <u-virtual-scroll :items="items" renderless>
+          <template v-slot:default="{ item, index, itemRef }">
+            <tr :ref="itemRef">
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.icon }}</td>
+            </tr>
+          </template>
+        </u-virtual-scroll>
+      </tbody>
+    </u-table>
+  </u-container>`;
+
 /**
- * Renderless mode does not generate DOM nodes automatically, so you must bind itemRef yourself for virtual scrolling to work properly.
+ * Renderless mode does not generate DOM nodes automatically, so you must bind itemRef
+ * yourself for virtual scrolling to work properly.
  */
-export const Renderless: StoryFn<ComponentArgs> = (args) => ({
+export const Renderless: StoryFn<ComponentArgs> = () => ({
   components: { UVirtualScroll, UContainer, UTable },
   setup() {
     const icons = ['🍄', '🌼', '🌵', '🌲', '🌰', '🍅', '🍊', '🍓'];
@@ -343,71 +344,16 @@ export const Renderless: StoryFn<ComponentArgs> = (args) => ({
       name: `Item #${String(i + 1).padStart(4, '0')}`,
       icon: icons[i % icons.length],
     }));
-    return { args, items };
+    return { items };
   },
-  template: `<u-container>
-    <p class="text-caption opacity-80">
-      💡 The <code>height</code> prop should be a plain number,
-      or a value with units like <code>px</code> and <code>vh</code>, but not the percentage
-      (<code>%</code>).
-    </p>
-
-    <u-table height="300" fixed-header>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Icon</th>
-        </tr>
-      </thead>
-      <tbody>
-        <u-virtual-scroll :items="items" renderless>
-          <template v-slot:default="{ item, index, itemRef }">
-            <tr :ref="itemRef">
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.icon }}</td>
-            </tr>
-          </template>
-        </u-virtual-scroll>
-      </tbody>
-    </u-table>
-  </u-container>`,
+  template: renderlessTemplate,
 });
 
 Renderless.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <p class="text-caption opacity-80">
-      💡 The <code>height</code> prop should be a plain number,
-      or a value with units like <code>px</code> and <code>vh</code>, but not the percentage
-      (<code>%</code>).
-    </p>
+      code: `<template>${renderlessTemplate}</template>
 
-    <u-table height="300" fixed-header>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Icon</th>
-        </tr>
-      </thead>
-      <tbody>
-        <u-virtual-scroll :items="items" renderless>
-          <template v-slot:default="{ item, index, itemRef }">
-            <tr :ref="itemRef">
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.icon }}</td>
-            </tr>
-          </template>
-        </u-virtual-scroll>
-      </tbody>
-    </u-table>
-  </u-container>
-</template>
 <script setup>
   const icons = ['🍄', '🌼', '🌵', '🌲', '🌰', '🍅', '🍊', '🍓']
   const items = Array.from({ length: 1000 }, (k, v) => ({
@@ -419,10 +365,75 @@ Renderless.parameters = {
   },
 };
 
+// UserDirectory story
+const userDirectoryTemplate = `<u-card
+    class="mx-auto"
+    max-width="400"
+  >
+    <u-card-item class="bg-orange-darken-4">
+      <u-card-title>
+        User Directory
+      </u-card-title>
+
+      <template v-slot:append>
+        <u-btn
+          color="white"
+          icon="hugeicons:plus-sign"
+          size="small"
+        ></u-btn>
+      </template>
+    </u-card-item>
+
+    <u-card-text class="pt-4">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nobis a at voluptates culpa optio amet! Inventore deserunt voluptatem maxime a veniam placeat, eos impedit nulla quos? Officiis, aperiam ducimus.
+    </u-card-text>
+
+    <u-divider></u-divider>
+    
+    <u-virtual-scroll
+      :items="items"
+      height="300"
+      item-height="50"
+    >
+      <template v-slot:default="{ item }">
+        <u-list-item>
+          <template v-slot:prepend>
+            <u-avatar
+              :color="item.color"
+              class="text-white"
+              size="40"
+            >
+              {{ item.initials }}
+            </u-avatar>
+          </template>
+
+          <u-list-item-title>{{ item.fullName }}</u-list-item-title>
+
+          <template v-slot:append>
+            <u-btn
+              size="small"
+              variant="tonal"
+            >
+              View User
+
+              <u-icon
+                color="orange-darken-4"
+                end
+              >
+                hugeicons:link-square-01
+              </u-icon>
+            </u-btn>
+          </template>
+        </u-list-item>
+      </template>
+    </u-virtual-scroll>
+  </u-card>`;
+
 /**
- * The u-virtual-scroll component can render an large amount of items by rendering only what it needs to fill the scroller’s viewport.
+ * The u-virtual-scroll component can render an large amount of items by rendering only
+ * what it needs to fill the scroller's viewport.
  */
-export const UserDirectory: StoryFn<ComponentArgs> = (args) => ({
+export const UserDirectory: StoryFn<ComponentArgs> = () => ({
   components: {
     UVirtualScroll,
     UCard,
@@ -483,139 +494,16 @@ export const UserDirectory: StoryFn<ComponentArgs> = (args) => ({
       return { color, fullName: `${name} ${surname}`, initials: `${name[0]} ${surname[0]}` };
     });
 
-    return { args, items };
+    return { items };
   },
-  template: `<u-card
-    class="mx-auto"
-    max-width="400"
-  >
-    <u-card-item class="bg-orange-darken-4">
-      <u-card-title>
-        User Directory
-      </u-card-title>
-
-      <template v-slot:append>
-        <u-btn
-          color="white"
-          icon="hugeicons:plus-sign"
-          size="small"
-        ></u-btn>
-      </template>
-    </u-card-item>
-
-    <u-card-text class="pt-4">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nobis a at voluptates culpa optio amet! Inventore deserunt voluptatem maxime a veniam placeat, eos impedit nulla quos? Officiis, aperiam ducimus.
-    </u-card-text>
-
-    <u-divider></u-divider>
-    
-    <u-virtual-scroll
-      :items="items"
-      height="300"
-      item-height="50"
-    >
-      <template v-slot:default="{ item }">
-        <u-list-item>
-          <template v-slot:prepend>
-            <u-avatar
-              :color="item.color"
-              class="text-white"
-              size="40"
-            >
-              {{ item.initials }}
-            </u-avatar>
-          </template>
-
-          <u-list-item-title>{{ item.fullName }}</u-list-item-title>
-
-          <template v-slot:append>
-            <u-btn
-              size="small"
-              variant="tonal"
-            >
-              View User
-
-              <u-icon
-                color="orange-darken-4"
-                end
-              >
-                hugeicons:link-square-01
-              </u-icon>
-            </u-btn>
-          </template>
-        </u-list-item>
-      </template>
-    </u-virtual-scroll>
-  </u-card>`,
+  template: userDirectoryTemplate,
 });
 
 UserDirectory.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    max-width="400"
-  >
-    <u-card-item class="bg-orange-darken-4">
-      <u-card-title>
-        User Directory
-      </u-card-title>
+      code: `<template>${userDirectoryTemplate}</template>
 
-      <template v-slot:append>
-        <u-btn
-          color="white"
-          icon="hugeicons:plus-sign"
-          size="small"
-        ></u-btn>
-      </template>
-    </u-card-item>
-
-    <u-card-text class="pt-4">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nobis a at voluptates culpa optio amet! Inventore deserunt voluptatem maxime a veniam placeat, eos impedit nulla quos? Officiis, aperiam ducimus.
-    </u-card-text>
-
-    <u-divider></u-divider>
-    
-    <u-virtual-scroll
-      :items="items"
-      height="300"
-      item-height="50"
-    >
-      <template v-slot:default="{ item }">
-        <u-list-item>
-          <template v-slot:prepend>
-            <u-avatar
-              :color="item.color"
-              class="text-white"
-              size="40"
-            >
-              {{ item.initials }}
-            </u-avatar>
-          </template>
-
-          <u-list-item-title>{{ item.fullName }}</u-list-item-title>
-
-          <template v-slot:append>
-            <u-btn
-              size="small"
-              variant="tonal"
-            >
-              View User
-
-              <u-icon
-                color="orange-darken-4"
-                end
-              >
-                hugeicons:link-square-01
-              </u-icon>
-            </u-btn>
-          </template>
-        </u-list-item>
-      </template>
-    </u-virtual-scroll>
-  </u-card>
-</template>
 <script setup>
   import { computed } from 'vue'
 
