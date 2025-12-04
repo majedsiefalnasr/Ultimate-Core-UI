@@ -17,16 +17,16 @@ import {
 
 interface ComponentArgs {
   label?: string;
-  modelValue?: any;
+  modelValue?: string;
   autoGrow?: boolean;
   bgColor?: string;
   color?: string;
   autocomplete?: string;
   clearable?: boolean;
-  clearIcon?: any;
+  clearIcon?: string;
   counter?: boolean | number;
-  prependIcon?: any;
-  appendIcon?: any;
+  prependIcon?: string;
+  appendIcon?: string;
   noResize?: boolean;
   rows?: number | string;
   name?: string;
@@ -180,6 +180,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UTextarea },
   setup() {
@@ -190,12 +191,8 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-export const AutoGrow: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTextarea, UContainer },
-  setup() {
-    return { args };
-  },
-  template: `
+// AutoGrow Story
+const autoGrowTemplate = `
     <u-container fluid>
       <u-textarea
         label="Label"
@@ -205,148 +202,133 @@ export const AutoGrow: StoryFn<ComponentArgs> = (args) => ({
         auto-grow
       ></u-textarea>
     </u-container>
-  `,
+  `;
+
+/**
+ * When using the auto-grow prop, textarea’s will automatically increase in size when
+ * the contained text exceeds its size.
+ */
+export const AutoGrow: StoryFn<ComponentArgs> = () => ({
+  components: { UTextarea, UContainer },
+  template: autoGrowTemplate,
 });
 
 AutoGrow.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-textarea
-      label="Label"
-      model-value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-      name="input-7-1"
-      variant="filled"
-      auto-grow
-    ></u-textarea>
-  </u-container>
-</template>`,
+      code: `<template>${autoGrowTemplate}</template>`,
     },
   },
 };
 
-export const BackgroundColor: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTextarea, UContainer },
-  setup() {
-    return { args };
-  },
-  template: `
+// BackgroundColor Story
+const backgroundColorTemplate = `
     <u-container>
       <u-textarea bg-color="light-blue" color="black" label="Label"></u-textarea>
       <u-textarea bg-color="grey-lighten-2" color="cyan" label="Label"></u-textarea>
       <u-textarea bg-color="amber-lighten-4" color="orange orange-darken-4" label="Label"></u-textarea>
     </u-container>
-  `,
-});
+  `;
 
-BackgroundColor.args = {} as ComponentArgs;
+/**
+ * The bg-color and color props give you more control over styling u-textarea’s.
+ */
+export const BackgroundColor: StoryFn<ComponentArgs> = () => ({
+  components: { UTextarea, UContainer },
+  template: backgroundColorTemplate,
+});
 
 BackgroundColor.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-textarea bg-color="light-blue" color="black" label="Label"></u-textarea>
-    <u-textarea bg-color="grey-lighten-2" color="cyan" label="Label"></u-textarea>
-    <u-textarea bg-color="amber-lighten-4" color="orange orange-darken-4" label="Label"></u-textarea>
-  </u-container>
-</template>`,
+      code: `<template>${backgroundColorTemplate}</template>`,
     },
   },
 };
 
-export const BrowserAutocomplete: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTextarea, UContainer },
-  setup() {
-    return { args };
-  },
-  template: `
+// BrowserAutocomplete Story
+const browserAutocompleteTemplate = `
     <u-container fluid>
       <u-textarea autocomplete="email" label="Email"></u-textarea>
     </u-container>
-  `,
-});
+  `;
 
-BrowserAutocomplete.args = {} as ComponentArgs;
+/**
+ * The autocomplete prop gives you the option to enable the browser to predict user input.
+ */
+export const BrowserAutocomplete: StoryFn<ComponentArgs> = () => ({
+  components: { UTextarea, UContainer },
+  template: browserAutocompleteTemplate,
+});
 
 BrowserAutocomplete.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-textarea autocomplete="email" label="Email"></u-textarea>
-  </u-container>
-</template>`,
+      code: `<template>${browserAutocompleteTemplate}</template>`,
     },
   },
 };
 
-export const Clearable: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTextarea, UContainer },
-  setup() {
-    return { args };
-  },
-  template: `
+// Clearable Story
+const clearableTemplate = `
     <u-container fluid>
       <u-textarea label="Text" model-value="This is clearable text." clearable></u-textarea>
     </u-container>
-  `,
-});
+  `;
 
-Clearable.args = {} as ComponentArgs;
+/**
+ * You can clear the text from a u-textarea by using the clearable prop, and customize
+ * the icon used with the clearable-icon prop.
+ */
+export const Clearable: StoryFn<ComponentArgs> = () => ({
+  components: { UTextarea, UContainer },
+  template: clearableTemplate,
+});
 
 Clearable.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-textarea label="Text" model-value="This is clearable text." clearable></u-textarea>
-  </u-container>
-</template>`,
+      code: `<template>${clearableTemplate}</template>`,
     },
   },
 };
 
-export const Counter: StoryFn<ComponentArgs> = (args) => ({
+// Counter Story
+const counterTemplate = `
+    <u-container fluid>
+      <u-textarea :model-value="Hello" :rules="rules" label="Text" counter></u-textarea>
+    </u-container>
+  `;
+
+/**
+ * The counter prop informs the user of a character limit for the u-textarea.
+ */
+export const Counter: StoryFn<ComponentArgs> = () => ({
   components: { UTextarea, UContainer },
   setup() {
-    return { args, rules: [(v: string) => (v || '').length <= 25 || 'Max 25 characters'] };
+    return { rules: [(v: string) => (v || '').length <= 25 || 'Max 25 characters'] };
   },
-  template: `
-    <u-container fluid>
-      <u-textarea :model-value="args.modelValue" :rules="rules" label="Text" counter></u-textarea>
-    </u-container>
-  `,
+  template: counterTemplate,
 });
-
-Counter.args = { modelValue: 'Hello!' } as ComponentArgs;
 
 Counter.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-textarea :model-value="value" :rules="rules" label="Text" counter></u-textarea>
-  </u-container>
-</template>
+      code: `<template>${counterTemplate}</template>
+
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const rules = [v => (v || '').length <= 25 || 'Max 25 characters']
+  const rules = [v => (v || '').length <= 25 || 'Max 25 characters']
 
-const value = ref('Hello!')
+  const value = ref('Hello!')
 </script>`,
     },
   },
 };
 
-export const Icons: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTextarea, UContainer, URow, UCol },
-  setup() {
-    return { args };
-  },
-  template: `
+// Icons Story
+const iconsTemplate = `
     <u-container>
       <u-row>
         <u-col cols="12" sm="6">
@@ -363,73 +345,62 @@ export const Icons: StoryFn<ComponentArgs> = (args) => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
-});
+  `;
 
-Icons.args = {} as ComponentArgs;
+/**
+ * The append-icon and prepend-icon props help add context to u-textarea.
+ */
+export const Icons: StoryFn<ComponentArgs> = () => ({
+  components: { UTextarea, UContainer, URow, UCol },
+  template: iconsTemplate,
+});
 
 Icons.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container>
-    <u-row>
-      <u-col cols="12" sm="6">
-        <u-textarea class="mx-2" label="prepend-icon" prepend-icon="hugeicons:comment-01" rows="1"></u-textarea>
-      </u-col>
-      <u-col cols="12" sm="6">
-        <u-textarea append-icon="hugeicons:comment-01" class="mx-2" label="append-icon" rows="1"></u-textarea>
-      </u-col>
-      <u-col cols="12" sm="6">
-        <u-textarea class="mx-2" label="prepend-inner-icon" prepend-inner-icon="hugeicons:comment-01" rows="1"></u-textarea>
-      </u-col>
-      <u-col cols="12" sm="6">
-        <u-textarea append-inner-icon="hugeicons:comment-01" class="mx-2" label="append-inner-icon" rows="1"></u-textarea>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${iconsTemplate}</template>`,
     },
   },
 };
 
-export const NoResize: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTextarea, UContainer },
-  setup() {
-    return { args, value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...' };
-  },
-  template: `
+// NoResize Story
+const noResizeTemplate = `
     <u-container fluid>
       <u-textarea :model-value="value" label="Text" rows="1" no-resize></u-textarea>
     </u-container>
-  `,
-});
+  `;
 
-NoResize.args = {} as ComponentArgs;
+/**
+ * u-textarea’s have the option to remain the same size regardless of their content’s
+ * size, using the no-resize prop.
+ */
+export const NoResize: StoryFn<ComponentArgs> = () => ({
+  components: { UTextarea, UContainer },
+  setup() {
+    return {
+      value:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    };
+  },
+  template: noResizeTemplate,
+});
 
 NoResize.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-textarea :model-value="value" label="Text" rows="1" no-resize></u-textarea>
-  </u-container>
-</template>
-<script setup>
-import { ref } from 'vue'
+      code: `<template>${noResizeTemplate}</template>
 
-const value = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit...')
+<script setup>
+  import { ref } from 'vue'
+
+  const value = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.')
 </script>`,
     },
   },
 };
 
-export const Rows: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTextarea, UContainer, URow, UCol },
-  setup() {
-    return { args };
-  },
-  template: `
+// Rows Story
+const rowsTemplate = `
     <u-container fluid>
       <u-row>
         <u-col cols="12" sm="6">
@@ -446,73 +417,27 @@ export const Rows: StoryFn<ComponentArgs> = (args) => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * The rows prop allows you to define how many rows the textarea has, when combined with
+ * the row-height prop you can further customize your rows by defining their height.
+ */
+export const Rows: StoryFn<ComponentArgs> = () => ({
+  components: { UTextarea, UContainer, URow, UCol },
+  template: rowsTemplate,
 });
 
-Rows.args = {} as ComponentArgs;
 Rows.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-row>
-      <u-col cols="12" sm="6">
-        <u-textarea label="One row" row-height="15" rows="1" variant="outlined" auto-grow></u-textarea>
-      </u-col>
-      <u-col cols="12" sm="6">
-        <u-textarea label="Two rows" row-height="20" rows="2" variant="filled" auto-grow></u-textarea>
-      </u-col>
-      <u-col cols="12" sm="6">
-        <u-textarea label="Three rows" row-height="25" rows="3" variant="outlined" auto-grow></u-textarea>
-      </u-col>
-      <u-col cols="12" sm="6">
-        <u-textarea label="Four rows" row-height="30" rows="4" variant="filled" auto-grow></u-textarea>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${rowsTemplate}</template>`,
     },
   },
 };
 
-export const SignupForm: StoryFn<ComponentArgs> = (args) => ({
-  components: { UCard, UToolbar, UBtn, UForm, UTextField, UTextarea, UCheckbox, UDivider },
-  setup() {
-    const isValid = ref(false);
-    const agreement = ref(false);
-    const bio = ref('Far far away, behind the word mountains...');
-    const dialog = ref(false);
-    const email = ref(undefined);
-    const isLoading = ref(false);
-    const password = ref(undefined);
-    const phone = ref(undefined);
-    const rules = {
-      email: (v: string) => !!(v || '').match(/@/) || 'Please enter a valid email',
-      length: (len: number) => (v: string) =>
-        (v || '').length >= len || `Invalid character length, required ${len}`,
-      password: (v: string) =>
-        !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
-        'Password must contain an upper case letter, a numeric character, and a special character',
-      required: (v: any) => !!v || 'This field is required',
-    };
-
-    const form = ref();
-
-    return {
-      args,
-      isValid,
-      agreement,
-      bio,
-      dialog,
-      email,
-      isLoading,
-      password,
-      phone,
-      rules,
-      form,
-    };
-  },
-  template: `
+// SignupForm Story
+const signupFormTemplate = `
     <u-card class="mx-auto" style="max-width: 500px;">
       <u-toolbar color="deep-purple-accent-4" cards dark flat>
         <u-btn icon>
@@ -562,18 +487,78 @@ export const SignupForm: StoryFn<ComponentArgs> = (args) => ({
         </u-card>
       </u-dialog>
     </u-card>
-  `,
+  `;
+
+/**
+ * Utilizing alternative input styles, you can create amazing interfaces that are easy
+ * to build and easy to use.
+ */
+export const SignupForm: StoryFn<ComponentArgs> = (args) => ({
+  components: { UCard, UToolbar, UBtn, UForm, UTextField, UTextarea, UCheckbox, UDivider },
+  setup() {
+    const isValid = ref(false);
+    const agreement = ref(false);
+    const bio = ref('Far far away, behind the word mountains...');
+    const dialog = ref(false);
+    const email = ref(undefined);
+    const isLoading = ref(false);
+    const password = ref(undefined);
+    const phone = ref(undefined);
+    const rules = {
+      email: (v: string) => !!(v || '').match(/@/) || 'Please enter a valid email',
+      length: (len: number) => (v: string) =>
+        (v || '').length >= len || `Invalid character length, required ${len}`,
+      password: (v: string) =>
+        !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*(_|[^a-zA-Z0-9_])).+$/) ||
+        'Password must contain an upper case letter, a numeric character, and a special character',
+      required: (v: unknown) => !!v || 'This field is required',
+    };
+
+    const form = ref();
+
+    return {
+      args,
+      isValid,
+      agreement,
+      bio,
+      dialog,
+      email,
+      isLoading,
+      password,
+      phone,
+      rules,
+      form,
+    };
+  },
+  template: signupFormTemplate,
 });
 
-SignupForm.args = {} as ComponentArgs;
 SignupForm.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card class="mx-auto" style="max-width: 500px;">
-    <!-- toolbar and form markup here (trimmed for brevity) -->
-  </u-card>
-</template>`,
+      code: `<template>${signupFormTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const rules = {
+    email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
+    length: len => v => (v || '').length >= len || \`Invalid character length, required \${len}\`,
+    password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*(_|[^a-zA-Z0-9_])).+$/) || 'Password must contain an upper case letter, a numeric character, and a special character',
+    required: v => !!v || 'This field is required',
+  }
+
+  const form = ref()
+
+  const agreement = ref(false)
+  const bio = ref('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts')
+  const dialog = ref(false)
+  const email = ref()
+  const isValid = ref(false)
+  const isLoading = ref(false)
+  const password = ref()
+  const phone = ref()
+</script>`,
     },
   },
 };
