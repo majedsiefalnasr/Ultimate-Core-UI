@@ -35,8 +35,6 @@ interface ComponentArgs {
   verticalArrows?: boolean | 'left' | 'right';
 }
 
-const toKebab = (s: string) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-
 const meta: Meta<ComponentArgs> = {
   title: 'Components/Selection/Windows',
   component: UWindow,
@@ -159,6 +157,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UWindow, UWindowItem, UCard },
   setup() {
@@ -187,17 +186,8 @@ Default.args = {
   showArrows: true,
 } as ComponentArgs;
 
-/**
- * By default no arrows are displayed. You can change this by adding the show-arrows prop. If you set the prop value to "hover", they will only show when you mouse over the window.
- */
-export const ShowArrows: StoryFn<ComponentArgs> = (args) => ({
-  components: { UWindow, UWindowItem, UCard },
-  setup() {
-    const length = ref(3);
-    const onboarding = ref(0);
-    return { args, length, onboarding };
-  },
-  template: `
+// ShowArrows story
+const showArrowsTemplate = `
   <u-window
     v-model="onboarding"
     show-arrows="hover"
@@ -219,18 +209,43 @@ export const ShowArrows: StoryFn<ComponentArgs> = (args) => ({
       </u-card>
     </u-window-item>
   </u-window>
-  `,
-});
+  `;
 
-ShowArrows.args = {} as ComponentArgs;
+/**
+ * By default no arrows are displayed. You can change this by adding the show-arrows prop.
+ * If you set the prop value to "hover", they will only show when you mouse over the window.
+ */
+export const ShowArrows: StoryFn<ComponentArgs> = () => ({
+  components: { UWindow, UWindowItem, UCard },
+  setup() {
+    const length = ref(3);
+    const onboarding = ref(0);
+    return { length, onboarding };
+  },
+  template: showArrowsTemplate,
+});
 
 ShowArrows.parameters = {
   docs: {
     source: {
-      code: `<template>
+      code: `<template>${showArrowsTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const length = ref(3)
+  const onboarding = ref(0)
+</script>`,
+    },
+  },
+};
+
+// Reverse story
+const reverseTemplate = `
   <u-window
     v-model="onboarding"
-    show-arrows="hover"
+    reverse
+    show-arrows
   >
     <u-window-item
       v-for="n in length"
@@ -249,62 +264,41 @@ ShowArrows.parameters = {
       </u-card>
     </u-window-item>
   </u-window>
-</template>
-<script setup>
-  import { ref } from 'vue'
-
-  const length = ref(3)
-  const onboarding = ref(0)
-</script>`,
-    },
-  },
-};
+  `;
 
 /**
  * The reverse prop will reverse the transitions
  */
-export const Reverse: StoryFn<ComponentArgs> = (args) => ({
+export const Reverse: StoryFn<ComponentArgs> = () => ({
   components: { UWindow, UWindowItem, UCard },
   setup() {
     const length = ref(3);
     const onboarding = ref(0);
-    return { args, length, onboarding };
+    return { length, onboarding };
   },
-  template: `
-  <u-window
-    v-model="onboarding"
-    reverse
-    show-arrows
-  >
-    <u-window-item
-      v-for="n in length"
-      :key="\`card-\${n}\`"
-    >
-      <u-card
-        class="d-flex align-center justify-center ma-2"
-        elevation="2"
-        height="200"
-      >
-        <h1
-          class="text-h2"
-        >
-          Slide {{ n }}
-        </h1>
-      </u-card>
-    </u-window-item>
-  </u-window>
-  `,
+  template: reverseTemplate,
 });
-
-Reverse.args = {} as ComponentArgs;
 
 Reverse.parameters = {
   docs: {
     source: {
-      code: `<template>
+      code: `<template>${reverseTemplate}</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const length = ref(3)
+  const onboarding = ref(0)
+</script>`,
+    },
+  },
+};
+
+// Direction story
+const directionTemplate = `
   <u-window
     v-model="onboarding"
-    reverse
+    direction="vertical"
     show-arrows
   >
     <u-window-item
@@ -324,82 +318,26 @@ Reverse.parameters = {
       </u-card>
     </u-window-item>
   </u-window>
-</template>
-<script setup>
-  import { ref } from 'vue'
-
-  const length = ref(3)
-  const onboarding = ref(0)
-</script>`,
-    },
-  },
-};
+  `;
 
 /**
  * You can change the transition to vertical using the direction prop
  */
-export const Direction: StoryFn<ComponentArgs> = (args) => ({
+export const Direction: StoryFn<ComponentArgs> = () => ({
   components: { UWindow, UWindowItem, UCard },
   setup() {
     const length = ref(3);
     const onboarding = ref(0);
-    return { args, length, onboarding };
+    return { length, onboarding };
   },
-  template: `
-  <u-window
-    v-model="onboarding"
-    direction="vertical"
-    show-arrows
-  >
-    <u-window-item
-      v-for="n in length"
-      :key="\`card-\${n}\`"
-    >
-      <u-card
-        class="d-flex align-center justify-center ma-2"
-        elevation="2"
-        height="200"
-      >
-        <h1
-          class="text-h2"
-        >
-          Slide {{ n }}
-        </h1>
-      </u-card>
-    </u-window-item>
-  </u-window>
-  `,
+  template: directionTemplate,
 });
-
-Direction.args = {} as ComponentArgs;
 
 Direction.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-window
-    v-model="onboarding"
-    direction="vertical"
-    show-arrows
-  >
-    <u-window-item
-      v-for="n in length"
-      :key="\`card-\${n}\`"
-    >
-      <u-card
-        class="d-flex align-center justify-center ma-2"
-        elevation="2"
-        height="200"
-      >
-        <h1
-          class="text-h2"
-        >
-          Slide {{ n }}
-        </h1>
-      </u-card>
-    </u-window-item>
-  </u-window>
-</template>
+      code: `<template>${directionTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -410,15 +348,8 @@ Direction.parameters = {
   },
 };
 
-/**
- * Arrows can be customized by using prev and next slots.
- */
-export const CustomizedArrows: StoryFn<ComponentArgs> = (args) => ({
-  components: { UWindow, UWindowItem, UCard, UBtn },
-  setup() {
-    return { args };
-  },
-  template: `
+// CustomizedArrows story
+const customizedArrowsTemplate = `
   <u-window show-arrows>
     <template v-slot:prev="{ props }">
       <u-btn
@@ -453,58 +384,111 @@ export const CustomizedArrows: StoryFn<ComponentArgs> = (args) => ({
       </u-card>
     </u-window-item>
   </u-window>
-  `,
-});
+  `;
 
-CustomizedArrows.args = {} as ComponentArgs;
+/**
+ * Arrows can be customized by using prev and next slots.
+ */
+export const CustomizedArrows: StoryFn<ComponentArgs> = () => ({
+  components: { UWindow, UWindowItem, UCard, UBtn },
+  template: customizedArrowsTemplate,
+});
 
 CustomizedArrows.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-window show-arrows>
-    <template v-slot:prev="{ props }">
-      <u-btn
-        color="success"
-        @click="props.onClick"
-      >
-        Previous slide
-      </u-btn>
-    </template>
-    <template v-slot:next="{ props }">
-      <u-btn
-        color="info"
-        @click="props.onClick"
-      >
-        Next slide
-      </u-btn>
-    </template>
-    <u-window-item
-      v-for="n in 3"
-      :key="\`card-\${n}\`"
-    >
-      <u-card
-        class="d-flex align-center justify-center ma-2"
-        elevation="2"
-        height="200"
-      >
-        <h1
-          class="text-h2"
-        >
-          Slide {{ n }}
-        </h1>
-      </u-card>
-    </u-window-item>
-  </u-window>
-</template>`,
+      code: `<template>${customizedArrowsTemplate}</template>`,
     },
   },
 };
 
+// AccountCreation story
+const accountCreationTemplate = `
+  <u-card
+    class="mx-auto"
+    max-width="500"
+  >
+    <u-card-title class="text-h6 font-weight-regular justify-space-between">
+      <span>{{ currentTitle }}</span>
+      <u-avatar
+        color="primary"
+        size="24"
+        v-text="step"
+      ></u-avatar>
+    </u-card-title>
+
+    <u-window v-model="step">
+      <u-window-item :value="1">
+        <u-card-text>
+          <u-text-field
+            label="Email"
+            placeholder="john@google.com"
+          ></u-text-field>
+          <span class="text-caption text-grey-darken-1">
+            This is the email you will use to login to your Vuetify account
+          </span>
+        </u-card-text>
+      </u-window-item>
+
+      <u-window-item :value="2">
+        <u-card-text>
+          <u-text-field
+            label="Password"
+            type="password"
+          ></u-text-field>
+          <u-text-field
+            label="Confirm Password"
+            type="password"
+          ></u-text-field>
+          <span class="text-caption text-grey-darken-1">
+            Please enter a password for your account
+          </span>
+        </u-card-text>
+      </u-window-item>
+
+      <u-window-item :value="3">
+        <div class="pa-4 text-center">
+          <u-img
+            class="mb-4"
+            height="128"
+            src="https://cdn.vuetifyjs.com/images/logos/v.svg"
+          ></u-img>
+          <h3 class="text-h6 font-weight-light mb-2">
+            Welcome to Vuetify
+          </h3>
+          <span class="text-caption text-grey">Thanks for signing up!</span>
+        </div>
+      </u-window-item>
+    </u-window>
+
+    <u-divider></u-divider>
+
+    <u-card-actions>
+      <u-btn
+        v-if="step > 1"
+        variant="text"
+        @click="step--"
+      >
+        Back
+      </u-btn>
+      <u-spacer></u-spacer>
+      <u-btn
+        v-if="step < 3"
+        color="primary"
+        variant="flat"
+        @click="step++"
+      >
+        Next
+      </u-btn>
+    </u-card-actions>
+  </u-card>
+  `;
+
 /**
- * Create rich forms with smooth animations. v-window automatically tracks the current selection index to change the transition direction.
+ * Create rich forms with smooth animations. v-window automatically tracks the current
+ * selection index to change the transition direction.
  */
-export const AccountCreation: StoryFn<ComponentArgs> = (args) => ({
+export const AccountCreation: StoryFn<ComponentArgs> = () => ({
   components: {
     UCard,
     UCardActions,
@@ -532,175 +516,16 @@ export const AccountCreation: StoryFn<ComponentArgs> = (args) => ({
       }
     });
 
-    return { args, step, currentTitle };
+    return { step, currentTitle };
   },
-  template: `
-  <u-card
-    class="mx-auto"
-    max-width="500"
-  >
-    <u-card-title class="text-h6 font-weight-regular justify-space-between">
-      <span>{{ currentTitle }}</span>
-      <u-avatar
-        color="primary"
-        size="24"
-        v-text="step"
-      ></u-avatar>
-    </u-card-title>
-
-    <u-window v-model="step">
-      <u-window-item :value="1">
-        <u-card-text>
-          <u-text-field
-            label="Email"
-            placeholder="john@google.com"
-          ></u-text-field>
-          <span class="text-caption text-grey-darken-1">
-            This is the email you will use to login to your Vuetify account
-          </span>
-        </u-card-text>
-      </u-window-item>
-
-      <u-window-item :value="2">
-        <u-card-text>
-          <u-text-field
-            label="Password"
-            type="password"
-          ></u-text-field>
-          <u-text-field
-            label="Confirm Password"
-            type="password"
-          ></u-text-field>
-          <span class="text-caption text-grey-darken-1">
-            Please enter a password for your account
-          </span>
-        </u-card-text>
-      </u-window-item>
-
-      <u-window-item :value="3">
-        <div class="pa-4 text-center">
-          <u-img
-            class="mb-4"
-            height="128"
-            src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-          ></u-img>
-          <h3 class="text-h6 font-weight-light mb-2">
-            Welcome to Vuetify
-          </h3>
-          <span class="text-caption text-grey">Thanks for signing up!</span>
-        </div>
-      </u-window-item>
-    </u-window>
-
-    <u-divider></u-divider>
-
-    <u-card-actions>
-      <u-btn
-        v-if="step > 1"
-        variant="text"
-        @click="step--"
-      >
-        Back
-      </u-btn>
-      <u-spacer></u-spacer>
-      <u-btn
-        v-if="step < 3"
-        color="primary"
-        variant="flat"
-        @click="step++"
-      >
-        Next
-      </u-btn>
-    </u-card-actions>
-  </u-card>
-  `,
+  template: accountCreationTemplate,
 });
-
-AccountCreation.args = {} as ComponentArgs;
 
 AccountCreation.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    max-width="500"
-  >
-    <u-card-title class="text-h6 font-weight-regular justify-space-between">
-      <span>{{ currentTitle }}</span>
-      <u-avatar
-        color="primary"
-        size="24"
-        v-text="step"
-      ></u-avatar>
-    </u-card-title>
-
-    <u-window v-model="step">
-      <u-window-item :value="1">
-        <u-card-text>
-          <u-text-field
-            label="Email"
-            placeholder="john@google.com"
-          ></u-text-field>
-          <span class="text-caption text-grey-darken-1">
-            This is the email you will use to login to your Vuetify account
-          </span>
-        </u-card-text>
-      </u-window-item>
-
-      <u-window-item :value="2">
-        <u-card-text>
-          <u-text-field
-            label="Password"
-            type="password"
-          ></u-text-field>
-          <u-text-field
-            label="Confirm Password"
-            type="password"
-          ></u-text-field>
-          <span class="text-caption text-grey-darken-1">
-            Please enter a password for your account
-          </span>
-        </u-card-text>
-      </u-window-item>
-
-      <u-window-item :value="3">
-        <div class="pa-4 text-center">
-          <u-img
-            class="mb-4"
-            height="128"
-            src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-          ></u-img>
-          <h3 class="text-h6 font-weight-light mb-2">
-            Welcome to Vuetify
-          </h3>
-          <span class="text-caption text-grey">Thanks for signing up!</span>
-        </div>
-      </u-window-item>
-    </u-window>
-
-    <u-divider></u-divider>
-
-    <u-card-actions>
-      <u-btn
-        v-if="step > 1"
-        variant="text"
-        @click="step--"
-      >
-        Back
-      </u-btn>
-      <u-spacer></u-spacer>
-      <u-btn
-        v-if="step < 3"
-        color="primary"
-        variant="flat"
-        @click="step++"
-      >
-        Next
-      </u-btn>
-    </u-card-actions>
-  </u-card>
-</template>
+      code: `<template>${accountCreationTemplate}</template>
+      
 <script setup>
   import { computed, ref } from 'vue'
 
