@@ -8,7 +8,7 @@
    * @extends VHotkey
    */
   // Import Vuetify's VHotkey component (Base component)
-  import { VHotkey } from 'vuetify/labs/VHotkey';
+  import { VHotkey } from 'vuetify/components';
   // Import local styles
   import './UHotkey.scss';
 
