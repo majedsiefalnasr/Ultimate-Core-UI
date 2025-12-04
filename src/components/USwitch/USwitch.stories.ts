@@ -360,6 +360,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USwitch },
   setup() {
@@ -373,27 +374,8 @@ Default.args = {
   inset: false,
 } as ComponentArgs;
 
-export const Colors: StoryFn<ComponentArgs> = () => ({
-  components: { USwitch, UCard, UCardText, UContainer, URow, UCol },
-  setup() {
-    const ex11 = ref([
-      'red',
-      'indigo',
-      'orange',
-      'primary',
-      'secondary',
-      'success',
-      'info',
-      'warning',
-      'error',
-      'red-darken-3',
-      'indigo-darken-3',
-      'orange-darken-3',
-    ]);
-
-    return { ex11 };
-  },
-  template: `
+// Colors story
+const colorsTemplate = `
     <u-card flat>
       <u-card-text>
         <u-container fluid>
@@ -429,161 +411,143 @@ export const Colors: StoryFn<ComponentArgs> = () => ({
         </u-container>
       </u-card-text>
     </u-card>
-  `,
+  `;
+
+/**
+ * Switches can be colored by using any of the builtin colors and contextual names
+ * using the color prop.
+ */
+export const Colors: StoryFn<ComponentArgs> = () => ({
+  components: { USwitch, UCard, UCardText, UContainer, URow, UCol },
+  setup() {
+    const ex11 = ref([
+      'red',
+      'indigo',
+      'orange',
+      'primary',
+      'secondary',
+      'success',
+      'info',
+      'warning',
+      'error',
+      'red-darken-3',
+      'indigo-darken-3',
+      'orange-darken-3',
+    ]);
+
+    return { ex11 };
+  },
+  template: colorsTemplate,
 });
 
 Colors.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card flat>
-    <u-card-text>
-      <u-container fluid>
-        <u-row>
-          <u-col cols="12" md="4" sm="4">
-            <u-switch v-model="ex11" color="red" label="red" value="red" hide-details />
-            <u-switch v-model="ex11" color="red-darken-3" label="red-darken-3" value="red-darken-3" hide-details />
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-switch v-model="ex11" color="indigo" label="indigo" value="indigo" hide-details />
-            <u-switch v-model="ex11" color="indigo-darken-3" label="indigo-darken-3" value="indigo-darken-3" hide-details />
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-switch v-model="ex11" color="orange" label="orange" value="orange" hide-details />
-            <u-switch v-model="ex11" color="orange-darken-3" label="orange-darken-3" value="orange-darken-3" hide-details />
-          </u-col>
-        </u-row>
-
-        <u-row class="mt-12">
-          <u-col cols="12" md="4" sm="4">
-            <u-switch v-model="ex11" color="primary" label="primary" value="primary" hide-details />
-            <u-switch v-model="ex11" color="secondary" label="secondary" value="secondary" hide-details />
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-switch v-model="ex11" color="success" label="success" value="success" hide-details />
-            <u-switch v-model="ex11" color="info" label="info" value="info" hide-details />
-          </u-col>
-          <u-col cols="12" md="4" sm="4">
-            <u-switch v-model="ex11" color="warning" label="warning" value="warning" hide-details />
-            <u-switch v-model="ex11" color="error" label="error" value="error" hide-details />
-          </u-col>
-        </u-row>
-      </u-container>
-    </u-card-text>
-  </u-card>
-</template>
-
+      code: `<template>${colorsTemplate}</template>
+      
 <script setup>
-const ex11 = ['red','indigo','orange','primary','secondary','success','info','warning','error','red-darken-3','indigo-darken-3','orange-darken-3']
+  const ex11 = ['red','indigo','orange','primary','secondary','success','info','warning','error','red-darken-3','indigo-darken-3','orange-darken-3']
 </script>`,
     },
   },
 };
 
-Colors.args = {} as ComponentArgs;
+// Inset story
+const insetTemplate = `<u-switch v-model="model" :label="'Switch: ' + model.toString()" hide-details inset />`;
 
+/**
+ * You can make switch render in inset mode.
+ */
 export const Inset: StoryFn<ComponentArgs> = () => ({
   components: { USwitch },
   setup() {
     const model = ref(true);
     return { model };
   },
-  template: `<u-switch v-model="model" :label="'Switch: ' + model.toString()" hide-details inset />`,
+  template: insetTemplate,
 });
 
 Inset.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-switch
-    v-model="model"
-    :label="'Switch: ' + model.toString()"
-    hide-details
-    inset
-  />
-</template>
+      code: `<template>${insetTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
-const model = ref(true)
+  import { ref } from 'vue'
+
+  const model = ref(true)
 </script>`,
     },
   },
 };
 
-Inset.args = {} as ComponentArgs;
+// Model As Array story
+const modelAsArrayTemplate = `
+    <u-container fluid>
+      <p>{{ people }}</p>
+      <u-switch v-model="people" color="primary" label="John" value="John" hide-details />
+      <u-switch v-model="people" color="primary" label="Jacob" value="Jacob" hide-details />
+    </u-container>
+  `;
 
+/**
+ * Multiple u-switch’s can share the same v-model by using an array.
+ */
 export const ModelAsArray: StoryFn<ComponentArgs> = () => ({
   components: { USwitch, UContainer },
   setup() {
     const people = ref(['John']);
     return { people };
   },
-  template: `
-    <u-container fluid>
-      <p>{{ people }}</p>
-      <u-switch v-model="people" color="primary" label="John" value="John" hide-details />
-      <u-switch v-model="people" color="primary" label="Jacob" value="Jacob" hide-details />
-    </u-container>
-  `,
+  template: modelAsArrayTemplate,
 });
 
 ModelAsArray.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <p>{{ people }}</p>
-    <u-switch v-model="people" color="primary" label="John" value="John" hide-details />
-    <u-switch v-model="people" color="primary" label="Jacob" value="Jacob" hide-details />
-  </u-container>
-</template>
+      code: `<template>${modelAsArrayTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
-const people = ref(['John'])
+  import { ref } from 'vue'
+
+  const people = ref(['John'])
 </script>`,
     },
   },
 };
 
-ModelAsArray.args = {} as ComponentArgs;
+// Custom True False story
+const customTrueFalseTemplate = `<u-switch v-model="model" :label="'Switch: ' + model" false-value="no" true-value="yes" hide-details />`;
 
+/**
+ * The switch can use custom values for its v-model, using the props true-value and
+ * false-value.
+ */
 export const CustomTrueFalse: StoryFn<ComponentArgs> = () => ({
   components: { USwitch },
   setup() {
     const model = ref('no');
     return { model };
   },
-  template: `<u-switch v-model="model" :label="'Switch: ' + model" false-value="no" true-value="yes" hide-details />`,
+  template: customTrueFalseTemplate,
 });
 
 CustomTrueFalse.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-switch
-    v-model="model"
-    :label="'Switch: ' + model"
-    false-value="no"
-    true-value="yes"
-    hide-details
-  />
-</template>
+      code: `<template>${customTrueFalseTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
-const model = ref('no')
+  import { ref } from 'vue'
+
+  const model = ref('no')
 </script>`,
     },
   },
 };
 
-CustomTrueFalse.args = {} as ComponentArgs;
-
-export const States: StoryFn<ComponentArgs> = () => ({
-  components: { USwitch, UContainer, URow, UCol },
-  template: `
+// States story
+const statesTemplate = `
     <u-container fluid>
       <u-row>
         <u-col cols="6">
@@ -612,82 +576,57 @@ export const States: StoryFn<ComponentArgs> = () => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * u-switch can have different states such as default, disabled, and loading.
+ */
+export const States: StoryFn<ComponentArgs> = () => ({
+  components: { USwitch, UContainer, URow, UCol },
+  template: statesTemplate,
 });
 
 States.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container fluid>
-    <u-row>
-      <u-col cols="6">
-        <u-switch :model-value="true" color="primary" label="on" />
-      </u-col>
-      <u-col cols="6">
-        <u-switch :model-value="false" color="primary" label="off" />
-      </u-col>
-    </u-row>
-
-    <u-row>
-      <u-col cols="6">
-        <u-switch :model-value="true" color="primary" label="on disabled" disabled />
-      </u-col>
-      <u-col cols="6">
-        <u-switch :model-value="false" color="primary" label="off disabled" disabled />
-      </u-col>
-    </u-row>
-
-    <u-row>
-      <u-col cols="6">
-        <u-switch :model-value="true" label="on loading" loading="warning" />
-      </u-col>
-      <u-col cols="6">
-        <u-switch :model-value="false" label="off loading" loading="warning" />
-      </u-col>
-    </u-row>
-  </u-container>
-</template>`,
+      code: `<template>${statesTemplate}</template>`,
     },
   },
 };
 
-States.args = {} as ComponentArgs;
-
-export const LabelSlot: StoryFn<ComponentArgs> = () => ({
-  components: { USwitch, UProgressCircular },
-  setup() {
-    const switchMe = ref(false);
-    return { switchMe };
-  },
-  template: `
+// Label Slot story
+const labelSlotTemplate = `
     <u-switch v-model="switchMe">
       <template #label>
         Turn on the progress:
         <u-progress-circular :indeterminate="switchMe" class="ms-2" size="24" />
       </template>
     </u-switch>
-  `,
+  `;
+
+/**
+ * If you need to render a switch label with more complex markup than plain text,
+ * you can use the label slot.
+ */
+export const LabelSlot: StoryFn<ComponentArgs> = () => ({
+  components: { USwitch, UProgressCircular },
+  setup() {
+    const switchMe = ref(false);
+    return { switchMe };
+  },
+  template: labelSlotTemplate,
 });
 
 LabelSlot.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-switch v-model="switchMe">
-    <template #label>
-      Turn on the progress:
-      <u-progress-circular :indeterminate="switchMe" class="ms-2" size="24" />
-    </template>
-  </u-switch>
-</template>
+      code: `<template>${labelSlotTemplate}</template>
 
 <script setup>
-import { ref } from 'vue'
-const switchMe = ref(false)
+  import { ref } from 'vue'
+
+  const switchMe = ref(false)
 </script>`,
     },
   },
 };
-
-LabelSlot.args = {} as ComponentArgs;
