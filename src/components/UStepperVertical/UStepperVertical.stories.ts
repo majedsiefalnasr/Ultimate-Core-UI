@@ -110,6 +110,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UStepperVertical },
   setup() {
@@ -122,65 +123,50 @@ Default.args = {
   items: ['Step 1', 'Step 2', 'Step 3'],
 } as ComponentArgs;
 
-export const NonLinear: StoryFn<ComponentArgs> = (_args) => ({
+// Non Linear story
+const nonLinearTemplate = `
+  <div>
+    <u-stepper-vertical
+      v-model="step"
+      :mandatory="false"
+      hide-actions
+      multiple
+      non-linear
+    >
+      <u-stepper-vertical-item title="Select campaign settings" value="1" editable>
+        Step content
+      </u-stepper-vertical-item>
+
+      <u-stepper-vertical-item title="Create an ad group" value="2" editable>
+        Step content
+      </u-stepper-vertical-item>
+
+      <u-stepper-vertical-item title="Create an ad" value="3" editable>
+        Step content
+      </u-stepper-vertical-item>
+    </u-stepper-vertical>
+  </div>
+  `;
+
+/**
+ * Non-linear stepper allow the user to navigate freely – skip to a desired section without
+ * forcing clicks on the action buttons within, provided editable prop is also present.
+ * When combined with :mandatory="false", allowes to collapse the section as well.
+ */
+export const NonLinear: StoryFn<ComponentArgs> = () => ({
   components: { UStepperVertical, UStepperVerticalItem },
   setup() {
     const step = shallowRef([1]);
     return { step };
   },
-  template: `
-  <div>
-    <u-stepper-vertical
-      v-model="step"
-      :mandatory="false"
-      hide-actions
-      multiple
-      non-linear
-    >
-      <u-stepper-vertical-item title="Select campaign settings" value="1" editable>
-        Step content
-      </u-stepper-vertical-item>
-
-      <u-stepper-vertical-item title="Create an ad group" value="2" editable>
-        Step content
-      </u-stepper-vertical-item>
-
-      <u-stepper-vertical-item title="Create an ad" value="3" editable>
-        Step content
-      </u-stepper-vertical-item>
-    </u-stepper-vertical>
-  </div>
-  `,
+  template: nonLinearTemplate,
 });
-
-NonLinear.args = {} as ComponentArgs;
 
 NonLinear.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <u-stepper-vertical
-      v-model="step"
-      :mandatory="false"
-      hide-actions
-      multiple
-      non-linear
-    >
-      <u-stepper-vertical-item title="Select campaign settings" value="1" editable>
-        Step content
-      </u-stepper-vertical-item>
+      code: `<template>${nonLinearTemplate}</template>
 
-      <u-stepper-vertical-item title="Create an ad group" value="2" editable>
-        Step content
-      </u-stepper-vertical-item>
-
-      <u-stepper-vertical-item title="Create an ad" value="3" editable>
-        Step content
-      </u-stepper-vertical-item>
-    </u-stepper-vertical>
-  </div>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
 
@@ -190,7 +176,68 @@ NonLinear.parameters = {
   },
 };
 
-export const Actions: StoryFn<ComponentArgs> = (_args) => ({
+// Actions story
+const actionsTemplate = `
+  <u-stepper-vertical>
+    <template v-slot:default="{ step }">
+      <u-stepper-vertical-item
+        :complete="step > 1"
+        subtitle="Personal details"
+        title="Step one"
+        value="1"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+
+        <template v-slot:next="{ next }">
+          <u-btn color="primary" @click="next"></u-btn>
+        </template>
+
+        <template v-slot:prev></template>
+      </u-stepper-vertical-item>
+      
+      <u-stepper-vertical-item
+        :complete="step > 2"
+        subtitle="Contact Details"
+        title="Step two"
+        value="2"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+
+        <template v-slot:next="{ next }">
+          <u-btn color="primary" @click="next"></u-btn>
+        </template>
+
+        <template v-slot:prev="{ prev }">
+          <u-btn variant="plain" @click="prev"></u-btn>
+        </template>
+      </u-stepper-vertical-item>
+
+      <u-stepper-vertical-item
+        subtitle="Confirmation"
+        title="Step three"
+        value="3"
+        @click:next="onClickFinish"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+
+        <template v-slot:next="{ next }">
+          <u-btn color="primary" text="Finish" @click="next"></u-btn>
+        </template>
+
+        <template v-slot:prev="{ prev }">
+          <u-btn v-if="!finished" variant="plain" @click="prev"></u-btn>
+          
+          <u-btn v-else text="Reset" variant="plain" @click="finished = false"></u-btn>
+        </template>
+      </u-stepper-vertical-item>
+    </template>
+  </u-stepper-vertical>
+  `;
+
+/**
+ * Customize the flow of your stepper by hooking into the available prev and next slots.
+ */
+export const Actions: StoryFn<ComponentArgs> = () => ({
   components: { UStepperVertical, UStepperVerticalItem, UBtn },
   setup() {
     const finished = ref(false);
@@ -203,125 +250,14 @@ export const Actions: StoryFn<ComponentArgs> = (_args) => ({
 
     return { finished, onClickFinish };
   },
-  template: `
-  <u-stepper-vertical>
-    <template v-slot:default="{ step }">
-      <u-stepper-vertical-item
-        :complete="step > 1"
-        subtitle="Personal details"
-        title="Step one"
-        value="1"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-
-        <template v-slot:next="{ next }">
-          <u-btn color="primary" @click="next"></u-btn>
-        </template>
-
-        <template v-slot:prev></template>
-      </u-stepper-vertical-item>
-      
-      <u-stepper-vertical-item
-        :complete="step > 2"
-        subtitle="Contact Details"
-        title="Step two"
-        value="2"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-
-        <template v-slot:next="{ next }">
-          <u-btn color="primary" @click="next"></u-btn>
-        </template>
-
-        <template v-slot:prev="{ prev }">
-          <u-btn variant="plain" @click="prev"></u-btn>
-        </template>
-      </u-stepper-vertical-item>
-
-      <u-stepper-vertical-item
-        subtitle="Confirmation"
-        title="Step three"
-        value="3"
-        @click:next="onClickFinish"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-
-        <template v-slot:next="{ next }">
-          <u-btn color="primary" text="Finish" @click="next"></u-btn>
-        </template>
-
-        <template v-slot:prev="{ prev }">
-          <u-btn v-if="!finished" variant="plain" @click="prev"></u-btn>
-          
-          <u-btn v-else text="Reset" variant="plain" @click="finished = false"></u-btn>
-        </template>
-      </u-stepper-vertical-item>
-    </template>
-  </u-stepper-vertical>
-  `,
+  template: actionsTemplate,
 });
-
-Actions.args = {} as ComponentArgs;
 
 Actions.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-stepper-vertical>
-    <template v-slot:default="{ step }">
-      <u-stepper-vertical-item
-        :complete="step > 1"
-        subtitle="Personal details"
-        title="Step one"
-        value="1"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-
-        <template v-slot:next="{ next }">
-          <u-btn color="primary" @click="next"></u-btn>
-        </template>
-
-        <template v-slot:prev></template>
-      </u-stepper-vertical-item>
+      code: `<template>${actionsTemplate}</template>
       
-      <u-stepper-vertical-item
-        :complete="step > 2"
-        subtitle="Contact Details"
-        title="Step two"
-        value="2"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-
-        <template v-slot:next="{ next }">
-          <u-btn color="primary" @click="next"></u-btn>
-        </template>
-
-        <template v-slot:prev="{ prev }">
-          <u-btn variant="plain" @click="prev"></u-btn>
-        </template>
-      </u-stepper-vertical-item>
-
-      <u-stepper-vertical-item
-        subtitle="Confirmation"
-        title="Step three"
-        value="3"
-        @click:next="onClickFinish"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-
-        <template v-slot:next="{ next }">
-          <u-btn color="primary" text="Finish" @click="next"></u-btn>
-        </template>
-
-        <template v-slot:prev="{ prev }">
-          <u-btn v-if="!finished" variant="plain" @click="prev"></u-btn>
-          
-          <u-btn v-else text="Reset" variant="plain" @click="finished = false"></u-btn>
-        </template>
-      </u-stepper-vertical-item>
-    </template>
-  </u-stepper-vertical>
-</template>
 <script setup>
   import { shallowRef } from 'vue'
 
