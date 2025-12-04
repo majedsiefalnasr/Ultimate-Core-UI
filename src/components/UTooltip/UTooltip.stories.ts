@@ -102,6 +102,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UTooltip, UBtn },
   setup() {
@@ -122,15 +123,8 @@ Default.args = {
   text: 'Tooltip',
 } as ComponentArgs;
 
-/**
- * The interactive prop prevents the tooltip from closing during mouse interactions. For example, if the tooltip contains text that users might want to click or copy.
- */
-export const Interactive: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTooltip, UIcon, UBtn },
-  setup() {
-    return { args };
-  },
-  template: `
+// Interactive Story
+const interactiveTemplate = `
     <div class="d-flex justify-center">
       <u-tooltip interactive>
         <template v-slot:activator="{ props: activatorProps }">
@@ -142,38 +136,27 @@ export const Interactive: StoryFn<ComponentArgs> = (args) => ({
         </div>
       </u-tooltip>
     </div>
-  `,
+  `;
+
+/**
+ * The interactive prop prevents the tooltip from closing during mouse interactions.
+ * For example, if the tooltip contains text that users might want to click or copy.
+ */
+export const Interactive: StoryFn<ComponentArgs> = () => ({
+  components: { UTooltip, UIcon, UBtn },
+  template: interactiveTemplate,
 });
 
 Interactive.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="d-flex justify-center">
-    <u-tooltip interactive>
-      <template v-slot:activator="{ props: activatorProps }">
-        <u-btn icon v-bind="activatorProps"><u-icon icon="hugeicons:information-circle"/></u-btn>
-      </template>
-      <div>
-        <a class="text-primary font-weight-medium" href="/blog/announcing-vuetify-3.8/#vtooltip-interactive">Learn more</a>
-        about interactive tooltip.
-      </div>
-    </u-tooltip>
-  </div>
-</template>`,
+      code: `<template>${interactiveTemplate}</template>`,
     },
   },
 };
 
-/**
- * Use the location prop to specify on which side of the element the tooltip should show.
- */
-export const Location: StoryFn<ComponentArgs> = (args) => ({
-  components: { UBtn, UTooltip, URow },
-  setup() {
-    return { args };
-  },
-  template: `
+// Location Story
+const locationTemplate = `
     <div class="d-flex justify-space-around">
       <u-btn>
         Start
@@ -195,48 +178,26 @@ export const Location: StoryFn<ComponentArgs> = (args) => ({
         <u-tooltip activator="parent" location="bottom">Tooltip</u-tooltip>
       </u-btn>
     </div>
-  `,
+  `;
+
+/**
+ * Use the location prop to specify on which side of the element the tooltip should show.
+ */
+export const Location: StoryFn<ComponentArgs> = () => ({
+  components: { UBtn, UTooltip, URow },
+  template: locationTemplate,
 });
 
 Location.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="d-flex justify-space-around">
-    <u-btn>
-      Start
-      <u-tooltip activator="parent" location="start">Tooltip</u-tooltip>
-    </u-btn>
-
-    <u-btn>
-      End
-      <u-tooltip activator="parent" location="end">Tooltip</u-tooltip>
-    </u-btn>
-
-    <u-btn>
-      Top
-      <u-tooltip activator="parent" location="top">Tooltip</u-tooltip>
-    </u-btn>
-
-    <u-btn>
-      Bottom
-      <u-tooltip activator="parent" location="bottom">Tooltip</u-tooltip>
-    </u-btn>
-  </div>
-</template>`,
+      code: `<template>${locationTemplate}</template>`,
     },
   },
 };
 
-/**
- * The open-on-click prop allows tooltip to open when the activator is clicked. Useful for touch devices or when manual triggering is preferred.
- */
-export const OpenOnClick: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTooltip, UBtn },
-  setup() {
-    return { args };
-  },
-  template: `
+// OpenOnClick Story
+const openOnClickTemplate = `
     <div class="text-center">
       <u-tooltip :open-on-hover="false" open-on-click>
         <template v-slot:activator="{ props }">
@@ -245,36 +206,30 @@ export const OpenOnClick: StoryFn<ComponentArgs> = (args) => ({
         <span>Open on click tooltip</span>
       </u-tooltip>
     </div>
-  `,
+  `;
+
+/**
+ * The open-on-click prop allows tooltip to open when the activator is clicked. Useful for
+ * touch devices or when manual triggering is preferred.
+ */
+export const OpenOnClick: StoryFn<ComponentArgs> = (args) => ({
+  components: { UTooltip, UBtn },
+  setup() {
+    return { args };
+  },
+  template: openOnClickTemplate,
 });
 
 OpenOnClick.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div class="text-center">
-    <u-tooltip :open-on-hover="false" open-on-click>
-      <template v-slot:activator="{ props }">
-        <u-btn v-bind="props">Click me</u-btn>
-      </template>
-      <span>Open on click tooltip</span>
-    </u-tooltip>
-  </div>
-</template>`,
+      code: `<template>${openOnClickTemplate}</template>`,
     },
   },
 };
 
-/**
- * Tooltip visibility can be programmatically changed using v-model.
- */
-export const Visibility: StoryFn<ComponentArgs> = (args) => ({
-  components: { UContainer, URow, UCol, UTooltip, UBtn, UIcon },
-  setup() {
-    const show = ref(false);
-    return { args, show };
-  },
-  template: `
+// Visibility Story
+const visibilityTemplate = `
     <u-container class="text-center" fluid>
       <u-row class="flex" justify="space-between">
         <u-col cols="12">
@@ -291,33 +246,29 @@ export const Visibility: StoryFn<ComponentArgs> = (args) => ({
         </u-col>
       </u-row>
     </u-container>
-  `,
+  `;
+
+/**
+ * Tooltip visibility can be programmatically changed using v-model.
+ */
+export const Visibility: StoryFn<ComponentArgs> = (args) => ({
+  components: { UContainer, URow, UCol, UTooltip, UBtn, UIcon },
+  setup() {
+    const show = ref(false);
+    return { args, show };
+  },
+  template: visibilityTemplate,
 });
 
 Visibility.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container class="text-center" fluid>
-    <u-row class="flex" justify="space-between">
-      <u-col cols="12">
-        <u-btn @click="show = !show">toggle</u-btn>
-      </u-col>
-
-      <u-col class="mt-12" cols="12">
-        <u-tooltip v-model="show" location="top">
-          <template v-slot:activator="{ props }">
-            <u-btn icon v-bind="props"><u-icon icon="hugeicons:shopping-bag-03" color="grey-lighten-1"/></u-btn>
-          </template>
-          <span>Programmatic tooltip</span>
-        </u-tooltip>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>
+      code: `<template>${visibilityTemplate}</template>
+      
 <script setup>
-import { ref } from 'vue'
-const show = ref(false)
+  import { ref } from 'vue'
+
+  const show = ref(false)
 </script>`,
     },
   },
