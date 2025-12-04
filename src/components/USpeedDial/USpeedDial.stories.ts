@@ -35,18 +35,18 @@ const meta: Meta<ComponentArgs> = {
 
           const attrsString = attrsArray.length > 0 ? ' ' + attrsArray.join(' ') : '';
 
-          return `
-<u-speed-dial${attrsString}>
-  <template v-slot:activator="{ props: activatorProps }">
-    <u-fab v-bind="activatorProps" size="large" icon="hugeicons:stars"></u-fab>
-  </template>
-  
-  <u-btn key="1" icon="hugeicons:checkmark-circle-01"></u-btn>
-  <u-btn key="2" icon="hugeicons:information-circle"></u-btn>
-  <u-btn key="3" icon="hugeicons:alert-circle"></u-btn>
-  <u-btn key="4" icon="hugeicons:alert-01"></u-btn>
-</u-speed-dial>
-          `;
+          return `<template>
+  <u-speed-dial${attrsString}>
+    <template v-slot:activator="{ props: activatorProps }">
+      <u-fab v-bind="activatorProps" size="large" icon="hugeicons:stars"></u-fab>
+    </template>
+    
+    <u-btn key="1" icon="hugeicons:checkmark-circle-01"></u-btn>
+    <u-btn key="2" icon="hugeicons:information-circle"></u-btn>
+    <u-btn key="3" icon="hugeicons:alert-circle"></u-btn>
+    <u-btn key="4" icon="hugeicons:alert-01"></u-btn>
+  </u-speed-dial>
+</template>`;
         },
       },
     },
@@ -92,6 +92,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USpeedDial, UFab, UBtn },
   setup() {
