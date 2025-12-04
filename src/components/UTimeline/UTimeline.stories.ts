@@ -174,6 +174,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UTimeline, UTimelineItem, UCard },
   setup() {
@@ -210,118 +211,211 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = { direction: 'horizontal' } as ComponentArgs;
 
-export const Side: StoryFn<ComponentArgs> = (args) => ({
+// Side Story
+const sideTemplate = `
+  <u-timeline side="end">
+    <u-timeline-item
+      v-for="item in items"
+      :key="item.id"
+      :dot-color="item.color"
+      size="small"
+    >
+      <u-alert
+        :color="item.color"
+        :icon="item.icon"
+        :value="true"
+      >
+        Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
+      </u-alert>
+    </u-timeline-item>
+  </u-timeline>
+  `;
+
+/**
+ * Use the side property to force all items to one side of the timeline.
+ */
+export const Side: StoryFn<ComponentArgs> = () => ({
   components: { UTimeline, UTimelineItem, UAlert },
   setup() {
     const items = ref([
       { id: 1, color: 'info', icon: 'hugeicons:information-circle' },
       { id: 2, color: 'error', icon: 'hugeicons:alert-circle' },
     ]);
-    return { args, items };
+    return { items };
   },
-  template: `
-    <u-timeline side="end">
-      <u-timeline-item v-for="item in items" :key="item.id" :dot-color="item.color" size="small">
-        <u-alert :color="item.color" :icon="item.icon" :value="true">
-          Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut.
-        </u-alert>
-      </u-timeline-item>
-    </u-timeline>
-  `,
+  template: sideTemplate,
 });
-
-Side.args = {} as ComponentArgs;
 
 Side.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-timeline side="end">
-    <u-timeline-item v-for="item in items" :key="item.id" :dot-color="item.color" size="small">
-      <u-alert :color="item.color" :icon="item.icon" :value="true">Lorem ipsum dolor sit amet...</u-alert>
-    </u-timeline-item>
-  </u-timeline>
-</template>
+      code: `<template>${sideTemplate}</template>
+
 <script setup>
-const items = [
-  { id: 1, color: 'info', icon: 'hugeicons:information-circle' },
-  { id: 2, color: 'error', icon: 'hugeicons:alert-circle' },
-]
+  const items = [
+    { id: 1, color: 'info', icon: 'hugeicons:information-circle' },
+    { id: 2, color: 'error', icon: 'hugeicons:alert-circle' },
+  ]
 </script>`,
     },
   },
 };
 
-export const Alignment: StoryFn<ComponentArgs> = (args) => ({
+// Alignment Story
+const alignmentTemplate = `
+  <u-timeline align="start">
+    <u-timeline-item>
+      <template v-slot:opposite>
+        Opposite content
+      </template>
+      <div>
+        <div class="text-h6">Content title</div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </u-timeline-item>
+
+    <u-timeline-item>
+      <template v-slot:opposite>
+        Opposite content
+      </template>
+      <div>
+        <div class="text-h6">Content title</div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </u-timeline-item>
+
+    <u-timeline-item>
+      <template v-slot:opposite>
+        Opposite content
+      </template>
+      <div>
+        <div class="text-h6">Content title</div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </u-timeline-item>
+  </u-timeline>
+  `;
+
+/**
+ * By default, u-timeline-item content is vertically aligned center. The align prop
+ * also supports top alignment.
+ */
+export const Alignment: StoryFn<ComponentArgs> = () => ({
   components: { UTimeline, UTimelineItem },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-timeline align="start">
-      <u-timeline-item>
-        <template v-slot:opposite>Opposite content</template>
-        <div>
-          <div class="text-h6">Content title</div>
-          <p>Lorem ipsum dolor sit amet...</p>
-        </div>
-      </u-timeline-item>
-      <u-timeline-item>
-        <template v-slot:opposite>Opposite content</template>
-        <div>
-          <div class="text-h6">Content title</div>
-          <p>Lorem ipsum dolor sit amet...</p>
-        </div>
-      </u-timeline-item>
-      <u-timeline-item>
-        <template v-slot:opposite>Opposite content</template>
-        <div>
-          <div class="text-h6">Content title</div>
-          <p>Lorem ipsum dolor sit amet...</p>
-        </div>
-      </u-timeline-item>
-    </u-timeline>
-  `,
+  template: alignmentTemplate,
 });
 
 Alignment.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-timeline align="start">...</u-timeline>
-</template>`,
+      code: `<template>${alignmentTemplate}</template>`,
     },
   },
 };
 
-export const DotColor: StoryFn<ComponentArgs> = (args) => ({
+// Dot Color Story
+const dotColorTemplate = `
+  <u-timeline align="start" side="end">
+    <u-timeline-item
+      dot-color="pink"
+      size="small"
+    >
+      <div class="d-flex">
+        <strong class="me-4">5pm</strong>
+        <div>
+          <strong>New Icon</strong>
+          <div class="text-caption">
+            Mobile App
+          </div>
+        </div>
+      </div>
+    </u-timeline-item>
+
+    <u-timeline-item
+      dot-color="teal-lighten-3"
+      size="small"
+    >
+      <div class="d-flex">
+        <strong class="me-4">3-4pm</strong>
+        <div>
+          <strong>Design Stand Up</strong>
+          <div class="text-caption mb-2">
+            Hangouts
+          </div>
+        </div>
+      </div>
+    </u-timeline-item>
+
+    <u-timeline-item
+      dot-color="pink"
+      size="small"
+    >
+      <div class="d-flex">
+        <strong class="me-4">12pm</strong>
+        <div>
+          <strong>Lunch break</strong>
+        </div>
+      </div>
+    </u-timeline-item>
+
+    <u-timeline-item
+      dot-color="teal-lighten-3"
+      size="small"
+    >
+      <div class="d-flex">
+        <strong class="me-4">9-11am</strong>
+        <div>
+          <strong>Finish Home Screen</strong>
+          <div class="text-caption">
+            Web App
+          </div>
+        </div>
+      </div>
+    </u-timeline-item>
+  </u-timeline>
+  `;
+
+/**
+ * Colored dots create visual breakpoints that make your timelines easier for users to read.
+ */
+export const DotColor: StoryFn<ComponentArgs> = () => ({
   components: { UTimeline, UTimelineItem },
-  setup() {
-    return { args };
-  },
-  template: `
-    <u-timeline align="start" side="end">
-      <u-timeline-item dot-color="pink" size="small">
-        <div class="d-flex"><strong class="me-4">5pm</strong><div><strong>New Icon</strong><div class="text-caption">Mobile App</div></div></div>
-      </u-timeline-item>
-      <u-timeline-item dot-color="teal-lighten-3" size="small">...</u-timeline-item>
-      <u-timeline-item dot-color="pink" size="small">...</u-timeline-item>
-      <u-timeline-item dot-color="teal-lighten-3" size="small">...</u-timeline-item>
-    </u-timeline>
-  `,
+  template: dotColorTemplate,
 });
 
 DotColor.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-timeline align="start" side="end">...</u-timeline>
-</template>`,
+      code: `<template>${dotColorTemplate}</template>`,
     },
   },
 };
 
-export const IconDots: StoryFn<ComponentArgs> = (args) => ({
+// Icon Dots Story
+const iconDotsTemplate = `
+    <u-timeline align="start">
+      <u-timeline-item v-for="(item, i) in items" :key="i" :dot-color="item.color" :icon="item.icon" fill-dot>
+        <u-card>
+          <u-card-title :class="['text-h6', 'bg-' + item.color]">Lorem Ipsum Dolor</u-card-title>
+          <u-card-text class="bg-white text--primary">
+            <p>Lorem ipsum dolor sit amet...</p>
+            <u-btn :color="item.color" variant="outlined">Button</u-btn>
+          </u-card-text>
+        </u-card>
+      </u-timeline-item>
+    </u-timeline>
+  `;
+
+/**
+ * Use icons within the u-timeline-item dot to provide additional context.
+ */
+export const IconDots: StoryFn<ComponentArgs> = () => ({
   components: { UTimeline, UTimelineItem, UCard, UCardTitle, UCardText, UBtn, UIcon },
   setup() {
     const items = ref([
@@ -330,46 +424,25 @@ export const IconDots: StoryFn<ComponentArgs> = (args) => ({
       { color: 'green-lighten-1', icon: 'hugeicons:hot-air-balloon' },
       { color: 'indigo-lighten-2', icon: 'hugeicons:layers-01' },
     ]);
-    return { args, items };
+    return { items };
   },
-  template: `
-    <u-timeline align="start">
-      <u-timeline-item v-for="(item, i) in items" :key="i" :dot-color="item.color" :icon="item.icon" fill-dot>
-        <u-card>
-          <u-card-title :class="['text-h6', 'bg-' + item.color]">Lorem Ipsum Dolor</u-card-title>
-          <u-card-text class="bg-white text--primary">
-            <p>Lorem ipsum dolor sit amet...</p>
-            <u-btn :color="item.color" variant="outlined">Button</u-btn>
-          </u-card-text>
-        </u-card>
-      </u-timeline-item>
-    </u-timeline>
-  `,
+  template: iconDotsTemplate,
 });
 
 IconDots.parameters = {
   docs: {
     source: {
-      code: `<template>
-    <u-timeline align="start">
-      <u-timeline-item v-for="(item, i) in items" :key="i" :dot-color="item.color" :icon="item.icon" fill-dot>
-        <u-card>
-          <u-card-title :class="['text-h6', 'bg-' + item.color]">Lorem Ipsum Dolor</u-card-title>
-          <u-card-text class="bg-white text--primary">
-            <p>Lorem ipsum dolor sit amet...</p>
-            <u-btn :color="item.color" variant="outlined">Button</u-btn>
-          </u-card-text>
-        </u-card>
-      </u-timeline-item>
-    </u-timeline>
-</template>
+      code: `<template>${iconDotsTemplate}</template>
+
 <script setup>
-const items = [
-  { color: 'red-lighten-2', icon: 'hugeicons:star' },
-  { color: 'purple-lighten-2', icon: 'hugeicons:book-02' },
-  { color: 'green-lighten-1', icon: 'hugeicons:hot-air-balloon' },
-  { color: 'indigo-lighten-2', icon: 'hugeicons:layers-01' },
-]
+  import { ref } from 'vue'
+
+  const items = ref([
+    { color: 'red-lighten-2', icon: 'hugeicons:star' },
+    { color: 'purple-lighten-2', icon: 'hugeicons:book-02' },
+    { color: 'green-lighten-1', icon: 'hugeicons:hot-air-balloon' },
+    { color: 'indigo-lighten-2', icon: 'hugeicons:layers-01' },
+  ])
 </script>`,
     },
   },
