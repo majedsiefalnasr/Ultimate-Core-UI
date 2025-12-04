@@ -13,8 +13,6 @@ interface ComponentArgs {
   theme?: string;
 }
 
-const toKebab = (s: string) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
-
 const meta: Meta<ComponentArgs> = {
   title: 'Components/Data & Display/Tables',
   component: UTable,
@@ -195,6 +193,7 @@ const desserts = [
   { name: 'KitKat', calories: 518 },
 ];
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UTable },
   setup() {
@@ -220,12 +219,8 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-export const Theme: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTable },
-  setup() {
-    return { args, desserts };
-  },
-  template: `
+// Theme Story
+const themeTemplate = `
     <u-table v-bind="args" theme="dark">
       <thead>
         <tr>
@@ -240,92 +235,29 @@ export const Theme: StoryFn<ComponentArgs> = (args) => ({
         </tr>
       </tbody>
     </u-table>
-  `,
-});
+  `;
 
-Theme.args = {} as ComponentArgs;
-Theme.parameters = {
-  docs: {
-    source: {
-      code: `<template>
-  <u-table theme="dark">
-    <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Calories
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </u-table>
-</template>
-<script setup>
-  import { ref } from 'vue'
-
-  const desserts = ref([
-    {
-      name: 'Frozen Yogurt',
-      calories: 159,
-    },
-    {
-      name: 'Ice cream sandwich',
-      calories: 237,
-    },
-    {
-      name: 'Eclair',
-      calories: 262,
-    },
-    {
-      name: 'Cupcake',
-      calories: 305,
-    },
-    {
-      name: 'Gingerbread',
-      calories: 356,
-    },
-    {
-      name: 'Jelly bean',
-      calories: 375,
-    },
-    {
-      name: 'Lollipop',
-      calories: 392,
-    },
-    {
-      name: 'Honeycomb',
-      calories: 408,
-    },
-    {
-      name: 'Donut',
-      calories: 452,
-    },
-    {
-      name: 'KitKat',
-      calories: 518,
-    },
-  ])
-</script>`,
-    },
-  },
-};
-
-export const Density: StoryFn<ComponentArgs> = (args) => ({
+/**
+ *
+ */
+export const Theme: StoryFn<ComponentArgs> = (args) => ({
   components: { UTable },
   setup() {
     return { args, desserts };
   },
-  template: `
+  template: themeTemplate,
+});
+
+Theme.parameters = {
+  docs: {
+    source: {
+      code: `<template>${themeTemplate}</template>`,
+    },
+  },
+};
+
+// Density Story
+const densityTemplate = `
     <u-table v-bind="args" density="compact">
       <thead>
         <tr>
@@ -340,36 +272,24 @@ export const Density: StoryFn<ComponentArgs> = (args) => ({
         </tr>
       </tbody>
     </u-table>
-  `,
+  `;
+
+/**
+ * You can show a dense version of the table by using the density prop.
+ */
+export const Density: StoryFn<ComponentArgs> = (args) => ({
+  components: { UTable },
+  setup() {
+    return { args, desserts };
+  },
+  template: densityTemplate,
 });
 
-Density.args = {} as ComponentArgs;
 Density.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <v-table density="compact">
-    <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Calories
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table>
-</template>
+      code: `<template>${densityTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -420,12 +340,8 @@ Density.parameters = {
   },
 };
 
-export const Height: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTable },
-  setup() {
-    return { args, desserts };
-  },
-  template: `
+// Height Story
+const heightTemplate = `
     <u-table v-bind="args" height="300px">
       <thead>
         <tr>
@@ -440,36 +356,24 @@ export const Height: StoryFn<ComponentArgs> = (args) => ({
         </tr>
       </tbody>
     </u-table>
-  `,
+  `;
+
+/**
+ * Use the height prop to set the height of the table.
+ */
+export const Height: StoryFn<ComponentArgs> = (args) => ({
+  components: { UTable },
+  setup() {
+    return { args, desserts };
+  },
+  template: heightTemplate,
 });
 
-Height.args = {} as ComponentArgs;
 Height.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <v-table height="300px">
-    <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Calories
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table>
-</template>
+      code: `<template>${heightTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
@@ -520,12 +424,8 @@ Height.parameters = {
   },
 };
 
-export const FixedHeader: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTable },
-  setup() {
-    return { args, desserts };
-  },
-  template: `
+// Fixed Header Story
+const fixedHeaderTemplate = `
     <u-table v-bind="args" height="300px" fixed-header>
       <thead>
         <tr>
@@ -540,39 +440,25 @@ export const FixedHeader: StoryFn<ComponentArgs> = (args) => ({
         </tr>
       </tbody>
     </u-table>
-  `,
+  `;
+
+/**
+ * Use the fixed-header prop together with the height prop to fix the header to the
+ * top of the table.
+ */
+export const FixedHeader: StoryFn<ComponentArgs> = (args) => ({
+  components: { UTable },
+  setup() {
+    return { args, desserts };
+  },
+  template: fixedHeaderTemplate,
 });
 
-FixedHeader.args = {} as ComponentArgs;
 FixedHeader.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <v-table
-    height="300px"
-    fixed-header
-  >
-    <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Calories
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table>
-</template>
+      code: `<template>${fixedHeaderTemplate}</template>
+
 <script setup>
   const desserts = [
     {
@@ -621,12 +507,8 @@ FixedHeader.parameters = {
   },
 };
 
-export const Striped: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTable },
-  setup() {
-    return { args, desserts };
-  },
-  template: `
+// Striped Story
+const stripedTemplate = `
     <u-table v-bind="args" striped="even">
       <thead>
         <tr>
@@ -641,36 +523,25 @@ export const Striped: StoryFn<ComponentArgs> = (args) => ({
         </tr>
       </tbody>
     </u-table>
-  `,
+  `;
+
+/**
+ * By applying the striped prop, you can have a background applied to either the even or
+ * odd rows of the table. Color can be further adjusted using sass variables.
+ */
+export const Striped: StoryFn<ComponentArgs> = (args) => ({
+  components: { UTable },
+  setup() {
+    return { args, desserts };
+  },
+  template: stripedTemplate,
 });
 
-Striped.args = {} as ComponentArgs;
 Striped.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <v-table striped="even">
-    <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Calories
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table>
-</template>
+      code: `<template>${stripedTemplate}</template>
+
 <script setup>
   import { ref } from 'vue'
 
