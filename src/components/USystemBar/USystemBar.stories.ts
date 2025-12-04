@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
-import { ref } from 'vue';
 
 // Import U-components from the library barrel
 import { UBtn, UIcon, ULayout, USpacer, USystemBar } from '../index';
@@ -103,6 +102,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USystemBar, UIcon },
   setup() {
@@ -121,126 +121,79 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
+// Color Story
+const colorTemplate = `
+    <div>
+      <u-layout style="height: 50px">
+        <u-system-bar color="primary">
+          <u-icon class="ms-2" icon="hugeicons:wifi-01"></u-icon>
+          <u-icon class="ms-2" icon="hugeicons:signal-full-02"></u-icon>
+          <u-icon class="ms-2" icon="hugeicons:battery-full"></u-icon>
+          <span class="ms-2">08:30</span>
+        </u-system-bar>
+      </u-layout>
+
+      <u-layout style="height: 50px">
+        <u-system-bar color="red-lighten-2">
+          <u-icon class="ms-2" icon="hugeicons:wifi-01"></u-icon>
+          <u-icon class="ms-2" icon="hugeicons:signal-full-02"></u-icon>
+          <u-icon class="ms-2" icon="hugeicons:battery-full"></u-icon>
+          <span class="ms-2">18:30</span>
+        </u-system-bar>
+      </u-layout>
+
+      <u-layout style="height: 50px">
+        <u-system-bar color="indigo-darken-2">
+          <u-icon class="ms-2" icon="hugeicons:wifi-01"></u-icon>
+          <u-icon class="ms-2" icon="hugeicons:signal-full-02"></u-icon>
+          <u-icon class="ms-2" icon="hugeicons:battery-full"></u-icon>
+          <span class="ms-2">13:24</span>
+        </u-system-bar>
+      </u-layout>
+    </div>
+  `;
+
 export const Color: StoryFn<ComponentArgs> = () => ({
   components: { USystemBar, UIcon, ULayout },
-  setup() {
-    const now = ref('08:30');
-    return { now };
-  },
-  template: `
-    <div>
-      <ULayout style="height: 50px">
-        <USystemBar color="primary">
-          <UIcon class="ms-2" icon="hugeicons:wifi-01"></UIcon>
-          <UIcon class="ms-2" icon="hugeicons:signal-full-02"></UIcon>
-          <UIcon class="ms-2" icon="hugeicons:battery-full"></UIcon>
-          <span class="ms-2">08:30</span>
-        </USystemBar>
-      </ULayout>
-
-      <ULayout style="height: 50px">
-        <USystemBar color="red-lighten-2">
-          <UIcon class="ms-2" icon="hugeicons:wifi-01"></UIcon>
-          <UIcon class="ms-2" icon="hugeicons:signal-full-02"></UIcon>
-          <UIcon class="ms-2" icon="hugeicons:battery-full"></UIcon>
-          <span class="ms-2">18:30</span>
-        </USystemBar>
-      </ULayout>
-
-      <ULayout style="height: 50px">
-        <USystemBar color="indigo-darken-2">
-          <UIcon class="ms-2" icon="hugeicons:wifi-01"></UIcon>
-          <UIcon class="ms-2" icon="hugeicons:signal-full-02"></UIcon>
-          <UIcon class="ms-2" icon="hugeicons:battery-full"></UIcon>
-          <span class="ms-2">13:24</span>
-        </USystemBar>
-      </ULayout>
-    </div>
-  `,
+  template: colorTemplate,
 });
 
 Color.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <div>
-    <v-layout style="height: 50px">
-      <u-system-bar color="primary">
-        <u-icon class="ms-2" icon="hugeicons:wifi-01"></u-icon>
-        <u-icon class="ms-2" icon="hugeicons:signal-full-02"></u-icon>
-        <u-icon class="ms-2" icon="hugeicons:battery-full"></u-icon>
-        <span class="ms-2">08:30</span>
-      </u-system-bar>
-    </v-layout>
-
-    <v-layout style="height: 50px">
-      <u-system-bar color="red-lighten-2">
-        <u-icon class="ms-2" icon="hugeicons:wifi-01"></u-icon>
-        <u-icon class="ms-2" icon="hugeicons:signal-full-02"></u-icon>
-        <u-icon class="ms-2" icon="hugeicons:battery-full"></u-icon>
-        <span class="ms-2">18:30</span>
-      </u-system-bar>
-    </v-layout>
-
-    <v-layout style="height: 50px">
-      <u-system-bar color="indigo-darken-2">
-        <u-icon class="ms-2" icon="hugeicons:wifi-01"></u-icon>
-        <u-icon class="ms-2" icon="hugeicons:signal-full-02"></u-icon>
-        <u-icon class="ms-2" icon="hugeicons:battery-full"></u-icon>
-        <span class="ms-2">13:24</span>
-      </u-system-bar>
-    </v-layout>
-  </div>
-</template>`,
+      code: `<template>${colorTemplate}</template>`,
     },
   },
 };
 
-Color.args = {} as ComponentArgs;
-
-export const Window: StoryFn<ComponentArgs> = () => ({
-  components: { USystemBar, UIcon, USpacer, UBtn },
-  template: `
-    <ULayout style="height: 50px">
-      <USystemBar window>
-        <UIcon class="me-2" icon="hugeicons:message-01"></UIcon>
+// Window Story
+const windowTemplate = `
+    <u-layout style="height: 50px">
+      <u-system-bar window>
+        <u-icon class="me-2" icon="hugeicons:message-01"></u-icon>
 
         <span>10 unread messages</span>
 
-        <USpacer></USpacer>
+        <u-spacer></u-spacer>
 
-        <UBtn icon="hugeicons:minus-sign" variant="text"></UBtn>
+        <u-btn icon="hugeicons:minus-sign" variant="text"></u-btn>
 
-        <UBtn class="ms-2" icon="hugeicons:square" variant="text"></UBtn>
+        <u-btn class="ms-2" icon="hugeicons:square" variant="text"></u-btn>
 
-        <UBtn class="ms-2" icon="hugeicons:cancel-01" variant="text"></UBtn>
-      </USystemBar>
-    </ULayout>
-  `,
+        <u-btn class="ms-2" icon="hugeicons:cancel-01" variant="text"></u-btn>
+      </u-system-bar>
+    </u-layout>
+  `;
+
+export const Window: StoryFn<ComponentArgs> = () => ({
+  components: { USystemBar, UIcon, USpacer, UBtn },
+  template: windowTemplate,
 });
 
 Window.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <v-layout style="height: 50px">
-    <u-system-bar window>
-      <u-icon class="me-2" icon="hugeicons:message-01"></u-icon>
-
-      <span>10 unread messages</span>
-
-      <u-spacer></u-spacer>
-
-      <u-btn icon="hugeicons:minus-sign" variant="text"></u-btn>
-
-      <u-btn class="ms-2" icon="hugeicons:square" variant="text"></u-btn>
-
-      <u-btn class="ms-2" icon="hugeicons:cancel-01" variant="text"></u-btn>
-    </u-system-bar>
-  </v-layout>
-</template>`,
+      code: `<template>${windowTemplate}</template>`,
     },
   },
 };
-
-Window.args = {} as ComponentArgs;
