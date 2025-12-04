@@ -98,9 +98,9 @@ const meta: Meta<ComponentArgs> = {
   </u-sheet>
 </template>
 <script>
-import { shallowRef } from 'vue';
+  import { shallowRef } from 'vue';
 
-const tab = shallowRef(0);
+  const tab = shallowRef(0);
 </script>`;
         },
       },
@@ -313,10 +313,10 @@ const tab = shallowRef(0);
 
 export default meta;
 
-const exampleItems = ['web', 'shopping', 'videos', 'images', 'news'];
 const lorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { UTabs, UTab, USheet, UDivider, UTabsWindow, UTabsWindowItem },
   setup() {
@@ -354,14 +354,8 @@ export const Default: StoryFn<ComponentArgs> = (args) => ({
 
 Default.args = {} as ComponentArgs;
 
-export const AlignTabs: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab, USheet, UDivider, UTabsWindow, UTabsWindowItem },
-  setup() {
-    const tab = ref(1);
-
-    return { args, tab };
-  },
-  template: `
+// Align Tabs Story
+const alignTabsTemplate = `
     <u-card>
       <u-tabs v-model="tab" align-tabs="center" color="deep-purple-accent-4" v-bind="args">
         <u-tab :value="1">Landscape</u-tab>
@@ -386,53 +380,26 @@ export const AlignTabs: StoryFn<ComponentArgs> = (args) => ({
         </u-tabs-window-item>
       </u-tabs-window>
     </u-card>
-  `,
-});
+  `;
 
-AlignTabs.args = {} as ComponentArgs;
+/**
+ * The align-tabs prop will align tabs to the start, center, or end of its container.
+ */
+export const AlignTabs: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab, USheet, UDivider, UTabsWindow, UTabsWindowItem },
+  setup() {
+    const tab = ref(1);
+
+    return { tab };
+  },
+  template: alignTabsTemplate,
+});
 
 AlignTabs.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-tabs
-      v-model="tab"
-      align-tabs="center"
-      color="deep-purple-accent-4"
-    >
-      <u-tab :value="1">Landscape</u-tab>
-      <u-tab :value="2">City</u-tab>
-      <u-tab :value="3">Abstract</u-tab>
-    </u-tabs>
+      code: `<template>${alignTabsTemplate}</template>
 
-    <u-tabs-window v-model="tab">
-      <u-tabs-window-item
-        v-for="n in 3"
-        :key="n"
-        :value="n"
-      >
-        <u-container fluid>
-          <u-row>
-            <u-col
-              v-for="i in 6"
-              :key="i"
-              cols="12"
-              md="4"
-            >
-              <u-img
-                :lazy-src="\`https://picsum.photos/10/6?image=\${i * n * 5 + 10}\`"
-                :src="\`https://picsum.photos/500/300?image=\${i * n * 5 + 10}\`"
-                height="205"
-                cover
-              ></u-img>
-            </u-col>
-          </u-row>
-        </u-container>
-      </u-tabs-window-item>
-    </u-tabs-window>
-  </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -442,16 +409,8 @@ AlignTabs.parameters = {
   },
 };
 
-export const AlignWithTitle: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab, UToolbar, UAppBar, UBtn },
-  setup() {
-    const tab = ref(null);
-    const items = ['web', 'shopping', 'videos', 'images', 'news'];
-    const text = lorem;
-
-    return { args, tab, items, text };
-  },
-  template: `
+// Align With Title Story
+const alignWithTitleTemplate = `
     <u-card>
       <u-toolbar color="primary">
         <u-app-bar-nav-icon></u-app-bar-nav-icon>
@@ -489,53 +448,29 @@ export const AlignWithTitle: StoryFn<ComponentArgs> = (args) => ({
         </u-tabs-window-item>
       </u-tabs-window>
     </u-card>
-  `,
-});
+  `;
 
-AlignWithTitle.args = {} as ComponentArgs;
+/**
+ * Make u-tabs line up with the v-toolbar-title component by setting the align-tabs
+ * prop to title (u-app-bar-nav-icon or u-btn must be used in u-toolbar).
+ */
+export const AlignWithTitle: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab, UToolbar, UAppBar, UBtn },
+  setup() {
+    const tab = ref(null);
+    const items = ['web', 'shopping', 'videos', 'images', 'news'];
+    const text = lorem;
+
+    return { tab, items, text };
+  },
+  template: alignWithTitleTemplate,
+});
 
 AlignWithTitle.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-toolbar color="primary">
-      <u-app-bar-nav-icon></u-app-bar-nav-icon>
+      code: `<template>${alignWithTitleTemplate}</template>
 
-      <u-toolbar-title>Your Dashboard</u-toolbar-title>
-
-      <u-btn icon="hugeicons:search-01"></u-btn>
-
-      <u-btn icon="hugeicons:more-vertical"></u-btn>
-
-      <template v-slot:extension>
-        <u-tabs
-          v-model="tab"
-          align-tabs="title"
-        >
-          <u-tab
-            v-for="item in items"
-            :key="item"
-            :text="item"
-            :value="item"
-          ></u-tab>
-        </u-tabs>
-      </template>
-    </u-toolbar>
-
-    <u-tabs-window v-model="tab">
-      <u-tabs-window-item
-        v-for="item in items"
-        :key="item"
-        :value="item"
-      >
-        <u-card flat>
-          <u-card-text v-text="text"></u-card-text>
-        </u-card>
-      </u-tabs-window-item>
-    </u-tabs-window>
-  </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -554,13 +489,8 @@ AlignWithTitle.parameters = {
   },
 };
 
-export const CenterActive: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab, USheet },
-  setup() {
-    const tab = ref(null);
-    return { args, tab };
-  },
-  template: `
+// Center Active Story
+const centerActiveTemplate = `
     <u-card>
       <u-tabs bg-color="deep-purple-darken-4" center-active v-bind="args">
         <u-tab>One</u-tab>
@@ -585,126 +515,80 @@ export const CenterActive: StoryFn<ComponentArgs> = (args) => ({
         <u-tab>Twenty</u-tab>
       </u-tabs>
     </u-card>
-  `,
-});
+  `;
 
-CenterActive.args = {} as ComponentArgs;
+/**
+ * The center-active prop will make the active tab always centered.
+ */
+export const CenterActive: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab, USheet },
+  setup() {
+    const tab = ref(null);
+    return { tab };
+  },
+  template: centerActiveTemplate,
+});
 
 CenterActive.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-tabs
-      bg-color="deep-purple-darken-4"
-      center-active
-    >
-      <u-tab>One</u-tab>
-      <u-tab>Two</u-tab>
-      <u-tab>Three</u-tab>
-      <u-tab>Four</u-tab>
-      <u-tab>Five</u-tab>
-      <u-tab>Six</u-tab>
-      <u-tab>Seven</u-tab>
-      <u-tab>Eight</u-tab>
-      <u-tab>Nine</u-tab>
-      <u-tab>Ten</u-tab>
-      <u-tab>Eleven</u-tab>
-      <u-tab>Twelve</u-tab>
-      <u-tab>Thirteen</u-tab>
-      <u-tab>Fourteen</u-tab>
-      <u-tab>Fifteen</u-tab>
-      <u-tab>Sixteen</u-tab>
-      <u-tab>Seventeen</u-tab>
-      <u-tab>Eighteen</u-tab>
-      <u-tab>Nineteen</u-tab>
-      <u-tab>Twenty</u-tab>
-    </u-tabs>
-  </u-card>
-</template>`,
+      code: `<template>${centerActiveTemplate}</template>`,
     },
   },
 };
 
-export const CustomIcons: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab, USheet },
-  setup() {
-    return { args };
-  },
-  template: `
+// Custom Icons Story
+const customIconsTemplate = `
     <u-sheet elevation="6">
         <u-tabs bg-color="indigo" next-icon="hugeicons:circle-arrow-right-01" prev-icon="hugeicons:circle-arrow-left-01" show-arrows v-bind="args">
         <u-tab v-for="i in 30" :key="i" :text="'Item ' + i"></u-tab>
       </u-tabs>
     </u-sheet>
-  `,
-});
+  `;
 
-CustomIcons.args = {} as ComponentArgs;
+/**
+ * prev-icon and next-icon can be used for applying custom pagination icons.
+ */
+export const CustomIcons: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab, USheet },
+  template: customIconsTemplate,
+});
 
 CustomIcons.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sheet elevation="6">
-    <u-tabs
-      bg-color="indigo"
-      next-icon="hugeicons:circle-arrow-right-01"
-      prev-icon="hugeicons:circle-arrow-left-01"
-      show-arrows
-    >
-      <u-tab
-        v-for="i in 30"
-        :key="i"
-        :text="\`Item \${i}\`"
-      ></u-tab>
-    </u-tabs>
-  </u-sheet>
-</template>`,
+      code: `<template>${customIconsTemplate}</template>`,
     },
   },
 };
 
-export const FixedTabs: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab },
-  setup() {
-    return { args };
-  },
-  template: `
+// Fixed Tabs Story
+const fixedTabsTemplate = `
     <u-tabs bg-color="indigo-darken-2" fixed-tabs v-bind="args">
       <u-tab text="Option"></u-tab>
       <u-tab text="Another Option"></u-tab>
     </u-tabs>
-  `,
-});
+  `;
 
-FixedTabs.args = {} as ComponentArgs;
+/**
+ * The fixed-tabs prop forces u-tab items to take up all available space up to 300px width,
+ * and centers them.
+ */
+export const FixedTabs: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab },
+  template: fixedTabsTemplate,
+});
 
 FixedTabs.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-tabs
-    bg-color="indigo-darken-2"
-    fixed-tabs
-  >
-    <u-tab text="Option"></u-tab>
-    <u-tab text="Another Option"></u-tab>
-  </u-tabs>
-</template>`,
+      code: `<template>${fixedTabsTemplate}</template>`,
     },
   },
 };
 
-export const Grow: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab, UCard: USheet },
-  setup() {
-    const tab = ref('Appetizers');
-    const items = ['Appetizers', 'Entrees', 'Deserts', 'Cocktails'];
-    const text = lorem;
-    return { args, tab, items, text };
-  },
-  template: `
+// Grow Story
+const growTemplate = `
     <u-card color="primary">
       <u-card-title class="text-center justify-center py-6">
         <h1 class="font-weight-bold text-h2">BASiL</h1>
@@ -722,51 +606,27 @@ export const Grow: StoryFn<ComponentArgs> = (args) => ({
         </u-tabs-window-item>
       </u-tabs-window>
     </u-card>
-  `,
-});
+  `;
 
-Grow.args = {} as ComponentArgs;
+/**
+ * The grow prop will make the tab items take up all available space with no limit.
+ */
+export const Grow: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab, UCard: USheet },
+  setup() {
+    const tab = ref('Appetizers');
+    const items = ['Appetizers', 'Entrees', 'Deserts', 'Cocktails'];
+    const text = lorem;
+    return { tab, items, text };
+  },
+  template: growTemplate,
+});
 
 Grow.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card color="primary">
-    <u-card-title class="text-center justify-center py-6">
-      <h1 class="font-weight-bold text-h2">
-        BASiL
-      </h1>
-    </u-card-title>
+      code: `<template>${growTemplate}</template>
 
-    <u-tabs
-      v-model="tab"
-      color="primary"
-      grow
-    >
-      <u-tab
-        v-for="item in items"
-        :key="item"
-        :text="item"
-        :value="item"
-      ></u-tab>
-    </u-tabs>
-
-    <u-tabs-window v-model="tab">
-      <u-tabs-window-item
-        v-for="item in items"
-        :key="item"
-        :value="item"
-      >
-        <u-card
-          color="basil"
-          flat
-        >
-          <u-card-text>{{ text }}</u-card-text>
-        </u-card>
-      </u-tabs-window-item>
-    </u-tabs-window>
-  </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -784,14 +644,8 @@ Grow.parameters = {
   },
 };
 
-export const Stacked: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab, UIcon: UDivider },
-  setup() {
-    const tab = ref(null);
-    const text = lorem;
-    return { args, tab, text };
-  },
-  template: `
+// Stacked Story
+const stackedTemplate = `
     <u-card>
       <u-tabs v-model="tab" align-tabs="center" bg-color="deep-purple-accent-4" stacked v-bind="args">
         <u-tab value="tab-1">
@@ -818,54 +672,27 @@ export const Stacked: StoryFn<ComponentArgs> = (args) => ({
         </u-tabs-window-item>
       </u-tabs-window>
     </u-card>
-  `,
-});
+  `;
 
-Stacked.args = {} as ComponentArgs;
+/**
+ * Using stacked increases the u-tabs height to 72px to allow for both icons and text
+ * to be displayed.
+ */
+export const Stacked: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab, UIcon: UDivider },
+  setup() {
+    const tab = ref(null);
+    const text = lorem;
+    return { tab, text };
+  },
+  template: stackedTemplate,
+});
 
 Stacked.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-tabs
-      v-model="tab"
-      align-tabs="center"
-      bg-color="deep-purple-accent-4"
-      stacked
-    >
-      <u-tab value="tab-1">
-        <u-icon icon="hugeicons:smart-phone-01"></u-icon>
+      code: `<template>${stackedTemplate}</template>
 
-        Recents
-      </u-tab>
-
-      <u-tab value="tab-2">
-        <u-icon icon="hugeicons:heartbreak"></u-icon>
-
-        Favorites
-      </u-tab>
-
-      <u-tab value="tab-3">
-        <u-icon icon="hugeicons:user-account"></u-icon>
-
-        Nearby
-      </u-tab>
-    </u-tabs>
-
-    <u-tabs-window v-model="tab">
-      <u-tabs-window-item
-        v-for="i in 3"
-        :key="i"
-        :value="'tab-' + i"
-      >
-        <u-card>
-          <u-card-text>{{ text }}</u-card-text>
-        </u-card>
-      </u-tabs-window-item>
-    </u-tabs-window>
-  </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -877,52 +704,34 @@ Stacked.parameters = {
   },
 };
 
-export const Pagination: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab },
-  setup() {
-    return { args };
-  },
-  template: `
+// Pagination Story
+const paginationTemplate = `
     <u-card>
       <u-tabs bg-color="teal-darken-3" slider-color="teal-lighten-3" show-arrows v-bind="args">
         <u-tab v-for="i in 30" :key="i" :text="'Item ' + i" :value="'tab-' + i"></u-tab>
       </u-tabs>
     </u-card>
-  `,
-});
+  `;
 
-Pagination.args = {} as ComponentArgs;
+/**
+ * If the tab items overflow their container, pagination controls will appear on desktop.
+ * For mobile devices, arrows will only display with the show-arrows prop.
+ */
+export const Pagination: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab },
+  template: paginationTemplate,
+});
 
 Pagination.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-tabs
-      bg-color="teal-darken-3"
-      slider-color="teal-lighten-3"
-      show-arrows
-    >
-      <u-tab
-        v-for="i in 30"
-        :key="i"
-        :text="'Item ' + i"
-        :value="'tab-' + i"
-      ></u-tab>
-    </u-tabs>
-  </u-card>
-</template>`,
+      code: `<template>${paginationTemplate}</template>`,
     },
   },
 };
 
-export const Vertical: StoryFn<ComponentArgs> = (args) => ({
-  components: { UTabs, UTab, UCard: USheet },
-  setup() {
-    const tab = ref('option-1');
-    return { args, tab };
-  },
-  template: `
+// Vertical Story
+const verticalTemplate = `
     <u-card>
       <u-toolbar color="primary" title="User Profile"></u-toolbar>
 
@@ -994,92 +803,25 @@ export const Vertical: StoryFn<ComponentArgs> = (args) => ({
         </u-tabs-window>
       </div>
     </u-card>
-  `,
-});
+  `;
 
-Vertical.args = {} as ComponentArgs;
+/**
+ * The direction prop allows for u-tab components to stack vertically.
+ */
+export const Vertical: StoryFn<ComponentArgs> = () => ({
+  components: { UTabs, UTab, UCard: USheet },
+  setup() {
+    const tab = ref('option-1');
+    return { tab };
+  },
+  template: verticalTemplate,
+});
 
 Vertical.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card>
-    <u-toolbar color="primary" title="User Profile">
-    </u-toolbar>
+      code: `<template>${verticalTemplate}</template>
 
-    <div class="d-flex flex-row">
-      <u-tabs
-        v-model="tab"
-        color="primary"
-        direction="vertical"
-      >
-        <u-tab prepend-icon="hugeicons:user-03" text="Option 1" value="option-1"></u-tab>
-        <u-tab prepend-icon="hugeicons:circle-lock-02" text="Option 2" value="option-2"></u-tab>
-        <u-tab prepend-icon="hugeicons:cellular-network" text="Option 3" value="option-3"></u-tab>
-      </u-tabs>
-
-      <u-tabs-window v-model="tab">
-        <u-tabs-window-item value="option-1">
-          <u-card flat>
-            <u-card-text>
-              <p>
-                Sed aliquam ultrices mauris. Donec posuere vulputate arcu. Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
-              </p>
-
-              <p>
-                Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Aliquam lobortis. Aliquam lobortis. Suspendisse non nisl sit amet velit hendrerit rutrum.
-              </p>
-
-              <p class="mb-0">
-                Phasellus dolor. Fusce neque. Fusce fermentum odio nec arcu. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Phasellus blandit leo ut odio.
-              </p>
-            </u-card-text>
-          </u-card>
-        </u-tabs-window-item>
-
-        <u-tabs-window-item value="option-2">
-          <u-card flat>
-            <u-card-text>
-              <p>
-                Morbi nec metus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nunc sed turpis.
-              </p>
-
-              <p>
-                Suspendisse feugiat. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In hac habitasse platea dictumst. Fusce ac felis sit amet ligula pharetra condimentum.
-              </p>
-
-              <p>
-                Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Nam commodo suscipit quam. In consectetuer turpis ut velit. Sed cursus turpis vitae tortor. Aliquam eu nunc.
-              </p>
-
-              <p>
-                Etiam ut purus mattis mauris sodales aliquam. Ut varius tincidunt libero. Aenean viverra rhoncus pede. Duis leo. Fusce fermentum odio nec arcu.
-              </p>
-
-              <p class="mb-0">
-                Donec venenatis vulputate lorem. Aenean viverra rhoncus pede. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Fusce commodo aliquam arcu. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi.
-              </p>
-            </u-card-text>
-          </u-card>
-        </u-tabs-window-item>
-
-        <u-tabs-window-item value="option-3">
-          <u-card flat>
-            <u-card-text>
-              <p>
-                Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
-              </p>
-
-              <p class="mb-0">
-                Cras sagittis. Phasellus nec sem in justo pellentesque facilisis. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nam at tortor in tellus interdum sagittis.
-              </p>
-            </u-card-text>
-          </u-card>
-        </u-tabs-window-item>
-      </u-tabs-window>
-    </div>
-  </u-card>
-</template>
 <script setup>
   import { ref } from 'vue'
 
@@ -1089,7 +831,27 @@ Vertical.parameters = {
   },
 };
 
-export const Spaced: StoryFn<ComponentArgs> = (args) => ({
+// Spaced Story
+const spacedTemplate = `
+    <u-container max-width="800">
+      <u-row justify="space-around">
+        <u-col cols="12" sm="auto">
+          <u-tabs :items="example1" direction="vertical" slider-color="purple" spaced="end" v-bind="args"></u-tabs>
+        </u-col>
+
+        <u-col cols="12" sm="auto">
+          <u-tabs direction="vertical" slider-color="primary" spaced="start" v-bind="args">
+            <u-tab v-for="(tab, i) in example2" :key="tab" :prepend-icon="numbers[i]" :text="tab" spaced="start" width="200"></u-tab>
+          </u-tabs>
+        </u-col>
+      </u-row>
+    </u-container>
+  `;
+
+/**
+ * Vertical tabs can be customized with spaced prop to move the text away from the icon.
+ */
+export const Spaced: StoryFn<ComponentArgs> = () => ({
   components: { UTabs, UTab, UContainer, URow, UCol },
   setup() {
     const example1 = [
@@ -1110,61 +872,16 @@ export const Spaced: StoryFn<ComponentArgs> = (args) => ({
       'hugeicons:five-square',
     ];
 
-    return { args, example1, example2, numbers };
+    return { example1, example2, numbers };
   },
-  template: `
-    <u-container max-width="800">
-      <u-row justify="space-around">
-        <u-col cols="12" sm="auto">
-          <u-tabs :items="example1" direction="vertical" slider-color="purple" spaced="end" v-bind="args"></u-tabs>
-        </u-col>
-
-        <u-col cols="12" sm="auto">
-          <u-tabs direction="vertical" slider-color="primary" spaced="start" v-bind="args">
-            <u-tab v-for="(tab, i) in example2" :key="tab" :prepend-icon="numbers[i]" :text="tab" spaced="start" width="200"></u-tab>
-          </u-tabs>
-        </u-col>
-      </u-row>
-    </u-container>
-  `,
+  template: spacedTemplate,
 });
-
-Spaced.args = {} as ComponentArgs;
 
 Spaced.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-container max-width="800">
-    <u-row justify="space-around">
-      <u-col cols="12" sm="auto">
-        <u-tabs
-          :items="example1"
-          direction="vertical"
-          slider-color="purple"
-          spaced="end"
-        ></u-tabs>
-      </u-col>
+      code: `<template>${spacedTemplate}</template>
 
-      <u-col cols="12" sm="auto">
-        <u-tabs
-          direction="vertical"
-          slider-color="primary"
-          spaced="start"
-        >
-          <u-tab
-            v-for="(tab, i) in example2"
-            :key="tab"
-            :prepend-icon="numbers[i]"
-            :text="tab"
-            spaced="start"
-            width="200"
-          ></u-tab>
-        </u-tabs>
-      </u-col>
-    </u-row>
-  </u-container>
-</template>
 <script setup>
   const example1 = [
     { text: 'My Files', appendIcon: 'hugeicons:folder-01', width: 250 },
