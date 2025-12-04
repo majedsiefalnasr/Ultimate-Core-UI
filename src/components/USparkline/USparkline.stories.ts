@@ -158,6 +158,7 @@ const meta: Meta<ComponentArgs> = {
 
 export default meta;
 
+// Default story
 export const Default: StoryFn<ComponentArgs> = (args) => ({
   components: { USparkline },
   setup() {
@@ -182,38 +183,8 @@ Default.args = {
   modelValue: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
 } as ComponentArgs;
 
-export const Fill: StoryFn<ComponentArgs> = () => ({
-  components: {
-    USparkline,
-    UContainer,
-    UDivider,
-    URow,
-    UCol,
-    UItemGroup,
-    UItem,
-    UCard,
-    USwitch,
-    USlider,
-  },
-  setup() {
-    const gradients = [
-      ['#222'],
-      ['#42b3f4'],
-      ['red', 'orange', 'yellow'],
-      ['purple', 'violet'],
-      ['#00c6ff', '#F0F', '#FF0'],
-      ['#f72047', '#ffd200', '#1feaea'],
-    ];
-    const fill = ref(true);
-    const selectedGradient = ref(gradients[4]);
-    const padding = ref(8);
-    const smooth = ref(true);
-    const value = ref([0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]);
-    const lineWidth = ref(2);
-
-    return { gradients, fill, selectedGradient, padding, smooth, value, lineWidth };
-  },
-  template: `
+// Fill story
+const fillTemplate = `
   <u-container fluid>
     <u-sparkline
       :fill="fill"
@@ -273,45 +244,67 @@ export const Fill: StoryFn<ComponentArgs> = () => ({
       </u-col>
     </u-row>
   </u-container>
-  `,
+  `;
+
+/**
+ * You can create a u-sparkline with fill using the fill property.
+ */
+export const Fill: StoryFn<ComponentArgs> = () => ({
+  components: {
+    USparkline,
+    UContainer,
+    UDivider,
+    URow,
+    UCol,
+    UItemGroup,
+    UItem,
+    UCard,
+    USwitch,
+    USlider,
+  },
+  setup() {
+    const gradients = [
+      ['#222'],
+      ['#42b3f4'],
+      ['red', 'orange', 'yellow'],
+      ['purple', 'violet'],
+      ['#00c6ff', '#F0F', '#FF0'],
+      ['#f72047', '#ffd200', '#1feaea'],
+    ];
+    const fill = ref(true);
+    const selectedGradient = ref(gradients[4]);
+    const padding = ref(8);
+    const smooth = ref(true);
+    const value = ref([0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]);
+    const lineWidth = ref(2);
+
+    return { gradients, fill, selectedGradient, padding, smooth, value, lineWidth };
+  },
+  template: fillTemplate,
 });
 
 Fill.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sparkline
-    :fill="fill"
-    :gradient="selectedGradient"
-    :line-width="lineWidth"
-    :model-value="value"
-    :padding="padding"
-    :smooth="smooth"
-    auto-draw
-  ></u-sparkline>
-</template>
-<script setup>
-import { ref } from 'vue'
+      code: `<template>${fillTemplate}</template>
 
-const gradients = [ ['#222'], ['#42b3f4'], ['red','orange','yellow'], ['purple','violet'], ['#00c6ff','#F0F','#FF0'], ['#f72047','#ffd200','#1feaea'] ]
-const fill = ref(true)
-const selectedGradient = ref(gradients[4])
-const padding = ref(8)
-const smooth = ref(true)
-const value = ref([0,2,5,9,5,10,3,5,0,0,1,8,2,9,0])
-const lineWidth = ref(2)
+<script setup>
+  import { ref } from 'vue'
+
+  const gradients = [ ['#222'], ['#42b3f4'], ['red','orange','yellow'], ['purple','violet'], ['#00c6ff','#F0F','#FF0'], ['#f72047','#ffd200','#1feaea'] ]
+  const fill = ref(true)
+  const selectedGradient = ref(gradients[4])
+  const padding = ref(8)
+  const smooth = ref(true)
+  const value = ref([0,2,5,9,5,10,3,5,0,0,1,8,2,9,0])
+  const lineWidth = ref(2)
 </script>`,
     },
   },
 };
 
-export const CustomLabels: StoryFn<ComponentArgs> = () => ({
-  components: { USparkline, UCard, USheet, UBtn, UDivider, UCardText, UCardActions },
-  setup() {
-    const value = ref([423, 446, 675, 510, 590, 610, 760]);
-    return { value };
-  },
-  template: `
+// Custom Labels story
+const customLabelsTemplate = `
   <u-card class="mx-auto text-center" color="green" max-width="600" dark>
     <u-card-text>
       <u-sheet color="rgba(0, 0, 0, .12)">
@@ -333,27 +326,92 @@ export const CustomLabels: StoryFn<ComponentArgs> = () => ({
       <u-btn variant="text" block>Go to Report</u-btn>
     </u-card-actions>
   </u-card>
-  `,
+  `;
+
+/**
+ * By providing a label slot, we are able to modify the displayed content by adding a dollar 
+ * sign ($). This slot is exclusively for text content. 
+.
+ */
+export const CustomLabels: StoryFn<ComponentArgs> = () => ({
+  components: { USparkline, UCard, USheet, UBtn, UDivider, UCardText, UCardActions },
+  setup() {
+    const value = ref([423, 446, 675, 510, 590, 610, 760]);
+    return { value };
+  },
+  template: customLabelsTemplate,
 });
 
 CustomLabels.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-sparkline :model-value="value" color="rgba(255,255,255,.7)" height="100" padding="24" stroke-linecap="round" smooth>
-    <template #label="item">
-      {{ item.value }}
-    </template>
-  </u-sparkline>
-</template>
+      code: `<template>${customLabelsTemplate}</template>
+
 <script setup>
-import { ref } from 'vue'
-const value = ref([423,446,675,510,590,610,760])
+  import { ref } from 'vue'
+
+  const value = ref([423,446,675,510,590,610,760])
 </script>`,
     },
   },
 };
 
+// Heart Rate story
+const heartRateTemplate = `
+  <u-card
+    class="mx-auto"
+    color="surface-light"
+    max-width="600"
+  >
+    <template v-slot:prepend>
+      <u-icon
+        :color="checking ? 'red lighten-2' : 'indigo-lighten-2'"
+        class="me-8"
+        icon="hugeicons:heartbreak"
+        size="64"
+        @click="takePulse"
+      ></u-icon>
+    </template>
+
+    <template v-slot:title>
+      <div class="text-caption text-grey text-uppercase">
+        Heart rate
+      </div>
+
+      <span
+        class="text-h3 font-weight-black"
+        v-text="avg || '—'"
+      ></span>
+      <strong v-if="avg">BPM</strong>
+    </template>
+
+    <template v-slot:append>
+      <u-btn
+        class="align-self-start"
+        icon="hugeicons:arrow-right-02"
+        size="34"
+        variant="text"
+      ></u-btn>
+    </template>
+
+    <u-sheet color="transparent">
+      <u-sparkline
+        :key="String(avg)"
+        :gradient="['#f72047', '#ffd200', '#1feaea']"
+        :line-width="3"
+        :model-value="heartbeats"
+        :smooth="16"
+        stroke-linecap="round"
+        auto-draw
+      ></u-sparkline>
+    </u-sheet>
+  </u-card>
+  `;
+
+/**
+ * For concise information, a complete chart might be overkill. Using a trend line with
+ * gradient provides enough detail for the user without showing too much information.
+ */
 export const HeartRate: StoryFn<ComponentArgs> = () => ({
   components: { USparkline, UCard, UBtn, USheet, UIcon },
   setup() {
@@ -379,111 +437,14 @@ export const HeartRate: StoryFn<ComponentArgs> = () => ({
 
     return { checking, heartbeats, avg, takePulse };
   },
-  template: `
-  <u-card
-    class="mx-auto"
-    color="surface-light"
-    max-width="600"
-  >
-    <template v-slot:prepend>
-      <u-icon
-        :color="checking ? 'red lighten-2' : 'indigo-lighten-2'"
-        class="me-8"
-        icon="hugeicons:heartbreak"
-        size="64"
-        @click="takePulse"
-      ></u-icon>
-    </template>
-
-    <template v-slot:title>
-      <div class="text-caption text-grey text-uppercase">
-        Heart rate
-      </div>
-
-      <span
-        class="text-h3 font-weight-black"
-        v-text="avg || '—'"
-      ></span>
-      <strong v-if="avg">BPM</strong>
-    </template>
-
-    <template v-slot:append>
-      <u-btn
-        class="align-self-start"
-        icon="hugeicons:arrow-right-02"
-        size="34"
-        variant="text"
-      ></u-btn>
-    </template>
-
-    <u-sheet color="transparent">
-      <u-sparkline
-        :key="String(avg)"
-        :gradient="['#f72047', '#ffd200', '#1feaea']"
-        :line-width="3"
-        :model-value="heartbeats"
-        :smooth="16"
-        stroke-linecap="round"
-        auto-draw
-      ></u-sparkline>
-    </u-sheet>
-  </u-card>
-  `,
+  template: heartRateTemplate,
 });
 
 HeartRate.parameters = {
   docs: {
     source: {
-      code: `<template>
-  <u-card
-    class="mx-auto"
-    color="surface-light"
-    max-width="600"
-  >
-    <template v-slot:prepend>
-      <u-icon
-        :color="checking ? 'red lighten-2' : 'indigo-lighten-2'"
-        class="me-8"
-        icon="hugeicons:heartbreak"
-        size="64"
-        @click="takePulse"
-      ></u-icon>
-    </template>
-
-    <template v-slot:title>
-      <div class="text-caption text-grey text-uppercase">
-        Heart rate
-      </div>
-
-      <span
-        class="text-h3 font-weight-black"
-        v-text="avg || '—'"
-      ></span>
-      <strong v-if="avg">BPM</strong>
-    </template>
-
-    <template v-slot:append>
-      <u-btn
-        class="align-self-start"
-        icon="hugeicons:arrow-right-02"
-        size="34"
-        variant="text"
-      ></u-btn>
-    </template>
-
-    <u-sheet color="transparent">
-      <u-sparkline
-        :key="String(avg)"
-        :gradient="['#f72047', '#ffd200', '#1feaea']"
-        :line-width="3"
-        :model-value="heartbeats"
-        :smooth="16"
-        stroke-linecap="round"
-        auto-draw
-      ></u-sparkline>
-    </u-sheet>
-  </u-card>
-</template>
+      code: `<template>${heartRateTemplate}</template>
+      
 <script setup>
   import { computed, ref } from 'vue'
 
