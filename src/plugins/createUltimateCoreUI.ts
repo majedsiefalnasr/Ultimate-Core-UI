@@ -85,7 +85,6 @@ const libraryDefaults: Partial<VuetifyOptions> = {
     global: {
       ripple: false,
       variants: 'flat',
-      rounded: 'lg',
     },
   },
 };
