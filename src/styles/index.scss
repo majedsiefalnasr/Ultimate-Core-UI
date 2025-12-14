@@ -1,5 +1,6 @@
 @use './variables' as *;
 @use './inputs' as *;
+@use './container' as *;
 
 body {
   font-family: $font-family-base;

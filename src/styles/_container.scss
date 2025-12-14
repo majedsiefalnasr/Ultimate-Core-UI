@@ -1,0 +1,490 @@
+* {
+  container-type: inline-size;
+}
+
+$breakpoints: (
+  xs: 600px,
+  sm: 960px,
+  md: 1280px,
+  lg: 1920px,
+  xl: 2560px,
+  xxl: 2560px,
+);
+
+$display-types: none, inline, inline-block, block, table, table-row, table-cell, flex, inline-flex;
+
+$float-types: none, left, right;
+
+$flex-direction: row, column, row-reverse, column-reverse;
+
+$flex-grow-shrink: 0, 1;
+
+$flex-wrap: wrap, nowrap, wrap-reverse;
+
+$justify-content: start, end, center, space-between, space-around, space-evenly;
+
+$justify-items: start, end, center, stretch;
+
+$align-items: start, end, center, baseline, stretch;
+
+$align-content: start, end, center, space-between, space-around, space-evenly, stretch;
+
+$align-self: auto, start, end, center, baseline, stretch;
+
+$order: (
+  first: -1,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12,
+  last: 13,
+);
+
+$gap: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, auto;
+
+$grid-span: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, auto;
+
+$spacing: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
+
+$negative-spacing:
+  -1,
+  -2,
+  -3,
+  -4,
+  -5,
+  -6,
+  -7,
+  -8,
+  -9,
+  -10,
+  -11,
+  -12,
+  -13,
+  -14,
+  -15,
+  -16;
+
+$margin-props: (
+  ma: margin,
+  mx: (
+    margin-left,
+    margin-right,
+  ),
+  my: (
+    margin-top,
+    margin-bottom,
+  ),
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+  ms: margin-inline-start,
+  me: margin-inline-end,
+);
+
+$padding-props: (
+  pa: padding,
+  px: (
+    padding-left,
+    padding-right,
+  ),
+  py: (
+    padding-top,
+    padding-bottom,
+  ),
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
+  ps: padding-inline-start,
+  pe: padding-inline-end,
+);
+
+$height-values: (
+  auto: auto,
+  screen: 100vh,
+  0: 0,
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+);
+
+$width-values: (
+  auto: auto,
+  0: 0,
+  25: 25%,
+  33: 33%,
+  50: 50%,
+  66: 66%,
+  75: 75%,
+  100: 100%,
+);
+
+.hidden {
+  &-xs {
+    @container (width < 600px) {
+      display: none !important;
+    }
+  }
+  &-sm {
+    @container (width >= 600px) and (width < 960px) {
+      display: none !important;
+    }
+  }
+  &-md {
+    @container (width >= 960px) and (width < 1280px) {
+      display: none !important;
+    }
+  }
+  &-lg {
+    @container (width >= 1280px) and (width < 1920px) {
+      display: none !important;
+    }
+  }
+  &-xl {
+    @container (width >= 1920px) and (width < 2560px) {
+      display: none !important;
+    }
+  }
+  &-xxl {
+    @container (width >= 2560px) {
+      display: none !important;
+    }
+  }
+  &-sm-and-up {
+    @container (width >= 600px) {
+      display: none !important;
+    }
+  }
+  &-md-and-up {
+    @container (width >= 960px) {
+      display: none !important;
+    }
+  }
+  &-lg-and-up {
+    @container (width >= 1280px) {
+      display: none !important;
+    }
+  }
+  &-xl-and-up {
+    @container (width >= 1920px) {
+      display: none !important;
+    }
+  }
+  &-sm-and-down {
+    @container (width < 960px) {
+      display: none !important;
+    }
+  }
+  &-md-and-down {
+    @container (width < 1280px) {
+      display: none !important;
+    }
+  }
+  &-lg-and-down {
+    @container (width < 1920px) {
+      display: none !important;
+    }
+  }
+  &-xl-and-down {
+    @container (width < 2560px) {
+      display: none !important;
+    }
+  }
+}
+
+@each $bp in sm, md, lg, xl, xxl {
+  $min: map-get($breakpoints, $bp);
+  @each $type in $display-types {
+    .d-#{$bp}-#{$type} {
+      @container (width >= $min) {
+        display: #{$type} !important;
+      }
+    }
+  }
+  @each $type in $float-types {
+    .float-#{$bp}-#{$type} {
+      @container (width >= $min) {
+        float: #{$type} !important;
+      }
+    }
+  }
+  .v-locale--is-rtl .float-#{$bp}-end {
+    @container (width >= $min) {
+      float: left !important;
+    }
+  }
+  .v-locale--is-rtl .float-#{$bp}-start,
+  .v-locale--is-ltr .float-#{$bp}-end {
+    @container (width >= $min) {
+      float: right !important;
+    }
+  }
+  .v-locale--is-ltr .float-#{$bp}-start {
+    @container (width >= $min) {
+      float: left !important;
+    }
+  }
+  .flex-#{$bp}-fill {
+    @container (width >= $min) {
+      flex: 1 1 100% !important;
+    }
+  }
+  .flex-#{$bp}-1-1 {
+    @container (width >= $min) {
+      flex: 1 1 100% !important;
+    }
+  }
+  .flex-#{$bp}-1-0 {
+    @container (width >= $min) {
+      flex: 1 0 100% !important;
+    }
+  }
+  .flex-#{$bp}-0-1 {
+    @container (width >= $min) {
+      flex: 0 1 100% !important;
+    }
+  }
+  .flex-#{$bp}-0-0 {
+    @container (width >= $min) {
+      flex: 0 0 100% !important;
+    }
+  }
+  .flex-#{$bp}-1-1-100 {
+    @container (width >= $min) {
+      flex: 1 1 0 !important;
+    }
+  }
+  .flex-#{$bp}-1-0-100 {
+    @container (width >= $min) {
+      flex: 1 0 0 !important;
+    }
+  }
+  .flex-#{$bp}-0-1-100 {
+    @container (width >= $min) {
+      flex: 0 1 0 !important;
+    }
+  }
+  .flex-#{$bp}-0-0-100 {
+    @container (width >= $min) {
+      flex: 0 0 0 !important;
+    }
+  }
+  @each $dir in $flex-direction {
+    .flex-#{$bp}-#{$dir} {
+      @container (width >= $min) {
+        flex-direction: #{$dir} !important;
+      }
+    }
+  }
+  @each $val in $flex-grow-shrink {
+    .flex-#{$bp}-grow-#{$val} {
+      @container (width >= $min) {
+        flex-grow: #{$val} !important;
+      }
+    }
+    .flex-#{$bp}-shrink-#{$val} {
+      @container (width >= $min) {
+        flex-shrink: #{$val} !important;
+      }
+    }
+  }
+  @each $wrap in $flex-wrap {
+    .flex-#{$bp}-#{$wrap} {
+      @container (width >= $min) {
+        flex-wrap: #{$wrap} !important;
+      }
+    }
+  }
+  @each $justify in $justify-content {
+    .justify-#{$bp}-#{$justify} {
+      @container (width >= $min) {
+        justify-content: #{$justify} !important;
+      }
+    }
+  }
+  @each $justify in $justify-items {
+    .justify-items-#{$bp}-#{$justify} {
+      @container (width >= $min) {
+        justify-items: #{$justify} !important;
+      }
+    }
+  }
+  @each $align in $align-items {
+    .align-#{$bp}-#{$align} {
+      @container (width >= $min) {
+        align-items: #{$align} !important;
+      }
+    }
+  }
+  @each $align in $align-content {
+    .align-content-#{$bp}-#{$align} {
+      @container (width >= $min) {
+        align-content: #{$align} !important;
+      }
+    }
+  }
+  @each $align in $align-self {
+    .align-self-#{$bp}-#{$align} {
+      @container (width >= $min) {
+        align-self: #{$align} !important;
+      }
+    }
+  }
+  @each $name, $val in $order {
+    .order-#{$bp}-#{$name} {
+      @container (width >= $min) {
+        order: #{$val} !important;
+      }
+    }
+  }
+  @each $val in $gap {
+    .ga-#{$bp}-#{$val} {
+      @container (width >= $min) {
+        gap: if($val == auto, auto, #{$val * 4}px) !important;
+      }
+    }
+  }
+  @each $val in $grid-span {
+    .gr-#{$bp}-#{$val} {
+      @container (width >= $min) {
+        grid-row: #{$val} !important;
+      }
+    }
+    .gc-#{$bp}-#{$val} {
+      @container (width >= $min) {
+        grid-column: #{$val} !important;
+      }
+    }
+  }
+  @each $name, $val in $height-values {
+    .h-#{$bp}-#{$name} {
+      @container (width >= $min) {
+        height: #{$val} !important;
+      }
+    }
+  }
+  @each $name, $val in $width-values {
+    .w-#{$bp}-#{$name} {
+      @container (width >= $min) {
+        width: #{$val} !important;
+      }
+    }
+  }
+  @each $prop, $css in $margin-props {
+    @each $val in $spacing {
+      .#{$prop}-#{$bp}-#{$val} {
+        @container (width >= $min) {
+          @if type-of($css) == list {
+            @each $c in $css {
+              #{$c}: #{$val * 4}px !important;
+            }
+          } @else {
+            #{$css}: #{$val * 4}px !important;
+          }
+        }
+      }
+    }
+    @each $val in $negative-spacing {
+      .#{$prop}-#{$bp}-n#{-$val} {
+        @container (width >= $min) {
+          @if type-of($css) == list {
+            @each $c in $css {
+              #{$c}: #{$val * 4}px !important;
+            }
+          } @else {
+            #{$css}: #{$val * 4}px !important;
+          }
+        }
+      }
+    }
+  }
+  @each $prop, $css in $padding-props {
+    @each $val in $spacing {
+      .#{$prop}-#{$bp}-#{$val} {
+        @container (width >= $min) {
+          @if type-of($css) == list {
+            @each $c in $css {
+              #{$c}: #{$val * 4}px !important;
+            }
+          } @else {
+            #{$css}: #{$val * 4}px !important;
+          }
+        }
+      }
+    }
+  }
+  .v-col-#{$bp} {
+    @container (width >= $min) {
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+  }
+  .v-col-#{$bp}-auto {
+    @container (width >= $min) {
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+    }
+  }
+  @for $i from 1 through 12 {
+    .v-col-#{$bp}-#{$i} {
+      @container (width >= $min) {
+        $percent: 100% / 12 * $i;
+        flex: 0 0 #{$percent};
+        max-width: #{$percent};
+      }
+    }
+  }
+  @for $i from 0 through 11 {
+    .offset-#{$bp}-#{$i} {
+      @container (width >= $min) {
+        $percent: 100% / 12 * $i;
+        margin-inline-start: #{$percent};
+      }
+    }
+  }
+}
+
+@container (width >= 960px) {
+  .v-container {
+    max-width: 900px;
+  }
+}
+@container (width >= 1280px) {
+  .v-container {
+    max-width: 1200px;
+  }
+}
+@container (width >= 1920px) {
+  .v-container {
+    max-width: 1800px;
+  }
+}
+@container (width >= 2560px) {
+  .v-container {
+    max-width: 2400px;
+  }
+}
+
+@container (width < 1280px) {
+  .v-tabs.v-slide-group--is-overflowing.v-slide-group--horizontal:not(.v-slide-group--has-affixes)
+    .v-tab:first-child {
+    margin-inline-start: 52px;
+  }
+  .v-tabs.v-slide-group--is-overflowing.v-slide-group--horizontal:not(.v-slide-group--has-affixes)
+    .v-tab:last-child {
+    margin-inline-end: 52px;
+  }
+}
