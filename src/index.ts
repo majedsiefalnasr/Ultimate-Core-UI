@@ -1,5 +1,7 @@
 import type { App, Component } from 'vue';
 
+// Ensure Vuetify styles are included
+import 'vuetify/styles';
 // Ensure library global styles are included when consumers import the package
 import './styles/index.scss';
 
