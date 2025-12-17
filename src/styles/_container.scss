@@ -612,15 +612,15 @@ $text-align-values: (
   }
 
   .v-col#{$suffix}-auto {
-    flex: 0 0 auto;
-    width: auto;
-    max-width: 100%;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: 100% !important;
   }
 
   @for $i from 1 through 12 {
     .v-col#{$suffix}-#{$i} {
-      flex: 0 0 percentage($i / 12);
-      max-width: percentage($i / 12);
+      flex: 0 0 percentage($i / 12) !important;
+      max-width: percentage($i / 12) !important;
     }
 
     .offset#{$suffix}-#{$i} {
